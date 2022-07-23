@@ -1,4 +1,7 @@
+import {Routes, Route} from 'react-router-dom';
+
 import Header from './component/Header.js';
+
 import NewMovies from './component/NewMovies.js';
 import AllMovies from './component/AllMovies.js';
 import ComingSoonMovies from './component/ComingSoonMovies.js';
@@ -9,15 +12,18 @@ import Footer from './component/Footer.js';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <NewMovies/>
-      <AllMovies/>
-      <ComingSoonMovies/>
-      <TopRatedMovies/>
-      <ContactUs/>
-      <Scroll/>
-      <Footer/>
+    <div className="App"> 
+      <Header/>
+      <Routes>
+        <Route path='/' element={<NewMovies />}></Route>        
+        <Route path='/movies' element={<AllMovies/>}></Route>
+        <Route path='/comingsoon' element={<ComingSoonMovies/>}></Route>
+        <Route path='/toprated' element={<TopRatedMovies/>}></Route>
+        <Route path='/contactus' element={<ContactUs/>}></Route>        
+      </Routes> 
+      
+      <Scroll/>   
+      <Footer/> 
     </div>
   );
 }

@@ -1,5 +1,6 @@
 export default function AllMovies() {
-    return <section className="section-long">
+    return 
+    <section className="section-long">
     <div className="container">
         <div className="section-head">
             <h2 className="section-title text-uppercase">Now in play</h2>
