@@ -4,6 +4,7 @@ using MovieGalleryWebAPI.Models.Movies;
 
 using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Models.Create;
+using MovieGalleryWebAPI.Models.Edit;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -30,7 +31,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             await this.data.Movies.AddAsync(movie);
 
             await this.data.SaveChangesAsync();
-        }
+        }        
 
         public async Task<MovieGetModel> GetLastMovie()
         {
@@ -97,6 +98,32 @@ namespace MovieGalleryWebAPI.Service.Movies
             await DeleteMovie(movie);
 
             return true;
+        }
+
+        public async Task<bool> EditMovei(MovieEditModel model)
+        {
+            var isEdited = true;
+
+            var movie = await this.data
+                .Movies
+                .Where(m => m.Id == model.Id)                
+                .FirstOrDefaultAsync();
+
+            if (movie is null)
+            {
+                isEdited = false;
+                return isEdited;
+            }
+
+            movie.Title = model.Title;
+            movie.Description = model.Description;
+            movie.ImageUrl = model.ImageUrl;
+            movie.Category = model.Category;
+            movie.Year = model.Year;
+
+            await this.data.SaveChangesAsync();
+
+            return isEdited;
         }
 
         private async Task DeleteMovie(Movie movie)

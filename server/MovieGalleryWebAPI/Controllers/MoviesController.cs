@@ -45,12 +45,13 @@ namespace MovieGalleryWebAPI.Controllers
             return movie;
         }
 
-        [HttpPut()]
-        public async Task<IActionResult> Edit(MovieEditModel model)
+        [HttpPut]
+        public async Task<bool> Edit(MovieEditModel model)
         {
-            ;
 
-            return NotFound();
+            var movie = await moviesService.EditMovei(model);
+
+            return movie;
         }
 
         [HttpDelete("{id}")]

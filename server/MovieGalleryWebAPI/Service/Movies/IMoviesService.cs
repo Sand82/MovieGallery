@@ -1,4 +1,5 @@
 ﻿using MovieGalleryWebAPI.Models.Create;
+using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Movies;
 
 namespace MovieGalleryWebAPI.Service.Movies
@@ -14,5 +15,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         Task CreateMovie(MovieCreateModel model);
 
         Task<MovieGetModel> GetLastMovie();
+
+        Task<bool> EditMovei(MovieEditModel model);
     }
 }

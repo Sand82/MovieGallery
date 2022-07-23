@@ -87,14 +87,23 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
             });
 
-            //});
+            movies.Add(new Movie
+            {
+                Title = "Top Gun: Maverick",
+                Year = "2021",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BOWQwOTA1ZDQtNzk3Yi00ZmVmLWFiZGYtNjdjNThiYjJhNzRjXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_UY98_CR0,0,67,98_AL_.jpg",
+                Description = "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
+                Category = "Action",
+
+            });
 
             //movies.Add(new Movie
             //{
-            //    Name = "",
+            //    Title = "",
             //    Year = "",
             //    ImageUrl = "",
             //    Description = "",
+            //    Category = "",
 
             //});
 

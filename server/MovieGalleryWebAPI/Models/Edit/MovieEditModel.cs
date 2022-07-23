@@ -25,7 +25,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public string? ImageUrl { get; set; }
 
         [Required]
-        [StringLength(MaxMovieCategoryLength, MinimumLength = MaxMovieCategoryLength,
+        [StringLength(MaxMovieCategoryLength, MinimumLength = MinMovieCategoryLength,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
         public string? Category { get; set; }
 
