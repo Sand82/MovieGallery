@@ -21,5 +21,11 @@
         [Required]
         [StringLength(MovieYearLength)]
         public string? Year { get; set; }
+
+        [Required]
+        [StringLength(MaxMovieCategoryLength)]
+        public string? Category { get; set; }
+
+        public bool IsDelete { get; set; } = false;
     }
 }

@@ -29,8 +29,21 @@ namespace MovieGalleryWebAPI.Controllers
         public async Task<MovieDataModel> Get(int id)
         {
             var movies = await moviesService.GetOneMovies(id);
-
+           
             return movies;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<string> Delete(int id)
+        {            
+            var isDelete = await moviesService.RemoveMovie(id);
+
+            if (isDelete == false)
+            {
+                return "Movie is not deleted from data base";
+            }
+
+            return id.ToString();
         }
     }
 }

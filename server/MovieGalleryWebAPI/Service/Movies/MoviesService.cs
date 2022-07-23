@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MovieGalleryWebAPI.Data;
+﻿using MovieGalleryWebAPI.Data;
+using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Movies;
+
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -31,7 +33,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<MovieDataModel> GetOneMovies(int movieId)
         {
             var movie = await this.data.Movies
-                .Where(m => m.Id == movieId)
+                .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
                     Id = m.Id,
@@ -42,6 +44,29 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .FirstOrDefaultAsync();
 
             return movie;
+        }
+
+        public async Task<bool> RemoveMovie(int movieId)
+        {
+            var movie = await this.data.Movies
+                .Where(m => m.Id == movieId && m.IsDelete == false)
+                .FirstOrDefaultAsync();
+
+            if (movie == null)
+            {
+                return false;
+            }
+
+            await DeleteMovie(movie);
+
+            return true;
+        }
+
+        private async Task DeleteMovie(Movie movie)
+        {
+            movie.IsDelete = true;
+
+            await this.data.SaveChangesAsync();
         }
     }
 }

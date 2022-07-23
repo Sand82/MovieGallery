@@ -5,6 +5,9 @@
         public const int MinMovieNameLength = 2;
         public const int MaxMovieNameLength = 100;
 
+        public const int MinMovieCategoryLength = 2;
+        public const int MaxMovieCategoryLength = 50;
+
         public const int MinMovieImageUrlLength = 5;
         public const int MaxMovieImageUrlLength = 300;
 
