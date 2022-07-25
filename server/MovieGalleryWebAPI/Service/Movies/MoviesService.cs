@@ -5,30 +5,36 @@ using MovieGalleryWebAPI.Models.Movies;
 using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
     public class MoviesService : IMoviesService
     {
         private readonly MovieGalleryDbContext data;
+        private readonly IMapper mapper;
 
-        public MoviesService(MovieGalleryDbContext data)
+        public MoviesService(MovieGalleryDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public async Task CreateMovie(MovieCreateModel model)
         {
-            var movie = new Movie
-            {
-                Title = model.Title,
-                Description = model.Description,
-                Category = model.Category,
-                ImageUrl = model.ImageUrl,
-                Year = model.Year,
-            };
+            var movieModel = this.mapper.Map<Movie>(model);
 
-            await this.data.Movies.AddAsync(movie);
+            //var movie = new Movie
+            //{
+            //    Title = model.Title,
+            //    Description = model.Description,
+            //    Category = model.Category,
+            //    ImageUrl = model.ImageUrl,
+            //    Year = model.Year,
+            //};
+
+            await this.data.Movies.AddAsync(movieModel);
 
             await this.data.SaveChangesAsync();
         }        
@@ -53,17 +59,18 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public async Task<List<MovieDataModel>> GetMovies()
         {
-            var movies = await this.data.Movies
-                .Select(m => new MovieDataModel
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    Description = m.Description,
-                    ImageUrl = m.ImageUrl,
-                    Category = m.Category,
-                    Year = m.Year,
-                })
-                .ToListAsync();
+            var movies = await this.data.Movies                
+                .ProjectTo<MovieDataModel>(this.mapper.ConfigurationProvider)
+                //.Select(m => new MovieDataModel
+                //{
+                //    Id = m.Id,
+                //    Title = m.Title,
+                //    Description = m.Description,
+                //    ImageUrl = m.ImageUrl,
+                //    Category = m.Category,
+                //    Year = m.Year,
+                //})
+                .ToListAsync();           
 
             return movies;
         }
@@ -72,14 +79,16 @@ namespace MovieGalleryWebAPI.Service.Movies
         {
             var movie = await this.data.Movies
                 .Where(m => m.Id == movieId && m.IsDelete == false)
-                .Select(m => new MovieDataModel
-                {
-                    Id = m.Id,
-                    Title = m.Title,
-                    Description = m.Description,
-                    ImageUrl = m.ImageUrl,
-                    Category = m.Category,
-                })
+                .ProjectTo<MovieDataModel>(this.mapper.ConfigurationProvider)
+                //.Select(m => new MovieDataModel
+                //{
+                //    Id = m.Id,
+                //    Title = m.Title,
+                //    Description = m.Description,
+                //    ImageUrl = m.ImageUrl,
+                //    Category = m.Category,
+                //    Year= m.Year,
+                //})
                 .FirstOrDefaultAsync();
 
             return movie;

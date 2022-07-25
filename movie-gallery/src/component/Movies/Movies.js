@@ -1,20 +1,6 @@
 import TopRated from "./TopRated/TopRated.js";
-import * as movieService from '../../services/MoviesService.js'
 
-import { useState, useEffect} from 'react';
-
-const Movies = () => {
-
-    const [movies, setMovies] = useState([])
-
-    useEffect(() => {
-      movieService.getAll()
-       .then(result => {
-        setMovies(result)
-       })
-    }, []) 
-
-    
+const Movies = ({movies}) => {       
 
   return (
     <section className="section-long">

@@ -33,5 +33,10 @@ namespace MovieGalleryWebAPI.Models.Edit
         [StringLength(MovieYearLength,
             ErrorMessage = "The field {0} is not valid! Must be exact {1} symbols.")]
         public string? Year { get; set; }
+
+        [Required]
+        [StringLength(MaxMovieDoration, MinimumLength = MinMovieDoration,
+           ErrorMessage = "The field {0} is not valid! Must be exact {1} symbols.")]
+        public string? Duration { get; set; }
     }
 }

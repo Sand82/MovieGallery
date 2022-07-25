@@ -36,6 +36,8 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly); // typeof(Program).Assembly meaby ???
+
 var app = builder.Build();
 
 app.PrepareDatabase();

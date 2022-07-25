@@ -13,5 +13,7 @@
         public string? Year { get; set; }
 
         public string? Category { get; set; }
+
+        public string? Duration { get; set; }
     }
 }

@@ -26,6 +26,10 @@
         [StringLength(MaxMovieCategoryLength)]
         public string? Category { get; set; }
 
+        [Required]
+        [StringLength(MaxMovieDoration)]
+        public string? Duration { get; set; }
+
         public bool IsDelete { get; set; } = false;
     }
 }

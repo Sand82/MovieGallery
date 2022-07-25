@@ -52,7 +52,7 @@ const TopRated = ({movie}) => {
                   <span className="text-theme info-icon">
                     <i className="fas fa-clock"></i>
                   </span>
-                  <span className="info-text">125</span>
+                  <span className="info-text">{movie.duration}</span>
                   <span className="info-rest">&nbsp;min</span>
                 </div>
               </div>
@@ -61,43 +61,7 @@ const TopRated = ({movie}) => {
              {movie.description}
             </p>
           </div>
-          {/* <div className="entity-extra">
-            <div className="text-uppercase entity-extra-title">Showtime</div>
-            <div className="entity-showtime">
-              <div className="showtime-wrap">
-                <div className="showtime-item">
-                  <span className="disabled btn-time btn" aria-disabled="true">
-                    11 : 30
-                  </span>
-                </div>
-                <div className="showtime-item">
-                  <a className="btn-time btn" aria-disabled="false" href="#">
-                    13 : 25
-                  </a>
-                </div>
-                <div className="showtime-item">
-                  <a className="btn-time btn" aria-disabled="false" href="#">
-                    16 : 07
-                  </a>
-                </div>
-                <div className="showtime-item">
-                  <a className="btn-time btn" aria-disabled="false" href="#">
-                    19 : 45
-                  </a>
-                </div>
-                <div className="showtime-item">
-                  <a className="btn-time btn" aria-disabled="false" href="#">
-                    21 : 30
-                  </a>
-                </div>
-                <div className="showtime-item">
-                  <a className="btn-time btn" aria-disabled="false" href="#">
-                    23 : 10
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div> */}
+          
         </article>
     )
 };
