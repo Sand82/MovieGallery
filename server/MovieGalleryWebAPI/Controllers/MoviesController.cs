@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
+using Microsoft.AspNetCore.Cors;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace MovieGalleryWebAPI.Controllers
             this.moviesService = moviesService;
         }
 
+        
         [HttpGet]
         public async Task<IEnumerable<MovieDataModel>> Get()
         {
