@@ -10,7 +10,7 @@ export default function ContactUs () {
                             <span className="text-theme">us</span>
                         </h4>
                         <p className="form-text">We understand your requirement and provide quality works</p>
-                        <form autocomplete="off">
+                        <form autoComplete="off">
                             <div className="row form-grid">
                                 <div className="col-sm-6">
                                     <div className="input-view-flat input-group">

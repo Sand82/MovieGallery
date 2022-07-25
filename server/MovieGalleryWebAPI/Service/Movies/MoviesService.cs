@@ -61,6 +61,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Description = m.Description,
                     ImageUrl = m.ImageUrl,
                     Category = m.Category,
+                    Year = m.Year,
                 })
                 .ToListAsync();
 

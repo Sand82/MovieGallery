@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 import Header from './component/Header.js';
 
 import NewMovies from './component/NewMovies.js';
-import AllMovies from './component/AllMovies.js';
+import Movies from './component/Movies/Movies.js';
 import ComingSoonMovies from './component/ComingSoonMovies.js';
 import TopRatedMovies from './component/TopRatedMovies.js';
 import ContactUs from './component/ContactUs.js';
@@ -16,7 +16,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<NewMovies />}></Route>        
-        <Route path='/movies' element={<AllMovies/>}></Route>
+        <Route path='/movies' element={<Movies/>}></Route>
         <Route path='/comingsoon' element={<ComingSoonMovies/>}></Route>
         <Route path='/toprated' element={<TopRatedMovies/>}></Route>
         <Route path='/contactus' element={<ContactUs/>}></Route>        

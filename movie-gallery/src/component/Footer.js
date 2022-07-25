@@ -95,7 +95,7 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Subscribe</h5>
                 <div className="footer-content">
                     <p className="footer-text">Get latest movie news right away with our subscription</p>
-                    <form className="footer-form" autocomplete="off">
+                    <form className="footer-form" autoComplete="off">
                         <div className="input-group">
                             <input className="form-control" name="email" type="email" placeholder="Your email" />
                             <div className="input-group-append">
