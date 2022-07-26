@@ -1,19 +1,46 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Movies;
+using MovieGalleryWebAPI.Service.Users;
+using MovieGalleryWebAPI.Settings;
+using System.Configuration;
+using System.Text;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<MovieGalleryDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+var jwtSettingsSection =
+    builder.Configuration.GetSection("JwtSettings");
+builder.Services.Configure<JwtSettings>(jwtSettingsSection);
+
+//var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
+//var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+//builder.Services.AddAuthentication().AddJwtBearer(option =>
+//{
+//    option.RequireHttpsMetadata = false;
+//    option.SaveToken = true;
+//    option.TokenValidationParameters = new TokenValidationParameters
+//    {
+//        ValidateIssuerSigningKey = true,
+//        IssuerSigningKey = new SymmetricSecurityKey(key),
+//        ValidateIssuer = false,
+//        ValidateAudience = false,
+//    };
+//});
+
+builder.
+    Services.
+    AddDefaultIdentity<IdentityUser>(options =>
     {
         options.Password.RequireDigit = false;
         options.Password.RequireLowercase = false;
@@ -23,9 +50,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
         //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
         //options.User.RequireUniqueEmail = true;
     })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<MovieGalleryDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IMoviesService, MoviesService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddCors(options =>
 {
@@ -36,7 +65,7 @@ builder.Services.AddCors(options =>
                       });
 });
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly); // typeof(Program).Assembly meaby ???
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 

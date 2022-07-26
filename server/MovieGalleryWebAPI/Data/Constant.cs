@@ -18,5 +18,8 @@
         public const int MaxMovieDescriptionLength = 500;
 
         public const int MovieYearLength = 4;
+
+        public const int UserPropsMinLength = 6;
+        public const int UserPropsMaxLength = 30;
     }
 }
