@@ -18,30 +18,40 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(LoginInputModel model)
         {
-            ;
-            
-            return Ok(model);
+            var chekedUser = await userService.FindUser(model.Email, model.Password);
+
+            if (chekedUser == null)
+            {
+                ModelState.AddModelError("User exsist", "Invalide username or password.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(chekedUser);
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterInputModel model)
         {
-            ;
+            
             if (model.Password.CompareTo(model.RepeatPassword) != 0)
             {
                 ModelState.AddModelError("RepeatPassword", "Passwort and confirm password should be the same.");
             }
 
-            var chekedUser = await userService.FindUser(model.Email);
+            var chekedUser = await userService.FindUserByEmail(model.Email);
 
-            if (chekedUser is not null)
+            if (chekedUser != null)
             {
                 ModelState.AddModelError("User exsist", "This email address is already taken.");
             }
 
             if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.Values);
+            {                
+                return BadRequest(ModelState);
             }
 
             var user = await userService.CreateUser(model);

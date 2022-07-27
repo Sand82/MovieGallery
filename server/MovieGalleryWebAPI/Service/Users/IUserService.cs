@@ -7,6 +7,9 @@ namespace MovieGalleryWebAPI.Service.Users
     {
         Task<IdentityUser> CreateUser(RegisterInputModel model);
 
-        Task<IdentityUser> FindUser(string email);
+        Task<UserApiModel> FindUserByEmail(string email);
+
+        Task<UserApiModel> FindUser(string email, string password);
+
     }
 }
