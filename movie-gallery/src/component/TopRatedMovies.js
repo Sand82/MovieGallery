@@ -1,5 +1,6 @@
 export default function TopRatedMovies () {
-    return <section className="section-long">
+    return 
+    <section className="section-long">
     <div className="container">
         <div className="section-head">
             <h2 className="section-title text-uppercase">Latest news</h2>

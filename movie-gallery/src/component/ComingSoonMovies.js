@@ -1,5 +1,6 @@
 export default function ComingSoonMovies () {
-   return <section className="section-solid-long section-text-white position-relative">
+   return 
+   <section className="section-solid-long section-text-white position-relative">
             <div className="d-background" data-image-src="http://via.placeholder.com/1920x1080" data-parallax="scroll"></div>
             <div className="d-background bg-gradient-black"></div>
             <div className="container position-relative">

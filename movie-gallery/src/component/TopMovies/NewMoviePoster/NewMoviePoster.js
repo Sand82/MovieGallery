@@ -4,7 +4,7 @@ const NewMoviePoster = ({movie}) => {
     <div
     className="slick-slide slick-cloned"
     tabIndex={-1}
-    style={{ width: 200 }}
+    style={{ width: 260 }}
     data-slick-index={14}
     aria-hidden="true"
   >

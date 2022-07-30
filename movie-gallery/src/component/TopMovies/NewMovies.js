@@ -1,8 +1,9 @@
 import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.js";
+import NewMovieBlog from './NewMovieBlog/NewMovieBlog.js'
 import * as style from "../TopMovies/NewMovies.Module.css";
 
-const NewMovies = ({ movies }) => { 
-
+const NewMovies = ({ movies }) => {
+    console.log(movies);
   return (
     <>
       <section style={style} className="section-text-white position-relative">
@@ -26,32 +27,31 @@ const NewMovies = ({ movies }) => {
             >
               <div className="slick-slides slick-initialized slick-slider">
                 <div className="slick-list draggable">
-                  <div
-                    className="slick-track"                   
-                  >
+                  <div className="slick-track">
                     {movies.map((x) => (
                       <NewMoviePoster key={x.id} movie={x} />
                     ))}
                   </div>
                 </div>
               </div>
-              {/* <div className="slick-arrows">
-                <div className="slick-arrow-prev slick-arrow" style={{}}>
-                  <span className="th-dots th-arrow-left th-dots-animated">
-                    <span />
-                    <span />
-                    <span />
-                  </span>
-                </div>
-                <div className="slick-arrow-next slick-arrow" style={{}}>
-                  <span className="th-dots th-arrow-right th-dots-animated">
-                    <span />
-                    <span />
-                    <span />
-                  </span>
-                </div>
-              </div> */}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-long">
+        <div className="container">
+          <div className="section-head">
+            <h2 className="section-title text-uppercase">Latest news</h2>
+          </div>
+          <div className="grid row">
+            {movies.map(x => <NewMovieBlog key={x.id} movie={x}/>)}
+            
+          </div>
+          <div className="section-bottom">
+            <a className="btn btn-theme" href="news-blocks-sidebar-right.html">
+              View All News
+            </a>
           </div>
         </div>
       </section>
