@@ -60,8 +60,7 @@ const TopRated = ({movie}) => {
             <p className="text-short entity-text">
              {movie.description}
             </p>
-          </div>
-          
+          </div>          
         </article>
     )
 };

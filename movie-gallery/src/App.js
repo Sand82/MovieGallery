@@ -11,6 +11,8 @@ import TopRatedMovies from './component/TopRatedMovies.js';
 import ContactUs from './component/ContactUs.js';
 import Scroll from './component/Scroll.js';
 import Footer from './component/Footer.js';
+import Login from './component/Login/Login.js';
+import Register from './component/Register/Register.js';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<NewMovies movies={firstFiveMovies} />}></Route>        
+        <Route path='/login' element={<Login />}></Route>        
+        <Route path='/register' element={<Register />}></Route>        
         <Route path='/movies' element={<Movies movies={movies}/>}></Route>
         <Route path='/comingsoon' element={<ComingSoonMovies/>}></Route>
         <Route path='/toprated' element={<TopRatedMovies/>}></Route>
