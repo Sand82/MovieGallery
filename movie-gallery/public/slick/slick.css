@@ -88,7 +88,7 @@
 }
 .slick-slide img
 {
-    display: block;
+    display: none;
 }
 .slick-slide.slick-loading img
 {
@@ -100,15 +100,15 @@
 }
 .slick-initialized .slick-slide
 {
-    display: block;
+    display: none;
 }
-.slick-loading .slick-slide
+/* .slick-loading .slick-slide
 {
-    visibility: hidden;
-}
+    visibility: ;
+} */
 .slick-vertical .slick-slide
 {
-    display: block;
+    display: none;
 
     height: auto;
 

@@ -1,5 +1,5 @@
 const TopRated = ({movie}) => {
-  console.log(movie)
+ 
     return (
 <article className="movie-line-entity">
           <div className="entity-poster" data-role="hover-wrap">
