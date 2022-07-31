@@ -11,5 +11,7 @@ namespace MovieGalleryWebAPI.Service.Users
 
         Task<UserApiModel> FindUser(string email, string password);
 
+        string CreateToken(string username, string password);
+
     }
 }

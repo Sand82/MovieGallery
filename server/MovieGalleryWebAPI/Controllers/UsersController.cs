@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MovieGalleryWebAPI.Models.Users;
 using MovieGalleryWebAPI.Service.Users;
+using MovieGalleryWebAPI.Settings;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -8,35 +10,17 @@ namespace MovieGalleryWebAPI.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserService userService;       
 
         public UsersController(IUserService userService)
         {
-            this.userService = userService;
+            this.userService = userService;          
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Login(LoginInputModel model)
-        {
-            var chekedUser = await userService.FindUser(model.Email, model.Password);
-
-            if (chekedUser == null)
-            {
-                ModelState.AddModelError("User exsist", "Invalide username or password.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok(chekedUser);
-        }
-
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterInputModel model)
         {
-            
+
             if (model.Password.CompareTo(model.RepeatPassword) != 0)
             {
                 ModelState.AddModelError("RepeatPassword", "Passwort and confirm password should be the same.");
@@ -50,7 +34,7 @@ namespace MovieGalleryWebAPI.Controllers
             }
 
             if (!ModelState.IsValid)
-            {                
+            {
                 return BadRequest(ModelState);
             }
 
@@ -58,5 +42,25 @@ namespace MovieGalleryWebAPI.Controllers
 
             return Ok(user);
         }
+
+        [HttpPost("login")]
+        public ActionResult<string> Login(LoginInputModel model)
+        {
+            var user = userService.CreateToken(model.Email, model.Password);
+
+            //var chekedUser = await userService.FindUser(model.Email, model.Password);
+
+            //if (chekedUser == null)
+            //{
+            //    ModelState.AddModelError("User exsist", "Invalide username or password.");
+            //}
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            return user;
+        }        
     }
 }
