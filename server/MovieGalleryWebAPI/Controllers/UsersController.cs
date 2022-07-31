@@ -46,7 +46,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost("login")]
         public ActionResult<string> Login(LoginInputModel model)
         {
-            var user = userService.CreateToken(model.Email, model.Password);
+            var token = userService.CreateToken(model.Email, model.Password);
 
             //var chekedUser = await userService.FindUser(model.Email, model.Password);
 
@@ -60,7 +60,7 @@ namespace MovieGalleryWebAPI.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            return user;
+            return token;
         }        
     }
 }

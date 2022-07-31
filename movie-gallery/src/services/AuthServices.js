@@ -1,0 +1,4 @@
+export const AuthServices = (data) => {
+    
+        
+};

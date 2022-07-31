@@ -11,8 +11,6 @@ import Scroll from './component/Scroll.js';
 import Footer from './component/Footer/Footer.js';
 import Login from './component/Login/Login.js';
 import Register from './component/Register/Register.js';
-import Details from './component/Details/Details.js';
-
 
 function App() {
 
@@ -22,8 +20,8 @@ function App() {
       movieService.getAll()
        .then(result => {
         setMovies(result)
-       })
-    }, []) 
+       })       
+    }, [])
 
     const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
 

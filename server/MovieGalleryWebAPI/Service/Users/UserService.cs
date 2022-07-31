@@ -35,6 +35,7 @@ namespace MovieGalleryWebAPI.Service.Users
             {
                 Email = model.Email,
                 PasswordHash = model.Password,
+                UserName = model.UserName,
             };
 
             await data.Users.AddAsync(user);

@@ -19,7 +19,7 @@
 
         public const int MovieYearLength = 4;
 
-        public const int UserPropsMinLength = 6;
-        public const int UserPropsMaxLength = 30;
+        public const int UserPropsMinLength = 2;
+        public const int UserPropsMaxLength = 50;
     }
 }

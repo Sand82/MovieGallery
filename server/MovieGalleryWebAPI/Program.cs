@@ -26,11 +26,7 @@ builder.Services.Configure<JwtSettings>(jwtSettingsSection);
 
 var jwtSettings = jwtSettingsSection.Get<JwtSettings>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
-builder.Services.AddAuthentication(option =>
-{
-    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
-}).AddJwtBearer(option =>
+builder.Services.AddAuthentication().AddJwtBearer(option =>
 {
     option.RequireHttpsMetadata = false;
     option.SaveToken = true;
