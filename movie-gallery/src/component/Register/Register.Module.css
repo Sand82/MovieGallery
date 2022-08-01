@@ -1,7 +1,17 @@
 .vh-100 {
+    font-family:'Open Sans';;
     background-color: #eee;
 }
 
 .card text-black {
     border-radius: 25;
+}
+
+.btn{
+    background-color: #FF8A00;
+    color: white;
+}
+
+.btn:hover{
+    background-color: #FF680D;
 }
