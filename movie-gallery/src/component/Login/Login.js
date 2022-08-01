@@ -3,8 +3,8 @@ import * as style from "../Login/Login.Module.css";
 
 const Login = () => {
     const [login, setLogin] = useState({
-        username: "",
-        password: "",
+        username: '',
+        password: '',
     });
 
     const [userNameError, setUserNameError] = useState(false);
@@ -15,10 +15,10 @@ const Login = () => {
             ...state,
             [e.target.name]: e.target.value,
         }));
-        console.log(login);
+        
     };
 
-    const onSubmitHandler = async (e) => {
+    const loginSubmitHandler = async (e) => {
         e.preventDefault();
 
         const response = await fetch("https://localhost:7222/api/users/login", {
@@ -62,11 +62,9 @@ const Login = () => {
             <h1>
                 <strong>Welcome.</strong> Please login.
             </h1>
-            <form onSubmit={onSubmitHandler}>
+            <form onSubmit={loginSubmitHandler}>
                 <fieldset>
                     <p>
-                        <label htmlFor="username">User name:</label>
-
                         <input
                             type="text"
                             name="username"
@@ -75,6 +73,7 @@ const Login = () => {
                             placeholder="Username"
                             onBlur={validateUsername}
                         />
+                        <label htmlFor="username">User name:</label>
                     </p>
                     {userNameError ? (
                         <p className="alert alert-danger">
@@ -84,8 +83,7 @@ const Login = () => {
                         <p></p>
                     )}
 
-                    <p>
-                        <label htmlFor="password">Password:</label>
+                    <p>                       
                         <input
                             type="password"
                             name="password"
@@ -94,6 +92,7 @@ const Login = () => {
                             placeholder="Password"
                             onBlur={validatePassword}
                         />
+                         <label htmlFor="password">Password:</label>
                     </p>
                     {passwordError ? (
                         <p className="alert alert-danger">
