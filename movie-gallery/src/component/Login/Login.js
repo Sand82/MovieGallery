@@ -24,10 +24,17 @@ const Login = () => {
           'Content-Type': 'application/json'
       },
       body: JSON.stringify(login)
-    });
-    const result = await response.json();
+    }); 
 
+    const result = await response.json();
     console.log(result);
+    
+    if (response.ok) {
+      
+      console.log(result);
+    }else {
+      console.log(result);
+    }   
   }
 
   return (

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using MovieGalleryWebAPI.Models.Errors;
 using MovieGalleryWebAPI.Models.Users;
 using MovieGalleryWebAPI.Service.Users;
 using MovieGalleryWebAPI.Settings;
@@ -50,12 +51,16 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (user == null)
             {
-                return BadRequest("Invalid username or password.");
+                var errorMode = new LoginErrorModel();
+
+                errorMode.Error = "Invalid username or password.";
+
+                return BadRequest(errorMode);
             }
 
             var token = await userService.CreateToken(model.Username, model.Password);
 
-            user.Token = token;
+            user.AccessToken = token;
 
             return user;
         }        
