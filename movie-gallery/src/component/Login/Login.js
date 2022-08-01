@@ -30,8 +30,7 @@ const Login = () => {
             body: JSON.stringify(login),
         });
 
-        const result = await response.json();
-        console.log(result);
+        const result = await response.json();       
 
         if (response.ok) {
             console.log(result);

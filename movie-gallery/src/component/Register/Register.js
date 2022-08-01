@@ -1,5 +1,5 @@
 import { useState } from "react";
-import  { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 import * as style from "./Register.Module.css";
 import * as userValidator from '../../services/UserValidator.js'
@@ -17,11 +17,26 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [conformPasswordError, setConformPasswordError] = useState(false);
 
-  const registerSubmitHandler = (e) => {
+  const navigate = useNavigate();
+
+  const registerSubmitHandler = async (e) => {
     e.preventDefault();    
-    
-    console.log(register);
-    
+
+    const response = await fetch('https://localhost:7222/api/users/register', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(register),
+    })
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            navigate('/login');
+        }else {
+            
+        }
+        
   };
 
   const changeHandler = (e) => {    
