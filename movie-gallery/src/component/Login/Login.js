@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import * as style from "../Login/Login.Module.css";
+import * as userValidator from '../../services/UserValidator.js'
 
 const Login = () => {
     const [login, setLogin] = useState({
@@ -14,12 +16,11 @@ const Login = () => {
         setLogin((state) => ({
             ...state,
             [e.target.name]: e.target.value,
-        }));
-        
+        }));        
     };
 
     const loginSubmitHandler = async (e) => {
-        e.preventDefault();
+        e.preventDefault();        
 
         const response = await fetch("https://localhost:7222/api/users/login", {
             method: "POST",
@@ -40,22 +41,16 @@ const Login = () => {
     };
 
     const validateUsername = (e) => {
-        const userName = e.target.value;
-        if (userName.length <= 2 || userName.length > 50) {
-            setUserNameError(true);
-        } else {
-            setUserNameError(false);
-        }
+        const userName = e.target.value;        
+        setUserNameError(userValidator.user(userName));        
     };
 
     const validatePassword = (e) => {
         const password = e.target.value;
-        if (password.length <= 5 || password.length > 50) {
-            setPasswordError(true);
-        } else {
-            setPasswordError(false);
-        }
+        setPasswordError(userValidator.password(password))
     };
+
+    const isValid = Object.values(login).some(x => x == '') || userNameError || passwordError ;
 
     return (
         <div id="login" style={style}>
@@ -101,8 +96,8 @@ const Login = () => {
                     ) : (
                         <p></p>
                     )}
-                    <p>
-                        <input type="submit" defaultValue="Login" />
+                    <p>                        
+                        <button className="button" type="submit" disabled={isValid}>Login</button>
                     </p>
                 </fieldset>
             </form>
@@ -113,13 +108,13 @@ const Login = () => {
                 <a className="facebook-before">
                     <span className="fontawesome-facebook" />
                 </a>
-                <button className="facebook">Login Using Facbook</button>
+                <button className="facebook" disabled={isValid}>Login Using Facbook</button>
             </p>
             <p>
                 <a className="twitter-before">
                     <span className="fontawesome-twitter" />
                 </a>
-                <button className="twitter">Login Using Twitter</button>
+                <button className="twitter" disabled={isValid}>Login Using Twitter</button>
             </p>
         </div>
     );

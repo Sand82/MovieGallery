@@ -1,5 +1,8 @@
 import { useState } from "react";
+import  { useNavigate } from 'react-router-dom'
+
 import * as style from "./Register.Module.css";
+import * as userValidator from '../../services/UserValidator.js'
 
 const Register = () => {
   const [register, setRegister] = useState({
@@ -8,19 +11,42 @@ const Register = () => {
     password: '',
     repeatPassword: '',
   });
+ 
+  const [userNameError, setUserNameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [conformPasswordError, setConformPasswordError] = useState(false);
 
   const registerSubmitHandler = (e) => {
-    e.preventDefault();
-    console.log(e);
+    e.preventDefault();    
+    
+    console.log(register);
     
   };
 
-  const changeHandler = (e) => {
+  const changeHandler = (e) => {    
     setRegister((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
   };
+  
+
+const validateUsername = (e) => {
+    const userName = e.target.value;        
+    setUserNameError(userValidator.user(userName));        
+};
+
+const validatePassword = (e) => {
+    const password = e.target.value;
+    setPasswordError(userValidator.password(password))
+};
+
+const validateConformePassword = (e) => {
+    const password = e.target.value;
+    setConformPasswordError(userValidator.password(password))
+};
+
+ const isValid = Object.values(register).some(x => x == '') || userNameError || passwordError || conformPasswordError;
 
   return (
     <section className="vh-100" style={style}>
@@ -48,6 +74,7 @@ const Register = () => {
                             name="username"
                             onChange={changeHandler}
                             value={register.username}
+                            onBlur={validateUsername}
                           />
                           <label
                             className="form-label"
@@ -55,6 +82,11 @@ const Register = () => {
                           >
                             User Name
                           </label>
+                            {userNameError &&
+                                <p className="alert alert-danger">
+                                    User name should be more than 2 and less than 50 symbols.
+                                </p>                           
+                            }
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
@@ -86,6 +118,7 @@ const Register = () => {
                             name="password"
                             onChange={changeHandler}
                             value={register.password}
+                            onBlur={validatePassword}
                           />
                           <label
                             className="form-label"
@@ -93,6 +126,11 @@ const Register = () => {
                           >
                             Password
                           </label>
+                            {passwordError &&
+                                <p className="alert alert-danger">
+                                    Password should be more than 5 and less than 50 symbols.
+                                </p>
+                            }
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
@@ -105,6 +143,7 @@ const Register = () => {
                             name="repeatPassword"
                             onChange={changeHandler}
                             value={register.repeatPassword}
+                            onBlur={validateConformePassword}
                           />
                           <label
                             className="form-label"
@@ -112,6 +151,11 @@ const Register = () => {
                           >
                             Repeat your password
                           </label>
+                            {conformPasswordError &&
+                                <p className="alert alert-danger">
+                                    Password conformation should be more than 5 and less than 50 symbols.
+                                </p>
+                            }
                         </div>
                       </div>
                       {/* <div className="form-check d-flex justify-content-center mb-5">
@@ -126,11 +170,11 @@ const Register = () => {
                       <a href="#!">Terms of service</a>
                     </label>
                   </div> */}
-                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <input type="submit" defaultValue="Register" />
+                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">                      
                         <button
                           type="submit"
                           className="btn btn-warning btn-lg"
+                          disabled={isValid}
                         >
                           Register
                         </button>

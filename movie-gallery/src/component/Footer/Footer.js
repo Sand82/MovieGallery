@@ -9,7 +9,7 @@ export default function Footer () {
                             <span className="svg-content svg-fill-theme" data-svg="./images/svg/logo-part.svg"></span>
                         </span>
                         <span className="logo-text text-uppercase">
-                            <span>M</span>emico</span>
+                            Movie Gallery</span>
                     </span>
                 </a>
                 <div className="footer-content">
