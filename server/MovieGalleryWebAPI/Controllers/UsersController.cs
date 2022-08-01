@@ -44,23 +44,20 @@ namespace MovieGalleryWebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public ActionResult<string> Login(LoginInputModel model)
+        public async Task<ActionResult<UserApiModel>> Login(LoginInputModel model)
         {
-            var token = userService.CreateToken(model.Email, model.Password);
+            var user = await userService.FindUser(model.Username, model.Password);
 
-            //var chekedUser = await userService.FindUser(model.Email, model.Password);
+            if (user == null)
+            {
+                return BadRequest("Invalid username or password.");
+            }
 
-            //if (chekedUser == null)
-            //{
-            //    ModelState.AddModelError("User exsist", "Invalide username or password.");
-            //}
+            var token = await userService.CreateToken(model.Username, model.Password);
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            user.Token = token;
 
-            return token;
+            return user;
         }        
     }
 }

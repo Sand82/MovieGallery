@@ -9,9 +9,9 @@ namespace MovieGalleryWebAPI.Service.Users
 
         Task<UserApiModel> FindUserByEmail(string email);
 
-        Task<UserApiModel> FindUser(string email, string password);
+        Task<UserApiModel> FindUser(string username, string password);
 
-        string CreateToken(string username, string password);
+        Task<string> CreateToken(string username, string password);
 
     }
 }

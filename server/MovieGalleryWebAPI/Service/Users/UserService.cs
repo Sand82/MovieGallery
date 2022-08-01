@@ -45,10 +45,10 @@ namespace MovieGalleryWebAPI.Service.Users
             return user;
         }
 
-        public async Task<UserApiModel> FindUser(string email, string password)
+        public async Task<UserApiModel> FindUser(string username, string password)
         {
             var user = await data.Users
-                .Where(u => u.Email == email && u.PasswordHash == password)
+                .Where(u => u.UserName == username && u.PasswordHash == password)
                 .ProjectTo<UserApiModel>(this.mapper.ConfigurationProvider)
                 //.Select(u => new UserApiModel
                 //{
@@ -70,15 +70,23 @@ namespace MovieGalleryWebAPI.Service.Users
             return user;
         }
 
-        public string CreateToken (string email, string password)
+        public async Task<string> CreateToken (string username, string password)
         {
-            var user = this.data.Users.FirstOrDefault(
-                x => x.Email == email && x.PasswordHash == password);
+            var user = await this.data.Users.FirstOrDefaultAsync(
+                x => x.UserName == username && x.PasswordHash == password);
 
             if (user == null)
             {
                 return null;
             }
+
+            var token = TokenGenerate(user);
+
+            return token;
+        }
+
+        private string TokenGenerate(IdentityUser user)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this.jwtSettings.Value.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
