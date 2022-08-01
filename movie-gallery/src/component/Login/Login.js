@@ -1,81 +1,129 @@
-import { useState } from 'react';
-import * as style from '../Login/Login.Module.css'
+import { useState } from "react";
+import * as style from "../Login/Login.Module.css";
 
 const Login = () => {
-  const [login, setLogin] = useState({
-    username: '',
-    password: '',
-  });
+    const [login, setLogin] = useState({
+        username: "",
+        password: "",
+    });
 
-  const changeHandler = (e) => {    
-    setLogin(state => ({
-      ...state,
-      [e.target.name]: e.target.value
-    }))
-    console.log(login);
-  } 
+    const [userNameError, setUserNameError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
+    const changeHandler = (e) => {
+        setLogin((state) => ({
+            ...state,
+            [e.target.name]: e.target.value,
+        }));
+        console.log(login);
+    };
 
-    const response = await fetch('https://localhost:7222/api/users/login', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(login)
-    }); 
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
 
-    const result = await response.json();
-    console.log(result);
-    
-    if (response.ok) {
-      
-      console.log(result);
-    }else {
-      console.log(result);
-    }   
-  }
+        const response = await fetch("https://localhost:7222/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(login),
+        });
 
-  return (
-    <div id="login" style={style}>
-      <h1>
-        <strong>Welcome.</strong> Please login.
-      </h1>
-      <form onSubmit={onSubmitHandler}>
-        <fieldset>
-          <p>
-            <label htmlFor="username">User name:</label>
-            <input type="text" name="username" value={login.username} onChange={changeHandler} placeholder="Username" />            
-          </p>
-          <p className="alert alert-danger">User name is not valid.</p>
-          <p>
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" value={login.password} onChange={changeHandler} placeholder="Password"  />
-          </p>    
-          <p className="alert alert-danger">Password is not valid.</p>      
-          <p>
-            <input type="submit" defaultValue="Login" />
-          </p>
-        </fieldset>
-      </form>
-      <p>
-        <span className="btn-round">or</span>
-      </p>
-      <p>
-        <a className="facebook-before">
-          <span className="fontawesome-facebook" />
-        </a>
-        <button className="facebook">Login Using Facbook</button>
-      </p>
-      <p>
-        <a className="twitter-before">
-          <span className="fontawesome-twitter" />
-        </a>
-        <button className="twitter">Login Using Twitter</button>
-      </p>
-    </div>
-  );
+        const result = await response.json();
+        console.log(result);
+
+        if (response.ok) {
+            console.log(result);
+        } else {
+            console.log(result);
+        }
+    };
+
+    const validateUsername = (e) => {
+        const userName = e.target.value;
+        if (userName.length <= 2 || userName.length > 50) {
+            setUserNameError(true);
+        } else {
+            setUserNameError(false);
+        }
+    };
+
+    const validatePassword = (e) => {
+        const password = e.target.value;
+        if (password.length <= 5 || password.length > 50) {
+            setPasswordError(true);
+        } else {
+            setPasswordError(false);
+        }
+    };
+
+    return (
+        <div id="login" style={style}>
+            <h1>
+                <strong>Welcome.</strong> Please login.
+            </h1>
+            <form onSubmit={onSubmitHandler}>
+                <fieldset>
+                    <p>
+                        <label htmlFor="username">User name:</label>
+
+                        <input
+                            type="text"
+                            name="username"
+                            value={login.username}
+                            onChange={changeHandler}
+                            placeholder="Username"
+                            onBlur={validateUsername}
+                        />
+                    </p>
+                    {userNameError ? (
+                        <p className="alert alert-danger">
+                            User name should be more than 2 and less than 50 symbols.
+                        </p>
+                    ) : (
+                        <p></p>
+                    )}
+
+                    <p>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            name="password"
+                            value={login.password}
+                            onChange={changeHandler}
+                            placeholder="Password"
+                            onBlur={validatePassword}
+                        />
+                    </p>
+                    {passwordError ? (
+                        <p className="alert alert-danger">
+                            Password should be more than 5 and less than 50 symbols.
+                        </p>
+                    ) : (
+                        <p></p>
+                    )}
+                    <p>
+                        <input type="submit" defaultValue="Login" />
+                    </p>
+                </fieldset>
+            </form>
+            <p>
+                <span className="btn-round">or</span>
+            </p>
+            <p>
+                <a className="facebook-before">
+                    <span className="fontawesome-facebook" />
+                </a>
+                <button className="facebook">Login Using Facbook</button>
+            </p>
+            <p>
+                <a className="twitter-before">
+                    <span className="fontawesome-twitter" />
+                </a>
+                <button className="twitter">Login Using Twitter</button>
+            </p>
+        </div>
+    );
 };
 
 export default Login;
