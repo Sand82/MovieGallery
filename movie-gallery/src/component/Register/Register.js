@@ -12,7 +12,8 @@ const Register = () => {
     repeatPassword: '',
   });
  
-  const [userNameError, setUserNameError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [conformPasswordError, setConformPasswordError] = useState(false);
 
@@ -33,12 +34,17 @@ const Register = () => {
 
 const validateUsername = (e) => {
     const userName = e.target.value;        
-    setUserNameError(userValidator.user(userName));        
+    setUsernameError(userValidator.user(userName));        
 };
 
+const validateEmail = (e) => {
+    const currEmail = e.target.value;   
+    setEmailError(userValidator.emailAddress(currEmail));    
+}
+
 const validatePassword = (e) => {
-    const password = e.target.value;
-    setPasswordError(userValidator.password(password))
+    const currPass = e.target.value;
+    setPasswordError(userValidator.password(currPass))
 };
 
 const validateConformePassword = (e) => {
@@ -46,7 +52,8 @@ const validateConformePassword = (e) => {
     setConformPasswordError(userValidator.password(password))
 };
 
- const isValid = Object.values(register).some(x => x == '') || userNameError || passwordError || conformPasswordError;
+ const isValid = Object.values(register).some(x => x == '') 
+        || usernameError || passwordError || conformPasswordError || emailError;
 
   return (
     <section className="vh-100" style={style}>
@@ -82,7 +89,7 @@ const validateConformePassword = (e) => {
                           >
                             User Name
                           </label>
-                            {userNameError &&
+                            {usernameError &&
                                 <p className="alert alert-danger">
                                     User name should be more than 2 and less than 50 symbols.
                                 </p>                           
@@ -99,6 +106,7 @@ const validateConformePassword = (e) => {
                             name="email"
                             onChange={changeHandler}
                             value={register.email}
+                            onBlur={validateEmail}
                           />
                           <label
                             className="form-label"
@@ -106,6 +114,11 @@ const validateConformePassword = (e) => {
                           >
                             Your Email
                           </label>
+                          {emailError &&
+                                <p className="alert alert-danger">
+                                    Invalid email address.
+                                </p>                           
+                            }
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
