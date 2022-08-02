@@ -29,20 +29,18 @@ namespace MovieGalleryWebAPI.Service.Users
             this.jwtSettings = jwtSettings;
         }
 
-        public async Task<IdentityUser> CreateUser(RegisterInputModel model)
+        public async Task CreateUser(RegisterInputModel model)
         {
             var user = new IdentityUser
             {
-                Email = model.Email,
-                PasswordHash = model.Password,
                 UserName = model.UserName,
+                Email = model.Email,
+                PasswordHash = model.Password,               
             };
 
             await data.Users.AddAsync(user);
 
-            await data.SaveChangesAsync();
-
-            return user;
+            await data.SaveChangesAsync();            
         }
 
         public async Task<UserApiModel> FindUser(string username, string password)

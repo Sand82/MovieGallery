@@ -1,16 +1,21 @@
 import { useState } from "react";
+import {useNavigate} from 'react-router-dom'
+import { useContext } from "react";
 
 import * as style from "../Login/Login.Module.css";
-import * as userValidator from '../../services/UserValidator.js'
+import * as userValidator from '../../services/UserValidator.js';
+import * as authService from '../../services/AuthServices.js';
+import { AuthContext } from "../../context/AuthContext.js";
 
 const Login = () => {
     const [login, setLogin] = useState({
         username: '',
         password: '',
     });
-
+    const {loginHandler} = useContext(AuthContext);
     const [userNameError, setUserNameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const navigate = useNavigate();
 
     const changeHandler = (e) => {
         setLogin((state) => ({
@@ -22,21 +27,31 @@ const Login = () => {
     const loginSubmitHandler = async (e) => {
         e.preventDefault();        
 
-        const response = await fetch("https://localhost:7222/api/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(login),
-        });
+        // const response = await fetch("https://localhost:7222/api/users/login", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(login),
+        // });  
+        authService.login(login)
+           .then(result => {
 
-        const result = await response.json();       
+            if (result === 'Not found') {
+               return navigate('/notfound') 
+            }            
+            loginHandler(result);
+            navigate('/')
+           })
+           .catch((error) => {
+                console.error(error);
+           });
 
-        if (response.ok) {
-            console.log(result);
-        } else {
-            console.log(result);
-        }
+        // if (response.ok) {
+        //     console.log(result);
+        // } else {
+        //     console.error(result.error);            
+        // }
     };
 
     const validateUsername = (e) => {

@@ -5,7 +5,7 @@ namespace MovieGalleryWebAPI.Service.Users
 {
     public interface IUserService
     {
-        Task<IdentityUser> CreateUser(RegisterInputModel model);
+        Task CreateUser(RegisterInputModel model);
 
         Task<UserApiModel> FindUserByEmail(string email);
 

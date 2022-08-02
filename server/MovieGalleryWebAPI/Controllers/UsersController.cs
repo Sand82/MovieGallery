@@ -39,9 +39,9 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await userService.CreateUser(model);
+            await userService.CreateUser(model);
 
-            return Ok(user);
+            return Ok();
         }
 
         [HttpPost("login")]

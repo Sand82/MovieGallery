@@ -3,7 +3,7 @@ import NewMovieBlog from './NewMovieBlog/NewMovieBlog.js'
 import * as style from "../TopMovies/NewMovies.Module.css";
 
 const NewMovies = ({ movies }) => {
-    console.log(movies);
+    
   return (
     <>
       <section style={style} className="section-text-white position-relative">
