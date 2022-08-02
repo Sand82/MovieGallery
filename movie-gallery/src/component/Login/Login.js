@@ -31,13 +31,13 @@ const Login = () => {
            .then(result => {
 
             if (result === 'Bad response') {
-               return navigate('/notfound') 
+                return navigate('/notfound') 
             }            
-            loginHandler(result);
-            navigate('/')
+                loginHandler(result);
+                return navigate('/')
            })
            .catch((error) => {
-              throw  console.error(error);
+                throw console.error(error);
            });
         
     };

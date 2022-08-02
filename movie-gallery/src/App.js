@@ -15,10 +15,11 @@ import Logout from "./component/Logout/Logout.js";
 import Register from "./component/Register/Register.js";
 import NotFound from "./component/ErrorPage/NotFound.js";
 import BadRequest from "./component/ErrorPage/BadRequest.js";
+import {useLocalStorage} from './hooks/useLocalStorage.js'
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useLocalStorage('auth', {});
 
   useEffect(() => {
     movieService.getAll().then((result) => {

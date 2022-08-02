@@ -17,6 +17,8 @@ export const request = async (method, url, data) => {
 
         const result = await response.json();
 
+        
+
         if (!response.ok) {
            return 'Bad response';
         }

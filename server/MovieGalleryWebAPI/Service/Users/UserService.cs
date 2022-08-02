@@ -29,8 +29,9 @@ namespace MovieGalleryWebAPI.Service.Users
             this.jwtSettings = jwtSettings;
         }
 
-        public async Task CreateUser(RegisterInputModel model)
+        public async Task<bool> CreateUser(RegisterInputModel model)
         {
+
             var user = new IdentityUser
             {
                 UserName = model.UserName,
@@ -40,7 +41,9 @@ namespace MovieGalleryWebAPI.Service.Users
 
             await data.Users.AddAsync(user);
 
-            await data.SaveChangesAsync();            
+            await data.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<UserApiModel> FindUser(string username, string password)

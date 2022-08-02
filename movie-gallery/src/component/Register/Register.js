@@ -1,91 +1,82 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import * as authService from '../../services/AuthServices.js'
+import * as authService from "../../services/AuthServices.js";
 import * as style from "./Register.Module.css";
-import * as userValidator from '../../services/UserValidator.js'
+import * as userValidator from "../../services/UserValidator.js";
 
 const Register = () => {
   const [register, setRegister] = useState({
-    username: '',
-    email: '',
-    password: '',
-    repeatPassword: '',
+    username: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
   });
- 
+
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [conformPasswordError, setConformPasswordError] = useState(false);
+  const [checkPasswords, setCheckPasswords] = useState(false);
 
   const navigate = useNavigate();
 
   const registerSubmitHandler = async (e) => {
     e.preventDefault();
-    
-    if (register.password !== register.repeatPassword) {
-        return;
-    }    
-    
-    authService.register(register)
-       .then(result => {
-        if (result !== 'Bad response') {
-            console.log(result);
-            navigate('/login');
-        }
-          navigate('/badrequest');
-       })
-       .catch((error) => {
-          throw console.error(error);
-      });
 
-    // const response = await fetch('https://localhost:7222/api/users/register', {
-    //     method: 'POST',
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(register),
-    // })
-    //     if (response.ok) {
-    //         const result = await response.json();
-    //         console.log(result);
-    //         navigate('/login');
-    //     }else {
-            
-    //     }
-        
+    if (register.password !== register.repeatPassword) {
+      setCheckPasswords(true);
+      return;
+    }else {
+      setCheckPasswords(false);
+    }
+
+    authService
+      .register(register)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/badrequest");
+        }        
+        return navigate("/login");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
-  const changeHandler = (e) => {    
+  const changeHandler = (e) => {
     setRegister((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));
   };
-  
 
-const validateUsername = (e) => {
-    const userName = e.target.value;        
-    setUsernameError(userValidator.user(userName));        
-};
+  const validateUsername = (e) => {
+    const userName = e.target.value;
+    setUsernameError(userValidator.user(userName));
+  };
 
-const validateEmail = (e) => {
-    const currEmail = e.target.value;   
-    setEmailError(userValidator.emailAddress(currEmail));    
-}
+  const validateEmail = (e) => {
+    const currEmail = e.target.value;
+    setEmailError(userValidator.emailAddress(currEmail));
+  };
 
-const validatePassword = (e) => {
+  const validatePassword = (e) => {
     const currPass = e.target.value;
-    setPasswordError(userValidator.password(currPass))
-};
+    setPasswordError(userValidator.password(currPass));
+  };
 
-const validateConformePassword = (e) => {
+  const validateConformePassword = (e) => {
     const password = e.target.value;
-    setConformPasswordError(userValidator.password(password))
-};
+    setConformPasswordError(userValidator.password(password));
+  };
 
- const isValid = Object.values(register).some(x => x == '') 
-        || usernameError || passwordError || conformPasswordError || emailError;
+  const isValid =
+    Object.values(register).some((x) => x == "") ||
+    usernameError ||
+    passwordError ||
+    conformPasswordError ||
+    emailError;
 
   return (
     <section className="vh-100" style={style}>
@@ -121,11 +112,12 @@ const validateConformePassword = (e) => {
                           >
                             User Name
                           </label>
-                            {usernameError &&
-                                <p className="alert alert-danger">
-                                    User name should be more than 2 and less than 50 symbols.
-                                </p>                           
-                            }
+                          {usernameError && (
+                            <p className="alert alert-danger">
+                              User name should be more than 2 and less than 50
+                              symbols.
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
@@ -146,11 +138,11 @@ const validateConformePassword = (e) => {
                           >
                             Your Email
                           </label>
-                          {emailError &&
-                                <p className="alert alert-danger">
-                                    Invalid email address.
-                                </p>                           
-                            }
+                          {emailError && (
+                            <p className="alert alert-danger">
+                              Invalid email address.
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
@@ -171,11 +163,12 @@ const validateConformePassword = (e) => {
                           >
                             Password
                           </label>
-                            {passwordError &&
-                                <p className="alert alert-danger">
-                                    Password should be more than 5 and less than 50 symbols.
-                                </p>
-                            }
+                          {passwordError && (
+                            <p className="alert alert-danger">
+                              Password should be more than 5 and less than 50
+                              symbols.
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
@@ -196,11 +189,18 @@ const validateConformePassword = (e) => {
                           >
                             Repeat your password
                           </label>
-                            {conformPasswordError &&
-                                <p className="alert alert-danger">
-                                    Password conformation should be more than 5 and less than 50 symbols.
-                                </p>
-                            }
+                          {conformPasswordError && (
+                            <p className="alert alert-danger">
+                              Password conformation should be more than 5 and
+                              less than 50 symbols.
+                            </p>
+                          )}
+                          {checkPasswords && (
+                            <p className="alert alert-danger">
+                              Password and conformation password should be the
+                              same.
+                            </p>
+                          )}
                         </div>
                       </div>
                       {/* <div className="form-check d-flex justify-content-center mb-5">
@@ -215,7 +215,7 @@ const validateConformePassword = (e) => {
                       <a href="#!">Terms of service</a>
                     </label>
                   </div> */}
-                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">                      
+                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           type="submit"
                           className="btn btn-lg"
