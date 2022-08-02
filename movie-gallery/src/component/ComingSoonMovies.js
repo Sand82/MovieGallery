@@ -1,7 +1,7 @@
 export default function ComingSoonMovies () {
    return 
    <section className="section-solid-long section-text-white position-relative">
-            <div className="d-background" data-image-src="http://via.placeholder.com/1920x1080" data-parallax="scroll"></div>
+            <div className="d-background" data-image-src="" data-parallax="scroll"></div>
             <div className="d-background bg-gradient-black"></div>
             <div className="container position-relative">
                 <div className="section-head">
@@ -13,7 +13,7 @@ export default function ComingSoonMovies () {
                             <article className="movie-line-entity">
                                 <div className="entity-preview">
                                     <div className="embed-responsive embed-responsive-16by9">
-                                        <img className="embed-responsive-item" src="http://via.placeholder.com/1920x1080" alt="" />
+                                        <img className="embed-responsive-item" src="" alt="" />
                                     </div>
                                     <div className="d-over">
                                         <div className="entity-play">

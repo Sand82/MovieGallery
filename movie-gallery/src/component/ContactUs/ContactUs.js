@@ -4,7 +4,7 @@ const ContactUs = () => {
       <section className="after-head d-flex section-text-white position-relative">
         <div
           className="d-background"
-          data-image-src="http://via.placeholder.com/1920x1080"
+          data-image-src=""
           data-parallax="scroll"
         />
         <div className="d-background bg-black-80" />

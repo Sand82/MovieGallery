@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import * as authService from '../../services/AuthServices.js'
 import * as style from "./Register.Module.css";
 import * as userValidator from '../../services/UserValidator.js'
 
@@ -20,22 +21,38 @@ const Register = () => {
   const navigate = useNavigate();
 
   const registerSubmitHandler = async (e) => {
-    e.preventDefault();    
-
-    const response = await fetch('https://localhost:7222/api/users/register', {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(register),
-    })
-        if (response.ok) {
-            const result = await response.json();
+    e.preventDefault();
+    
+    if (register.password !== register.repeatPassword) {
+        return;
+    }    
+    
+    authService.register(register)
+       .then(result => {
+        if (result !== 'Bad response') {
             console.log(result);
             navigate('/login');
-        }else {
-            
         }
+          navigate('/badrequest');
+       })
+       .catch((error) => {
+          throw console.error(error);
+      });
+
+    // const response = await fetch('https://localhost:7222/api/users/register', {
+    //     method: 'POST',
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(register),
+    // })
+    //     if (response.ok) {
+    //         const result = await response.json();
+    //         console.log(result);
+    //         navigate('/login');
+    //     }else {
+            
+    //     }
         
   };
 

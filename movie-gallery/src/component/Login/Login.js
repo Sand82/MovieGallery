@@ -25,33 +25,21 @@ const Login = () => {
     };
 
     const loginSubmitHandler = async (e) => {
-        e.preventDefault();        
-
-        // const response = await fetch("https://localhost:7222/api/users/login", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify(login),
-        // });  
+        e.preventDefault();
+       
         authService.login(login)
            .then(result => {
 
-            if (result === 'Not found') {
+            if (result === 'Bad response') {
                return navigate('/notfound') 
             }            
             loginHandler(result);
             navigate('/')
            })
            .catch((error) => {
-                console.error(error);
+              throw  console.error(error);
            });
-
-        // if (response.ok) {
-        //     console.log(result);
-        // } else {
-        //     console.error(result.error);            
-        // }
+        
     };
 
     const validateUsername = (e) => {

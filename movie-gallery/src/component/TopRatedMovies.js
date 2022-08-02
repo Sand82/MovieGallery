@@ -10,7 +10,7 @@ export default function TopRatedMovies () {
                 <article className="article-tape-entity">
                     <a className="entity-preview" href="article-sidebar-right.html" data-role="hover-wrap">
                         <span className="embed-responsive embed-responsive-16by9">
-                            <img className="embed-responsive-item" src="http://via.placeholder.com/720x405" alt="" />
+                            <img className="embed-responsive-item" src="" alt="" />
                         </span>
                         <span className="entity-date">
                             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
@@ -44,7 +44,7 @@ export default function TopRatedMovies () {
                 <article className="article-tape-entity">
                     <a className="entity-preview" href="article-sidebar-right.html" data-role="hover-wrap">
                         <span className="embed-responsive embed-responsive-16by9">
-                            <img className="embed-responsive-item" src="http://via.placeholder.com/720x405" alt="" />
+                            <img className="embed-responsive-item" src="" alt="" />
                         </span>
                         <span className="entity-date">
                             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
@@ -77,7 +77,7 @@ export default function TopRatedMovies () {
                 <article className="article-tape-entity">
                     <a className="entity-preview" href="article-sidebar-right.html" data-role="hover-wrap">
                         <span className="embed-responsive embed-responsive-16by9">
-                            <img className="embed-responsive-item" src="http://via.placeholder.com/720x405" alt="" />
+                            <img className="embed-responsive-item" src="" alt="" />
                         </span>
                         <span className="entity-date">
                             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
