@@ -10,7 +10,8 @@ const NewMovieBlog = ({movie}) => {
                   data-role="hover-wrap"
                 >
                   <span className="embed-responsive embed-responsive-16by9 image-wrapper">
-                    <img
+                    <img 
+                      id="image"
                       className="embed-responsive-item image"
                       src={movie.imageUrl}
                       alt=""                      

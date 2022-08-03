@@ -45,13 +45,11 @@ const Header = () => {
                 </div>
               </li>
               {user.accessToken ? (
-                <>
-                    
+                <>                    
                   <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                     <Link
                       className="nav-link"
-                      to="/movies"
-                      data-role="nav-toggler"
+                      to="/movies"                      
                     >
                       Movies
                     </Link>
@@ -59,11 +57,29 @@ const Header = () => {
                       <i className="fas fa-chevron-down"></i>
                     </div>
                   </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/contactus">
+                  {user.isAdmin && <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
+                    <Link
+                      className="nav-link"
+                      to="/movies"                      
+                    >
+                      Create
+                    </Link>
+                    <div className="nav-arrow">
+                      <i className="fas fa-chevron-down"></i>
+                    </div>
+                  </li>
+                  }                  
+                  <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
+                    <Link
+                      className="nav-link"
+                      to="/movies"                      
+                    >
                       Contact us
                     </Link>
-                  </li> 
+                    <div className="nav-arrow">
+                      <i className="fas fa-chevron-down"></i>
+                    </div>
+                  </li>                  
                   <li className="nav-item">
                     <Link className="nav-link" to="/Logout">
                       Logout

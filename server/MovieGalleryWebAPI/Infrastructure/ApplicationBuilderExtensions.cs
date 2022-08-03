@@ -48,6 +48,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                     {
                         Email = "sandoki@abv.bg",
                         UserName = "sandoki",
+                        PasswordHash = "123456"
                     };
 
                     await userMager.CreateAsync(author, "123456");

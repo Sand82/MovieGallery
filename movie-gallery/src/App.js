@@ -16,6 +16,7 @@ import Register from "./component/Register/Register.js";
 import NotFound from "./component/ErrorPage/NotFound.js";
 import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js'
+import CreateMovie from './component/CreateMovie/CreateMovie.js'
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -50,6 +51,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/Logout" element={<Logout />}></Route>
           <Route path="/movies" element={<Movies movies={movies} />}></Route>
+          <Route path="/create" element={<CreateMovie/>}></Route>
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
