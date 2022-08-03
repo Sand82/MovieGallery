@@ -6,7 +6,7 @@ import * as movieServis from "../../services/MoviesService.js";
 import { AuthContext } from "../../context/AuthContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
 
-const CreateMovie = () => {
+const CreateMovie = ({createMovieHandler}) => {
   const { user } = useContext(AuthContext);
   const [createMovie, setCreateMovie] = useState({
     title: "",
@@ -38,7 +38,20 @@ const CreateMovie = () => {
 
     const movieData = Object.fromEntries(new FormData(e.target));
 
-    movieServis.create(movieData, user.accessToken);
+    movieServis
+      .create(movieData, user.accessToken)
+      .then((result) => {
+       
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        createMovieHandler();
+        return navigate("/");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+
     navigate("/");
   };
 

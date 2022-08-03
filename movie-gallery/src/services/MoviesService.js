@@ -8,22 +8,23 @@ export const getAll = () => {
 
 export const create = async (data, token) => {
   try {
-    let response = fetch(baseUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    });
+    let response = await fetch(baseUrl, { 
+        method: 'POST',
+        headers : {
+         "Content-Type": "application/json",
+         'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(data),
+     })
+   
+   const result = await response.json();
 
-    const result = await response.json();
 
     if (!response.ok) {
-      return "Bad response";
+       return 'Bad response';
     }
-
     return result;
+
   } catch (error) {
     throw console.error(error.error);
   }

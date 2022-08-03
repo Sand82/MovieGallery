@@ -36,6 +36,12 @@ function App() {
     setUser({});
   }
 
+  const createMovieHandler = () => {
+    movieService.getAll().then((result) => {
+      setMovies(result);
+    });
+  }
+
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
 
   return (
@@ -51,7 +57,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/Logout" element={<Logout />}></Route>
           <Route path="/movies" element={<Movies movies={movies} />}></Route>
-          <Route path="/create" element={<CreateMovie/>}></Route>
+          <Route path="/create" element={<CreateMovie createMovieHandler={createMovieHandler}/>}></Route>
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>

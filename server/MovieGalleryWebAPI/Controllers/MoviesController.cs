@@ -7,6 +7,8 @@ using MovieGalleryWebAPI.Models.Create;
 
 using Microsoft.AspNetCore.Authorization;
 using MovieGalleryWebAPI.Models.Errors;
+using MovieGalleryWebAPI.Infrastructure;
+using MovieGalleryWebAPI.Service.Users;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -15,10 +17,12 @@ namespace MovieGalleryWebAPI.Controllers
     public class MoviesController : ControllerBase
     {
         private readonly IMoviesService moviesService;
+        private readonly IUserService userService;
 
-        public MoviesController(IMoviesService moviesService)
+        public MoviesController(IMoviesService moviesService, IUserService userService)
         {            
             this.moviesService = moviesService;
+            this.userService = userService;
         }
 
         
@@ -42,14 +46,21 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(MovieCreateModel model)
         {
-            //Request.Headers.TryGetValue("Bearer", out var token);
+            var userId = User.GetId();
+
+            var isAdmin = await userService.CheckIsAdmin(userId);
+
+            if (!isAdmin)
+            {
+                return BadRequest("Authorization denied");
+            }
 
             var isExist = await moviesService.ChackForDublicate(model.Title);
 
             if (isExist)
             {
                 return BadRequest("Movie already exist");
-            }
+            }            
 
             await moviesService.CreateMovie(model);
 

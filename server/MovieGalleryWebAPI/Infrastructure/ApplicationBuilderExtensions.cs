@@ -206,6 +206,28 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             });
 
+            movies.Add(new Movie
+            {
+                Title = "Die Hard with a Vengeance",
+                Year = "1995",
+                ImageUrl = "https://image.tmdb.org/t/p/original/sOqB9iMEcbGhAgH70dbs8U58UW5.jpg",
+                Description = "128",
+                Category = "Action",
+                Duration = "John McClane and a Harlem store owner are targeted by German terrorist Simon in New York City, where he plans to rob the Federal Reserve Building.",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "Live Free or Die Hard",
+                Year = "2007",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BNDQxMDE1OTg4NV5BMl5BanBnXkFtZTcwMTMzOTQzMw@@._V1_.jpg",
+                Description = "128",
+                Category = "Action",
+                Duration = "John McClane and a young hacker join forces to take down master cyber-terrorist Thomas Gabriel in Washington D.C.",
+
+            });
+
             //movies.Add(new Movie
             //{
             //    Title = "",
@@ -216,6 +238,8 @@ namespace MovieGalleryWebAPI.Infrastructure
             //    Duration = "",
 
             //});
+
+
 
             data.Movies.AddRange(movies);
             data.SaveChanges();
