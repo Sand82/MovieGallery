@@ -36,10 +36,11 @@ function App() {
     setUser({});
   }
 
-  const createMovieHandler = () => {
-    movieService.getAll().then((result) => {
-      setMovies(result);
-    });
+  const createMovieHandler = (movieData) => {
+    setMovies(state => ([
+      ...state,
+      movieData
+    ]));
   }
 
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
