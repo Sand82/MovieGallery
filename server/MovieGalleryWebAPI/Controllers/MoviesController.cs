@@ -2,10 +2,9 @@
 using MovieGalleryWebAPI.Service.Movies;
 
 using Microsoft.AspNetCore.Mvc;
-using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
-using Microsoft.AspNetCore.Cors;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace MovieGalleryWebAPI.Controllers
@@ -42,6 +41,8 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost]
         public async Task<MovieGetModel> Post(MovieCreateModel model)
         {
+            //Request.Headers.TryGetValue("Bearer", out var token);            
+
             await moviesService.CreateMovie(model);
 
             var movie = await moviesService.GetLastMovie();
@@ -49,6 +50,7 @@ namespace MovieGalleryWebAPI.Controllers
             return movie;
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<bool> Edit(MovieEditModel model)
         {
@@ -58,6 +60,7 @@ namespace MovieGalleryWebAPI.Controllers
             return movie;
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<string> Delete(int id)
         {            

@@ -10,7 +10,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public int Id { get; set; }
 
         [Required]
-        [StringLength(MaxMovieNameLength, MinimumLength = MinMovieNameLength,
+        [StringLength(MaxMovieTitleLength, MinimumLength = MinMovieTitleLength,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
         public string? Title { get; set; }
 
@@ -35,7 +35,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public string? Year { get; set; }
 
         [Required]
-        [StringLength(MaxMovieDoration, MinimumLength = MinMovieDoration,
+        [StringLength(MaxMovieDuration, MinimumLength = MinMovieDouration,
            ErrorMessage = "The field {0} is not valid! Must be exact {1} symbols.")]
         public string? Duration { get; set; }
     }

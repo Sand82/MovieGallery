@@ -148,7 +148,29 @@ namespace MovieGalleryWebAPI.Infrastructure
                 ImageUrl = "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
                 Description = "220",
                 Category = "Crime",
+                Duration = "210",
 
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "The Godfather",
+                Year = "1972",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/714ZOEiVNtL._RI_.jpg",
+                Description = "The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
+                Category = "Crime",
+                Duration = "175",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "The Fast and the Furious",
+                Year = "2001",
+                ImageUrl = "http://vignette1.wikia.nocookie.net/fastandfurious/images/0/04/The_Fast_and_the_Furious_%28DVD_Cover%29.jpeg/revision/latest?cb=20150501043627",
+                Description = "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy.",
+                Category = "Adventure",
+                Duration = "105",
             });
 
             //movies.Add(new Movie
@@ -158,6 +180,7 @@ namespace MovieGalleryWebAPI.Infrastructure
             //    ImageUrl = "",
             //    Description = "",
             //    Category = "",
+            //    Duration = "",
 
             //});
 

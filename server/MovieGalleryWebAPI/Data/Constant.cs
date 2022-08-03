@@ -2,11 +2,11 @@
 {
     public static class Constant
     {
-        public const int MinMovieNameLength = 2;
-        public const int MaxMovieNameLength = 100;
+        public const int MinMovieTitleLength = 2;
+        public const int MaxMovieTitleLength = 100;
 
-        public const int MinMovieDoration = 2;
-        public const int MaxMovieDoration = 20;
+        public const int MinMovieDuration = 2;
+        public const int MaxMovieDuration = 20;
 
         public const int MinMovieCategoryLength = 2;
         public const int MaxMovieCategoryLength = 50;

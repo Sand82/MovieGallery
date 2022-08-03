@@ -43,6 +43,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         {
             var movie = await this.data.Movies
                 .OrderByDescending(m => m.Id)
+                .Where(m => m.IsDelete == false)
                 .Select(m => new MovieGetModel
                 {
                     Id = m.Id,
@@ -59,7 +60,8 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public async Task<List<MovieDataModel>> GetMovies()
         {
-            var movies = await this.data.Movies                
+            var movies = await this.data.Movies
+                .Where(m => m.IsDelete == false)
                 .ProjectTo<MovieDataModel>(this.mapper.ConfigurationProvider)
                 //.Select(m => new MovieDataModel
                 //{

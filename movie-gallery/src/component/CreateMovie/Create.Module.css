@@ -3,10 +3,19 @@
     margin: 20px auto;
     max-width: 500px;
     box-shadow: 0 5px 5px rgb(0 0 0 / 50%);
+    border-radius: 20px;
     
 }
 
 .movie-title{
     margin: 20px 0px;
     font-size: large;
+}
+
+.btn {
+    background-color: #FF8A00;
+}
+
+.btn:hover{
+    background-color: #FF680D;
 }

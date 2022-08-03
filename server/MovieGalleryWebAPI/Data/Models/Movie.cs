@@ -7,7 +7,7 @@
         public int Id { get; set; }
 
         [Required]
-        [StringLength(MaxMovieNameLength)]
+        [StringLength(MaxMovieTitleLength)]
         public string? Title { get; set; }
 
         [Required]
@@ -27,7 +27,7 @@
         public string? Category { get; set; }
 
         [Required]
-        [StringLength(MaxMovieDoration)]
+        [StringLength(MaxMovieDuration)]
         public string? Duration { get; set; }
 
         public bool IsDelete { get; set; } = false;
