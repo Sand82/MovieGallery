@@ -17,5 +17,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         Task<MovieGetModel> GetLastMovie();
 
         Task<bool> EditMovei(MovieEditModel model);
+
+        Task<bool> ChackForDublicate(string title);
     }
 }

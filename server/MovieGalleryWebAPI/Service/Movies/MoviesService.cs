@@ -138,11 +138,18 @@ namespace MovieGalleryWebAPI.Service.Movies
             return isEdited;
         }
 
+        public async Task<bool> ChackForDublicate(string title)
+        {
+            return await this.data.Movies.AnyAsync(m => m.Title == title);
+        }
+
         private async Task DeleteMovie(Movie movie)
         {
             movie.IsDelete = true;
 
             await this.data.SaveChangesAsync();
         }
+
+        
     }
 }

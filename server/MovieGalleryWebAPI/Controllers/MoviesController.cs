@@ -6,6 +6,7 @@ using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
 
 using Microsoft.AspNetCore.Authorization;
+using MovieGalleryWebAPI.Models.Errors;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -39,15 +40,22 @@ namespace MovieGalleryWebAPI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<MovieGetModel> Post(MovieCreateModel model)
+        public async Task<IActionResult> Post(MovieCreateModel model)
         {
-            //Request.Headers.TryGetValue("Bearer", out var token);            
+            //Request.Headers.TryGetValue("Bearer", out var token);
+
+            var isExist = await moviesService.ChackForDublicate(model.Title);
+
+            if (isExist)
+            {
+                return BadRequest("Movie already exist");
+            }
 
             await moviesService.CreateMovie(model);
 
             var movie = await moviesService.GetLastMovie();
 
-            return movie;
+            return Ok(movie);
         }
 
         [Authorize]
