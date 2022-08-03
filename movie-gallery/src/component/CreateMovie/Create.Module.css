@@ -1,0 +1,12 @@
+.form-container{
+    border: 1px solid #BEBEBE;   
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 5px 5px rgb(0 0 0 / 50%);
+    
+}
+
+.movie-title{
+    margin: 20px 0px;
+    font-size: large;
+}

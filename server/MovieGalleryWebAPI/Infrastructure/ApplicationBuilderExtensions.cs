@@ -72,10 +72,10 @@ namespace MovieGalleryWebAPI.Infrastructure
             movies.Add(new Movie
             {
                 Title = "Obi-Wan Kenobi",
+                Category = "Adventure",
                 Year = "2022",
                 ImageUrl = "https://zamunda-net.com/wp-content/uploads/2022/03/obi-wan-kenobi-season-1-2.jpg",
-                Description = "Jedi Master Obi-Wan Kenobi has to save young Leia after she is kidnapped, all the while being pursued by Imperial Inquisitors and his former Padawan, now known as Darth Vader.",
-                Category = "Adventure",
+                Description = "Jedi Master Obi-Wan Kenobi has to save young Leia after she is kidnapped, all the while being pursued by Imperial Inquisitors and his former Padawan, now known as Darth Vader.",                
                 Duration = "150",
             }) ;
 
@@ -138,6 +138,16 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Description = "After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.",
                 Category = "Action",
                 Duration = "140",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "The Godfather Part II",
+                Year = "1974",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
+                Description = "220",
+                Category = "Crime",
 
             });
 

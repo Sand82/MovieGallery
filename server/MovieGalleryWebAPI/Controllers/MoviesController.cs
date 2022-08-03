@@ -6,6 +6,7 @@ using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -37,6 +38,7 @@ namespace MovieGalleryWebAPI.Controllers
             return movies;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<MovieGetModel> Post(MovieCreateModel model)
         {
@@ -67,8 +69,6 @@ namespace MovieGalleryWebAPI.Controllers
             }
 
             return id.ToString();
-        }
-
-        
+        }        
     }
 }

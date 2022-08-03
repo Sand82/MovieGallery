@@ -60,7 +60,7 @@ const Header = () => {
                   {user.isAdmin && <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                     <Link
                       className="nav-link"
-                      to="/movies"                      
+                      to="/create"                      
                     >
                       Create
                     </Link>
