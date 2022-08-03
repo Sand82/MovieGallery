@@ -173,6 +173,39 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "105",
             });
 
+            movies.Add(new Movie
+            {
+                Title = "F9: The Fast Saga",
+                Year = "2021",
+                ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6469/6469286_so.jpg",
+                Description = "Dom and the crew must take on an international terrorist who turns out to be Dom and Mia's estranged brother.",
+                Category = "Action",
+                Duration = "143",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "Die hard",
+                Year = "1981",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/819cf1ZR2WL.jpg",
+                Description = "An NYPD officer tries to save his wife and several others taken hostage by German terrorists during a Christmas party at the Nakatomi Plaza in Los Angeles.",
+                Category = "Action",
+                Duration = "132",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "Die hard 2",
+                Year = "1990",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BZjI0ZWFiMmQtMjRlZi00ZmFhLWI4NmYtMjQ5YmY0MzIyMzRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
+                Description = "John McClane attempts to avert disaster as rogue military operatives seize control of Dulles International Airport in Washington, D.C.",
+                Category = "Action",
+                Duration = "124",
+
+            });
+
             //movies.Add(new Movie
             //{
             //    Title = "",

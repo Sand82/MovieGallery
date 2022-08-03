@@ -19,8 +19,8 @@ const Header = () => {
                 ></span>
               </span>
               <span className="logo-text text-uppercase">
-                <span>M</span>Movie Gallery
-              </span>
+                <span>M</span>Movies
+              </span>              
             </span>
           </Link>
           <button className="navbar-toggler" type="button">
@@ -72,7 +72,7 @@ const Header = () => {
                   <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                     <Link
                       className="nav-link"
-                      to="/movies"                      
+                      to="/contactus"                      
                     >
                       Contact us
                     </Link>

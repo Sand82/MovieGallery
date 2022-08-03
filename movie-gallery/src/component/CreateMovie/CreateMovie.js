@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import * as style from "./Create.Module.css";
 import * as movieServis from "../../services/MoviesService.js";
@@ -23,6 +24,8 @@ const CreateMovie = () => {
   const [durationError, setDurationError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
 
+  const navigate = useNavigate();
+
   const changeHandler = (e) => {
     setCreateMovie((state) => ({
       ...state,
@@ -36,8 +39,7 @@ const CreateMovie = () => {
     const movieData = Object.fromEntries(new FormData(e.target));
 
     movieServis.create(movieData, user.accessToken);
-
-    console.log(movieData);
+    navigate("/");
   };
 
   const validateTitle = (e) => {
@@ -191,7 +193,6 @@ const CreateMovie = () => {
                 name="description"
                 rows={3}
                 placeholder="Enter game description..."
-                defaultValue={""}
                 onChange={changeHandler}
                 value={createMovie.description}
                 onBlur={validateDescription}
