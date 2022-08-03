@@ -59,6 +59,7 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Year = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Category = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Duration = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using static MovieGalleryWebAPI.GlobalConstans;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 
@@ -18,10 +21,43 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             data.Database.Migrate();
 
+            SeedAdministrator(serviceProvider);
+
             SeedMovies(data);
 
             return app;
         }
+        private static void SeedAdministrator(IServiceProvider service)
+        {
+            var userMager = service.GetRequiredService<UserManager<IdentityUser>>();
+            var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task
+                .Run(async () =>
+                {
+                    if (await roleManager.RoleExistsAsync(AdministratorRoleName))
+                    {
+                        return;
+                    }
+
+                    var role = new IdentityRole { Name = AdministratorRoleName };
+
+                    await roleManager.CreateAsync(role);
+
+                    var author = new IdentityUser
+                    {
+                        Email = "sandoki@abv.bg",
+                        UserName = "sandoki",
+                    };
+
+                    await userMager.CreateAsync(author, "123456");
+
+                    await userMager.AddToRoleAsync(author, role.Name);
+                })
+                .GetAwaiter()
+                .GetResult();
+        }
+
 
         private static void SeedMovies(MovieGalleryDbContext data)
         {
@@ -80,6 +116,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 ImageUrl = "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",
                 Description = "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
                 Category = "Adventure",
+                Duration = "160"
             });
 
             movies.Add(new Movie

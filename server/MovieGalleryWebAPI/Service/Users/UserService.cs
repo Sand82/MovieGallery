@@ -109,5 +109,10 @@ namespace MovieGalleryWebAPI.Service.Users
 
             return jwt;
         }
+
+        public async Task<bool> CheckIsAdmin(string userId)
+        {
+            return await this.data.UserRoles.AnyAsync(x => x.UserId == userId);
+        }
     }
 }

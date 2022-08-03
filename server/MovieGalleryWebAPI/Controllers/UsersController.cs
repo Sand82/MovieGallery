@@ -60,7 +60,11 @@ namespace MovieGalleryWebAPI.Controllers
 
             var token = await userService.CreateToken(model.Username, model.Password);
 
+            var isAdmin = await userService.CheckIsAdmin(user.Id);
+
             user.AccessToken = token;
+
+            user.IsAdmin = isAdmin;
 
             return user;
         }        
