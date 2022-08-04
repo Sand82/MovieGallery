@@ -28,7 +28,7 @@ function App() {
     movieService.getAll().then((result) => {
       setMovies(result);
     });
-  }, [() =>createMovieHandler()]);
+  }, []);
 
   const loginHandler = (data) => {
         setUser(data);
@@ -38,10 +38,11 @@ function App() {
     setUser({});
   }
 
-  const createMovieHandler = () => {
-    movieService.getAll().then((result) => {
-      setMovies(result);
-    });
+  const createMovieHandler = (movieData) => {
+    setMovies(state => ([
+      ...state,
+      movieData
+    ]));
   }
 
   const detailsMovieHandler = (movie) => {   

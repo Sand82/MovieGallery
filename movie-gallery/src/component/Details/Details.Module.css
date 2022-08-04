@@ -1,0 +1,21 @@
+.button-holder {
+    text-align: right;
+    margin-right: 30px;   
+}
+
+.delButton {
+    background-color: red;
+    margin: 5px;
+}
+
+.editButton {
+    background-color:orange;
+}
+
+.delButton:hover {
+    color: black;
+}
+
+.editButton:hover {    
+    border-color: black;
+}

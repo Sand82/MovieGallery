@@ -8,7 +8,7 @@ export const getAll = () => {
 
 export const create = async (data, token) => {
   try {    
-    let response = fetch(baseUrl, { 
+    let response = await fetch(baseUrl, { 
         method: 'POST',
         headers : {
          "Content-Type": "application/json",         
@@ -19,7 +19,7 @@ export const create = async (data, token) => {
    
     const result = await response.json();  
     
-    console.log(response);
+    console.log(response)
 
     if (!response.ok) {
        return 'Bad response';

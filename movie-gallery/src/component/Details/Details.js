@@ -1,8 +1,9 @@
+import * as style from './Details.Module.css';
+
 const Details = ({movie}) => {
-  
-console.log(movie);
+
   return (
-    <div className="container">
+    <div stylr={style} className="container">
       <div className="sidebar-container">
         <div className="content">
           <section className="section-long">
@@ -119,6 +120,10 @@ console.log(movie);
                       english
                     </li>
                   </ul>
+                  <div className="button-holder">
+                        <button className="btn btn-warning editButton"> Edit</button>
+                        <button className="btn btn-danger delButton"> Delete</button>
+                    </div>
                 </div>
               </div>
             </div>

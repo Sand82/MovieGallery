@@ -40,7 +40,7 @@ const CreateMovie = ({createMovieHandler}) => {
 
     movieServis
       .create(movieData, user.accessToken)
-      .then((result) => {        
+      .then((result) => {               
        
         if (result === "Bad response") {
           return navigate("/notfound");
@@ -50,9 +50,7 @@ const CreateMovie = ({createMovieHandler}) => {
       })
       .catch((error) => {
         throw console.error(error);
-      });
-
-    navigate("/");
+      });    
   };
 
   const validateTitle = (e) => {
