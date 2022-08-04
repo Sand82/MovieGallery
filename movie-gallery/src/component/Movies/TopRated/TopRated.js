@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 
-const TopRated = ({ movie }) => {
+const TopRated = ({ movie, detailsMovieHandler }) => {  
+
+  const detailsHeandler = () => { 
+    detailsMovieHandler(movie);
+  }
+
   return (
     <article className="movie-line-entity">
       <div className="entity-poster" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
-          <Link to={`/movies/details/${movie.id}`}>
+          <Link to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
             <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
           </Link>
         </div>
@@ -19,6 +24,7 @@ const TopRated = ({ movie }) => {
               className="action-icon-theme action-icon-bordered rounded-circle"
               // href="https://www.youtube.com/watch?v=nuTU5XcZTLA"
               data-magnific-popup="iframe"
+              onClick={detailsHeandler}
               to={`/movies/details/${movie.id}`}
             >
               <span className="icon-content">
@@ -30,12 +36,12 @@ const TopRated = ({ movie }) => {
       </div>
       <div className="entity-content">
         <h4 className="entity-title">
-          <Link className="content-link" to={`/movies/details/${movie.id}`}>
+          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
             {movie.title}
           </Link>
         </h4>
         <div className="entity-category">
-          <Link className="content-link" to={`/movies/details/${movie.id}`}>
+          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
             {movie.category}
           </Link>
         </div>

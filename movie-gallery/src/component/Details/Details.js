@@ -1,4 +1,5 @@
-const Details = () => {
+const Details = ({movie}) => {
+  
 
   return (
     <div className="container">

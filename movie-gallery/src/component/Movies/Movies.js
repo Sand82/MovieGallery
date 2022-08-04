@@ -1,6 +1,6 @@
 import TopRated from "./TopRated/TopRated.js";
 
-const Movies = ({movies}) => {       
+const Movies = ({movies, detailsMovieHandler}) => {       
 
   return (
     <section className="section-long">
@@ -9,7 +9,7 @@ const Movies = ({movies}) => {
           <h2 className="section-title text-uppercase">Top rated</h2>
           <p className="section-text">date</p>
         </div>        
-       {movies.map(x => < TopRated key={x.id} movie={x}/>)}
+       {movies.map(x => < TopRated key={x.id} movie={x} detailsMovieHandler={detailsMovieHandler}/>)}
       </div>
     </section>
   );

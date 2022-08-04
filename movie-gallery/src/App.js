@@ -18,11 +18,12 @@ import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js';
 import CreateMovie from './component/CreateMovie/CreateMovie.js';
 import Details from './component/Details/Details.js';
-import GameContext from "./context/GameContext.js";
+import { MovieContext } from "./context/MovieContext.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useLocalStorage('auth', {});
+  const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {
     movieService.getAll().then((result) => {
@@ -45,8 +46,8 @@ function App() {
     ]));
   }
 
-  const detailsMovieHandler = (movieId) => {
-
+  const detailsMovieHandler = (movie) => {   
+    setMovieDetails(movie);
   }
 
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
@@ -54,8 +55,9 @@ function App() {
   return (
     <div className="App">
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>
-        <GameContext.Provider value={{detailsMovieHandler}}>
+        
         <Header />
+        <MovieContext.Provider value={{detailsMovieHandler}}>
         <Routes>
           <Route
             path="/"
@@ -64,17 +66,17 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/Logout" element={<Logout />}></Route>
-          <Route path="/movies" element={<Movies movies={movies} />}></Route>
+          <Route path="/movies" element={<Movies movies={movies} detailsMovieHandler={detailsMovieHandler} />}></Route>
           <Route path="/create" element={<CreateMovie createMovieHandler={createMovieHandler}/>}></Route>
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
-          <Route path="/movies/details/:movieId" element={<Details />}></Route>        
+          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails}/>}></Route>        
         </Routes>
 
         <Scroll />
         <Footer />
-        </GameContext.Provider>
+        </MovieContext.Provider>
       </AuthContext.Provider>
     </div>
   );
