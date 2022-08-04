@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as style from "./Create.Module.css";
 import * as movieServis from "../../services/MoviesService.js";
-import { AuthContext } from "../../context/AuthContext.js";
+import { AuthContext } from "../../contexts/AuthContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
 
 const CreateMovie = ({createMovieHandler}) => {

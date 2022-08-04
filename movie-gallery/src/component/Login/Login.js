@@ -5,7 +5,7 @@ import { useContext } from "react";
 import * as style from "../Login/Login.Module.css";
 import * as userValidator from '../../services/UserValidator.js';
 import * as authService from '../../services/AuthServices.js';
-import { AuthContext } from "../../context/AuthContext.js";
+import { AuthContext } from "../../contexts/AuthContext.js";
 
 const Login = () => {
     const [login, setLogin] = useState({

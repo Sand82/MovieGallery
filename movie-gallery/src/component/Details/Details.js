@@ -1,6 +1,6 @@
 const Details = ({movie}) => {
   
-
+console.log(movie);
   return (
     <div className="container">
       <div className="sidebar-container">
@@ -12,7 +12,7 @@ const Details = ({movie}) => {
                   <div className="embed-responsive embed-responsive-poster">
                     <img
                       className="embed-responsive-item"
-                      src="http://via.placeholder.com/340x510"
+                      src={movie.imageUrl}
                       alt=""
                     />
                   </div>
@@ -35,15 +35,11 @@ const Details = ({movie}) => {
                   </div>
                 </div>
                 <div className="entity-content">
-                  <h2 className="entity-title">Blick</h2>
+                  <h2 className="entity-title">{movie.title}</h2>
                   <div className="entity-category">
                     <a className="content-link" href="movies-blocks.html">
-                      comedy
-                    </a>
-                    ,
-                    <a className="content-link" href="movies-blocks.html">
-                      detective
-                    </a>
+                      {movie.category}
+                    </a>                    
                   </div>
                   <div className="entity-info">
                     <div className="info-lines">
@@ -58,7 +54,7 @@ const Details = ({movie}) => {
                         <span className="text-theme info-icon">
                           <i className="fas fa-clock" />
                         </span>
-                        <span className="info-text">130</span>
+                        <span className="info-text">{movie.duration}</span>
                         <span className="info-rest">&nbsp;min</span>
                       </div>
                     </div>

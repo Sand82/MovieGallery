@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./component/Header/Header.js";
 import * as movieService from "./services/MoviesService.js";
-import { AuthContext } from "./context/AuthContext.js";
+import { AuthContext } from "./contexts/AuthContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.js";
 import Movies from "./component/Movies/Movies.js";
@@ -18,7 +18,7 @@ import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js';
 import CreateMovie from './component/CreateMovie/CreateMovie.js';
 import Details from './component/Details/Details.js';
-import { MovieContext } from "./context/MovieContext.js";
+import { MovieContext } from "./contexts/MovieContext.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -57,7 +57,7 @@ function App() {
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>
         
         <Header />
-        <MovieContext.Provider value={{detailsMovieHandler}}>
+        <MovieContext.Provider value={{ movies, createMovieHandler, detailsMovieHandler}}>
         <Routes>
           <Route
             path="/"
