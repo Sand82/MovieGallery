@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using MovieGalleryWebAPI.Models.Errors;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Users;
+using System.Net;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -42,7 +43,7 @@ namespace MovieGalleryWebAPI.Controllers
             return movies;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Post(MovieCreateModel model)
         {

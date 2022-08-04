@@ -33,7 +33,7 @@ const Login = () => {
             if (result === 'Bad response') {
                 return navigate('/notfound') 
             }            
-                // loginHandler(result);
+                loginHandler(result);
                 return navigate('/')
            })
            .catch((error) => {

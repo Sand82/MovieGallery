@@ -40,7 +40,7 @@ const CreateMovie = ({createMovieHandler}) => {
 
     movieServis
       .create(movieData, user.accessToken)
-      .then((result) => {
+      .then((result) => {        
        
         if (result === "Bad response") {
           return navigate("/notfound");
@@ -219,7 +219,7 @@ const CreateMovie = ({createMovieHandler}) => {
                 </p>
               )}
             </div>
-            
+            {/* Submit button */}
             <button
               type="submit"
               className="btn btn-block mb-4"

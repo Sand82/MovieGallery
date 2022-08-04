@@ -47,8 +47,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                     var author = new IdentityUser
                     {
                         Email = "sandoki@abv.bg",
-                        UserName = "sandoki",
-                        PasswordHash = "123456"
+                        UserName = "sandoki",                        
                     };
 
                     await userMager.CreateAsync(author, "123456");
@@ -211,9 +210,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Title = "Die Hard with a Vengeance",
                 Year = "1995",
                 ImageUrl = "https://image.tmdb.org/t/p/original/sOqB9iMEcbGhAgH70dbs8U58UW5.jpg",
-                Description = "128",
+                Description = "John McClane and a Harlem store owner are targeted by German terrorist Simon in New York City, where he plans to rob the Federal Reserve Building.",
                 Category = "Action",
-                Duration = "John McClane and a Harlem store owner are targeted by German terrorist Simon in New York City, where he plans to rob the Federal Reserve Building.",
+                Duration = "128" ,
 
             });
 
@@ -222,9 +221,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Title = "Live Free or Die Hard",
                 Year = "2007",
                 ImageUrl = "https://m.media-amazon.com/images/M/MV5BNDQxMDE1OTg4NV5BMl5BanBnXkFtZTcwMTMzOTQzMw@@._V1_.jpg",
-                Description = "128",
+                Description = "John McClane and a young hacker join forces to take down master cyber-terrorist Thomas Gabriel in Washington D.C.",
                 Category = "Action",
-                Duration = "John McClane and a young hacker join forces to take down master cyber-terrorist Thomas Gabriel in Washington D.C.",
+                Duration = "128",
 
             });
 
@@ -244,9 +243,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Title = "Cinderella Man",
                 Year = "2005",
                 ImageUrl = "https://m.media-amazon.com/images/I/81vHUrHKLKL._SL1500_.jpg",
-                Description = "145",
+                Description = "The story of James J. Braddock, a supposedly washed-up boxer who came back to challenge for the heavyweight championship of the world.",
                 Category = "Drama",
-                Duration = "The story of James J. Braddock, a supposedly washed-up boxer who came back to challenge for the heavyweight championship of the world.",
+                Duration = "145",
 
             });        
 

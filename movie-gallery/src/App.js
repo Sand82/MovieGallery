@@ -18,7 +18,6 @@ import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js';
 import CreateMovie from './component/CreateMovie/CreateMovie.js';
 import Details from './component/Details/Details.js';
-import { MovieContext } from "./contexts/MovieContext.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -29,7 +28,7 @@ function App() {
     movieService.getAll().then((result) => {
       setMovies(result);
     });
-  }, []);
+  }, [() =>createMovieHandler()]);
 
   const loginHandler = (data) => {
         setUser(data);
@@ -39,11 +38,10 @@ function App() {
     setUser({});
   }
 
-  const createMovieHandler = (movieData) => {
-    setMovies(state => ([
-      ...state,
-      movieData
-    ]));
+  const createMovieHandler = () => {
+    movieService.getAll().then((result) => {
+      setMovies(result);
+    });
   }
 
   const detailsMovieHandler = (movie) => {   
@@ -54,10 +52,8 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>
-        
-        <Header />
-        <MovieContext.Provider value={{ movies, createMovieHandler, detailsMovieHandler}}>
+      <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>        
+        <Header />        
         <Routes>
           <Route
             path="/"
@@ -75,8 +71,7 @@ function App() {
         </Routes>
 
         <Scroll />
-        <Footer />
-        </MovieContext.Provider>
+        <Footer />        
       </AuthContext.Provider>
     </div>
   );
