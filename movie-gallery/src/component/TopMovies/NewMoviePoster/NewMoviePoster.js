@@ -39,30 +39,22 @@ const NewMoviePoster = ({movie}) => {
           </a>
         </div>
         <h4 className="entity-title">
-          <a
+          <div
             className="content-link"
-            href="movie-info-sidebar-right.html"
+            // href="movie-info-sidebar-right.html"
             tabIndex={-1}
           >
             {movie.title}
-          </a>
+          </div>
         </h4>
         <div className="entity-category">
-          <a
+          <div
             className="content-link"
-            href="movies-blocks.html"
+            // href="movies-blocks.html"
             tabIndex={-1}
           >
             {movie.category}
-          </a>
-          ,
-          <a
-            className="content-link"
-            href="movies-blocks.html"
-            tabIndex={-1}
-          >
-            adventure
-          </a>
+          </div>          
         </div>
         <div className="entity-info">
           <div className="info-lines">

@@ -1,4 +1,5 @@
 const Details = () => {
+
   return (
     <div className="container">
       <div className="sidebar-container">

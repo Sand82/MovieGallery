@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
+
 const TopRated = ({ movie }) => {
   return (
     <article className="movie-line-entity">
       <div className="entity-poster" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
-          <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
+          <Link to={`/movies/details/${movie.id}`}>
+            <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
+          </Link>
         </div>
         <div
           className="d-over bg-theme-lighted collapse animated faster"
@@ -11,28 +15,29 @@ const TopRated = ({ movie }) => {
           data-hide-classname="fadeOut show"
         >
           <div className="entity-play">
-            <a
+            <Link
               className="action-icon-theme action-icon-bordered rounded-circle"
-              href="https://www.youtube.com/watch?v=nuTU5XcZTLA"
+              // href="https://www.youtube.com/watch?v=nuTU5XcZTLA"
               data-magnific-popup="iframe"
+              to={`/movies/details/${movie.id}`}
             >
               <span className="icon-content">
                 <i className="fas fa-play"></i>
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className="entity-content">
         <h4 className="entity-title">
-          <a className="content-link" href="movie-info-sidebar-right.html">
+          <Link className="content-link" to={`/movies/details/${movie.id}`}>
             {movie.title}
-          </a>
+          </Link>
         </h4>
         <div className="entity-category">
-          <a className="content-link" href="movies-blocks.html">
+          <Link className="content-link" to={`/movies/details/${movie.id}`}>
             {movie.category}
-          </a>
+          </Link>
         </div>
         <div className="entity-info">
           <div className="info-lines">

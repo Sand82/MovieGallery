@@ -219,7 +219,7 @@ const CreateMovie = ({createMovieHandler}) => {
                 </p>
               )}
             </div>
-            {/* Submit button */}
+            
             <button
               type="submit"
               className="btn btn-block mb-4"

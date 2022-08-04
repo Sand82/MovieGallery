@@ -15,8 +15,10 @@ import Logout from "./component/Logout/Logout.js";
 import Register from "./component/Register/Register.js";
 import NotFound from "./component/ErrorPage/NotFound.js";
 import BadRequest from "./component/ErrorPage/BadRequest.js";
-import {useLocalStorage} from './hooks/useLocalStorage.js'
-import CreateMovie from './component/CreateMovie/CreateMovie.js'
+import {useLocalStorage} from './hooks/useLocalStorage.js';
+import CreateMovie from './component/CreateMovie/CreateMovie.js';
+import Details from './component/Details/Details.js';
+import GameContext from "./context/GameContext.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -43,11 +45,16 @@ function App() {
     ]));
   }
 
+  const detailsMovieHandler = (movieId) => {
+
+  }
+
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
 
   return (
     <div className="App">
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>
+        <GameContext.Provider value={{detailsMovieHandler}}>
         <Header />
         <Routes>
           <Route
@@ -62,11 +69,12 @@ function App() {
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
-          {/* <Route path='/details' element={<Details/>}></Route>         */}
+          <Route path="/movies/details/:movieId" element={<Details />}></Route>        
         </Routes>
 
         <Scroll />
         <Footer />
+        </GameContext.Provider>
       </AuthContext.Provider>
     </div>
   );

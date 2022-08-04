@@ -228,6 +228,49 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             });
 
+            movies.Add(new Movie
+            {
+                Title = "Beautiful mind",
+                Year = "2001",
+                ImageUrl = "https://images-na.ssl-images-amazon.com/images/I/61uzUoS79LL.jpg",
+                Description = "After John Nash, a brilliant but asocial mathematician, accepts secret work in cryptography, his life takes a turn for the nightmarish.",
+                Category = "Drama",
+                Duration = "135",
+
+            });        
+
+            movies.Add(new Movie
+            {
+                Title = "Cinderella Man",
+                Year = "2005",
+                ImageUrl = "https://m.media-amazon.com/images/I/81vHUrHKLKL._SL1500_.jpg",
+                Description = "145",
+                Category = "Drama",
+                Duration = "The story of James J. Braddock, a supposedly washed-up boxer who came back to challenge for the heavyweight championship of the world.",
+
+            });        
+
+            movies.Add(new Movie
+            {
+                Title = "The Shawshank Redemption",
+                Year = "1994",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg",
+                Description = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                Category = "Drama",
+                Duration = "142",
+
+            });
+
+            movies.Add(new Movie
+            {
+                Title = "Million Dollar Baby",
+                Year = "2004",
+                ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/7170/7170018_so.jpg",
+                Description = "A determined woman works with a hardened boxing trainer to become a professional.",
+                Category = "Drama",
+                Duration = "142",
+            });
+
             //movies.Add(new Movie
             //{
             //    Title = "",
@@ -236,10 +279,7 @@ namespace MovieGalleryWebAPI.Infrastructure
             //    Description = "",
             //    Category = "",
             //    Duration = "",
-
             //});
-
-
 
             data.Movies.AddRange(movies);
             data.SaveChanges();
