@@ -1,6 +1,11 @@
-export const request = async (method, url, data) => {
+export const request = async (method, url, data, token) => {
     try {
         let buildRequest;
+        let headers = {};
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
 
         if (method === 'GET') {
             buildRequest = fetch(url);
@@ -8,6 +13,7 @@ export const request = async (method, url, data) => {
             buildRequest = fetch(url,{ 
                method,
                headers : {
+                ...headers,
                 "Content-Type": "application/json",
                },
                body: JSON.stringify(data),
