@@ -2731,7 +2731,7 @@ a.paginator-item:hover {
   opacity: 0.4;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
   filter: alpha(opacity=40);
-  trainsition: all 0.1s linear 0s;
+  transition: all 0.1s linear 0s;
 }
 .movie-tape-playlist .slick-slide:hover .embed-responsive,
 .movie-tape-playlist .slick-slide.slick-current .embed-responsive {

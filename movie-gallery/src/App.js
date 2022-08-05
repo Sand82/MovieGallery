@@ -19,6 +19,7 @@ import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js';
 import CreateMovie from './component/CreateMovie/CreateMovie.js';
 import Details from './component/Details/Details.js';
+import ScrollToTop from "./hooks/ScrollToTop.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -60,11 +61,14 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>        
+      <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
+        <ScrollToTop />   
         <Header />
         <MovieContext.Provider value={{movies,deleteHandler, detailsHandler}}>      
         <Routes>
+        
           <Route
+          
             path="/"
             element={<NewMovies movies={firstFiveMovies} />}
           ></Route>
@@ -79,7 +83,7 @@ function App() {
           <Route path="/movies/details/:movieId" element={<Details movie={movieDetails} />}></Route>        
         </Routes>
         </MovieContext.Provider>  
-        <Scroll />
+        {/* <Scroll /> */}
         <Footer />        
       </AuthContext.Provider>
     </div>

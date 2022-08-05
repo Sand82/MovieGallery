@@ -139,11 +139,12 @@ const Details = ({movie}) => {
                     <span className="entity-list-title">Language:</span>
                     english
                   </li>
-                </ul>
-                <div className="button-holder">
+                  <li className="button-holder">
                       <button className="btn btn-warning editButton"> Edit</button>
                       <button className="btn btn-danger delButton" data-toggle="modal" data-target="#exampleModal" > Delete</button>
-                  </div>
+                  </li>
+                </ul>
+                
               </div>
             </div>
           </div>
