@@ -41,11 +41,10 @@ function App() {
     setUser({});
   };
 
-  const createMovieHandler = (movieData) => {
-    setMovies(state => ([
-      ...state,
-      movieData
-    ]));
+  const createMovieHandler = () => {
+    movieService.getAll().then((result) => {
+      setMovies(result);
+    });
   };  
 
   const detailsHandler = (movie) => {   

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext.js";
@@ -8,7 +8,6 @@ import * as movieValidator from "../../services/MovieValidator.js";
 import * as style from './EditMovie.Model.css'
 
 const EditMovie = ({movie}) => {
-    console.log(movie);
 
     const { user } = useContext(AuthContext);
     const { editHandler} = useContext(MovieContext)
@@ -30,7 +29,7 @@ const EditMovie = ({movie}) => {
   const [descriptionError, setDescriptionError] = useState(false);
 
   const navigate = useNavigate();  
-
+ 
   const editMovieHandler = (e) => {
     e.preventDefault();
 

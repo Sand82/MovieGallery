@@ -37,8 +37,8 @@ const NotFound = () => {
               Not found
             </p>
             <div className="entity-actions">
-              <Link className="btn btn-theme" to="/login">
-                Back Login
+              <Link className="btn btn-theme" to="/">
+                Back Home
               </Link>
             </div>
           </div>

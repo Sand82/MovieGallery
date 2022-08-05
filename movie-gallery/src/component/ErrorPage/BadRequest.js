@@ -34,8 +34,8 @@ const BadRequest = () => {
             <h4 className="entity-title">Sorry!</h4>
             <p className="entity-text">Bad Request</p>
             <div className="entity-actions">
-              <Link className="btn btn-theme" to="/register">
-                Back Register
+              <Link className="btn btn-theme" to="/">
+                Back Home
               </Link>
             </div>
           </div>

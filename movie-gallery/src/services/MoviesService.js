@@ -6,6 +6,11 @@ export const getAll = () => {
   return request.get(baseUrl);
 };
 
+export const getOne = (movieId, token) => {
+  let data = {};
+  return request.get(`${baseUrl}/${movieId}`, data, token);
+};
+
 export const create = async (data, token) => {
   return request.post(baseUrl, data, token )
 };

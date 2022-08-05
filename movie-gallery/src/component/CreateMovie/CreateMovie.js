@@ -45,7 +45,7 @@ const CreateMovie = ({createMovieHandler}) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        createMovieHandler(result);
+        createMovieHandler();
         return navigate("/");
       })
       .catch((error) => {
