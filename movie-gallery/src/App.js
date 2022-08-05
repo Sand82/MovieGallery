@@ -18,6 +18,7 @@ import NotFound from "./component/ErrorPage/NotFound.js";
 import BadRequest from "./component/ErrorPage/BadRequest.js";
 import {useLocalStorage} from './hooks/useLocalStorage.js';
 import CreateMovie from './component/CreateMovie/CreateMovie.js';
+import EditMovie from './component/EditMovie/EditMovie.js';
 import Details from './component/Details/Details.js';
 import ScrollToTop from "./hooks/ScrollToTop.js";
 
@@ -34,28 +35,35 @@ function App() {
 
   const loginHandler = (data) => {
         setUser(data);
-  }
+  };
 
   const logoutHandler = () => {
     setUser({});
-  }
+  };
 
   const createMovieHandler = (movieData) => {
     setMovies(state => ([
       ...state,
       movieData
     ]));
-  }  
+  };  
 
   const detailsHandler = (movie) => {   
     setMovieDetails(movie);
-  }
+  };
+
+  const editHandler = (movie) => {
+    setMovies(state => ([
+      ...state.filter(m => m.id !== movie.id),
+      movie
+    ]));
+  };
 
   const deleteHandler = (movieId) => {    
     setMovies(state => ([
       ...state.filter(m => m.id !== movieId)      
     ]));
-  }
+  };
 
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
 
@@ -64,11 +72,9 @@ function App() {
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
         <ScrollToTop />   
         <Header />
-        <MovieContext.Provider value={{movies,deleteHandler, detailsHandler}}>      
-        <Routes>
-        
-          <Route
-          
+        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler}}>      
+        <Routes>        
+          <Route          
             path="/"
             element={<NewMovies movies={firstFiveMovies} />}
           ></Route>
@@ -80,10 +86,11 @@ function App() {
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
-          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails} />}></Route>        
+          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails} />}></Route>
+          <Route path="/movies/details/:movieId/edit" element={<EditMovie movie={movieDetails} />}></Route>         
         </Routes>
         </MovieContext.Provider>  
-        {/* <Scroll /> */}
+        <Scroll />
         <Footer />        
       </AuthContext.Provider>
     </div>

@@ -1,10 +1,9 @@
 .button-holder {
-    text-align: left;
-    margin-right: 30px;   
+    text-align: left;    
 }
 
 .delButton {
-    background-color: red;
+    background-color: rgb(224, 16, 16);
     margin: 5px;
 }
 
@@ -20,6 +19,7 @@
     background-color: rgb(71, 226, 226);
 }
 
-.delButton:hover .closeButton {
+.closeButton:hover,
+.delButton:hover  {
     color: black;
 }

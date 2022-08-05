@@ -10,6 +10,7 @@ using MovieGalleryWebAPI.Models.Errors;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Users;
 using System.Net;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -43,7 +44,7 @@ namespace MovieGalleryWebAPI.Controllers
             return movies;
         }
 
-        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Post(MovieCreateModel model)
         {
@@ -70,17 +71,25 @@ namespace MovieGalleryWebAPI.Controllers
             return Ok(movie);
         }
 
-        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut]
-        public async Task<bool> Edit(MovieEditModel model)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(MovieEditModel model, int movieId)
         {
+            var userId = User.GetId();
+
+            var isAdmin = await userService.CheckIsAdmin(userId);
+
+            if (!isAdmin)
+            {
+                return BadRequest("Authorization denied");
+            }
 
             var movie = await moviesService.EditMovei(model);
 
-            return movie;
+            return Ok(movie);
         }
 
-        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

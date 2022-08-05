@@ -13,8 +13,6 @@ const Details = ({movie}) => {
   const navigate = useNavigate();
 
   const deleteMovie = (e, movieId) => {
-
-    console.log(e.target);
     moviesService.remove(movieId, user.accessToken)
     .then(res => {
         deleteHandler(res);
@@ -140,7 +138,7 @@ const Details = ({movie}) => {
                     english
                   </li>
                   <li className="button-holder">
-                      <button className="btn btn-warning editButton"> Edit</button>
+                      <Link to={`/movies/details/${movie.id}/edit`} className="btn btn-warning editButton"> Edit</Link>
                       <button className="btn btn-danger delButton" data-toggle="modal" data-target="#exampleModal" > Delete</button>
                   </li>
                 </ul>
