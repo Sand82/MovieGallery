@@ -50,8 +50,7 @@ function App() {
     setMovieDetails(movie);
   }
 
-  const deleteHandler = (movieId) => {
-    console.log(movieId);
+  const deleteHandler = (movieId) => {    
     setMovies(state => ([
       ...state.filter(m => m.id !== movieId)      
     ]));

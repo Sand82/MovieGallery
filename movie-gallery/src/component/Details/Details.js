@@ -12,8 +12,9 @@ const Details = ({movie}) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const deleteMovie = (movieId) => {
+  const deleteMovie = (e, movieId) => {
 
+    console.log(e.target);
     moviesService.remove(movieId, user.accessToken)
     .then(res => {
         deleteHandler(res);
@@ -626,7 +627,7 @@ const Details = ({movie}) => {
         >
           Close
         </button>
-        <button type="button" className="btn btn-primary delButton" onClick={() => deleteMovie(movie.id)}> 
+        <button type="button" className="btn btn-primary delButton" onClick={(e) => deleteMovie(e, movie.id)} data-dismiss="modal"> 
           Delete
         </button>
       </div>

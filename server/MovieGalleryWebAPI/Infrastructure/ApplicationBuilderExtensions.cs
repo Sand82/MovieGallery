@@ -145,7 +145,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Title = "The Godfather Part II",
                 Year = "1974",
                 ImageUrl = "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg",
-                Description = "220",
+                Description = "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
                 Category = "Crime",
                 Duration = "210",
 
