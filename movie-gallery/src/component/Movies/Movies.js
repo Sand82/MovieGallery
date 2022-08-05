@@ -1,6 +1,11 @@
 import TopRated from "./TopRated/TopRated.js";
+import { useContext } from "react";
 
-const Movies = ({movies, detailsMovieHandler}) => {       
+import { MovieContext } from "../../contexts/MovieContext.js";
+
+const Movies = () => {       
+
+const {movies} = useContext(MovieContext);
 
   return (
     <section className="section-long">
@@ -9,7 +14,7 @@ const Movies = ({movies, detailsMovieHandler}) => {
           <h2 className="section-title text-uppercase">Top rated</h2>
           <p className="section-text">date</p>
         </div>        
-       {movies.map(x => < TopRated key={x.id} movie={x} detailsMovieHandler={detailsMovieHandler}/>)}
+       {movies.map(x => < TopRated key={x.id} movie={x} />)}
       </div>
     </section>
   );

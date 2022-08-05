@@ -46,7 +46,7 @@ function App() {
     ]));
   }  
 
-  const detailsMovieHandler = (movie) => {   
+  const detailsHandler = (movie) => {   
     setMovieDetails(movie);
   }
 
@@ -63,7 +63,7 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>        
         <Header />
-        <MovieContext.Provider value={{deleteHandler}}>      
+        <MovieContext.Provider value={{movies,deleteHandler, detailsHandler}}>      
         <Routes>
           <Route
             path="/"
@@ -72,7 +72,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/Logout" element={<Logout />}></Route>
-          <Route path="/movies" element={<Movies movies={movies} detailsMovieHandler={detailsMovieHandler} />}></Route>
+          <Route path="/movies" element={<Movies/>}></Route>
           <Route path="/create" element={<CreateMovie createMovieHandler={createMovieHandler}/>}></Route>
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>

@@ -1,4 +1,5 @@
 const NewMoviePoster = ({movie}) => {
+
   return (
      
     <div
@@ -27,7 +28,7 @@ const NewMoviePoster = ({movie}) => {
           data-show-class="fadeIn show"
           data-hide-class="fadeOut show"
         >
-          <a
+          <div
             className="action-icon-theme action-icon-bordered rounded-circle"
             href="https://www.youtube.com/watch?v=d96cjJhvlMA"
             data-magnific-popup="iframe"
@@ -36,7 +37,7 @@ const NewMoviePoster = ({movie}) => {
             <span className="icon-content">
               <i className="fas fa-play" />
             </span>
-          </a>
+          </div>
         </div>
         <h4 className="entity-title">
           <div

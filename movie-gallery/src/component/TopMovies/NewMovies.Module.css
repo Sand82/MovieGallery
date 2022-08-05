@@ -117,3 +117,7 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+.top-block-footer {
+    margin-left: 40px;
+}

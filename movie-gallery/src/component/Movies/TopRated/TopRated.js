@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-const TopRated = ({ movie, detailsMovieHandler }) => {  
+import { MovieContext } from "../../../contexts/MovieContext.js";
 
-  const detailsHeandler = () => { 
-    detailsMovieHandler(movie);
+const TopRated = ({ movie}) => {  
+
+  const {detailsHandler} = useContext(MovieContext);
+
+  const detailsMovieHandler = () => { 
+    detailsHandler(movie);
   }
 
   return (
     <article className="movie-line-entity">
       <div className="entity-poster" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
-          <Link to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
+          <Link to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
             <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
           </Link>
         </div>
@@ -24,7 +29,7 @@ const TopRated = ({ movie, detailsMovieHandler }) => {
               className="action-icon-theme action-icon-bordered rounded-circle"
               // href="https://www.youtube.com/watch?v=nuTU5XcZTLA"
               data-magnific-popup="iframe"
-              onClick={detailsHeandler}
+              onClick={detailsMovieHandler}
               to={`/movies/details/${movie.id}`}
             >
               <span className="icon-content">
@@ -36,12 +41,12 @@ const TopRated = ({ movie, detailsMovieHandler }) => {
       </div>
       <div className="entity-content">
         <h4 className="entity-title">
-          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
+          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
             {movie.title}
           </Link>
         </h4>
         <div className="entity-category">
-          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsHeandler}>
+          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
             {movie.category}
           </Link>
         </div>
