@@ -38,7 +38,7 @@ const Header = () => {
                     </li>}
               <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                 <Link className="nav-link" to="/">
-                  Homepage
+                  Home
                 </Link>
                 <div className="nav-arrow">
                   <i className="fas fa-chevron-down"></i>

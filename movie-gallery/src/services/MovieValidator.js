@@ -1,18 +1,14 @@
-export const title = (currTitle) => {
-    if (currTitle.length <= 2 || currTitle.length > 100) {
-        return true;
-      } else {
-        return false;
-      }
-}
+import { boolValidator } from './BoolValidator.js';
 
-export const category = (currCategory) => {
-    if (currCategory.length <= 2 || currCategory.length > 50) {
-        return true;
-      } else {
-        return false;
-      }
-}
+export const title = (currTitle) => boolValidator(currTitle, 2, 100);
+
+export const category = (currCategory) => boolValidator(currCategory, 2, 50);
+
+export const image = (currImage) => boolValidator(currImage, 5, 300);   
+
+export const duration = (currDuration) =>  boolValidator(currDuration, 2, 20);    
+
+export const description = (currDescription) => boolValidator(currDescription, 10, 500);
 
 export const year = (currYear) => {
     if (currYear.length === 4 ) {
@@ -22,26 +18,3 @@ export const year = (currYear) => {
       }
 }
 
-export const image = (currImage) => {
-    if (currImage.length <= 5 || currImage.length > 300) {
-        return true;
-      } else {
-        return false;
-      }
-}
-
-export const duration = (currDuration) => {
-    if (currDuration.length <= 2 || currDuration.length > 20) {
-        return true;
-      } else {
-        return false;
-      }
-}
-
-export const description = (currDescription) => {
-    if (currDescription.length <= 10 || currDescription.length > 500) {
-        return true;
-      } else {
-        return false;
-      }
-}
