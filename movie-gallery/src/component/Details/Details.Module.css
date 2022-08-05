@@ -12,10 +12,14 @@
     background-color:orange;
 }
 
-.delButton:hover {
-    color: black;
-}
-
 .editButton:hover {    
     border-color: black;
+}
+
+.closeButton {
+    background-color: rgb(71, 226, 226);
+}
+
+.delButton:hover .closeButton {
+    color: black;
 }
