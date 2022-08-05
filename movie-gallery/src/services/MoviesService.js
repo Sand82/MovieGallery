@@ -30,3 +30,27 @@ export const create = async (data, token) => {
     throw console.error(error.error);
   }
 };
+
+export const remove= async (movieId, token) => {
+  try {    
+    let response = await fetch(`${baseUrl}/${movieId}`, { 
+        method: 'DELETE',
+        headers : {
+         "Content-Type": "application/json",         
+         'Authorization': `Bearer ${token}`
+        }
+     })
+   
+    const result = await response.json();  
+    
+    console.log(response)
+
+    if (!response.ok) {
+       return 'Bad response';
+    }
+    return result;
+
+  } catch (error) {
+    throw console.error(error.error);
+  }
+};

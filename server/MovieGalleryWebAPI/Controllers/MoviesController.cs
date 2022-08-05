@@ -70,7 +70,7 @@ namespace MovieGalleryWebAPI.Controllers
             return Ok(movie);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut]
         public async Task<bool> Edit(MovieEditModel model)
         {
@@ -80,18 +80,27 @@ namespace MovieGalleryWebAPI.Controllers
             return movie;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
-        public async Task<string> Delete(int id)
-        {            
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.GetId();
+
+            var isAdmin = await userService.CheckIsAdmin(userId);
+
+            if (!isAdmin)
+            {
+                return BadRequest("Authorization denied");
+            }
+
             var isDelete = await moviesService.RemoveMovie(id);
 
             if (isDelete == false)
             {
-                return "Movie is not deleted from data base";
+                return BadRequest("Movie is not deleted from data base");
             }
 
-            return id.ToString();
+            return Ok(id.ToString());
         }        
     }
 }

@@ -1,7 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
 import * as style from './Details.Module.css';
+import { MovieContext } from '../../contexts/MovieContext.js';
+import { AuthContext } from '../../contexts/AuthContext.js';
+import * as moviesService from '../../services/MoviesService.js'
 
 const Details = ({movie}) => {
+
+  const {deleteHandler} = useContext(MovieContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const deleteMovie = (movieId) => {
+
+    moviesService.remove(movieId, user.accessToken)
+    .then(res => {
+        deleteHandler(res);
+        navigate('/')
+    })
+  }
 
   return (
     <div stylr={style} className="container">
@@ -123,7 +141,7 @@ const Details = ({movie}) => {
                   </ul>
                   <div className="button-holder">
                         <button className="btn btn-warning editButton"> Edit</button>
-                        <button className="btn btn-danger delButton"> Delete</button>
+                        <button className="btn btn-danger delButton" onClick={() => deleteMovie(movie.id)}> Delete</button>
                     </div>
                 </div>
               </div>

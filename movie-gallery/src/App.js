@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./component/Header/Header.js";
 import * as movieService from "./services/MoviesService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
+import { MovieContext } from "./contexts/MovieContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.js";
 import Movies from "./component/Movies/Movies.js";
@@ -43,10 +44,17 @@ function App() {
       ...state,
       movieData
     ]));
-  }
+  }  
 
   const detailsMovieHandler = (movie) => {   
     setMovieDetails(movie);
+  }
+
+  const deleteHandler = (movieId) => {
+    console.log(movieId);
+    setMovies(state => ([
+      ...state.filter(m => m.id !== movieId)      
+    ]));
   }
 
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
@@ -54,7 +62,8 @@ function App() {
   return (
     <div className="App">
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>        
-        <Header />        
+        <Header />
+        <MovieContext.Provider value={{deleteHandler}}>      
         <Routes>
           <Route
             path="/"
@@ -68,9 +77,9 @@ function App() {
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
-          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails}/>}></Route>        
+          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails} />}></Route>        
         </Routes>
-
+        </MovieContext.Provider>  
         <Scroll />
         <Footer />        
       </AuthContext.Provider>
