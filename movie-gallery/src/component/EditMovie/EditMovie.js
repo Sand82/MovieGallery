@@ -8,7 +8,7 @@ import * as movieValidator from "../../services/MovieValidator.js";
 import * as style from './EditMovie.Model.css'
 
 const EditMovie = ({movie}) => {
-
+  
     const { user } = useContext(AuthContext);
     const { editHandler} = useContext(MovieContext)
 
@@ -34,7 +34,7 @@ const EditMovie = ({movie}) => {
     e.preventDefault();
 
     const movieData = Object.fromEntries(new FormData(e.target));
-    movieData.id = movie.id
+    movieData.id = movie.id;
 
     movieServis.edit(movieData, user.accessToken)
     .then((result) => {               

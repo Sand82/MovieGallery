@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import * as style from "./Details.Module.css";
@@ -10,22 +10,22 @@ import DetailsSynopsis from "../HardCoded/DetailsSynopsis.js";
 import CreateComment from "../Comments/CommentCreate/CreateComment.js";
 import Comment from "../Comments/Comment/Comment.js";
 
-const Details = ({ movie }) => {
-  const [currMovie, setCurrMovie] = useState({});
+const Details = () => {
+    const {movieId} = useParams();     
+
+    const [currMovie, setCurrMovie] = useState({});  
 
   useEffect(() => {
-    moviesService.getOne(movie.id).then((result) => {
+    moviesService.getOne(movieId).then((result) => {
       setCurrMovie(result);
     });
-  }, [movie.id]);
+  }, [movieId]);
 
   const commentHandler = (comment) => {    
     moviesService.getOne(comment.movieId).then((result) => {
         setCurrMovie(result);
       });
-  };
-
-  console.log(currMovie);
+  };  
 
   return (
     <>
@@ -63,7 +63,7 @@ const Details = ({ movie }) => {
                   </div>
                   <div className="entity-content">
                     <h2 className="entity-title">{currMovie.title}</h2>
-                    <div className="entity-category">{movie.category}</div>
+                    <div className="entity-category">{currMovie.category}</div>
                     <div className="entity-info">
                       <div className="info-lines">
                         <div className="info info-short">
@@ -120,7 +120,7 @@ const Details = ({ movie }) => {
               </div>
 
               <CreateComment
-                movieId={movie.id}
+                movieId={movieId}
                 commentHandler={commentHandler}
               />
             </section>
@@ -137,7 +137,7 @@ const Details = ({ movie }) => {
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
-          <DeleteModal movieId={movie.id} />
+          <DeleteModal movieId={movieId} />
         </div>
       </div>
     </>

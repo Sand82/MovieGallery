@@ -85,7 +85,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>
-          <Route path="/movies/details/:movieId" element={<Details movie={movieDetails} />}></Route>
+          <Route path="/movies/details/:movieId" element={<Details />}></Route>
           <Route path="/movies/details/:movieId/edit" element={<EditMovie movie={movieDetails} />}></Route>         
         </Routes>
         </MovieContext.Provider>  
