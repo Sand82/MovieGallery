@@ -1,14 +1,15 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Movies;
 using MovieGalleryWebAPI.Service.Users;
 using MovieGalleryWebAPI.Settings;
-using System.Configuration;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MovieGalleryWebAPI.Service.Comments;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -60,6 +61,7 @@ builder.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IMoviesService, MoviesService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ICommentService, CommentService>();
 
 builder.Services.AddCors(options =>
 {

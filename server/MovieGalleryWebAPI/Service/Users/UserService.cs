@@ -81,12 +81,12 @@ namespace MovieGalleryWebAPI.Service.Users
                 return null;
             }
 
-            var token = TokenGenerate(user);
+            var token = TokenGenerator(user);
 
             return token;
         }
 
-        private string TokenGenerate(IdentityUser user)
+        private string TokenGenerator(IdentityUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this.jwtSettings.Value.Secret);

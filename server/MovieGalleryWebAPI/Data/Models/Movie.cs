@@ -37,6 +37,6 @@
 
         public bool IsDelete { get; set; } = false;
 
-        public IEnumerable<Comment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
     }
 }
