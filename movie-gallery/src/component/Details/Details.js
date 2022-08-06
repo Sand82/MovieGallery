@@ -19,10 +19,10 @@ const Details = ({ movie }) => {
     });
   }, [movie.id]);
 
-  const commentHandler = (comment) => {
-    // setCurrMovie(movie => ({
-    //   ...movie.
-    // }))
+  const commentHandler = (comment) => {    
+    moviesService.getOne(comment.movieId).then((result) => {
+        setCurrMovie(result);
+      });
   };
 
   console.log(currMovie);
@@ -113,7 +113,10 @@ const Details = ({ movie }) => {
                   <h2 className="section-title text-uppercase">Comments</h2>
                 </div>
                 
-                { currMovie.comments != undefined ? currMovie.comments.map(x => <Comment key={x.id} comment={x} />) : ''}
+                { currMovie.comments != undefined 
+                    ? currMovie.comments.map(x => <Comment key={x.id} comment={x} />) 
+                    : ''
+                }
               </div>
 
               <CreateComment

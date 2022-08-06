@@ -21,8 +21,9 @@ const CreateComment = ({movieId, commentHandler}) => {
     commentService
       .create(currComment, user.accessToken)
       .then((result) => {
-        console.log(result)
+        
         commentHandler(result);
+        setComment('');
 
         if (result === "Bad response") {
           return navigate("/notfound");
@@ -58,6 +59,7 @@ const CreateComment = ({movieId, commentHandler}) => {
                 name="username"
                 type="text"
                 placeholder="username"
+                onChange={() =>({})}
                 value={user.username}
               />
             </div>
@@ -69,6 +71,7 @@ const CreateComment = ({movieId, commentHandler}) => {
                 name="email"
                 type="email"
                 placeholder="Email"
+                onChange={() =>({})}
                 value={user.email}
               />
             </div>
