@@ -1,8 +1,22 @@
-const DeleteModal = ({deleteMovie, movieId}) => {
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
-    const deleteMovieHandler =() => {
-        deleteMovie(movieId)
-    };
+import { MovieContext } from "../../../contexts/MovieContext.js";
+import { AuthContext } from "../../../contexts/AuthContext.js";
+import * as moviesService from "../../../services/MoviesService.js";
+
+const DeleteModal = ({ movieId}) => {
+
+  const { deleteHandler } = useContext(MovieContext);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  const deleteMovie = () => {
+    moviesService.remove(movieId, user.accessToken).then((res) => {
+      deleteHandler(res);
+      navigate("/");
+    });
+  };
 
   return (
     <div className="modal-content">
@@ -33,7 +47,7 @@ const DeleteModal = ({deleteMovie, movieId}) => {
         <button
           type="button"
           className="btn btn-primary delButton"
-          onClick={deleteMovieHandler}
+          onClick={deleteMovie}
           data-dismiss="modal"
         >
           Delete

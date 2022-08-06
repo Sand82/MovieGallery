@@ -1,30 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import * as style from "./Details.Module.css";
-import { MovieContext } from "../../contexts/MovieContext.js";
-import { AuthContext } from "../../contexts/AuthContext.js";
 import * as moviesService from "../../services/MoviesService.js";
 import DeleteModal from "./DeleteModal/DeleteModal.js";
 
-const Details = ({ movie }) => {
-  const { deleteHandler } = useContext(MovieContext);
-  const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
+const Details = ({ movie }) => {  
+  
   const [currMovie, setCurrMovie] = useState({});
 
   useEffect(() => {
     moviesService.getOne(movie.id).then((result) => {
       setCurrMovie(result);
     });
-  }, [movie.id, user.accessToken]);
-
-  const deleteMovie = ( movieId) => {
-    moviesService.remove(movieId, user.accessToken).then((res) => {
-      deleteHandler(res);
-      navigate("/");
-    });
-  };
+  }, []);  
 
   return (
     <>
@@ -151,7 +140,7 @@ const Details = ({ movie }) => {
                           to={`/movies/details/${currMovie.id}/edit`}
                           className="btn btn-warning editButton"
                         >
-                          {" "}
+                          
                           Edit
                         </Link>
                         <button
@@ -159,7 +148,7 @@ const Details = ({ movie }) => {
                           data-toggle="modal"
                           data-target="#exampleModal"
                         >
-                          {" "}
+                          
                           Delete
                         </button>
                       </li>
@@ -625,7 +614,7 @@ const Details = ({ movie }) => {
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
-          <DeleteModal deleteMovie={deleteMovie} movieId={movie.id} />
+          <DeleteModal movieId={movie.id} />
         </div>
       </div>
     </>
