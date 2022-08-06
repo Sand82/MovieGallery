@@ -4,6 +4,11 @@
     using static MovieGalleryWebAPI.Data.Constant;
     public class Movie
     {
+        public Movie()
+        {
+            this.Comments =  new HashSet<Comment>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -31,5 +36,7 @@
         public string? Duration { get; set; }
 
         public bool IsDelete { get; set; } = false;
+
+        public IEnumerable<Comment>? Comments { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import * as style from './Details.Module.css';
 import { MovieContext } from '../../contexts/MovieContext.js';
@@ -7,10 +7,20 @@ import { AuthContext } from '../../contexts/AuthContext.js';
 import * as moviesService from '../../services/MoviesService.js'
 
 const Details = ({movie}) => {
-
+ 
   const {deleteHandler} = useContext(MovieContext);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [currMovie, setCurrMovie] = useState({});
+
+  useEffect(()=>{
+     moviesService.getOne(movie.id)
+       .then(result => {
+        setCurrMovie(result)
+       })
+       
+  },[movie.id, user.accessToken])
+
 
   const deleteMovie = (e, movieId) => {
     moviesService.remove(movieId, user.accessToken)
@@ -31,7 +41,7 @@ const Details = ({movie}) => {
                 <div className="embed-responsive embed-responsive-poster">
                   <img
                     className="embed-responsive-item"
-                    src={movie.imageUrl}
+                    src={currMovie.imageUrl}
                     alt=""
                   />
                 </div>
@@ -54,7 +64,7 @@ const Details = ({movie}) => {
                 </div>
               </div>
               <div className="entity-content">
-                <h2 className="entity-title">{movie.title}</h2>
+                <h2 className="entity-title">{currMovie.title}</h2>
                 <div className="entity-category">
                   <a className="content-link" to="movies-blocks.html">
                     {movie.category}
@@ -73,7 +83,7 @@ const Details = ({movie}) => {
                       <span className="text-theme info-icon">
                         <i className="fas fa-clock" />
                       </span>
-                      <span className="info-text">{movie.duration}</span>
+                      <span className="info-text">{currMovie.duration}</span>
                       <span className="info-rest">&nbsp;min</span>
                     </div>
                   </div>
@@ -138,7 +148,7 @@ const Details = ({movie}) => {
                     english
                   </li>
                   <li className="button-holder">
-                      <Link to={`/movies/details/${movie.id}/edit`} className="btn btn-warning editButton"> Edit</Link>
+                      <Link to={`/movies/details/${currMovie.id}/edit`} className="btn btn-warning editButton"> Edit</Link>
                       <button className="btn btn-danger delButton" data-toggle="modal" data-target="#exampleModal" > Delete</button>
                   </li>
                 </ul>

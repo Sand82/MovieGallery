@@ -73,7 +73,7 @@ namespace MovieGalleryWebAPI.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(MovieEditModel model, int movieId)
+        public async Task<IActionResult> Edit(MovieEditModel model)
         {
             var userId = User.GetId();
 
