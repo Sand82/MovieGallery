@@ -58,11 +58,11 @@ namespace MovieGalleryWebAPI.Service.Movies
             return movie;
         }
 
-        public async Task<List<MovieDataModel>> GetMovies()
+        public async Task<List<MoviesDataModel>> GetMovies()
         {
             var movies = await this.data.Movies
                 .Where(m => m.IsDelete == false)
-                .ProjectTo<MovieDataModel>(this.mapper.ConfigurationProvider)
+                .ProjectTo<MoviesDataModel>(this.mapper.ConfigurationProvider)
                 //.Select(m => new MovieDataModel
                 //{
                 //    Id = m.Id,
@@ -80,17 +80,29 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<MovieDataModel> GetOneMovies(int movieId)
         {
             var movie = await this.data.Movies
+                .Include(m => m.Comments).ThenInclude(c => c.User)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
-                .ProjectTo<MovieDataModel>(this.mapper.ConfigurationProvider)
-                //.Select(m => new MovieDataModel
-                //{
-                //    Id = m.Id,
-                //    Title = m.Title,
-                //    Description = m.Description,
-                //    ImageUrl = m.ImageUrl,
-                //    Category = m.Category,
-                //    Year= m.Year,
-                //})
+                .Select(m => new MovieDataModel
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Description = m.Description,
+                    ImageUrl = m.ImageUrl,
+                    Category = m.Category,
+                    Year = m.Year,
+                    Duration = m.Duration,
+                    Comments = m.Comments.Select(c => new MovieCommentModel
+                    {
+                        Id = c.Id,
+                        Comment = c.Content,
+                        UserId = c.UserId,
+                        MovieId = movieId,
+                        Username = c.User.UserName,
+                        CreationData = c.CreationData,
+                        
+                    })
+                    .ToList()
+                })
                 .FirstOrDefaultAsync();
 
             return movie;

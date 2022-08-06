@@ -2,6 +2,9 @@
 {
     public static class Constant
     {
+        public const int MinUsernameLength = 2;
+        public const int MaxUsernameLength = 50;
+
         public const int MinMovieTitleLength = 2;
         public const int MaxMovieTitleLength = 100;       
 
@@ -24,5 +27,8 @@
 
         public const int UserPasswordMinLength = 5;
         public const int UserPasswordMaxLength = 50;
+
+        public const int MinContentLength = 10;
+        public const int MaxContentLength = 500;
     }
 }

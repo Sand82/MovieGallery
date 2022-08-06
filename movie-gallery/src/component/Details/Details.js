@@ -7,18 +7,25 @@ import * as moviesService from "../../services/MoviesService.js";
 import DeleteModal from "./DeleteModal/DeleteModal.js";
 import DetailsLi from "../HardCoded/DetailsLi.js";
 import DetailsSynopsis from "../HardCoded/DetailsSynopsis.js";
-import CreateComment from "../Comments/CommentCreate/CreateComment.js"
-import CommendsList from "../Comments/CommendsList/CommendsList.js"
+import CreateComment from "../Comments/CommentCreate/CreateComment.js";
+import Comment from "../Comments/Comment/Comment.js";
 
-const Details = ({ movie }) => {  
-  
+const Details = ({ movie }) => {
   const [currMovie, setCurrMovie] = useState({});
 
   useEffect(() => {
     moviesService.getOne(movie.id).then((result) => {
       setCurrMovie(result);
     });
-  }, [movie.id]);  
+  }, [movie.id]);
+
+  const commentHandler = (comment) => {
+    // setCurrMovie(movie => ({
+    //   ...movie.
+    // }))
+  };
+
+  console.log(currMovie);
 
   return (
     <>
@@ -56,9 +63,7 @@ const Details = ({ movie }) => {
                   </div>
                   <div className="entity-content">
                     <h2 className="entity-title">{currMovie.title}</h2>
-                    <div className="entity-category">                      
-                    {movie.category}                      
-                    </div>
+                    <div className="entity-category">{movie.category}</div>
                     <div className="entity-info">
                       <div className="info-lines">
                         <div className="info info-short">
@@ -80,19 +85,19 @@ const Details = ({ movie }) => {
                       </div>
                     </div>
                     <ul className="entity-list">
-                     <DetailsLi/>
+                      <DetailsLi />
                       <li className="button-holder">
                         <Link
                           to={`/movies/details/${currMovie.id}/edit`}
                           className="btn btn-warning editButton"
-                        >                          
+                        >
                           Edit
                         </Link>
                         <button
                           className="btn btn-danger delButton"
                           data-toggle="modal"
                           data-target="#exampleModal"
-                        >                          
+                        >
                           Delete
                         </button>
                       </li>
@@ -101,10 +106,20 @@ const Details = ({ movie }) => {
                 </div>
               </div>
 
-              <DetailsSynopsis/>
+              <DetailsSynopsis />
 
-              <CommendsList/>
-              <CreateComment/>
+              <div className="section-line">
+                <div className="section-head">
+                  <h2 className="section-title text-uppercase">Comments</h2>
+                </div>
+                
+                { currMovie.comments != undefined ? currMovie.comments.map(x => <Comment key={x.id} comment={x} />) : ''}
+              </div>
+
+              <CreateComment
+                movieId={movie.id}
+                commentHandler={commentHandler}
+              />
             </section>
           </div>
         </div>

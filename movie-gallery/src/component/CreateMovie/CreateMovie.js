@@ -84,7 +84,7 @@ const CreateMovie = ({createMovieHandler}) => {
   };
 
   const isValid =
-    Object.values(createMovie).some((x) => x === "") ||
+    Object.values(createMovie).some((x) => x === '') ||
     titleError ||
     categoryError ||
     yearError ||

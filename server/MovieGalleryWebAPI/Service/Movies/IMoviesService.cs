@@ -6,7 +6,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 {
     public interface IMoviesService
     {
-        Task<List<MovieDataModel>> GetMovies();
+        Task<List<MoviesDataModel>> GetMovies();
 
         Task<MovieDataModel> GetOneMovies(int movieId);
 

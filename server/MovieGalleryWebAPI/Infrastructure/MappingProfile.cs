@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
-using MovieGalleryWebAPI.Models.Movies;
 using MovieGalleryWebAPI.Models.Users;
+using MovieGalleryWebAPI.Service.Movies;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {
@@ -14,7 +14,7 @@ namespace MovieGalleryWebAPI.Infrastructure
         {
             this.CreateMap<MovieCreateModel, Movie>().ReverseMap();            
 
-            this.CreateMap<Movie, MovieDataModel>().ReverseMap();
+            this.CreateMap<Movie, MoviesDataModel>().ReverseMap();
 
             this.CreateMap<MovieEditModel, Movie>().ReverseMap();
 

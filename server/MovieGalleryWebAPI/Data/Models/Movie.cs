@@ -1,7 +1,9 @@
-﻿namespace MovieGalleryWebAPI.Data.Models
-{
-    using System.ComponentModel.DataAnnotations;
-    using static MovieGalleryWebAPI.Data.Constant;
+﻿using System.ComponentModel.DataAnnotations;
+
+using static MovieGalleryWebAPI.Data.Constant;
+
+namespace MovieGalleryWebAPI.Data.Models
+{    
     public class Movie
     {
         public Movie()

@@ -1,13 +1,13 @@
-﻿namespace MovieGalleryWebAPI.Models.Movies
+﻿namespace MovieGalleryWebAPI.Service.Movies
 {
-    public class MovieDataModel
+    public class MoviesDataModel
     {
         public int Id { get; set; }
-                
+
         public string? Title { get; set; }
-                
+
         public string? Description { get; set; }
-                
+
         public string? ImageUrl { get; set; }
 
         public string? Year { get; set; }
@@ -15,7 +15,5 @@
         public string? Category { get; set; }
 
         public string? Duration { get; set; }
-
-        public ICollection<MovieCommentModel>? Comments { get; set; }
     }
 }
