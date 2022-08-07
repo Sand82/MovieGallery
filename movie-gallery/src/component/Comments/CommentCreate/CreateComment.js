@@ -43,7 +43,7 @@ const CreateComment = ({movieId, commentHandler}) => {
     setCommentError(movieValidator.description(description));
   };
 
-  const isValid = Object.values(comment).some((x) => x === "") || commentError;
+  const isValid = comment === '' || commentError;
 
   return (
     <div className="section-line">
@@ -95,10 +95,10 @@ const CreateComment = ({movieId, commentHandler}) => {
           </div>
 
           <div className="col-12">
-            <button
-              disabled={isValid}
+            <button              
               className="px-5 btn btn-theme"
               type="submit"
+              disabled={isValid}
             >
               Send
             </button>

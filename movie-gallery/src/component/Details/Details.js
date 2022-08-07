@@ -21,11 +21,16 @@ const Details = () => {
     });
   }, [movieId]);
 
-  const commentHandler = (comment) => {    
-    moviesService.getOne(comment.movieId).then((result) => {
-        setCurrMovie(result);
-      });
-  };  
+  const commentHandler = (comment) => {
+    setCurrMovie(state => ({
+        ...state,
+        comments: [...state.comments, comment]          
+    }));      
+  }; 
+  
+  const editCommentHandler = (comment) =>{
+        
+  }
 
   return (
     <>
@@ -114,14 +119,14 @@ const Details = () => {
                 </div>
                 
                 { currMovie.comments != undefined 
-                    ? currMovie.comments.map(x => <Comment key={x.id} comment={x} />) 
+                    ? currMovie.comments.map(x => <Comment key={x.id} comment={x} editCommentHandler={editCommentHandler}/>) 
                     : ''
                 }
               </div>
 
               <CreateComment
                 movieId={movieId}
-                commentHandler={commentHandler}
+                commentHandler={commentHandler}               
               />
             </section>
           </div>
