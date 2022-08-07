@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
@@ -12,11 +12,11 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
   const navigate = useNavigate();  
-
+  
   const restartState = (e) => {
     e.preventDefault();
 
-    setResetState((state) => ({ ...state }));
+    setResetState(state => ({ ...state }));
   };
 
   const changeHandler = (e) => {
@@ -31,6 +31,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     setResetState("");
     if (!isValidComment) {
       editCurrentComment(description);
+      comment.comment = description;
     }
   };
 
@@ -59,7 +60,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
             if (result === "Bad response") {
                 return navigate("/notfound");
             }      
-            deleteCommentHandler(editComment.id);
+            deleteCommentHandler();
         })
         .catch((error) => {
             throw console.error(error);
@@ -77,10 +78,10 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
           {resetState ? (
             <input
               name="comment"
-              type="text"
+              type="textarea"
               className="form-control entity-text"
               onChange={changeHandler}
-              defaultValue={editComment.comment}
+              defaultValue={comment.comment}
               onBlur={validateComment}
             />
           ) : (

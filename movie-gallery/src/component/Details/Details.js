@@ -35,7 +35,7 @@ const Details = () => {
     }));      
   }
 
-  const deleteCommentHandler = (commentId) => {
+  const deleteCommentHandler = () => {
     moviesService.getOne(movieId).then((result) => {
         setCurrMovie(result);
       });
