@@ -12,7 +12,7 @@ const Comment = ({ comment, editCommentHandler }) => {
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
 
-  console.log(comment);
+//   console.log(comment);
 
   const restartState = (e) => {
     e.preventDefault();    
@@ -33,10 +33,9 @@ const Comment = ({ comment, editCommentHandler }) => {
     }
   };
 
-  const editCurrentComment= (coment) => {
-    console.log(coment);
-
-    commentService.edit(coment,user.AuthContext, coment.id)
+  const editCurrentComment= (commentString) => {
+    comment.comment = commentString;
+    commentService.edit(comment, user.accessToken)
     .then((result) => {
         console.log(result);
     })

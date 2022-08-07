@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using MovieGalleryWebAPI.Data.Models;
+﻿using MovieGalleryWebAPI.Data.Models;
+using MovieGalleryWebAPI.Data.Movies;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Users;
-using MovieGalleryWebAPI.Service.Movies;
+
+using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {

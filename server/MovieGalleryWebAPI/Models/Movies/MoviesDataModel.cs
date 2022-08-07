@@ -1,4 +1,4 @@
-﻿namespace MovieGalleryWebAPI.Service.Movies
+﻿namespace MovieGalleryWebAPI.Data.Movies
 {
     public class MoviesDataModel
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Models.Comments;
 using MovieGalleryWebAPI.Service.Comments;
@@ -26,7 +27,7 @@ namespace MovieGalleryWebAPI.Controllers
         public async Task<IActionResult> Post(CommentCreateModel model)
         {
             var userId = User.GetId();
-           
+
             if (userId == null)
             {
                 return NotFound("User not found");
@@ -37,6 +38,24 @@ namespace MovieGalleryWebAPI.Controllers
             var comment = await commentService.FindComment(model.Comment, model.MovieId);
 
             comment.UserId = userId;
+
+            return Ok(comment);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(CommentEditModel model)
+        {
+            var userId = User.GetId();
+
+            var isValidUser = userId == model.UserId;
+
+            if (!isValidUser)
+            {
+                return BadRequest("Unauthoraze request");
+            }
+
+            Comment comment = null;
 
             return Ok(comment);
         }
