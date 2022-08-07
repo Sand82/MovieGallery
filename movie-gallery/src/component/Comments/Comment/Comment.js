@@ -51,11 +51,11 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   };
 
   const daleteHandler = () => {
-   
+
     commentService
       .remove(comment.id, user.accessToken)    
         .then(result => {
-            console.log(result);
+            
             if (result === "Bad response") {
                 return navigate("/notfound");
             }      

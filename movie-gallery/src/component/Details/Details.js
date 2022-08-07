@@ -36,10 +36,9 @@ const Details = () => {
   }
 
   const deleteCommentHandler = (commentId) => {
-    setCurrMovie(state => ({
-        ...state,
-        comments: [...state.comments.filter(c => c.id != commentId)]          
-    }));  
+    moviesService.getOne(movieId).then((result) => {
+        setCurrMovie(result);
+      });
   }
 
   return (
