@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import * as style from "./Details.Module.css";
 import * as moviesService from "../../services/MoviesService.js";
@@ -9,12 +9,12 @@ import DetailsLi from "../HardCoded/DetailsLi.js";
 import DetailsSynopsis from "../HardCoded/DetailsSynopsis.js";
 import CreateComment from "../Comments/CommentCreate/CreateComment.js";
 import Comment from "../Comments/Comment/Comment.js";
+import { AuthContext } from "../../contexts/AuthContext.js";
 
 const Details = () => {
-    const {movieId} = useParams();     
-
+    const {movieId} = useParams();
     const [currMovie, setCurrMovie] = useState({});  
-
+    const {user} = useContext(AuthContext)
   useEffect(() => {
     moviesService.getOne(movieId).then((result) => {
       setCurrMovie(result);
@@ -43,7 +43,7 @@ const Details = () => {
 
   return (
     <>
-      <div stylr={style} className="container">
+      <div style={style} className="container">
         <div className="sidebar-container">
           <div className="content">
             <section className="section-long">
@@ -100,7 +100,8 @@ const Details = () => {
                     </div>
                     <ul className="entity-list">
                       <DetailsLi />
-                      <li className="button-holder">
+                    {user.isAdmin &&
+                      <li style={style} className="button-holder">
                         <Link
                           to={`/movies/details/${currMovie.id}/edit`}
                           className="btn btn-warning editButton"
@@ -115,6 +116,7 @@ const Details = () => {
                           Delete
                         </button>
                       </li>
+                    }
                     </ul>
                   </div>
                 </div>

@@ -71,7 +71,7 @@ function App() {
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
         <ScrollToTop />   
         <Header />
-        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler}}>      
+        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}>      
         <Routes>        
           <Route          
             path="/"
@@ -81,7 +81,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/Logout" element={<Logout />}></Route>
           <Route path="/movies" element={<Movies/>}></Route>
-          <Route path="/create" element={<CreateMovie createMovieHandler={createMovieHandler}/>}></Route>
+          <Route path="/create" element={<CreateMovie />}></Route>
           <Route path="/contactus" element={<ContactUs />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
           <Route path="/badrequest" element={<BadRequest />}></Route>

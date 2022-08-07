@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
@@ -11,16 +11,16 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const [resetState, setResetState] = useState("");
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
-  const navigate = useNavigate();  
-  
+  const navigate = useNavigate();
+
   const restartState = (e) => {
     e.preventDefault();
 
-    setResetState(state => ({ ...state }));
+    setResetState((state) => ({ ...state }));
   };
 
   const changeHandler = (e) => {
-    setEditComment((state) => state == e.target.value);
+    setEditComment((state) => state === e.target.value);
   };
 
   const validateComment = (e) => {
@@ -52,19 +52,17 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   };
 
   const daleteHandler = () => {
-
     commentService
-      .remove(comment.id, user.accessToken)    
-        .then(result => {
-            
-            if (result === "Bad response") {
-                return navigate("/notfound");
-            }      
-            deleteCommentHandler();
-        })
-        .catch((error) => {
-            throw console.error(error);
-          }); 
+      .remove(comment.id, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        deleteCommentHandler();
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
   const isValid = user.id === comment.userId;
@@ -77,8 +75,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
           <p className="entity-subtext">{comment.creationData}</p>
           {resetState ? (
             <input
-              name="comment"
-              type="textarea"
+              name="comment"          
               className="form-control entity-text"
               onChange={changeHandler}
               defaultValue={comment.comment}

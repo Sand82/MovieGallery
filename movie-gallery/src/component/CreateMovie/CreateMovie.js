@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import * as style from "./Create.Module.css";
 import * as movieServis from "../../services/MoviesService.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
+import { MovieContext } from "../../contexts/MovieContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
 
-const CreateMovie = ({createMovieHandler}) => {
+const CreateMovie = () => {
   const { user } = useContext(AuthContext);
+  const {createMovieHandler} = useContext(MovieContext)
   const [createMovie, setCreateMovie] = useState({
     title: "",
     category: "",
