@@ -36,6 +36,27 @@ namespace MovieGalleryWebAPI.Service.Comments
            
         }
 
+        public async Task<bool> EditComment(CommentEditModel model, DateTime date)
+        {          
+
+            var comment = await this.data.Comments
+                .Where(c => c.Id == model.Id && c.MovieId == model.MovieId && c.IsDelete == false)
+                .FirstOrDefaultAsync();
+
+            if (comment == null)
+            {
+                return false;
+            }
+
+            comment.Content = model.Comment;
+            comment.CreationData = date;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
+
+        }
+
         public async Task<CommentGetModel> FindComment(string content, int movieId)
         {
             var comment = await this.data.Comments
@@ -53,6 +74,24 @@ namespace MovieGalleryWebAPI.Service.Comments
                 .FirstOrDefaultAsync();
 
             return comment;
+        }
+
+        public async Task<bool> RemoveComment(int commentId, string userId)
+        {
+            var comment = await this.data.Comments
+                .Where(c => c.Id == commentId && c.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (comment == null)
+            {
+                return false;
+            }
+
+            comment.IsDelete = true;
+
+            await this.data.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -1,53 +1,77 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as movieValidator from "../../../services/MovieValidator.js";
-import * as commentService from "../../../services/CommentService.js"
+import * as commentService from "../../../services/CommentService.js";
 
-const Comment = ({ comment, editCommentHandler }) => {
+const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const { user } = useContext(AuthContext);
-  const [resetState, setResetState] = useState('');
+  const [resetState, setResetState] = useState("");
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
-
-//   console.log(comment);
+  const navigate = useNavigate();  
 
   const restartState = (e) => {
-    e.preventDefault();    
-    setResetState(state => ({...state}));
+    e.preventDefault();
+
+    setResetState((state) => ({ ...state }));
   };
 
   const changeHandler = (e) => {
-    setEditComment(state => state == e.target.value)
-  };  
+    setEditComment((state) => state == e.target.value);
+  };
 
   const validateComment = (e) => {
     const description = e.target.value;
-    setCommentError(movieValidator.description(description));
 
-    if (!commentError) {
-        editCurrentComment(description)
-        setResetState('');
+    const isValidComment = movieValidator.description(description);
+    setCommentError(isValidComment);
+    setResetState("");
+    if (!isValidComment) {
+      editCurrentComment(description);
     }
   };
 
-  const editCurrentComment= (commentString) => {
+  const editCurrentComment = (commentString) => {
     comment.comment = commentString;
-    commentService.edit(comment, user.accessToken)
-    .then((result) => {
-        console.log(result);
-    })
-}  
+    commentService
+      .edit(comment, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+
+        editCommentHandler(result);
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
+
+  const daleteHandler = () => {
+   
+    commentService
+      .remove(comment.id, user.accessToken)    
+        .then(result => {
+            console.log(result);
+            if (result === "Bad response") {
+                return navigate("/notfound");
+            }      
+            deleteCommentHandler(editComment.id);
+        })
+        .catch((error) => {
+            throw console.error(error);
+          }); 
+  };
 
   const isValid = user.id === comment.userId;
-  
 
   return (
     <div style={style} className="comment-entity">
       <div className="entity-inner">
-        <form  className="entity-content">
+        <form className="entity-content">
           <h4 className="entity-title">{comment.username}</h4>
           <p className="entity-subtext">{comment.creationData}</p>
           {resetState ? (
@@ -56,7 +80,7 @@ const Comment = ({ comment, editCommentHandler }) => {
               type="text"
               className="form-control entity-text"
               onChange={changeHandler}
-              value={editComment.comment}
+              defaultValue={editComment.comment}
               onBlur={validateComment}
             />
           ) : (
@@ -68,16 +92,16 @@ const Comment = ({ comment, editCommentHandler }) => {
             <Link className="comment-link" to="#" onClick={restartState}>
               Edit
             </Link>
-            <Link className="comment-link" to="#">
+            <Link className="comment-link" to="#" onClick={daleteHandler}>
               Delete
             </Link>
           </div>
         )}
         {commentError && (
-              <p className="alert alert-danger">
-                Comment should be more than 10 and less than 500 symbols.
-              </p>
-            )}
+          <p className="alert alert-danger">
+            Comment should be more than 10 and less than 500 symbols.
+          </p>
+        )}
       </div>
     </div>
   );

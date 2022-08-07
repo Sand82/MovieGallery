@@ -92,17 +92,18 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
-                    Comments = m.Comments.Select(c => new MovieCommentModel
-                    {
-                        Id = c.Id,
-                        Comment = c.Content,
-                        UserId = c.UserId,
-                        MovieId = movieId,
-                        Username = c.User.UserName,
-                        CreationData = c.CreationData,
-                        
-                    })
-                    .ToList()
+                    Comments = m.Comments.Where(c => c.IsDelete == false)
+                        .Select(c => new MovieCommentModel
+                        {
+                            Id = c.Id,
+                            Comment = c.Content,
+                            UserId = c.UserId,
+                            MovieId = movieId,
+                            Username = c.User.UserName,
+                            CreationData = c.CreationData,
+                            
+                        })
+                        .ToList()
                 })
                 .FirstOrDefaultAsync();
 
@@ -161,8 +162,6 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.IsDelete = true;
 
             await this.data.SaveChangesAsync();
-        }
-
-        
+        }        
     }
 }

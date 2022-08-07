@@ -55,9 +55,35 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest("Unauthoraze request");
             }
 
-            Comment comment = null;
+            var date = DateTime.UtcNow;
+
+            var isEdited = await commentService.EditComment(model, date);
+
+            if (!isEdited)
+            {
+                return BadRequest("Comment not found.");
+            }
+
+            var comment = await commentService.FindComment(model.Comment, model.MovieId);
+            comment.UserId = userId;
 
             return Ok(comment);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.GetId();
+
+            var isRemoved = await commentService.RemoveComment(id, userId);
+
+            if (!isRemoved)
+            {
+                return BadRequest("Unauthoraze request");
+            }
+
+            return Ok(isRemoved);
         }
     }
 }

@@ -8,5 +8,9 @@ namespace MovieGalleryWebAPI.Service.Comments
         Task CreateComment(CommentCreateModel model, string userId);
 
         Task<CommentGetModel> FindComment(string content, int movieId);
+
+        Task<bool> EditComment(CommentEditModel model, DateTime date);
+
+        Task<bool> RemoveComment(int commentId, string userId);
     }
 }

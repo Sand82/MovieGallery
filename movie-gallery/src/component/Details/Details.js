@@ -29,7 +29,17 @@ const Details = () => {
   }; 
   
   const editCommentHandler = (comment) =>{
-        
+    setCurrMovie(state => ({
+        ...state,
+        comments: [...state.comments.filter(c => c.id != comment.id ? c : comment)]          
+    }));      
+  }
+
+  const deleteCommentHandler = (commentId) => {
+    setCurrMovie(state => ({
+        ...state,
+        comments: [...state.comments.filter(c => c.id != commentId)]          
+    }));  
   }
 
   return (
@@ -119,7 +129,11 @@ const Details = () => {
                 </div>
                 
                 { currMovie.comments != undefined 
-                    ? currMovie.comments.map(x => <Comment key={x.id} comment={x} editCommentHandler={editCommentHandler}/>) 
+                    ? currMovie.comments.map(x => 
+                        <Comment key={x.id} comment={x} 
+                            editCommentHandler={editCommentHandler} 
+                            deleteCommentHandler={deleteCommentHandler}
+                        />) 
                     : ''
                 }
               </div>

@@ -22,12 +22,12 @@ const CreateComment = ({movieId, commentHandler}) => {
       .create(currComment, user.accessToken)
       .then((result) => {
         
-        commentHandler(result);
-        setComment('');
-
         if (result === "Bad response") {
           return navigate("/notfound");
-        }       
+        }      
+
+        commentHandler(result);
+        setComment('');       
       })
       .catch((error) => {
         throw console.error(error);
