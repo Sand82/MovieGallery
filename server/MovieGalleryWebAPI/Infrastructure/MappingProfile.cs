@@ -6,6 +6,7 @@ using MovieGalleryWebAPI.Models.Users;
 
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using MovieGalleryWebAPI.Models.Ratings;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {
@@ -20,6 +21,8 @@ namespace MovieGalleryWebAPI.Infrastructure
             this.CreateMap<MovieEditModel, Movie>().ReverseMap();
 
             this.CreateMap<IdentityUser, UserApiModel>();
+
+            this.CreateMap<Rating, RatingApiModel>();
             
         }
     }
