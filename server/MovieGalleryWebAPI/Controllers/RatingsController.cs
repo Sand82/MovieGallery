@@ -30,7 +30,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return NotFound("User not found");
             }
 
-            await ratingService.CreateRating(model);
+            await ratingService.AddRating(model);
 
             var rating = await ratingService.SearcheRating(model.Value, model.MovieId, model.UserId);
 

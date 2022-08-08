@@ -5,6 +5,7 @@ import Header from "./component/Header/Header.js";
 import * as movieService from "./services/MoviesService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
 import { MovieContext } from "./contexts/MovieContext.js";
+import { RatingContext } from "./contexts/RatingContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.js";
 import Movies from "./component/Movies/Movies.js";
@@ -64,6 +65,11 @@ function App() {
     ]));
   };
 
+  const ratingHandler = () => {
+
+  };
+  
+
   const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
 
   return (
@@ -71,7 +77,8 @@ function App() {
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
         <ScrollToTop />   
         <Header />
-        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}>      
+        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}> 
+        <RatingContext.Provider value={{ratingHandler}}>    
         <Routes>        
           <Route          
             path="/"
@@ -88,6 +95,7 @@ function App() {
           <Route path="/movies/details/:movieId" element={<Details />}></Route>
           <Route path="/movies/details/:movieId/edit" element={<EditMovie movie={movieDetails} />}></Route>         
         </Routes>
+        </RatingContext.Provider> 
         </MovieContext.Provider>  
         <Scroll />
         <Footer />        

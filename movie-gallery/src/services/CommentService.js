@@ -14,3 +14,7 @@ export const remove = async (movieId, token) => {
   let data = {};
   return request.del(`${baseUrl}/${movieId}`, data ,token );
 }
+
+export const addRating = async (data, token) => {
+  return request.post('https://localhost:7222/api/ratings', data, token);
+}

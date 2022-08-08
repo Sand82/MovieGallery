@@ -17,16 +17,27 @@ namespace MovieGalleryWebAPI.Service.Ratings
             this.mapper = mapper;
             this.data = data;
         }
-        public async Task CreateRating(RatingsCreateModel model)
+        public async Task AddRating(RatingsCreateModel model)
         {
-            var rating = new Rating
-            {
-                Value = int.Parse(model.Value),
-                MovieId = model.MovieId,
-                UserId = model.UserId,
-            };
+            var rating = await this.data.Ratings
+                .Where(r => r.UserId == model.UserId && r.MovieId == model.MovieId)
+                .FirstOrDefaultAsync();
 
-            await this.data.Ratings.AddAsync(rating);
+            if (rating == null)
+            {
+                rating = new Rating
+                {
+                    MovieId = model.MovieId,
+                    UserId = model.UserId,
+                    Value = int.Parse(model.Value)
+                };
+
+                await this.data.Ratings.AddAsync(rating);
+            }
+            else
+            {
+                rating.Value = int.Parse(model.Value);
+            } 
 
             await this.data.SaveChangesAsync();                
         }
