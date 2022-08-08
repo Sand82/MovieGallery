@@ -12,9 +12,9 @@ import Comment from "../Comments/Comment/Comment.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 
 const Details = () => {
-    const {movieId} = useParams();
-    const [currMovie, setCurrMovie] = useState({});  
-    const {user} = useContext(AuthContext)
+  const { movieId } = useParams();
+  const [currMovie, setCurrMovie] = useState({});
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     moviesService.getOne(movieId).then((result) => {
       setCurrMovie(result);
@@ -22,24 +22,26 @@ const Details = () => {
   }, [movieId]);
 
   const commentHandler = (comment) => {
-    setCurrMovie(state => ({
-        ...state,
-        comments: [...state.comments, comment]          
-    }));      
-  }; 
-  
-  const editCommentHandler = (comment) =>{
-    setCurrMovie(state => ({
-        ...state,
-        comments: [...state.comments.filter(c => c.id != comment.id ? c : comment)]          
-    }));      
-  }
+    setCurrMovie((state) => ({
+      ...state,
+      comments: [...state.comments, comment],
+    }));
+  };
+
+  const editCommentHandler = (comment) => {
+    setCurrMovie((state) => ({
+      ...state,
+      comments: [
+        ...state.comments.filter((c) => (c.id != comment.id ? c : comment)),
+      ],
+    }));
+  };
 
   const deleteCommentHandler = () => {
     moviesService.getOne(movieId).then((result) => {
-        setCurrMovie(result);
-      });
-  }
+      setCurrMovie(result);
+    });
+  };
 
   return (
     <>
@@ -100,23 +102,23 @@ const Details = () => {
                     </div>
                     <ul className="entity-list">
                       <DetailsLi />
-                    {user.isAdmin &&
-                      <li style={style} className="button-holder">
-                        <Link
-                          to={`/movies/details/${currMovie.id}/edit`}
-                          className="btn btn-warning editButton"
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          className="btn btn-danger delButton"
-                          data-toggle="modal"
-                          data-target="#exampleModal"
-                        >
-                          Delete
-                        </button>
-                      </li>
-                    }
+                      {user.isAdmin && (
+                        <li style={style} className="button-holder">
+                          <Link
+                            to={`/movies/details/${currMovie.id}/edit`}
+                            className="btn btn-warning editButton"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            className="btn btn-danger delButton"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                          >
+                            Delete
+                          </button>
+                        </li>
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -128,26 +130,29 @@ const Details = () => {
                 <div className="section-head">
                   <h2 className="section-title text-uppercase">Comments</h2>
                 </div>
-                
-                { currMovie.comments != undefined 
-                    ? currMovie.comments.map(x => 
-                        <Comment key={x.id} comment={x} 
-                            editCommentHandler={editCommentHandler} 
-                            deleteCommentHandler={deleteCommentHandler}
-                        />) 
-                    : ''
-                }
-              </div>
 
+                {currMovie.comments != undefined
+                  ? currMovie.comments.map((x) => (
+                      <Comment
+                        key={x.id}
+                        comment={x}
+                        editCommentHandler={editCommentHandler}
+                        deleteCommentHandler={deleteCommentHandler}
+                      />
+                    ))
+                  : ""}
+              </div>
+              
               <CreateComment
                 movieId={movieId}
-                commentHandler={commentHandler}               
+                commentHandler={commentHandler}
               />
+              
             </section>
           </div>
         </div>
       </div>
-
+      
       <div
         className="modal fade"
         id="exampleModal"

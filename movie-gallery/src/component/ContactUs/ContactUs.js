@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom"
+
 const ContactUs = () => {
   return (
     <>
@@ -12,9 +14,9 @@ const ContactUs = () => {
           <div className="top-block-content">
             <h1 className="section-title">Contact us</h1>
             <div className="page-breadcrumbs">
-              <a className="content-link" href="#">
+              <Link className="content-link" to="/">
                 Home
-              </a>
+              </Link>
               <span className="text-theme mx-2">
                 <i className="fas fa-chevron-right" />
               </span>
@@ -88,24 +90,24 @@ const ContactUs = () => {
             <div className="col-md-6">
               <h4 className="entity-title">Address</h4>
               <p className="entity-text">
-                Sidestate NSW 4132, Sidney, Australia
-                <br /> 2200-2214 S Washtenaw Ave, Chicago, USA
+                 Hristo Botev 15, Sofia, Bulgaria
+                <br /> Vasil Levski 12, Varna, Bulgaria
               </p>
             </div>
             <div className="col-md-6">
               <h4 className="entity-title">Phone</h4>
               <p className="entity-text">
-                (+88) 018 4113 6251, (+43) 018 4111 7255
+                (+359) 888 411 621, (+359) 888 412 755
                 <br />
-                (+50) 118 4341 5251, (+08) 123 567 7255
+                (+359) 885 441 525, (+359) 885 441 255
               </p>
             </div>
             <div className="col-md-6">
               <h4 className="entity-title">Email</h4>
               <p className="entity-text">
-                info@memico.net
+                moviegallery@abv.com
                 <br />
-                service@memico.net
+                service-moviegallery@abv.com
               </p>
             </div>
             <div className="col-md-6">
@@ -123,9 +125,9 @@ const ContactUs = () => {
           </p>
         </div>
       </section>
-      <a className="scroll-top disabled" href="#">
+      <Link className="scroll-top disabled" to="#">
         <i className="fas fa-angle-up" aria-hidden="true" />
-      </a>
+      </Link>
     </>
   );
 };

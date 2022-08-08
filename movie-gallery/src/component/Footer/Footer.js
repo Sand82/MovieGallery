@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function Footer () {
     return  <footer className="section-text-white footer footer-links bg-darken">
     <div className="footer-body container">
         <div className="row">
             <div className="col-sm-6 col-lg-3">
-                <a className="footer-logo" href="./">
+                <Link className="footer-logo" to="/">
                     <span className="logo-element">
                         <span className="logo-tape">
                             <span className="svg-content svg-fill-theme" data-svg="./images/svg/logo-part.svg"></span>
@@ -11,36 +13,36 @@ export default function Footer () {
                         <span className="logo-text text-uppercase">
                             Movie Gallery</span>
                     </span>
-                </a>
+                </Link>
                 <div className="footer-content">
-                    <p className="footer-text">Sidestate NSW 4132,
-                        <br/>Australia</p>
-                    <p className="footer-text">Call us:&nbsp;&nbsp;(555) 555-0312</p>
+                    <p className="footer-text">Hristo Botev 15, Sofia,
+                        <br/>Bulgaria</p>
+                    <p className="footer-text">Call us:&nbsp;&nbsp;(+359) 888 411 621</p>
                 </div>
             </div>
             <div className="col-sm-6 col-lg-3">
                 <h5 className="footer-title text-uppercase">Movies</h5>
                 <ul className="list-unstyled list-wide footer-content">
                     <li>
-                        <a className="content-link" href="#">All Movies</a>
+                        <Link className="content-link" to="#">All Movies</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Upcoming movies</a>
+                        <Link className="content-link" to="#">Upcoming movies</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Top 100 movies</a>
+                        <Link className="content-link" to="#">Top 100 movies</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Blockbasters</a>
+                        <Link className="content-link" to="#">Blockbasters</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">British movies</a>
+                        <Link className="content-link" to="#">British movies</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Summer movies collection</a>
+                        <Link className="content-link" to="#">Summer movies collection</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Movie trailers</a>
+                        <Link className="content-link" to="#">Movie trailers</Link>
                     </li>
                 </ul>
             </div>
@@ -48,25 +50,25 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Information</h5>
                 <ul className="list-unstyled list-wide footer-content">
                     <li>
-                        <a className="content-link" href="#">Schedule</a>
+                        <Link className="content-link" to="#">Schedule</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">News</a>
+                        <Link className="content-link" to="#">News</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Contact us</a>
+                        <Link className="content-link" to="#">Contact us</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Community</a>
+                        <Link className="content-link" to="#">Community</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Blog</a>
+                        <Link className="content-link" to="#">Blog</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Events</a>
+                        <Link className="content-link" to="#">Events</Link>
                     </li>
                     <li>
-                        <a className="content-link" href="#">Help center</a>
+                        <Link className="content-link" to="#">Help center</Link>
                     </li>
                 </ul>
             </div>
@@ -74,22 +76,22 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Follow</h5>
                 <ul className="list-wide footer-content list-inline">
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-slack-hash"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-slack-hash"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-twitter"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-twitter"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-facebook-f"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-facebook-f"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-dribbble"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-dribbble"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-google-plus-g"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-google-plus-g"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <a className="content-link" href="#"><i className="fab fa-instagram"></i></a>
+                        <Link className="content-link" to="#"><i className="fab fa-instagram"></i></Link>
                     </li>
                 </ul>
                 <h5 className="footer-title text-uppercase">Subscribe</h5>
@@ -108,7 +110,7 @@ export default function Footer () {
         </div>
     </div>
     <div className="footer-copy">
-        <div className="container">Copyright 2019 &copy; AmigosThemes. All rights reserved.</div>
+        <div className="container">Copyright 2022 &copy; AmigosThemes. All rights reserved.</div>
     </div>
 </footer>
 }

@@ -8,7 +8,7 @@ import * as commentService from "../../../services/CommentService.js";
 
 const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const { user } = useContext(AuthContext);
-  const [resetState, setResetState] = useState("");
+  const [resetState, setResetState] = useState(false);
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const restartState = (e) => {
     e.preventDefault();
 
-    setResetState((state) => ({ ...state }));
+    setResetState(true);
   };
 
   const changeHandler = (e) => {
@@ -28,7 +28,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
 
     const isValidComment = movieValidator.description(description);
     setCommentError(isValidComment);
-    setResetState("");
+    setResetState(false);
     if (!isValidComment) {
       editCurrentComment(description);
       comment.comment = description;
@@ -70,7 +70,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   return (
     <div style={style} className="comment-entity">
       <div className="entity-inner">
-        <form className="entity-content">
+        <form className="entity-content" onSubmit={restartState}>
           <h4 className="entity-title">{comment.username}</h4>
           <p className="entity-subtext">{comment.creationData}</p>
           {resetState ? (

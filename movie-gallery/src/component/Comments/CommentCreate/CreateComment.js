@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as movieValidator from "../../../services/MovieValidator.js";
 import * as commentService from "../../../services/CommentService.js"
+import MovieRating from "../../Rating/MovieRaiting.js"
 
 const CreateComment = ({movieId, commentHandler}) => {
 
@@ -93,7 +94,7 @@ const CreateComment = ({movieId, commentHandler}) => {
               </p>
             )}
           </div>
-
+          <MovieRating  movieId={movieId}/>
           <div className="col-12">
             <button              
               className="px-5 btn btn-theme"
