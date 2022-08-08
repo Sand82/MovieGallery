@@ -9,6 +9,8 @@ namespace MovieGalleryWebAPI.Data.Models
         public Movie()
         {
             this.Comments =  new HashSet<Comment>();
+
+            this.Ratings = new HashSet<Rating>();
         }
 
         public int Id { get; set; }
@@ -40,5 +42,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public bool IsDelete { get; set; } = false;
 
         public ICollection<Comment>? Comments { get; set; }
+
+        public ICollection<Rating>? Ratings { get; set; }
     }
 }
