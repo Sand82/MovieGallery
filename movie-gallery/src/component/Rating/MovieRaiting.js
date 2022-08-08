@@ -1,30 +1,50 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 import { AuthContext } from "../../contexts/AuthContext.js";
 import * as commentService from "../../services/CommentService.js";
+import * as style from "./MovieRating.Module.css";
 
 const MovieRating = ({ movieId }) => {
-  
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();  
+  const [rating, setRating] = useState(null);
+  const navigate = useNavigate();
+   
+  useEffect(() => {
+
+    const data = {
+      userId: user.id,
+      movieId: movieId,
+    };
+
+    commentService
+      .getRating(data, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }       
+        setRating(Number(result.value));
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  }, [movieId]);
 
   const movieRaitingHandler = (e) => {
+    
     const data = {
       value: e.target.value,
       userId: user.id,
       movieId: movieId,
     };
 
-    console.log(data);
     commentService
       .addRating(data, user.accessToken)
       .then((result) => {
-
         if (result === "Bad response") {
           return navigate("/notfound");
-        }       
+        } 
+        setRating(Number(result.value));
       })
       .catch((error) => {
         throw console.error(error);
@@ -34,7 +54,7 @@ const MovieRating = ({ movieId }) => {
   return (
     <div className="col-12">
       <div className="rating-line">
-        <label>Rating:</label>
+        <label><strong>{rating == 0 ? "Rate: " : `You Vote: ${rating}`}</strong></label>
         <div className="form-rating" name="rating">
           <input
             type="radio"
@@ -71,7 +91,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-8"
             name="rating"
             value={8}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-8">
             <span className="rating-active-icon">
@@ -93,7 +113,7 @@ const MovieRating = ({ movieId }) => {
               <i className="fas fa-star" />
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+              <i className="far fa-star"/>
             </span>
           </label>
           <input
@@ -116,7 +136,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-5"
             name="rating"
             value={5}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-5">
             <span className="rating-active-icon">
@@ -131,7 +151,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-4"
             name="rating"
             value={4}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-4">
             <span className="rating-active-icon">
@@ -146,7 +166,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-3"
             name="rating"
             value={3}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-3">
             <span className="rating-active-icon">
@@ -161,7 +181,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-2"
             name="rating"
             value={2}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-2">
             <span className="rating-active-icon">
@@ -176,7 +196,7 @@ const MovieRating = ({ movieId }) => {
             id="rating-1"
             name="rating"
             value={1}
-            onClick={movieRaitingHandler}
+            onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-1">
             <span className="rating-active-icon">

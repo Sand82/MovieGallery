@@ -18,3 +18,7 @@ export const remove = async (movieId, token) => {
 export const addRating = async (data, token) => {
   return request.post('https://localhost:7222/api/ratings', data, token);
 }
+
+export const getRating = async(data, token) => {
+  return request.put(`https://localhost:7222/api/ratings`, data, token);
+}

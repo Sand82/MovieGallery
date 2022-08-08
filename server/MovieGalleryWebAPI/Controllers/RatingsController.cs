@@ -32,8 +32,25 @@ namespace MovieGalleryWebAPI.Controllers
 
             await ratingService.AddRating(model);
 
-            var rating = await ratingService.SearcheRating(model.Value, model.MovieId, model.UserId);
+            var rating = await ratingService.SearcheRating(model.MovieId, model.UserId);
 
+            return Ok(rating);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut]
+        public async Task<IActionResult> Put(RatingGetModel model)
+        {
+            var userId = User.GetId();
+
+            if (userId == null || userId != model.UserId)
+            {
+                return NotFound("User not found");
+            }
+
+            var rating = await ratingService.SearcheRating(model.MovieId, userId);
+
+            
             return Ok(rating);
         }
     }

@@ -42,10 +42,10 @@ namespace MovieGalleryWebAPI.Service.Ratings
             await this.data.SaveChangesAsync();                
         }
 
-        public async Task<RatingApiModel> SearcheRating(string value, int movieId, string userId)
+        public async Task<RatingApiModel> SearcheRating(int movieId, string userId)
         {
             var rating = await this.data.Ratings
-                .Where(r => r.UserId == userId && r.MovieId == movieId && r.Value == int.Parse(value))
+                .Where(r => r.UserId == userId && r.MovieId == movieId)
                 .ProjectTo<RatingApiModel>(this.mapper.ConfigurationProvider)
                 //.Select(r => new RatingApiModel
                 //{
@@ -55,6 +55,16 @@ namespace MovieGalleryWebAPI.Service.Ratings
                 //    UserId = r.UserId,
                 //})
                 .FirstOrDefaultAsync();
+
+            if (rating == null)
+            {
+                rating = new RatingApiModel
+                {
+                   Value = "0",
+                   MovieId = movieId,
+                   UserId = userId,
+                };
+            }
 
             return rating;
         }

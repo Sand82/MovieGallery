@@ -7,6 +7,6 @@ namespace MovieGalleryWebAPI.Service.Ratings
     {
         Task AddRating(RatingsCreateModel model);
 
-        Task<RatingApiModel> SearcheRating(string value, int movieId, string userId);
+        Task<RatingApiModel> SearcheRating( int movieId, string userId);
     }
 }
