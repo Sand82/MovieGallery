@@ -53,6 +53,8 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Year= m.Year,
                     Category= m.Category,
                     ImageUrl= m.ImageUrl,
+                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1"),
+                    Duration = m.Duration,
                 })
                 .FirstOrDefaultAsync();
 
@@ -62,23 +64,25 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<List<MoviesDataModel>> GetMovies()
         {
             var movies = await this.data.Movies
+                .Include(m => m.Ratings)
                 .Where(m => m.IsDelete == false)
-                .ProjectTo<MoviesDataModel>(this.mapper.ConfigurationProvider)
-                //.Select(m => new MovieDataModel
-                //{
-                //    Id = m.Id,
-                //    Title = m.Title,
-                //    Description = m.Description,
-                //    ImageUrl = m.ImageUrl,
-                //    Category = m.Category,
-                //    Year = m.Year,
-                //})
+                //.ProjectTo<MoviesDataModel>(this.mapper.ConfigurationProvider)
+                .Select(m => new MoviesDataModel
+                {
+                    Id = m.Id,
+                    Title = m.Title,
+                    Description = m.Description,
+                    ImageUrl = m.ImageUrl,
+                    Category = m.Category,
+                    Year = m.Year,
+                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1")
+                })
                 .ToListAsync();           
 
             return movies;
         }
 
-        public async Task<MovieDataModel> GetOneMovies(int movieId)
+        public async Task<MovieDataModel> GetOneMovie(int movieId)
         {
             var movie = await this.data.Movies
                 .Include(m => m.Comments).ThenInclude(c => c.User)
@@ -92,6 +96,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
+                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1"),
                     Comments = m.Comments.Where(c => c.IsDelete == false)
                         .Select(c => new MovieCommentModel
                         {

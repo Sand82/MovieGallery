@@ -34,6 +34,8 @@ function App() {
     });
   }, []);
 
+  console.log(movies);
+
   const loginHandler = (data) => {
         setUser(data);
   };

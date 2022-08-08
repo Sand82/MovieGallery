@@ -15,5 +15,7 @@
         public string? Category { get; set; }
 
         public string? Duration { get; set; }
+
+        public string? AvergeRating { get; set; }
     }
 }

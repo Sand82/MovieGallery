@@ -86,7 +86,7 @@ const Details = () => {
                           <span className="text-theme info-icon">
                             <i className="fas fa-star" />
                           </span>
-                          <span className="info-text">8,7</span>
+                          <span className="info-text">{currMovie.avergeRating}</span>
                           <span className="info-rest">/10</span>
                         </div>
                         <div className="info info-short">

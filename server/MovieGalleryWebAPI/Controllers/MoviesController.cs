@@ -37,7 +37,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<MovieDataModel> Get(int id)
         {
-            var movies = await moviesService.GetOneMovies(id);
+            var movies = await moviesService.GetOneMovie(id);
            
             return movies;
         }
