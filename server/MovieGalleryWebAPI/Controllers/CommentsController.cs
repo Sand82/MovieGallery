@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MovieGalleryWebAPI.Data.Models;
-using MovieGalleryWebAPI.Infrastructure;
+﻿using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Models.Comments;
 using MovieGalleryWebAPI.Service.Comments;
 using MovieGalleryWebAPI.Service.Users;
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -13,12 +13,11 @@ namespace MovieGalleryWebAPI.Controllers
     [Route("api/[controller]")]
     public class CommentsController : Controller
     {
-        private readonly IUserService userService;
+        
         private readonly ICommentService commentService;
 
-        public CommentsController(IUserService userService, ICommentService commentService)
-        {
-            this.userService = userService;
+        public CommentsController( ICommentService commentService)
+        {            
             this.commentService = commentService;
         }
 

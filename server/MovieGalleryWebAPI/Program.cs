@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MovieGalleryWebAPI.Service.Comments;
+using MovieGalleryWebAPI.Service.Ratings;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +63,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IMoviesService, MoviesService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICommentService, CommentService>();
+builder.Services.AddTransient<IRatingService, RatingService>();
 
 builder.Services.AddCors(options =>
 {

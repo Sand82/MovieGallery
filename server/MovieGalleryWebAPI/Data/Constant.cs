@@ -30,5 +30,8 @@
 
         public const int MinContentLength = 10;
         public const int MaxContentLength = 500;
+
+        public const int MinRaitingValue = 1;
+        public const int MaxRaitingValue = 10;
     }
 }
