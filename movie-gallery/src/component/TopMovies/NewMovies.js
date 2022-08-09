@@ -4,6 +4,7 @@ import * as style from "../TopMovies/NewMovies.Module.css";
 
 const NewMovies = ({ movies }) => {
   const firstFiveMovies = movies
+    .slice()
     .sort((a, b) => b.avergeRating - a.avergeRating)
     .slice(0, 4);
 

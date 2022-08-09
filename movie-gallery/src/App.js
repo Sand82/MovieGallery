@@ -29,9 +29,10 @@ function App() {
 
   useEffect(() => {
     movieService.getAll().then((result) => {
-      setMovies(result.sort((a, b) => b.id - a.id));
+      const moviesResult = result.sort((a, b) => b.id - a.id)
+      setMovies(moviesResult);
     });
-  }, []);
+  }, []);  
 
   const loginHandler = (data) => {
         setUser(data);
@@ -43,7 +44,8 @@ function App() {
 
   const createMovieHandler = () => {
     movieService.getAll().then((result) => {
-      setMovies(result);
+      const moviesResult = result.sort((a, b) => b.id - a.id)
+      setMovies(moviesResult);
     });
   };  
 
@@ -53,7 +55,8 @@ function App() {
 
   const editHandler = () => {
     movieService.getAll().then((result) => {
-      setMovies(result);
+      const moviesResult = result.sort((a, b) => b.id - a.id)
+      setMovies(moviesResult);
     });
   };
 

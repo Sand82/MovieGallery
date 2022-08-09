@@ -48,7 +48,7 @@ const CreateMovie = () => {
           return navigate("/notfound");
         }
         createMovieHandler();
-        return navigate("/");
+        return navigate("/movies");
       })
       .catch((error) => {
         throw console.error(error);

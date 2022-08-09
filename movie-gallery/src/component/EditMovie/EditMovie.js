@@ -41,10 +41,9 @@ const EditMovie = ({movie}) => {
      
       if (result === "Bad response") {
         return navigate("/notfound");
-      }
-      console.log(result);
+      }     
       editHandler(result);
-      return navigate("/");
+      return navigate("/movies");
     })
     .catch((error) => {
       throw console.error(error);

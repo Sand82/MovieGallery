@@ -5,17 +5,24 @@ import { MovieContext } from "../../../contexts/MovieContext.js";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as moviesService from "../../../services/MoviesService.js";
 
-const DeleteModal = ({ movieId}) => {
-
+const DeleteModal = ({ movieId }) => {
   const { deleteHandler } = useContext(MovieContext);
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
 
   const deleteMovie = () => {
-    moviesService.remove(movieId, user.accessToken).then((res) => {
-      deleteHandler(res);
-      navigate("/");
-    });
+    moviesService
+      .remove(movieId, user.accessToken)
+      .then((res) => {
+        if (res === "Bad response") {
+          return navigate("/notfound");
+        }
+        deleteHandler(res);
+        navigate("/movies");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
   return (
