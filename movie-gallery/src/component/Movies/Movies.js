@@ -1,5 +1,5 @@
 import TopRated from "./TopRated/TopRated.js";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { MovieContext } from "../../contexts/MovieContext.js";
 import * as helperService from "../../services/HelperService.js";
@@ -8,19 +8,47 @@ import Search from "../Search/Search.js";
 const Movies = () => {       
 
 const {movies} = useContext(MovieContext);
+const [filterMovies, setFilteredMovies] = useState(movies);
 
+useEffect(()=> {
+  setFilteredMovies(movies)
+},[movies])
+
+const searchTermsHandler = (search, select) => {
+  
+    let sortedMovies;
+
+    if (select === 'All' && search === '') { 
+
+      sortedMovies = movies;
+
+    }else if(search === ''){
+      
+      sortedMovies = movies.sort((a,b) => b[select] - a[select]);
+      
+    }else if(select === 'All'){
+
+      sortedMovies = movies.filter(x => x.title.toLowerCase().includes(search.toLowerCase()));   
+        
+    }else{
+
+      sortedMovies = movies.filter(x => x.title.toLowerCase().includes(search.toLowerCase())).sort((a, b) => b[select] - a[select]);      
+    }
+    setFilteredMovies(state => state = [...sortedMovies]);
+}
+ 
 const date = new Date();
 
   return (
     <section className="section-long">
       <div className="container">
-       <Search/>
+       <Search searchTermsHandler={searchTermsHandler}/>
         <div className="section-head">
           <h2 className="section-title text-uppercase">Colection</h2>
           <p className="section-text">{helperService.formatData(date)}</p>
         </div>
                 
-       {movies.map(x => < TopRated key={x.id} movie={x} />)}
+       {filterMovies.map(x => < TopRated key={x.id} movie={x} />)}
       </div>
     </section>
   );

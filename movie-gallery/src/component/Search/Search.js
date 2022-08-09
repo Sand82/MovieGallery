@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Search = () => {
+const Search = ({searchTermsHandler}) => {
   const [search, setSearch] = useState('');
   const [select, setSelect] = useState('All')
 
   const searchChange = (e) => {         
     e.preventDefault();
-    console.log(search);
-    console.log(select);
-
-    
-    setSearch('');   
+   
+    searchTermsHandler(search, select);       
   };
  
   const searching = (e) => {    
@@ -83,11 +80,10 @@ const Search = () => {
               <div className="col-sm-6 col-lg-3">
                 <div className="input-view-flat input-group">
                   <select className="form-control" name="sortBy" onChange={selecting}>                    
-                    <option value="all">All</option>
-                    <option value="name">Name</option>
+                    <option value="all">Select</option>                    
                     <option value="year">Year</option>
-                    <option value="raiting">Rating</option>
-                    <option value="category">Category</option>
+                    <option value="avergeRating">Rating</option>                    
+                    <option value="duration">Duration</option>                    
                   </select>
                 </div>
               </div>
