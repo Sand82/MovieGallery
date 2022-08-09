@@ -10,9 +10,9 @@ import * as style from './EditMovie.Model.css'
 const EditMovie = ({movie}) => {
   
     const { user } = useContext(AuthContext);
-    const { editHandler} = useContext(MovieContext)
+    const { editHandler } = useContext(MovieContext)
 
-    const [editMovie, setCreateMovie] = useState({
+    const [editMovie, setEditovie] = useState({
     title: movie.title,
     category: movie.category,
     year: movie.year,
@@ -42,7 +42,8 @@ const EditMovie = ({movie}) => {
       if (result === "Bad response") {
         return navigate("/notfound");
       }
-      editHandler(movieData);
+      console.log(result);
+      editHandler(result);
       return navigate("/");
     })
     .catch((error) => {
@@ -50,8 +51,9 @@ const EditMovie = ({movie}) => {
     });
   }
 
-  const changeHandler = (e) => {    
-    setCreateMovie((state) => ({
+  const changeHandler = (e) => {     
+   
+    setEditovie((state) => ({
       ...state,
       [e.target.name]: e.target.value,
     }));

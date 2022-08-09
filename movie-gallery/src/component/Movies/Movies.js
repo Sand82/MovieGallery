@@ -3,6 +3,7 @@ import { useContext } from "react";
 
 import { MovieContext } from "../../contexts/MovieContext.js";
 import * as helperService from "../../services/HelperService.js";
+import Search from "../Search/Search.js";
 
 const Movies = () => {       
 
@@ -13,10 +14,12 @@ const date = new Date();
   return (
     <section className="section-long">
       <div className="container">
+       <Search/>
         <div className="section-head">
           <h2 className="section-title text-uppercase">Colection</h2>
           <p className="section-text">{helperService.formatData(date)}</p>
-        </div>        
+        </div>
+                
        {movies.map(x => < TopRated key={x.id} movie={x} />)}
       </div>
     </section>

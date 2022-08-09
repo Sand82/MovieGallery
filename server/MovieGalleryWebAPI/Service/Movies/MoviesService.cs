@@ -152,6 +152,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.ImageUrl = model.ImageUrl;
             movie.Category = model.Category;
             movie.Year = model.Year;
+            movie.Duration = model.Duration;
 
             await this.data.SaveChangesAsync();
 

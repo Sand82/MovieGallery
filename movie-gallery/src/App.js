@@ -51,11 +51,10 @@ function App() {
     setMovieDetails(movie);
   };
 
-  const editHandler = (movie) => {
-    setMovies(state => ([
-      ...state.filter(m => m.id !== movie.id),
-      movie
-    ]));
+  const editHandler = () => {
+    movieService.getAll().then((result) => {
+      setMovies(result);
+    });
   };
 
   const deleteHandler = (movieId) => {    
