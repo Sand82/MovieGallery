@@ -1,9 +1,12 @@
 import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.js";
-import NewMovieBlog from './NewMovieBlog/NewMovieBlog.js'
+import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.js";
 import * as style from "../TopMovies/NewMovies.Module.css";
 
 const NewMovies = ({ movies }) => {
-    
+  const firstFiveMovies = movies
+    .sort((a, b) => b.avergeRating - a.avergeRating)
+    .slice(0, 4);
+
   return (
     <>
       <section style={style} className="section-text-white position-relative">
@@ -28,7 +31,7 @@ const NewMovies = ({ movies }) => {
               <div className="slick-slides slick-initialized slick-slider">
                 <div className="slick-list draggable">
                   <div className="slick-track">
-                    {movies.map((x) => (
+                    {firstFiveMovies.map((x) => (
                       <NewMoviePoster key={x.id} movie={x} />
                     ))}
                   </div>
@@ -45,8 +48,9 @@ const NewMovies = ({ movies }) => {
             <h2 className="section-title text-uppercase">Latest news</h2>
           </div>
           <div className="grid row">
-            {movies.map(x => <NewMovieBlog key={x.id} movie={x}/>)}
-            
+            {firstFiveMovies.map((x) => (
+              <NewMovieBlog key={x.id} movie={x} />
+            ))}
           </div>
           <div className="section-bottom">
             <a className="btn btn-theme" href="news-blocks-sidebar-right.html">

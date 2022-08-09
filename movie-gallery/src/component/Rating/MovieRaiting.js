@@ -28,7 +28,7 @@ const MovieRating = ({ movieId }) => {
       .catch((error) => {
         throw console.error(error);
       });
-  }, [movieId]);
+  }, [movieId, navigate, user.accessToken, user.id]);
 
   const movieRaitingHandler = (e) => {
     
@@ -50,10 +50,10 @@ const MovieRating = ({ movieId }) => {
         throw console.error(error);
       });
   };
-
+console.log(rating);
   return (
     <div className="col-12">
-      <div className="rating-line">
+      <div style={style} className="rating-line">
         <label><strong>{rating == 0 ? "Rate: " : `You Vote: ${rating}`}</strong></label>
         <div className="form-rating" name="rating">
           <input
@@ -65,10 +65,10 @@ const MovieRating = ({ movieId }) => {
           />
           <label htmlFor="rating-10">
             <span className="rating-active-icon">
-              <i className="fas fa-star" />
+              {rating == 10 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 10 ? <i className="far fa-star" />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -79,11 +79,11 @@ const MovieRating = ({ movieId }) => {
             onClick={movieRaitingHandler}
           />
           <label htmlFor="rating-9">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 9 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 9 ? <i className="far fa-star" />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -94,11 +94,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-8">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 8 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 8 ? <i className="far fa-star" />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -109,11 +109,11 @@ const MovieRating = ({ movieId }) => {
             onClick={movieRaitingHandler}
           />
           <label htmlFor="rating-7">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 7 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star"/>
+            {rating < 7 ? <i className="far fa-star" />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -124,11 +124,11 @@ const MovieRating = ({ movieId }) => {
             onClick={movieRaitingHandler}
           />
           <label htmlFor="rating-6">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 6 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 6 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -139,11 +139,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-5">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 5 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 5 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -154,11 +154,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-4">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 4 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 4 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -169,11 +169,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-3">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 3 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 3 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -184,11 +184,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-2">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 2 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 2 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
           <input
@@ -199,11 +199,11 @@ const MovieRating = ({ movieId }) => {
             onClick={ movieRaitingHandler}
           />
           <label htmlFor="rating-1">
-            <span className="rating-active-icon">
-              <i className="fas fa-star" />
+          <span className="rating-active-icon">
+              {rating >= 1 ? <i className="fas fa-star star" /> : <i className="fas fa-star" />}
             </span>
             <span className="rating-icon">
-              <i className="far fa-star" />
+            {rating < 1 ? <i className="far fa-star " />: <i className="fas fa-star star" />}
             </span>
           </label>
         </div>

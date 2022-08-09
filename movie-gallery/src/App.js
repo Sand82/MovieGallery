@@ -5,7 +5,6 @@ import Header from "./component/Header/Header.js";
 import * as movieService from "./services/MoviesService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
 import { MovieContext } from "./contexts/MovieContext.js";
-import { RatingContext } from "./contexts/RatingContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.js";
 import Movies from "./component/Movies/Movies.js";
@@ -26,14 +25,13 @@ import ScrollToTop from "./hooks/ScrollToTop.js";
 function App() {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useLocalStorage('auth', {});
-  const [movieDetails, setMovieDetails] = useState({});
+  const [movieDetails, setMovieDetails] = useState({});    
 
   useEffect(() => {
     movieService.getAll().then((result) => {
-      setMovies(result);
+      setMovies(result.sort((a, b) => b.id - a.id));
     });
   }, []);
-  
 
   const loginHandler = (data) => {
         setUser(data);
@@ -64,26 +62,18 @@ function App() {
     setMovies(state => ([
       ...state.filter(m => m.id !== movieId)      
     ]));
-  };
-
-  const ratingHandler = () => {
-
-  };
-  
-
-  const firstFiveMovies = movies.sort((a, b) => b.id - a.id).slice(0, 4);
+  }; 
 
   return (
     <div className="App">
       <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
         <ScrollToTop />   
         <Header />
-        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}> 
-        <RatingContext.Provider value={{ratingHandler}}>    
+        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}>           
         <Routes>        
           <Route          
             path="/"
-            element={<NewMovies movies={firstFiveMovies} />}
+            element={<NewMovies movies={movies} />}
           ></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
@@ -95,8 +85,7 @@ function App() {
           <Route path="/badrequest" element={<BadRequest />}></Route>
           <Route path="/movies/details/:movieId" element={<Details />}></Route>
           <Route path="/movies/details/:movieId/edit" element={<EditMovie movie={movieDetails} />}></Route>         
-        </Routes>
-        </RatingContext.Provider> 
+        </Routes>        
         </MovieContext.Provider>  
         <Scroll />
         <Footer />        
