@@ -5,6 +5,7 @@ import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as movieValidator from "../../../services/MovieValidator.js";
 import * as commentService from "../../../services/CommentService.js";
+import * as helperService from "../../../services/HelperService.js"
 
 const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const { user } = useContext(AuthContext);
@@ -72,7 +73,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
       <div className="entity-inner">
         <form className="entity-content" onSubmit={restartState}>
           <h4 className="entity-title">{comment.username}</h4>
-          <p className="entity-subtext">{comment.creationData}</p>
+          <p className="entity-subtext">{helperService.formatData(comment.creationData)}</p>
           {resetState ? (
             <input
               name="comment"          

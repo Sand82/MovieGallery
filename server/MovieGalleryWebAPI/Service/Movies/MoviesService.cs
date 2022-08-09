@@ -75,6 +75,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     ImageUrl = m.ImageUrl,
                     Category = m.Category,
                     Year = m.Year,
+                    Duration = m.Duration,
                     AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1")
                 })
                 .ToListAsync();           
