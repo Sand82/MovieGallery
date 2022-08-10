@@ -1,20 +1,26 @@
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 
 import ContactInformation from "./ContactInformation/ContactInformation.js";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
+import * as userValidator from "../../services/UserValidator.js";
 
 const ContactUs = () => {
   const { user } = useContext(AuthContext);
   const [sendMail, setSendMail] = useState({
+    username: user.username,
+    email: user.email,
     subject: "",
     message: "",
   });
+  const [usernameError, setUsernameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [messegError, setMessegeError] = useState(false);
+  const form = useRef();
 
   const changeHandler = (e) => {
     setSendMail((state) => ({
@@ -26,11 +32,28 @@ const ContactUs = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
-
-    console.log(data);
-    setSendMail({subject: '', message: ''});
-
     
+    console.log(data);
+    
+
+    emailjs.sendForm('service_ufh83g4', 'template_qgn844p',form.current, '97bvqzMYCmiGXN1wA')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
+
+    setSendMail({subject: '', message: ''});
+  };
+
+  const validateUsername = (e) => {
+    const userName = e.target.value;
+    setUsernameError(userValidator.user(userName));
+  };
+
+  const validateEmail = (e) => {
+    const currEmail = e.target.value;
+    setEmailError(userValidator.emailAddress(currEmail));
   };
 
   const validateSubject = (e) => {
@@ -60,7 +83,7 @@ const ContactUs = () => {
                   <p className="form-text">
                     We understand your requirement and provide quality works
                   </p>
-                  <form onSubmit={sendEmail}>
+                  <form ref={form} onSubmit={sendEmail}>
                     <div className="row form-grid">
                       <div className="col-sm-6">
                         <div className="input-view-flat input-group">
@@ -68,10 +91,18 @@ const ContactUs = () => {
                             className="form-control"
                             name="username"
                             type="text"
-                            placeholder="Username"
-                            defaultValue={user.username}
+                            placeholder="Username"                            
+                            onChange={changeHandler}
+                            value={sendMail.username}
+                            onBlur={validateUsername}
                           />
                         </div>
+                        {usernameError && (
+                            <p className="alert alert-danger">
+                              User name should be more than 2 and less than 50
+                              symbols.
+                            </p>
+                          )}
                       </div>
                       <div className="col-sm-6">
                         <div className="input-view-flat input-group">
@@ -79,10 +110,17 @@ const ContactUs = () => {
                             className="form-control"
                             name="email"
                             type="email"
-                            placeholder="Email"
-                            defaultValue={user.email}
+                            placeholder="Email"                           
+                            onChange={changeHandler}
+                            value={sendMail.email}
+                            onBlur={validateEmail}
                           />
-                        </div>                        
+                        </div>
+                        {emailError && (
+                            <p className="alert alert-danger">
+                              Invalid email address.
+                            </p>
+                          )}                        
                       </div>
                       <div className="col-sm-12">
                         <div className="input-view-flat input-group">
