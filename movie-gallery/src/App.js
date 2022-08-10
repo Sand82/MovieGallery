@@ -16,28 +16,27 @@ import Logout from "./component/Logout/Logout.js";
 import Register from "./component/Register/Register.js";
 import NotFound from "./component/ErrorPage/NotFound.js";
 import BadRequest from "./component/ErrorPage/BadRequest.js";
-import {useLocalStorage} from './hooks/useLocalStorage.js';
-import CreateMovie from './component/CreateMovie/CreateMovie.js';
-import EditMovie from './component/EditMovie/EditMovie.js';
-import Details from './component/Details/Details.js';
+import { useLocalStorage } from "./hooks/useLocalStorage.js";
+import CreateMovie from "./component/CreateMovie/CreateMovie.js";
+import EditMovie from "./component/EditMovie/EditMovie.js";
+import Details from "./component/Details/Details.js";
 import ScrollToTop from "./hooks/ScrollToTop.js";
+import RouteGuard from "./common/RouteGuard.js"
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useLocalStorage('auth', {});
-  const [movieDetails, setMovieDetails] = useState({});    
-
-  console.log(movies);
+  const [user, setUser] = useLocalStorage("auth", {});
+  const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {
     movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id)
+      const moviesResult = result.sort((a, b) => b.id - a.id);
       setMovies(moviesResult);
     });
-  }, []);  
+  }, []);
 
   const loginHandler = (data) => {
-        setUser(data);
+    setUser(data);
   };
 
   const logoutHandler = () => {
@@ -46,53 +45,63 @@ function App() {
 
   const createMovieHandler = () => {
     movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id)
+      const moviesResult = result.sort((a, b) => b.id - a.id);
       setMovies(moviesResult);
     });
-  };  
+  };
 
-  const detailsHandler = (movie) => {   
+  const detailsHandler = (movie) => {
     setMovieDetails(movie);
   };
 
   const editHandler = () => {
     movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id)
+      const moviesResult = result.sort((a, b) => b.id - a.id);
       setMovies(moviesResult);
     });
   };
 
-  const deleteHandler = (movieId) => {    
-    setMovies(state => ([
-      ...state.filter(m => m.id !== movieId)      
-    ]));
-  }; 
+  const deleteHandler = (movieId) => {
+    setMovies((state) => [...state.filter((m) => m.id !== movieId)]);
+  };
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{user, loginHandler, logoutHandler}}>     
-        <ScrollToTop />   
+      <AuthContext.Provider value={{ user, loginHandler, logoutHandler }}>
+        <ScrollToTop />
         <Header />
-        <MovieContext.Provider value={{movies, detailsHandler, editHandler, deleteHandler, createMovieHandler}}>           
-        <Routes>        
-          <Route          
-            path="/"
-            element={<NewMovies movies={movies} />}
-          ></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/Logout" element={<Logout />}></Route>
-          <Route path="/movies" element={<Movies/>}></Route>
-          <Route path="/create" element={<CreateMovie />}></Route>
-          <Route path="/contactus" element={<ContactUs />}></Route>
-          <Route path="/notfound" element={<NotFound />}></Route>
-          <Route path="/badrequest" element={<BadRequest />}></Route>
-          <Route path="/movies/details/:movieId" element={<Details />}></Route>
-          <Route path="/movies/details/:movieId/edit" element={<EditMovie movie={movieDetails} />}></Route>         
-        </Routes>        
-        </MovieContext.Provider>  
+        <MovieContext.Provider
+          value={{
+            movies,
+            detailsHandler,
+            editHandler,
+            deleteHandler,
+            createMovieHandler,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<NewMovies movies={movies} />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
+
+            <Route path="/logout" element={<RouteGuard><Logout /></RouteGuard>}></Route>
+            <Route path="/movies" element={<RouteGuard><Movies /></RouteGuard>}></Route>
+            <Route path="/create" element={<RouteGuard><CreateMovie /></RouteGuard>}></Route>
+            <Route path="/contactus" element={<RouteGuard><ContactUs /></RouteGuard>}></Route>
+            <Route path="/notfound" element={<NotFound />}></Route>
+            <Route path="/badrequest" element={<BadRequest />}></Route>
+            <Route
+              path="/movies/details/:movieId"
+              element={<RouteGuard><Details /></RouteGuard>}
+            ></Route>
+            <Route
+              path="/movies/details/:movieId/edit"
+              element={<RouteGuard><EditMovie movie={movieDetails} /></RouteGuard>}
+            ></Route>
+          </Routes>
+        </MovieContext.Provider>
         <Scroll />
-        <Footer />        
+        <Footer />
       </AuthContext.Provider>
     </div>
   );

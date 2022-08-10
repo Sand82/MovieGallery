@@ -42,7 +42,7 @@ const TopRated = ({ movie}) => {
       <div className="entity-content">
         <h4 className="entity-title">
           <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
-            {movie.title}
+            {movie.title} ({movie.year})
           </Link>
         </h4>
         <div className="entity-category">

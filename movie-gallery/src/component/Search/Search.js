@@ -88,7 +88,7 @@ const Search = ({ searchTermsHandler }) => {
                     name="sortBy"
                     onChange={selecting}
                   >
-                    <option value="all">Select</option>
+                    <option value="all">Sort By</option>
                     <option value="year">Year</option>
                     <option value="avergeRating">Rating</option>
                     <option value="duration">Duration</option>

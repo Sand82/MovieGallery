@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext} from "../contexts/AuthContext.js"
 
 const RouteGuard = ({children}) => {
+    
     const { user } = useContext(AuthContext);
 
     if (!user.accessToken) {
