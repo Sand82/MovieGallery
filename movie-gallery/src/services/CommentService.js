@@ -2,6 +2,8 @@ import * as request from "./Requester.js";
 
 const baseUrl = "https://localhost:7222/api/comments";
 
+const ratingUrl = 'https://localhost:7222/api/ratings';
+
 export const create = async (data, token) => {
     return request.post(baseUrl, data, token )
   };
@@ -16,9 +18,9 @@ export const remove = async (movieId, token) => {
 }
 
 export const addRating = async (data, token) => {
-  return request.post('https://localhost:7222/api/ratings', data, token);
+  return request.post(ratingUrl, data, token);
 }
 
 export const getRating = async(data, token) => {
-  return request.put(`https://localhost:7222/api/ratings`, data, token);
+  return request.put(ratingUrl, data, token);
 }
