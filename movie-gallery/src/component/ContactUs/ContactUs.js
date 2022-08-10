@@ -7,6 +7,7 @@ import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
 import * as userValidator from "../../services/UserValidator.js";
+import ContactUsMap from "./ContactUsMap/ContactUsMap.js";
 
 const ContactUs = () => {
   const { user } = useContext(AuthContext);
@@ -32,18 +33,26 @@ const ContactUs = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.target));
-    
+
     console.log(data);
-    
 
-    emailjs.sendForm('service_ufh83g4', 'template_qgn844p',form.current, '97bvqzMYCmiGXN1wA')
-    .then((result) => {
-        console.log(result.text);
-    }, (error) => {
-        console.log(error.text);
-    });
+    emailjs
+      .sendForm(
+        "service_ufh83g4",
+        "template_qgn844p",
+        form.current,
+        "97bvqzMYCmiGXN1wA"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
 
-    setSendMail({subject: '', message: ''});
+    setSendMail({ subject: "", message: "" });
   };
 
   const validateUsername = (e) => {
@@ -71,7 +80,8 @@ const ContactUs = () => {
       <ContactUsHeader />
       <section>
         <div className="gmap-with-map">
-          <div className="gmap" data-lat="-33.878897" data-lng="151.103737" />
+          <div className="gmap" />
+          <ContactUsMap />
           <div className="container">
             <div className="row">
               <div className="col-lg-6 ml-lg-auto">
@@ -91,18 +101,18 @@ const ContactUs = () => {
                             className="form-control"
                             name="username"
                             type="text"
-                            placeholder="Username"                            
+                            placeholder="Username"
                             onChange={changeHandler}
                             value={sendMail.username}
                             onBlur={validateUsername}
                           />
                         </div>
                         {usernameError && (
-                            <p className="alert alert-danger">
-                              User name should be more than 2 and less than 50
-                              symbols.
-                            </p>
-                          )}
+                          <p className="alert alert-danger">
+                            User name should be more than 2 and less than 50
+                            symbols.
+                          </p>
+                        )}
                       </div>
                       <div className="col-sm-6">
                         <div className="input-view-flat input-group">
@@ -110,17 +120,17 @@ const ContactUs = () => {
                             className="form-control"
                             name="email"
                             type="email"
-                            placeholder="Email"                           
+                            placeholder="Email"
                             onChange={changeHandler}
                             value={sendMail.email}
                             onBlur={validateEmail}
                           />
                         </div>
                         {emailError && (
-                            <p className="alert alert-danger">
-                              Invalid email address.
-                            </p>
-                          )}                        
+                          <p className="alert alert-danger">
+                            Invalid email address.
+                          </p>
+                        )}
                       </div>
                       <div className="col-sm-12">
                         <div className="input-view-flat input-group">
