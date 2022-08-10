@@ -1,9 +1,9 @@
 export const request = async (method, url, data, token) => {
     try {
         let buildRequest;
-        let headers = {};
+        let headers = {};       
 
-        if (token) {
+        if (token) {           
             headers['Authorization'] = `Bearer ${token}`;
         }
 

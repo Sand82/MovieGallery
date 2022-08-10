@@ -5,14 +5,13 @@ import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import * as movieServis from "../../services/MoviesService.js";
 import * as movieValidator from "../../services/MovieValidator.js";
-import * as style from './EditMovie.Model.css'
+import * as style from "./EditMovie.Model.css";
 
-const EditMovie = ({movie}) => {
-  
-    const { user } = useContext(AuthContext);
-    const { editHandler } = useContext(MovieContext)
+const EditMovie = ({ movie }) => {
+  const { user } = useContext(AuthContext);
+  const { editHandler } = useContext(MovieContext);
 
-    const [editMovie, setEditovie] = useState({
+  const [editMovie, setEditovie] = useState({
     title: movie.title,
     category: movie.category,
     year: movie.year,
@@ -28,30 +27,29 @@ const EditMovie = ({movie}) => {
   const [durationError, setDurationError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
 
-  const navigate = useNavigate();  
- 
+  const navigate = useNavigate();
+
   const editMovieHandler = (e) => {
     e.preventDefault();
 
     const movieData = Object.fromEntries(new FormData(e.target));
     movieData.id = movie.id;
 
-    movieServis.edit(movieData, user.accessToken)
-    .then((result) => {               
-     
-      if (result === "Bad response") {
-        return navigate("/notfound");
-      }     
-      editHandler(result);
-      return navigate("/movies");
-    })
-    .catch((error) => {
-      throw console.error(error);
-    });
-  }
+    movieServis
+      .edit(movieData, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        editHandler(result);
+        return navigate("/movies");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
 
-  const changeHandler = (e) => {     
-   
+  const changeHandler = (e) => {
     setEditovie((state) => ({
       ...state,
       [e.target.name]: e.target.value,
@@ -97,11 +95,12 @@ const EditMovie = ({movie}) => {
     durationError ||
     descriptionError;
 
-  
-    return (
-        <div className="container px-12 form-container" style={style}>
-          <div className="row top-buffer">
-            <div className="col-sm-12 col-lg-3 col-lg-8 offset-xl-3 col-xl-6 col">
+  return (
+    <div className="container px-12 form-container" style={style}>
+      <div className="row top-buffer">
+        <div className="col-sm-12 col-lg-3 col-lg-8 offset-xl-3 col-xl-6 col">
+          {user.isAdmin ? (
+            <>
               <h2 className="heading text-center movie-title">Edit Movie</h2>
               <form onSubmit={editMovieHandler}>
                 <div className="form-outline mb-4">
@@ -123,7 +122,7 @@ const EditMovie = ({movie}) => {
                     </p>
                   )}
                 </div>
-    
+
                 <div className="form-outline mb-4">
                   <input
                     type="text"
@@ -143,7 +142,7 @@ const EditMovie = ({movie}) => {
                     </p>
                   )}
                 </div>
-    
+
                 <div className="form-outline mb-4">
                   <input
                     type="text"
@@ -163,7 +162,7 @@ const EditMovie = ({movie}) => {
                     </p>
                   )}
                 </div>
-    
+
                 <div className="form-outline mb-4">
                   <input
                     type="text"
@@ -183,7 +182,7 @@ const EditMovie = ({movie}) => {
                     </p>
                   )}
                 </div>
-    
+
                 <div className="form-outline mb-4">
                   <input
                     type="text"
@@ -203,7 +202,7 @@ const EditMovie = ({movie}) => {
                     </p>
                   )}
                 </div>
-    
+
                 <div className="form-outline mb-4">
                   <textarea
                     className="form-control"
@@ -219,7 +218,8 @@ const EditMovie = ({movie}) => {
                   </label>
                   {descriptionError && (
                     <p className="alert alert-danger">
-                      Description should be more than 10 and less than 500 symbols.
+                      Description should be more than 10 and less than 500
+                      symbols.
                     </p>
                   )}
                 </div>
@@ -232,10 +232,16 @@ const EditMovie = ({movie}) => {
                   Edit movie
                 </button>
               </form>
-            </div>
-          </div>
+            </>
+          ) : (
+            <h1 style={{ textAlign: "center" }}>
+              You don't have rights to edit movie.
+            </h1>
+          )}
         </div>
-      );
+      </div>
+    </div>
+  );
 };
 
 export default EditMovie;

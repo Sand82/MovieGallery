@@ -27,6 +27,8 @@ function App() {
   const [user, setUser] = useLocalStorage('auth', {});
   const [movieDetails, setMovieDetails] = useState({});    
 
+  console.log(movies);
+
   useEffect(() => {
     movieService.getAll().then((result) => {
       const moviesResult = result.sort((a, b) => b.id - a.id)

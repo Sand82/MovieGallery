@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Search = ({searchTermsHandler}) => {
-  const [search, setSearch] = useState('');
-  const [select, setSelect] = useState('All')
+const Search = ({ searchTermsHandler }) => {
+  const [search, setSearch] = useState("");
+  const [select, setSelect] = useState("All");
 
-  const searchChange = (e) => {         
+  const searchChange = (e) => {
     e.preventDefault();
-   
-    searchTermsHandler(search, select);       
+
+    searchTermsHandler(search, select);
   };
- 
-  const searching = (e) => {    
+
+  const searching = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
-  const selecting = (e) => {    
+  const selecting = (e) => {
     setSelect(e.target.value);
-  }
+  };
 
-  const clearSearch = () => {    
-    setSearch('');   
-  }
-  
+  const clearSearch = () => {
+    setSearch("");
+  };
+
   return (
     <div className="section-pannel">
       <div className="grid row">
@@ -64,26 +64,34 @@ const Search = ({searchTermsHandler}) => {
                   <input
                     className="datetimepicker-input form-control"
                     type="text"
-                    placeholder="Search"                                       
+                    placeholder="Search"
                     value={search}
-                    onChange={searching}                    
+                    onChange={searching}
                   />
                   <div className="input-group-append">
-                    {search.length > 0 &&
-                    <Link className="input-group-text" to="#" onClick={clearSearch}> 
-                     <i className="fa-solid fa-calendar-xmark"></i>
-                    </Link>
-                    }                    
+                    {search.length > 0 && (
+                      <Link
+                        className="input-group-text"
+                        to="#"
+                        onClick={clearSearch}
+                      >
+                        <i className="fa-solid fa-calendar-xmark"></i>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
               <div className="col-sm-6 col-lg-3">
                 <div className="input-view-flat input-group">
-                  <select className="form-control" name="sortBy" onChange={selecting}>                    
-                    <option value="all">Select</option>                    
+                  <select
+                    className="form-control"
+                    name="sortBy"
+                    onChange={selecting}
+                  >
+                    <option value="all">Select</option>
                     <option value="year">Year</option>
-                    <option value="avergeRating">Rating</option>                    
-                    <option value="duration">Duration</option>                    
+                    <option value="avergeRating">Rating</option>
+                    <option value="duration">Duration</option>
                   </select>
                 </div>
               </div>
@@ -95,12 +103,13 @@ const Search = ({searchTermsHandler}) => {
           <ul className="ml-md-auto h5 list-inline">
             <li className="list-inline-item">
               <Link
-                className="content-link transparent-link" to="#" onClick={searchChange}
-               
+                className="content-link transparent-link"
+                to="#"
+                onClick={searchChange}
               >
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Link>
-            </li>            
+            </li>
           </ul>
         </div>
       </div>
