@@ -75,6 +75,11 @@ const ContactUs = () => {
     setMessegeError(movieValidator.description(message));
   };
 
+  const isValid =
+    Object.values(sendMail).some((x) => x === "") ||
+    usernameError || emailError || subjectError ||  messegError 
+   
+
   return (
     <>
       <ContactUsHeader />
@@ -170,7 +175,8 @@ const ContactUs = () => {
                         )}
                       </div>
                       <div className="col-12">
-                        <button className="px-5 btn btn-theme" type="submit">
+                        
+                        <button disabled={isValid} className="px-5 btn btn-theme" type="submit">
                           Send
                         </button>
                       </div>

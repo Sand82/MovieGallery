@@ -15,6 +15,8 @@ const Details = () => {
   const { movieId } = useParams();
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
+  const [hart, setHart] = useState(false);
+
   useEffect(() => {
     moviesService.getOne(movieId).then((result) => {
       setCurrMovie(result);
@@ -42,6 +44,14 @@ const Details = () => {
       setCurrMovie(result);
     });
   };
+
+  const hartClickHandler = (e) => {
+        
+
+        setHart(state => state = !state );
+  }
+  console.log(hart);
+  let hartClass = hart == false ? "fa-solid fa-heart fa-2xl hart hart-not-active" : "fa-solid fa-heart fa-2xl hart hart-active"
 
   return (
     <>
@@ -86,7 +96,9 @@ const Details = () => {
                           <span className="text-theme info-icon">
                             <i className="fas fa-star" />
                           </span>
-                          <span className="info-text">{currMovie.avergeRating}</span>
+                          <span className="info-text">
+                            {currMovie.avergeRating}
+                          </span>
                           <span className="info-rest">/10</span>
                         </div>
                         <div className="info info-short">
@@ -102,7 +114,7 @@ const Details = () => {
                     </div>
                     <ul className="entity-list">
                       <DetailsLi />
-                      {user.isAdmin && (
+                      {user.isAdmin ? (
                         <li style={style} className="button-holder">
                           <Link
                             to={`/movies/details/${currMovie.id}/edit`}
@@ -118,6 +130,19 @@ const Details = () => {
                             Delete
                           </button>
                         </li>
+                      ) : (
+                        <span>
+                          <label className="entity-list-title"> Add in favorite:
+                          <i className={hartClass}></i>
+                            <input
+                              className="hart-input"
+                              type="radio"
+                              name="favorite"
+                              value={hart}
+                              onClick={hartClickHandler}                              
+                            /> 
+                            </label>                         
+                        </span>
                       )}
                     </ul>
                   </div>
@@ -142,17 +167,16 @@ const Details = () => {
                     ))
                   : ""}
               </div>
-              
+
               <CreateComment
                 movieId={movieId}
                 commentHandler={commentHandler}
               />
-              
             </section>
           </div>
         </div>
       </div>
-      
+
       <div
         className="modal fade"
         id="exampleModal"

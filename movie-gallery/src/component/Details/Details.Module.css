@@ -23,3 +23,28 @@
 .delButton:hover  {
     color: black;
 }
+
+.hart {   
+     
+     margin: 18px 5px;
+     cursor: pointer;
+}
+
+.hart:hover {
+    color: #FF8A00;
+}
+
+.hart-not-active {
+    color: gray; 
+}
+
+.hart-active {
+    color: red; 
+}
+
+.hart-input {
+    display: none;
+}
+
+
+
