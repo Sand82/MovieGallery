@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 
 import ContactInformation from "./ContactInformation/ContactInformation.js";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.js";
@@ -21,7 +21,14 @@ const ContactUs = () => {
   const [emailError, setEmailError] = useState(false);
   const [subjectError, setSubjectError] = useState(false);
   const [messegError, setMessegeError] = useState(false);
+  const [data, setData] = useState(null);  
   const form = useRef();
+
+  useEffect(() => {   
+    setTimeout(() => {
+        setData(null);
+    }, 5000);
+  }, [data]); 
 
   const changeHandler = (e) => {
     setSendMail((state) => ({
@@ -32,9 +39,6 @@ const ContactUs = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-
-    console.log(data);
 
     emailjs
       .sendForm(
@@ -45,7 +49,9 @@ const ContactUs = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
+          if (result.text == "OK") {
+            setData(result.text);            
+          }
         },
         (error) => {
           console.log(error.text);
@@ -77,8 +83,10 @@ const ContactUs = () => {
 
   const isValid =
     Object.values(sendMail).some((x) => x === "") ||
-    usernameError || emailError || subjectError ||  messegError 
-   
+    usernameError ||
+    emailError ||
+    subjectError ||
+    messegError;  
 
   return (
     <>
@@ -173,10 +181,20 @@ const ContactUs = () => {
                             symbols.
                           </p>
                         )}
+                        {data == "OK" && (
+                          <div className="input-view-flat input-group">
+                            <p className="alert alert-success">
+                              Successful send the message.
+                            </p>
+                          </div>
+                        )}
                       </div>
                       <div className="col-12">
-                        
-                        <button disabled={isValid} className="px-5 btn btn-theme" type="submit">
+                        <button
+                          disabled={isValid}
+                          className="px-5 btn btn-theme"
+                          type="submit"
+                        >
                           Send
                         </button>
                       </div>
