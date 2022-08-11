@@ -1,8 +1,9 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 
 import * as style from "./Details.Module.css";
 import * as moviesService from "../../services/MoviesService.js";
+import * as favoriteService from "../../services/CommentService.js"
 
 import DeleteModal from "./DeleteModal/DeleteModal.js";
 import DetailsLi from "../HardCoded/DetailsLi.js";
@@ -16,6 +17,7 @@ const Details = () => {
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
   const [hart, setHart] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     moviesService.getOne(movieId).then((result) => {
@@ -45,10 +47,21 @@ const Details = () => {
     });
   };
 
-  const hartClickHandler = (e) => {
-    console.log(hart)
-    setHart((state) => (state = !state));
-    
+  const hartClickHandler = (e) => { 
+    console.log(e.target.value);
+
+
+    favoriteService.edit(e.target.value, user.accessToken)
+    .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        setHart((state) => (state = !state));        
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });   
+        
   };
   
   let hartClass = hart == false
@@ -142,7 +155,7 @@ const Details = () => {
                               className="hart-input"
                               type="radio"
                               name="favorite"
-                              value={hart}
+                              value={!hart}
                               onClick={hartClickHandler}
                             />
                           </label>

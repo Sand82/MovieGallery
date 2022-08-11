@@ -24,7 +24,6 @@ namespace MovieGalleryWebAPI.Controllers
             this.moviesService = moviesService;
             this.userService = userService;
         }
-
         
         [HttpGet]
         public async Task<IEnumerable<MoviesDataModel>> Get()

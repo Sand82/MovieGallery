@@ -11,6 +11,8 @@ namespace MovieGalleryWebAPI.Data.Models
             this.Comments =  new HashSet<Comment>();
 
             this.Ratings = new HashSet<Rating>();
+
+            this.Favorites = new HashSet<Favorite>();
         }
 
         public int Id { get; set; }
@@ -44,5 +46,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public ICollection<Comment>? Comments { get; set; }
 
         public ICollection<Rating>? Ratings { get; set; }
+
+        public ICollection<Favorite>? Favorites { get; set; }
     }
 }

@@ -17,5 +17,7 @@ namespace MovieGalleryWebAPI.Data
         public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Favorite> Favorites { get; set; }
     }
 }

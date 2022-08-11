@@ -24,3 +24,7 @@ export const addRating = async (data, token) => {
 export const getRating = async(data, token) => {
   return request.put(ratingUrl, data, token);
 }
+
+export const addFavorite = async(data, token) => {
+  return request.put('', data, token);
+}
