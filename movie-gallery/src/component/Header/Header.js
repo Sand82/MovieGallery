@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext.js";
+import HeaderArrow from "./HeaderArrow.js"
 
 const Header = () => {
   const { user } = useContext(AuthContext);
@@ -40,9 +41,7 @@ const Header = () => {
                 <Link className="nav-link" to="/">
                   Home
                 </Link>
-                <div className="nav-arrow">
-                  <i className="fas fa-chevron-down"></i>
-                </div>
+                <HeaderArrow/>                
               </li>
               {user.accessToken ? (
                 <>                    
@@ -53,20 +52,27 @@ const Header = () => {
                     >
                       Movies
                     </Link>
-                    <div className="nav-arrow">
-                      <i className="fas fa-chevron-down"></i>
-                    </div>
+                    <HeaderArrow/>
                   </li>
-                  {user.isAdmin && <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
+                  {user.isAdmin ? 
+                  <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                     <Link
                       className="nav-link"
                       to="/create"                      
                     >
                       Create
                     </Link>
-                    <div className="nav-arrow">
-                      <i className="fas fa-chevron-down"></i>
-                    </div>
+                    <HeaderArrow/>
+                    </li>
+                    : 
+                    <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
+                    <Link
+                      className="nav-link"
+                      to="/favorite"                      
+                    >
+                      Favorite
+                    </Link>
+                    <HeaderArrow/>                  
                   </li>
                   }                  
                   <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
@@ -76,9 +82,7 @@ const Header = () => {
                     >
                       Contact us
                     </Link>
-                    <div className="nav-arrow">
-                      <i className="fas fa-chevron-down"></i>
-                    </div>
+                    <HeaderArrow/>
                   </li>                  
                   <li className="nav-item">
                     <Link className="nav-link" to="/logout">

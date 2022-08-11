@@ -46,12 +46,14 @@ const Details = () => {
   };
 
   const hartClickHandler = (e) => {
-        
-
-        setHart(state => state = !state );
-  }
-  console.log(hart);
-  let hartClass = hart == false ? "fa-solid fa-heart fa-2xl hart hart-not-active" : "fa-solid fa-heart fa-2xl hart hart-active"
+    console.log(hart)
+    setHart((state) => (state = !state));
+    
+  };
+  
+  let hartClass = hart == false
+      ? "fa-solid fa-heart fa-2xl hart hart-not-active"
+      : "fa-solid fa-heart fa-2xl hart hart-active";
 
   return (
     <>
@@ -132,16 +134,18 @@ const Details = () => {
                         </li>
                       ) : (
                         <span>
-                          <label className="entity-list-title"> Add in favorite:
-                          <i className={hartClass}></i>
+                          <label className="entity-list-title">
+                            {" "}
+                            Add in favorite:
+                            <i className={hartClass}></i>
                             <input
                               className="hart-input"
                               type="radio"
                               name="favorite"
                               value={hart}
-                              onClick={hartClickHandler}                              
-                            /> 
-                            </label>                         
+                              onClick={hartClickHandler}
+                            />
+                          </label>
                         </span>
                       )}
                     </ul>
