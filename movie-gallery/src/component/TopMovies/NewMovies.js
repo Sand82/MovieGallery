@@ -1,6 +1,7 @@
 import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.js";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.js";
 import * as style from "../TopMovies/NewMovies.Module.css";
+import { Link } from "react-router-dom";
 
 const NewMovies = ({ movies }) => {
   const firstFiveMovies = movies
@@ -54,9 +55,9 @@ const NewMovies = ({ movies }) => {
             ))}
           </div>
           <div className="section-bottom">
-            <a className="btn btn-theme" href="news-blocks-sidebar-right.html">
-              View All News
-            </a>
+            <Link className="btn btn-theme" to="/movies">
+              All Movies
+            </Link>
           </div>
         </div>
       </section>

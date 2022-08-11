@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 
 import * as style from "./Details.Module.css";
 import * as moviesService from "../../services/MoviesService.js";
-import * as favoriteService from "../../services/CommentService.js"
+import * as favoriteService from "../../services/CommentService.js";
 
 import DeleteModal from "./DeleteModal/DeleteModal.js";
 import DetailsLi from "../HardCoded/DetailsLi.js";
@@ -16,7 +16,6 @@ const Details = () => {
   const { movieId } = useParams();
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
-//   const [hartDefault, setHartDefault] = useState()
   const [hart, setHart] = useState(false);
   const navigate = useNavigate();
 
@@ -26,24 +25,24 @@ const Details = () => {
     });
   }, [movieId]);
 
-  useEffect(()=> {
-    let data = {        
-        movieId: Number(movieId),
-        userId: user.id,
-    };  
+  useEffect(() => {
+    let data = {
+      movieId: Number(movieId),
+      userId: user.id,
+    };
 
-    favoriteService.getFavorite(data, user.accessToken)
-    .then((result) => {
-        
+    favoriteService
+      .getFavorite(data, user.accessToken)
+      .then((result) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        setHart(result);         
+        setHart(result);
       })
       .catch((error) => {
         throw console.error(error);
       });
-  }, [ movieId ,user.accessToken, user.id])
+  }, [movieId, user.accessToken, user.id]);
 
   const commentHandler = (comment) => {
     setCurrMovie((state) => ({
@@ -68,29 +67,27 @@ const Details = () => {
   };
 
   const hartClickHandler = (hart) => {
-
-    console.log(hart);
-
     let data = {
-        isFavorite: Boolean(hart),
-        movieId: Number(movieId),
-        userId: user.id,
-    };    
-  
-    favoriteService.addFavorite(data, user.accessToken)
-    .then((result) => {
-        
+      isFavorite: Boolean(hart),
+      movieId: Number(movieId),
+      userId: user.id,
+    };
+
+    favoriteService
+      .addFavorite(data, user.accessToken)
+      .then((result) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        setHart(result);        
+        setHart(result);
       })
       .catch((error) => {
         throw console.error(error);
       });
   };
-  
-  let hartClass = hart == false
+
+  let hartClass =
+    hart == false
       ? "fa-solid fa-heart fa-2xl hart hart-not-active"
       : "fa-solid fa-heart fa-2xl hart hart-active";
 
@@ -173,7 +170,7 @@ const Details = () => {
                         </li>
                       ) : (
                         <span>
-                          <label className="entity-list-title">                           
+                          <label className="entity-list-title">
                             Add in favorite:
                             <i className={hartClass}></i>
                             <input
@@ -181,7 +178,7 @@ const Details = () => {
                               type="radio"
                               name="favorite"
                               value={hart}
-                              onClick={()=>hartClickHandler(!hart)}
+                              onClick={() => hartClickHandler(!hart)}
                             />
                           </label>
                         </span>

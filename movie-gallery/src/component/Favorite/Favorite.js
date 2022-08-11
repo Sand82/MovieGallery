@@ -9,9 +9,7 @@ import FavoriteMovie from "./FavoriteMovie/FavoriteMovie.js";
 const Favorite = () => {
   const {user} =  useContext(AuthContext);
   const [favMovies, setFavMovies] = useState([])
-  const navigate = useNavigate();  
-
-    console.log(favMovies);
+  const navigate = useNavigate();     
 
   useEffect(()=>{
     favoriteService.getFavoriteMovies(user.id)
@@ -19,12 +17,12 @@ const Favorite = () => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        setFavMovies(result);        
+        setFavMovies(state => state = [...result]);        
       })
       .catch((error) => {
         throw console.error(error);
       });
-  },[user.id], navigate)
+  },[user.id])
 
   return (
     <>
@@ -35,8 +33,8 @@ const Favorite = () => {
           </div>
           <div className="grid row">
             {
-                favMovies === [] 
-                ? <h1>No movies in the collection.</h1>
+                favMovies == [] 
+                ? <h2>No movies in the collection.</h2>
                 : favMovies.map(x => <FavoriteMovie key={x.id} movie={x}/>)     
             }                 
           </div>

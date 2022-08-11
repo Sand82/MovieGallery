@@ -24,25 +24,19 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Movies</h5>
                 <ul className="list-unstyled list-wide footer-content">
                     <li>
-                        <Link className="content-link" to="#">All Movies</Link>
+                        <Link className="content-link" to="/movies">Movies</Link>
+                    </li>                    
+                    <li>
+                        <Link className="content-link" to="/underconstruction">Upcoming movies</Link>
                     </li>
                     <li>
-                        <Link className="content-link" to="#">Upcoming movies</Link>
+                        <Link className="content-link" to="/underconstruction">Blockbasters</Link>
+                    </li>                    
+                    <li>
+                        <Link className="content-link" to="/underconstruction">Summer movies collection</Link>
                     </li>
                     <li>
-                        <Link className="content-link" to="#">Top 100 movies</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Blockbasters</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">British movies</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Summer movies collection</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Movie trailers</Link>
+                        <Link className="content-link" to="/underconstruction">Movie trailers</Link>
                     </li>
                 </ul>
             </div>
@@ -50,25 +44,19 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Information</h5>
                 <ul className="list-unstyled list-wide footer-content">
                     <li>
-                        <Link className="content-link" to="#">Schedule</Link>
+                        <Link className="content-link" to="/underconstruction">News</Link>
                     </li>
                     <li>
-                        <Link className="content-link" to="#">News</Link>
+                        <Link className="content-link" to="/contactus">Contact us</Link>
+                    </li>                    
+                    <li>
+                        <Link className="content-link" to="/underconstruction">Blog</Link>
                     </li>
                     <li>
-                        <Link className="content-link" to="#">Contact us</Link>
+                        <Link className="content-link" to="/underconstruction">Events</Link>
                     </li>
                     <li>
-                        <Link className="content-link" to="#">Community</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Blog</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Events</Link>
-                    </li>
-                    <li>
-                        <Link className="content-link" to="#">Help center</Link>
+                        <Link className="content-link" to="/underconstruction">Help center</Link>
                     </li>
                 </ul>
             </div>
@@ -76,36 +64,24 @@ export default function Footer () {
                 <h5 className="footer-title text-uppercase">Follow</h5>
                 <ul className="list-wide footer-content list-inline">
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-slack-hash"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-slack-hash"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-twitter"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-twitter"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-facebook-f"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-facebook-f"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-dribbble"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-dribbble"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-google-plus-g"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-google-plus-g"></i></Link>
                     </li>
                     <li className="list-inline-item">
-                        <Link className="content-link" to="#"><i className="fab fa-instagram"></i></Link>
+                        <Link className="content-link" to="/underconstruction"><i className="fab fa-instagram"></i></Link>
                     </li>
-                </ul>
-                <h5 className="footer-title text-uppercase">Subscribe</h5>
-                <div className="footer-content">
-                    <p className="footer-text">Get latest movie news right away with our subscription</p>
-                    <form className="footer-form" autoComplete="off">
-                        <div className="input-group">
-                            <input className="form-control" name="email" type="email" placeholder="Your email" />
-                            <div className="input-group-append">
-                                <button className="btn btn-theme" type="submit"><i className="fas fa-angle-right"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                </ul>               
             </div>
         </div>
     </div>

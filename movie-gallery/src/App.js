@@ -23,6 +23,7 @@ import Details from "./component/Details/Details.js";
 import ScrollToTop from "./hooks/ScrollToTop.js";
 import RouteGuard from "./common/RouteGuard.js"
 import Favorite from "./component/Favorite/Favorite.js";
+import UnderConstruction from "./component/ErrorPage/UnderConstruction.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -92,6 +93,7 @@ function App() {
             <Route path="/contactus" element={<RouteGuard><ContactUs /></RouteGuard>}></Route>
             <Route path="/notfound" element={<NotFound />}></Route>
             <Route path="/badrequest" element={<BadRequest />}></Route>
+            <Route path="/underconstruction" element={<UnderConstruction />}></Route>
             <Route
               path="/movies/details/:movieId"
               element={<RouteGuard><Details /></RouteGuard>}

@@ -3,20 +3,26 @@ import { useContext } from "react";
 
 import { MovieContext } from "../../../contexts/MovieContext.js";
 
-const TopRated = ({ movie}) => {  
+const TopRated = ({ movie }) => {
+  const { detailsHandler } = useContext(MovieContext);
 
-  const {detailsHandler} = useContext(MovieContext);
-
-  const detailsMovieHandler = () => { 
+  const detailsMovieHandler = () => {
     detailsHandler(movie);
-  }
+  };
 
   return (
     <article className="movie-line-entity">
       <div className="entity-poster" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
-          <Link to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
-            <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
+          <Link
+            to={`/movies/details/${movie.id}`}
+            onClick={detailsMovieHandler}
+          >
+            <img
+              className="embed-responsive-item"
+              src={movie.imageUrl}
+              alt=""
+            />
           </Link>
         </div>
         <div
@@ -41,12 +47,20 @@ const TopRated = ({ movie}) => {
       </div>
       <div className="entity-content">
         <h4 className="entity-title">
-          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
+          <Link
+            className="content-link"
+            to={`/movies/details/${movie.id}`}
+            onClick={detailsMovieHandler}
+          >
             {movie.title} ({movie.year})
           </Link>
         </h4>
         <div className="entity-category">
-          <Link className="content-link" to={`/movies/details/${movie.id}`} onClick={detailsMovieHandler}>
+          <Link
+            className="content-link"
+            to={`/movies/details/${movie.id}`}
+            onClick={detailsMovieHandler}
+          >
             {movie.category}
           </Link>
         </div>

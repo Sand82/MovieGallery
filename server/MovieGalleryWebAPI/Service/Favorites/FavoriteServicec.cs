@@ -34,7 +34,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
         {
             var movies = await this.data.Movies
                 .Include(m => m.Favorites)
-                .Where(m => m.Favorites.Any(f => f.IsFavorite == true))
+                .Where(m => m.Favorites.Any(f => f.IsFavorite == true && userId == f.UserId))
                 .Select(m => new FavoriteMovieModel
                 {
                     Id = m.Id,
