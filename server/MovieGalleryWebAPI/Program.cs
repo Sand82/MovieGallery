@@ -65,7 +65,7 @@ builder.Services.AddTransient<IMoviesService, MoviesService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICommentService, CommentService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
-builder.Services.AddTransient<IFavoriteController, FavoriteController>();
+builder.Services.AddTransient<IFavoriteService, FavoriteController>();
 
 builder.Services.AddCors(options =>
 {

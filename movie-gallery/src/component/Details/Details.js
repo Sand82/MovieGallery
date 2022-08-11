@@ -16,6 +16,7 @@ const Details = () => {
   const { movieId } = useParams();
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
+//   const [hartDefault, setHartDefault] = useState()
   const [hart, setHart] = useState(false);
   const navigate = useNavigate();
 
@@ -24,6 +25,25 @@ const Details = () => {
       setCurrMovie(result);
     });
   }, [movieId]);
+
+  useEffect(()=> {
+    let data = {        
+        movieId: Number(movieId),
+        userId: user.id,
+    };  
+
+    favoriteService.getFavorite(data, user.accessToken)
+    .then((result) => {
+        
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        setHart(result);         
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  }, [ movieId ,user.accessToken, user.id])
 
   const commentHandler = (comment) => {
     setCurrMovie((state) => ({
@@ -47,21 +67,27 @@ const Details = () => {
     });
   };
 
-  const hartClickHandler = (e) => { 
-    console.log(e.target.value);
+  const hartClickHandler = (hart) => {
 
+    console.log(hart);
 
-    favoriteService.edit(e.target.value, user.accessToken)
+    let data = {
+        isFavorite: Boolean(hart),
+        movieId: Number(movieId),
+        userId: user.id,
+    };    
+  
+    favoriteService.addFavorite(data, user.accessToken)
     .then((result) => {
+        
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        setHart((state) => (state = !state));        
+        setHart(result);        
       })
       .catch((error) => {
         throw console.error(error);
-      });   
-        
+      });
   };
   
   let hartClass = hart == false
@@ -147,16 +173,15 @@ const Details = () => {
                         </li>
                       ) : (
                         <span>
-                          <label className="entity-list-title">
-                            {" "}
+                          <label className="entity-list-title">                           
                             Add in favorite:
                             <i className={hartClass}></i>
                             <input
                               className="hart-input"
                               type="radio"
                               name="favorite"
-                              value={!hart}
-                              onClick={hartClickHandler}
+                              value={hart}
+                              onClick={()=>hartClickHandler(!hart)}
                             />
                           </label>
                         </span>

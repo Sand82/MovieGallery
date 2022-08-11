@@ -14,9 +14,7 @@ namespace MovieGalleryWebAPI.Service.Comments
         public CommentService(MovieGalleryDbContext data, IMapper mapper)
         {
             this.data = data;
-            this.mapper = mapper;
-            this.mapper = mapper;
-            this.data = data;
+            this.mapper = mapper;            
         }
         public async Task CreateComment(CommentCreateModel model, string userId)
         {

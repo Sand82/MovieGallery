@@ -4,6 +4,8 @@ const baseUrl = "https://localhost:7222/api/comments";
 
 const ratingUrl = 'https://localhost:7222/api/ratings';
 
+const favoriteUrl = 'https://localhost:7222/api/favorites'
+
 export const create = async (data, token) => {
     return request.post(baseUrl, data, token )
   };
@@ -26,5 +28,9 @@ export const getRating = async(data, token) => {
 }
 
 export const addFavorite = async(data, token) => {
-  return request.put('', data, token);
+  return request.post(favoriteUrl, data, token);
+}
+
+export const getFavorite = async(data, token) => {
+  return request.put(favoriteUrl, data, token);
 }
