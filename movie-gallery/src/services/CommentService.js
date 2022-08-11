@@ -34,3 +34,8 @@ export const addFavorite = async(data, token) => {
 export const getFavorite = async(data, token) => {
   return request.put(favoriteUrl, data, token);
 }
+
+export const getFavoriteMovies = async (userId)=> {
+  const encodedValue = encodeURIComponent(userId);
+  return request.get(`${favoriteUrl}?userId=${encodedValue}`)
+}

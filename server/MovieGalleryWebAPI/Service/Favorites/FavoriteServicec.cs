@@ -30,6 +30,26 @@ namespace MovieGalleryWebAPI.Service.Favorites
             return true;
         }
 
+        public async Task<ICollection<FavoriteMovieModel>> GetFavoriteMovies(string userId)
+        {
+            var movies = await this.data.Movies
+                .Include(m => m.Favorites)
+                .Where(m => m.Favorites.Any(f => f.IsFavorite == true))
+                .Select(m => new FavoriteMovieModel
+                {
+                    Id = m.Id,
+                    Description = m.Description,
+                    Title = m.Title,
+                    ImageUrl = m.ImageUrl,
+                    Category = m.Category,
+                    Duration = m.Duration,
+                    Year = m.Year
+                })
+                .ToListAsync();
+
+            return movies;
+        }
+
         public async Task<bool> SetFavorite(FavoriteDataModel model)
         {
             Favorite? favorite = await Findfavorite(model.UserId, model.MovieId);                

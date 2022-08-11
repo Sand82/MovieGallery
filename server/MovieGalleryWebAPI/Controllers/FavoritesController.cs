@@ -18,6 +18,14 @@ namespace MovieGalleryWebAPI.Controllers
             this.favoriteService = favoriteService;
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<FavoriteMovieModel>> Get(string userId)
+        {
+           var movies = await favoriteService.GetFavoriteMovies(userId);
+
+            return movies;
+        }
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> Post(FavoriteDataModel model)

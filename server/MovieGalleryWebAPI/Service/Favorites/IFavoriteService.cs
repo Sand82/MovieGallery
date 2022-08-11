@@ -7,5 +7,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
         Task<bool> SetFavorite(FavoriteDataModel model);
 
         Task<bool> GetFavorite(string userId, int movieId);
+
+        Task<ICollection<FavoriteMovieModel>> GetFavoriteMovies(string userId);
     }
 }
