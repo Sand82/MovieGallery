@@ -8,7 +8,7 @@ const RouteGuard = ({children}) => {
     const { user } = useContext(AuthContext);
 
     if (!user.accessToken) {
-        return <Navigate to="/login" replace/>
+        return <Navigate to='/login' replace/>
     }    
 
     return children ? children : <Outlet/>

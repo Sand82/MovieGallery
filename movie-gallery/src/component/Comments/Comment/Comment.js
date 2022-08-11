@@ -26,10 +26,11 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
 
   const validateComment = (e) => {
     const description = e.target.value;
-
     const isValidComment = movieValidator.description(description);
+
     setCommentError(isValidComment);
     setResetState(false);
+
     if (!isValidComment) {
       editCurrentComment(description);
       comment.comment = description;
@@ -41,8 +42,8 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     commentService
       .edit(comment, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
 
         editCommentHandler(result);
@@ -56,8 +57,8 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     commentService
       .remove(comment.id, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         deleteCommentHandler();
       })

@@ -7,10 +7,10 @@ import * as userValidator from "../../services/UserValidator.js";
 
 const Register = () => {
   const [register, setRegister] = useState({
-    username: "",
-    email: "",
-    password: "",
-    repeatPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
   });
 
   const [usernameError, setUsernameError] = useState(false);
@@ -34,10 +34,10 @@ const Register = () => {
     authService
       .register(register)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/badrequest");
+        if (result === 'Bad response') {
+          return navigate('/badrequest');
         }        
-        return navigate("/login");
+        return navigate('/login');
       })
       .catch((error) => {
         throw console.error(error);
@@ -72,7 +72,7 @@ const Register = () => {
   };
 
   const isValid =
-    Object.values(register).some((x) => x == "") ||
+    Object.values(register).some((x) => x == '') ||
     usernameError ||
     passwordError ||
     conformPasswordError ||

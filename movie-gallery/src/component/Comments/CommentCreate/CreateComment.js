@@ -23,8 +23,8 @@ const CreateComment = ({movieId, commentHandler}) => {
       .create(currComment, user.accessToken)
       .then((result) => {
         
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }      
 
         commentHandler(result);

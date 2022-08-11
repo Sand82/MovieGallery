@@ -1,7 +1,38 @@
 const JsxComntainer = ()=> {
     return(
         <>
+        {/* {category selector} */}
+         {/* <div className="col-sm-6 col-lg-3">
+                <div className="input-view-flat input-group">
+                  <select className="form-control" name="genre">
+                    <option selected="true">genre</option>
+                    <option>action</option>
+                    <option>adventure</option>
+                    <option>comedy</option>
+                    <option>crime</option>
+                    <option>detective</option>
+                    <option>drama</option>
+                    <option>fantasy</option>
+                    <option>melodrama</option>
+                    <option>romance</option>
+                    <option>superhero</option>
+                    <option>supernatural</option>
+                    <option>thriller</option>
+                    <option>sport</option>
+                    <option>historical</option>
+                    <option>horror</option>
+                    <option>musical</option>
+                    <option>sci-fi</option>
+                    <option>war</option>
+                    <option>western</option>
+                  </select>
+                </div>
+              </div> */}
+
+
+
         {/*Photos and videos*/}
+
          {/* <div className="section-line">
               <div className="section-head">
                 <h2 className="section-title text-uppercase">

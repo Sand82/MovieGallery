@@ -27,7 +27,7 @@ import UnderConstruction from "./component/ErrorPage/UnderConstruction.js";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useLocalStorage("auth", {});
+  const [user, setUser] = useLocalStorage('auth', {});
   const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {

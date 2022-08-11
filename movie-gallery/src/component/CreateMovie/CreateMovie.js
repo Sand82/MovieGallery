@@ -11,12 +11,12 @@ const CreateMovie = () => {
   const { user } = useContext(AuthContext);
   const { createMovieHandler } = useContext(MovieContext);
   const [createMovie, setCreateMovie] = useState({
-    title: "",
-    category: "",
-    year: "",
-    imageUrl: "",
-    duration: "",
-    description: "",
+    title: '',
+    category: '',
+    year: '',
+    imageUrl: '',
+    duration: '',
+    description: '',
   });
 
   const [titleError, setTitleError] = useState(false);
@@ -43,11 +43,11 @@ const CreateMovie = () => {
     movieServis
       .create(movieData, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         createMovieHandler();
-        return navigate("/movies");
+        return navigate('/movies');
       })
       .catch((error) => {
         throw console.error(error);
@@ -85,7 +85,7 @@ const CreateMovie = () => {
   };
 
   const isValid =
-    Object.values(createMovie).some((x) => x === "") ||
+    Object.values(createMovie).some((x) => x === '') ||
     titleError ||
     categoryError ||
     yearError ||

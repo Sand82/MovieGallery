@@ -38,11 +38,11 @@ const EditMovie = ({ movie }) => {
     movieServis
       .edit(movieData, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         editHandler(result);
-        return navigate("/movies");
+        return navigate('/movies');
       })
       .catch((error) => {
         throw console.error(error);
@@ -87,7 +87,7 @@ const EditMovie = ({ movie }) => {
   };
 
   const isValid =
-    Object.values(editMovie).some((x) => x === "") ||
+    Object.values(editMovie).some((x) => x === '') ||
     titleError ||
     categoryError ||
     yearError ||

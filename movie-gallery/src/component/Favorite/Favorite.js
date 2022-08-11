@@ -14,8 +14,8 @@ const Favorite = () => {
   useEffect(()=>{
     favoriteService.getFavoriteMovies(user.id)
     .then((result) => {       
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         setFavMovies(state => state = [...result]);        
       })

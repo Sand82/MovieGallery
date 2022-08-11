@@ -14,11 +14,11 @@ const DeleteModal = ({ movieId }) => {
     moviesService
       .remove(movieId, user.accessToken)
       .then((res) => {
-        if (res === "Bad response") {
-          return navigate("/notfound");
+        if (res === 'Bad response') {
+          return navigate('/notfound');
         }
         deleteHandler(res);
-        navigate("/movies");
+        navigate('/movies');
       })
       .catch((error) => {
         throw console.error(error);

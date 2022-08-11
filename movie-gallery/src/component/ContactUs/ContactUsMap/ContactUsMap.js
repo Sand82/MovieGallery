@@ -14,7 +14,7 @@ export default function ContactUsMap(){
   };
 
   return (
-     // Important! Always set the container height explicitly
+     
     <div style={{ height: '100vh', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
@@ -24,7 +24,7 @@ export default function ContactUsMap(){
         <AnyReactComponent
           lat={43.998724827897}
           lng={26.4634633263893}
-          text="My Marker"
+          text='My Marker'
         />
       </GoogleMapReact>
     </div>

@@ -1,6 +1,6 @@
 import * as request from "./Requester.js";
 
-const baseUrl = "https://localhost:7222/api/comments";
+const baseUrl = 'https://localhost:7222/api/comments';
 
 const ratingUrl = 'https://localhost:7222/api/ratings';
 

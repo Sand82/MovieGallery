@@ -34,8 +34,8 @@ const Details = () => {
     favoriteService
       .getFavorite(data, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         setHart(result);
       })
@@ -76,8 +76,8 @@ const Details = () => {
     favoriteService
       .addFavorite(data, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         setHart(result);
       })

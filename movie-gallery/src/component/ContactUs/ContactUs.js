@@ -14,8 +14,8 @@ const ContactUs = () => {
   const [sendMail, setSendMail] = useState({
     username: user.username,
     email: user.email,
-    subject: "",
-    message: "",
+    subject: '',
+    message: '',
   });
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -42,14 +42,14 @@ const ContactUs = () => {
 
     emailjs
       .sendForm(
-        "service_ufh83g4",
-        "template_qgn844p",
+        'service_ufh83g4',
+        'template_qgn844p',
         form.current,
-        "97bvqzMYCmiGXN1wA"
+        '97bvqzMYCmiGXN1wA'
       )
       .then(
         (result) => {
-          if (result.text == "OK") {
+          if (result.text == 'OK') {
             setData(result.text);            
           }
         },
@@ -58,7 +58,7 @@ const ContactUs = () => {
         }
       );
 
-    setSendMail({ subject: "", message: "" });
+    setSendMail({ subject: '', message: '' });
   };
 
   const validateUsername = (e) => {
@@ -82,7 +82,7 @@ const ContactUs = () => {
   };
 
   const isValid =
-    Object.values(sendMail).some((x) => x === "") ||
+    Object.values(sendMail).some((x) => x === '') ||
     usernameError ||
     emailError ||
     subjectError ||

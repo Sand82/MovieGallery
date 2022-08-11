@@ -19,8 +19,8 @@ const MovieRating = ({ movieId }) => {
     commentService
       .getRating(data, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         setRating(Number(result.value));
       })
@@ -39,8 +39,8 @@ const MovieRating = ({ movieId }) => {
     commentService
       .addRating(data, user.accessToken)
       .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
+        if (result === 'Bad response') {
+          return navigate('/notfound');
         }
         setRating(Number(result.value));
       })
