@@ -57,5 +57,11 @@ View from Contact As page upper part.
 ![Contact as upper part](https://user-images.githubusercontent.com/75274983/184321848-fda42623-d554-4ae4-a89e-f9e6b26dc03d.png)
 View from Contact As page down part.
 ![Contact as down part](https://user-images.githubusercontent.com/75274983/184321939-dca3aa53-ffe4-41af-892d-4ecb4db9841e.png)
+View from some Forms.
+![Login](https://user-images.githubusercontent.com/75274983/184322410-35c32741-5e57-47f1-a750-8dfd575e6d3f.png)
+![Register](https://user-images.githubusercontent.com/75274983/184322548-662e5d41-1be5-4bd1-8d1d-db6b0e3b7380.png)
+![Create](https://user-images.githubusercontent.com/75274983/184322702-05811237-0a18-449f-a7f5-22c581696e57.png)
+
+
 
 
