@@ -53,6 +53,9 @@ View from movie Details page down part.
 ![Details down part](https://user-images.githubusercontent.com/75274983/184320101-c8a4f4ca-7cc7-4996-9b72-9b8a2b896d72.png)
 View from Favorite page.
 ![Favorite](https://user-images.githubusercontent.com/75274983/184320702-5e15b4fe-20d8-4cb0-82ee-b216df74fbc8.png)
-
+View from Contact As page upper part.
+![Contact as upper part](https://user-images.githubusercontent.com/75274983/184321848-fda42623-d554-4ae4-a89e-f9e6b26dc03d.png)
+View from Contact As page down part.
+![Contact as down part](https://user-images.githubusercontent.com/75274983/184321939-dca3aa53-ffe4-41af-892d-4ecb4db9841e.png)
 
 
