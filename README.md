@@ -37,3 +37,22 @@
   <li>Integrate with Gmail owner</li>
   <li>Deploy in Firebas</li>
 </ul>
+
+
+<h3>Screen shots of some views</h3>
+
+View from Home page upper part.
+![Home page upper part](https://user-images.githubusercontent.com/75274983/184317591-46d14bc2-0fb7-4777-99d4-701f43ff76ff.png)
+View from Home page down part.
+![Home page down part](https://user-images.githubusercontent.com/75274983/184318115-ce68b5fa-9b10-44d2-833d-6cd2527a01f6.png)
+View from Movies area.
+![Movies area](https://user-images.githubusercontent.com/75274983/184318726-a8f77581-a3e4-4b86-9f45-296b71b7d8e0.png)
+View from movie Details page upper part.
+![Details upper part](https://user-images.githubusercontent.com/75274983/184319483-af9cd8d4-0f8e-4291-9998-0822da0bf948.png)
+View from movie Details page down part.
+![Details down part](https://user-images.githubusercontent.com/75274983/184320101-c8a4f4ca-7cc7-4996-9b72-9b8a2b896d72.png)
+View from Favorite page.
+![Favorite](https://user-images.githubusercontent.com/75274983/184320702-5e15b4fe-20d8-4cb0-82ee-b216df74fbc8.png)
+
+
+
