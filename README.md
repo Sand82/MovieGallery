@@ -35,7 +35,7 @@
   <li>CSS Modules</li>
   <li>Integrate with Google Maps</li>
   <li>Integrate with Gmail owner</li>
-  <li>Deploy in Firebas</li>
+  <li>Deploy in Firebasе</li>
 </ul>
 
 
