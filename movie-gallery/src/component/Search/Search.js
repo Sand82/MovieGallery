@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Search = ({ searchTermsHandler }) => {
-  const [search, setSearch] = useState('');
-  const [select, setSelect] = useState('All');
+  const [search, setSearch] = useState("");
+  const [select, setSelect] = useState("All");
 
   const searchChange = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Search = ({ searchTermsHandler }) => {
   };
 
   const clearSearch = () => {
-    setSearch('');
+    setSearch("");
   };
 
   return (
@@ -60,15 +60,16 @@ const Search = ({ searchTermsHandler }) => {
                   <select
                     className="form-control"
                     name="sortBy"
+                    placeholder="Sort By"
                     onChange={selecting}
                   >
-                    <option value="all">Sort By</option>
+                    <option value="all">All movies</option>
                     <option value="year">Year</option>
                     <option value="avergeRating">Rating</option>
                     <option value="duration">Duration</option>
                   </select>
                 </div>
-              </div>             
+              </div>
             </div>
           </form>
         </div>
