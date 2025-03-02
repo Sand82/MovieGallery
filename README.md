@@ -47,7 +47,9 @@ View from Home page down part.
 ![Home page down part](https://user-images.githubusercontent.com/75274983/184318115-ce68b5fa-9b10-44d2-833d-6cd2527a01f6.png)
 View from Movies area.
 ![Movies area](https://user-images.githubusercontent.com/75274983/184318726-a8f77581-a3e4-4b86-9f45-296b71b7d8e0.png)
-View from movie Details page upper part.
+View from movie Details page upper part admin account.
+![DetailsAdmin](https://user-images.githubusercontent.com/75274983/198112710-58e2df7d-2381-4e84-9a1b-a31417f72707.png)
+View from movie Details page upper part user account.
 ![Details upper part](https://user-images.githubusercontent.com/75274983/184319483-af9cd8d4-0f8e-4291-9998-0822da0bf948.png)
 View from movie Details page down part.
 ![Details down part](https://user-images.githubusercontent.com/75274983/184320101-c8a4f4ca-7cc7-4996-9b72-9b8a2b896d72.png)
