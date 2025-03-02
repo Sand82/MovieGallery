@@ -20,7 +20,7 @@ import { useLocalStorage } from "./hooks/useLocalStorage.js";
 import CreateMovie from "./component/CreateMovie/CreateMovie.js";
 import EditMovie from "./component/EditMovie/EditMovie.js";
 import Details from "./component/Details/Details.js";
-import ScrollToTop from "./hooks/ScrollToTop.js";
+import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./common/RouteGuard.js"
 import Favorite from "./component/Favorite/Favorite.js";
 import UnderConstruction from "./component/ErrorPage/UnderConstruction.js";
