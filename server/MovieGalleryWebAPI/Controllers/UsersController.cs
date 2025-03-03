@@ -56,7 +56,7 @@ namespace MovieGalleryWebAPI.Controllers
                 errorMode.Error = "Invalid username or password.";
 
                 return BadRequest(errorMode);
-            }
+            }            
 
             var token = await userService.CreateToken(model.Username, model.Password);
 

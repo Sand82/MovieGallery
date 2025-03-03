@@ -6,7 +6,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Models.Users;
-using MovieGalleryWebAPI.Service.PasswordHelper;
 using MovieGalleryWebAPI.Settings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,23 +18,23 @@ namespace MovieGalleryWebAPI.Service.Users
         private readonly MovieGalleryDbContext data;
         private readonly IMapper mapper;
         private readonly IOptions<JwtSettings> jwtSettings;
-        private readonly IPasswordHelper passwordHelper;
+        private readonly IPasswordHasher<string> passwordHasher;
 
         public UserService(MovieGalleryDbContext data, 
             IMapper mapper, 
             IOptions<JwtSettings> jwtSettings,
-            IPasswordHelper passwordHelper
+            IPasswordHasher<string> passwordHasher
             )
         {
             this.data = data;
             this.mapper = mapper;
             this.jwtSettings = jwtSettings;
-            this.passwordHelper = passwordHelper;
+            this.passwordHasher = passwordHasher;
         }
 
         public async Task<bool> CreateUser(RegisterInputModel model)
         {
-            var currPassword = passwordHelper.GeneratePassword(new ApplicationUser(), model.Password);
+            var currPassword = passwordHasher.HashPassword(null ,model.Password);
             var user = new IdentityUser
             {
                 UserName = model.UserName,
@@ -52,19 +51,27 @@ namespace MovieGalleryWebAPI.Service.Users
 
         public async Task<UserApiModel> FindUser(string username, string password)
         {
-            var currPassword = passwordHelper.GeneratePassword(new ApplicationUser(), "123456");
-            var user = await data.Users
-                .Where(u => u.UserName == username && u.PasswordHash == password)
-                .ProjectTo<UserApiModel>(this.mapper.ConfigurationProvider)
-                //.Select(u => new UserApiModel
-                //{
-                //    Id = u.Id,
-                //    Password = u.PasswordHash,
-                //    Email = u.Email,
-                //})
-                .FirstOrDefaultAsync();
 
-            return user;
+            var user = await FindIdentityUser(username);
+
+            if (user == null)
+            {
+                return null;
+            }
+           
+            var result = passwordHasher.VerifyHashedPassword(null, user.PasswordHash, password);
+
+            if (result != PasswordVerificationResult.Success)
+            {
+                return null;             
+            }
+            
+            return new UserApiModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Username = user.UserName
+            };
         }
 
         public async Task<UserApiModel> FindUserByEmail(string email)
@@ -78,8 +85,7 @@ namespace MovieGalleryWebAPI.Service.Users
 
         public async Task<string> CreateToken (string username, string password)
         {
-            var user = await this.data.Users.FirstOrDefaultAsync(
-                x => x.UserName == username && x.PasswordHash == password);
+            var user = await FindIdentityUser(username);
 
             if (user == null)
             {
@@ -118,6 +124,14 @@ namespace MovieGalleryWebAPI.Service.Users
         public async Task<bool> CheckIsAdmin(string userId)
         {
             return await this.data.UserRoles.AnyAsync(x => x.UserId == userId);
+        }
+
+        private async Task<IdentityUser> FindIdentityUser(string username)
+        {
+            var user = await data.Users
+                .Where(u => u.UserName == username)
+                .FirstOrDefaultAsync();
+            return user;
         }
     }
 }

@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext.js";
-import HeaderArrow from "./HeaderArrow.js"
+import HeaderArrow from "./HeaderArrow.js";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
+
+  console.log(user);
 
   return (
     <header className="header header-horizontal header-view-pannel">
@@ -21,7 +23,7 @@ const Header = () => {
               </span>
               <span className="logo-text text-uppercase">
                 <span>M</span>Movies
-              </span>              
+              </span>
             </span>
           </Link>
           <button className="navbar-toggler" type="button">
@@ -33,62 +35,47 @@ const Header = () => {
           </button>
           <div className="navbar-collapse">
             <ul className="navbar-nav">
-                {user.username && 
-                    <li>
-                       Welcome: {user.username}
-                    </li>}
+              {user.username && <li>Welcome: {user.username}</li>}
               <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                 <Link className="nav-link" to="/">
                   Home
                 </Link>
-                <HeaderArrow/>                
+                <HeaderArrow />
               </li>
               {user.accessToken ? (
-                <>                    
+                <>
                   <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
-                    <Link
-                      className="nav-link"
-                      to="/movies"                      
-                    >
+                    <Link className="nav-link" to="/movies">
                       Movies
                     </Link>
-                    <HeaderArrow/>
+                    <HeaderArrow />
                   </li>
-                  {user.isAdmin ? 
-                  <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
-                    <Link
-                      className="nav-link"
-                      to="/create"                      
-                    >
-                      Create
-                    </Link>
-                    <HeaderArrow/>
-                    </li>
-                    : 
+                  {user.isAdmin ? (
                     <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
-                    <Link
-                      className="nav-link"
-                      to="/favorite"                      
-                    >
-                      Favorite
-                    </Link>
-                    <HeaderArrow/>                  
-                  </li>
-                  }                  
+                      <Link className="nav-link" to="/create">
+                        Create
+                      </Link>
+                      <HeaderArrow />
+                    </li>
+                  ) : (
+                    <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
+                      <Link className="nav-link" to="/favorite">
+                        Favorite
+                      </Link>
+                      <HeaderArrow />
+                    </li>
+                  )}
                   <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
-                    <Link
-                      className="nav-link"
-                      to="/contactus"                      
-                    >
+                    <Link className="nav-link" to="/contactus">
                       Contact us
                     </Link>
-                    <HeaderArrow/>
-                  </li>                  
+                    <HeaderArrow />
+                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/logout">
                       Logout
                     </Link>
-                  </li>                 
+                  </li>
                 </>
               ) : (
                 <>

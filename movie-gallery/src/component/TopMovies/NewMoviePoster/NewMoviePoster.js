@@ -1,6 +1,4 @@
 const NewMoviePoster = ({ movie }) => {
-  console.log(movie);
-
   return (
     <div
       className="slick-slide slick-cloned"
