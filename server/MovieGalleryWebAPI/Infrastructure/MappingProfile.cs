@@ -1,5 +1,4 @@
 ﻿using MovieGalleryWebAPI.Data.Models;
-using MovieGalleryWebAPI.Data.Movies;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Users;
@@ -7,6 +6,7 @@ using MovieGalleryWebAPI.Models.Users;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using MovieGalleryWebAPI.Models.Ratings;
+using MovieGalleryWebAPI.Models.Movies;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {

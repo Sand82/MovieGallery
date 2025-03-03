@@ -7,7 +7,6 @@ using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using MovieGalleryWebAPI.Data.Movies;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {

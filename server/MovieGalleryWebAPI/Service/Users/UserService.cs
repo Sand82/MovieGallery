@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Models.Users;
+using MovieGalleryWebAPI.Service.PasswordHelper;
 using MovieGalleryWebAPI.Settings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,25 +19,28 @@ namespace MovieGalleryWebAPI.Service.Users
         private readonly MovieGalleryDbContext data;
         private readonly IMapper mapper;
         private readonly IOptions<JwtSettings> jwtSettings;
+        private readonly IPasswordHelper passwordHelper;
 
         public UserService(MovieGalleryDbContext data, 
             IMapper mapper, 
-            IOptions<JwtSettings> jwtSettings
+            IOptions<JwtSettings> jwtSettings,
+            IPasswordHelper passwordHelper
             )
         {
             this.data = data;
             this.mapper = mapper;
             this.jwtSettings = jwtSettings;
+            this.passwordHelper = passwordHelper;
         }
 
         public async Task<bool> CreateUser(RegisterInputModel model)
         {
-
+            var currPassword = passwordHelper.GeneratePassword(new ApplicationUser(), model.Password);
             var user = new IdentityUser
             {
                 UserName = model.UserName,
                 Email = model.Email,
-                PasswordHash = model.Password,               
+                PasswordHash = currPassword
             };
 
             await data.Users.AddAsync(user);
@@ -48,6 +52,7 @@ namespace MovieGalleryWebAPI.Service.Users
 
         public async Task<UserApiModel> FindUser(string username, string password)
         {
+            var currPassword = passwordHelper.GeneratePassword(new ApplicationUser(), "123456");
             var user = await data.Users
                 .Where(u => u.UserName == username && u.PasswordHash == password)
                 .ProjectTo<UserApiModel>(this.mapper.ConfigurationProvider)

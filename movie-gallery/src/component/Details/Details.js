@@ -135,7 +135,7 @@ const Details = () => {
                             <i className="fas fa-star" />
                           </span>
                           <span className="info-text">
-                            {currMovie.avergeRating}
+                            {currMovie.avergeRating ? currMovie.avergeRating : "0"}
                           </span>
                           <span className="info-rest">/10</span>
                         </div>

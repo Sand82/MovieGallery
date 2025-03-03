@@ -1,5 +1,4 @@
-﻿using MovieGalleryWebAPI.Data.Movies;
-using MovieGalleryWebAPI.Models.Create;
+﻿using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Movies;
 

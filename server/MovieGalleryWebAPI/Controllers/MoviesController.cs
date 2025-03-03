@@ -8,7 +8,6 @@ using MovieGalleryWebAPI.Service.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MovieGalleryWebAPI.Data.Movies;
 
 namespace MovieGalleryWebAPI.Controllers
 {
