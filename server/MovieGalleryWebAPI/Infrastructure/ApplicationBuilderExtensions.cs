@@ -9,15 +9,14 @@ namespace MovieGalleryWebAPI.Infrastructure
 {
     public static class ApplicationBuilderExtensions
     {
+        
         public static IApplicationBuilder PrepareDatabase(
          this IApplicationBuilder app)
         {
-            var scolpedServices = app.ApplicationServices.CreateScope();
+            using var scolpedServices = app.ApplicationServices.CreateScope();
             var serviceProvider = scolpedServices.ServiceProvider;
 
-            var data = serviceProvider.GetRequiredService<MovieGalleryDbContext>();
-
-            //var webHostEnvironment = serviceProvider.GetRequiredService<IWebHostEnvironment>();
+            var data = serviceProvider.GetRequiredService<MovieGalleryDbContext>();            
 
             data.Database.Migrate();
 
@@ -29,8 +28,9 @@ namespace MovieGalleryWebAPI.Infrastructure
         }
         private static void SeedAdministrator(IServiceProvider service)
         {
-            var userMager = service.GetRequiredService<UserManager<IdentityUser>>();
+            var userMagner = service.GetRequiredService<UserManager<IdentityUser>>();
             var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+            var passwordHasher = service.GetRequiredService<IPasswordHasher<IdentityUser>>();
 
             Task
                 .Run(async () =>
@@ -50,9 +50,11 @@ namespace MovieGalleryWebAPI.Infrastructure
                         UserName = "sandoki",                        
                     };
 
-                    await userMager.CreateAsync(author, "123456");
+                    var currPassword = passwordHasher.HashPassword(null, "123456");
 
-                    await userMager.AddToRoleAsync(author, role.Name);
+                    await userMagner.CreateAsync(author, currPassword);
+
+                    await userMagner.AddToRoleAsync(author, role.Name);
                 })
                 .GetAwaiter()
                 .GetResult();
@@ -268,17 +270,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Description = "A determined woman works with a hardened boxing trainer to become a professional.",
                 Category = "Drama",
                 Duration = "142",
-            });
-
-            //movies.Add(new Movie
-            //{
-            //    Title = "",
-            //    Year = "",
-            //    ImageUrl = "",
-            //    Description = "",
-            //    Category = "",
-            //    Duration = "",
-            //});
+            });           
 
             data.Movies.AddRange(movies);
             data.SaveChanges();
