@@ -3,13 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as movieValidator from "../../../services/MovieValidator.js";
-import * as commentService from "../../../services/CommentService.js"
-import MovieRating from "../../Rating/MovieRaiting.js"
+import * as commentService from "../../../services/CommentService.js";
+import MovieRating from "../../Rating/MovieRaiting.jsx";
 
-const CreateComment = ({movieId, commentHandler}) => {
-
+const CreateComment = ({ movieId, commentHandler }) => {
   const { user } = useContext(AuthContext);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState(false);
   const navigate = useNavigate();
 
@@ -18,25 +17,24 @@ const CreateComment = ({movieId, commentHandler}) => {
 
     const currComment = Object.fromEntries(new FormData(e.target));
     currComment.movieId = movieId;
-    
+
     commentService
       .create(currComment, user.accessToken)
       .then((result) => {
-        
-        if (result === 'Bad response') {
-          return navigate('/notfound');
-        }      
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
 
         commentHandler(result);
-        setComment('');       
+        setComment("");
       })
       .catch((error) => {
         throw console.error(error);
-      });    
+      });
   };
 
-  const changeHandler = (e) => {   
-    setComment(state => state = e.target.value);
+  const changeHandler = (e) => {
+    setComment((state) => (state = e.target.value));
   };
 
   const validateComment = (e) => {
@@ -44,7 +42,7 @@ const CreateComment = ({movieId, commentHandler}) => {
     setCommentError(movieValidator.description(description));
   };
 
-  const isValid = comment === '' || commentError;
+  const isValid = comment === "" || commentError;
 
   return (
     <div className="section-line">
@@ -60,7 +58,7 @@ const CreateComment = ({movieId, commentHandler}) => {
                 name="username"
                 type="text"
                 placeholder="username"
-                onChange={() =>({})}
+                onChange={() => ({})}
                 value={user.username}
               />
             </div>
@@ -72,7 +70,7 @@ const CreateComment = ({movieId, commentHandler}) => {
                 name="email"
                 type="email"
                 placeholder="Email"
-                onChange={() =>({})}
+                onChange={() => ({})}
                 value={user.email}
               />
             </div>
@@ -94,9 +92,9 @@ const CreateComment = ({movieId, commentHandler}) => {
               </p>
             )}
           </div>
-          <MovieRating  movieId={movieId}/>
+          <MovieRating movieId={movieId} />
           <div className="col-12">
-            <button              
+            <button
               className="px-5 btn btn-theme"
               type="submit"
               disabled={isValid}

@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
 import { useContext, useState, useRef, useEffect } from "react";
 
-import ContactInformation from "./ContactInformation/ContactInformation.js";
-import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.js";
+import ContactInformation from "./ContactInformation/ContactInformation.jsx";
+import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
 import * as userValidator from "../../services/UserValidator.js";
-import ContactUsMap from "./ContactUsMap/ContactUsMap.js";
+import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
 
 const ContactUs = () => {
   const { user } = useContext(AuthContext);

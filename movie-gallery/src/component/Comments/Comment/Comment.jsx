@@ -5,7 +5,7 @@ import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import * as movieValidator from "../../../services/MovieValidator.js";
 import * as commentService from "../../../services/CommentService.js";
-import * as helperService from "../../../services/HelperService.js"
+import * as helperService from "../../../services/HelperService.js";
 
 const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
   const { user } = useContext(AuthContext);
@@ -42,8 +42,8 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     commentService
       .edit(comment, user.accessToken)
       .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/notfound');
+        if (result === "Bad response") {
+          return navigate("/notfound");
         }
 
         editCommentHandler(result);
@@ -57,8 +57,8 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     commentService
       .remove(comment.id, user.accessToken)
       .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/notfound');
+        if (result === "Bad response") {
+          return navigate("/notfound");
         }
         deleteCommentHandler();
       })
@@ -74,10 +74,12 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
       <div className="entity-inner">
         <form className="entity-content" onSubmit={restartState}>
           <h4 className="entity-title">{comment.username}</h4>
-          <p className="entity-subtext">{helperService.formatData(comment.creationData)}</p>
+          <p className="entity-subtext">
+            {helperService.formatData(comment.creationData)}
+          </p>
           {resetState ? (
             <input
-              name="comment"          
+              name="comment"
               className="form-control entity-text"
               onChange={changeHandler}
               defaultValue={comment.comment}

@@ -5,11 +5,11 @@ import * as style from "./Details.Module.css";
 import * as moviesService from "../../services/MoviesService.js";
 import * as favoriteService from "../../services/CommentService.js";
 
-import DeleteModal from "./DeleteModal/DeleteModal.js";
-import DetailsLi from "../HardCoded/DetailsLi.js";
-import DetailsSynopsis from "../HardCoded/DetailsSynopsis.js";
-import CreateComment from "../Comments/CommentCreate/CreateComment.js";
-import Comment from "../Comments/Comment/Comment.js";
+import DeleteModal from "./DeleteModal/DeleteModal.jsx";
+import DetailsLi from "../HardCoded/DetailsLi.jsx";
+import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
+import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
+import Comment from "../Comments/Comment/Comment.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 
 const Details = () => {
@@ -34,8 +34,8 @@ const Details = () => {
     favoriteService
       .getFavorite(data, user.accessToken)
       .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/notfound');
+        if (result === "Bad response") {
+          return navigate("/notfound");
         }
         setHart(result);
       })
@@ -76,15 +76,15 @@ const Details = () => {
     favoriteService
       .addFavorite(data, user.accessToken)
       .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/notfound');
+        if (result === "Bad response") {
+          return navigate("/notfound");
         }
         setHart(result);
       })
       .catch((error) => {
         throw console.error(error);
       });
-  };
+  };  
 
   let hartClass =
     hart == false
@@ -135,7 +135,9 @@ const Details = () => {
                             <i className="fas fa-star" />
                           </span>
                           <span className="info-text">
-                            {currMovie.avergeRating ? currMovie.avergeRating : "0"}
+                            {currMovie.avergeRating
+                              ? currMovie.avergeRating
+                              : "0"}
                           </span>
                           <span className="info-rest">/10</span>
                         </div>

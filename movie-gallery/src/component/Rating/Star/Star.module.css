@@ -1,0 +1,12 @@
+.raitingInput {
+  display: none;
+}
+
+.raitingLabel {
+  margin-right: 0.5rem !important;
+}
+
+.star:before {
+  content: "\f005";
+  color: #ff8a00;
+}

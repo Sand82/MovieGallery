@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as favoriteService from '../../services/CommentService.js'
 
 import { AuthContext } from "../../contexts/AuthContext.js";
-import FavoriteMovie from "./FavoriteMovie/FavoriteMovie.js";
+import FavoriteMovie from "./FavoriteMovie/FavoriteMovie.jsx";
 
 const Favorite = () => {
   const {user} =  useContext(AuthContext);

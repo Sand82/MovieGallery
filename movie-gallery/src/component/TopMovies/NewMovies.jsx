@@ -1,5 +1,5 @@
-import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.js";
-import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.js";
+import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.jsx";
+import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
 

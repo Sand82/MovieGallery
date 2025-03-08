@@ -2,12 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/AuthContext.js";
-import HeaderArrow from "./HeaderArrow.js";
+import HeaderArrow from "./HeaderArrow.jsx";
 
 const Header = () => {
   const { user } = useContext(AuthContext);
-
-  console.log(user);
 
   return (
     <header className="header header-horizontal header-view-pannel">

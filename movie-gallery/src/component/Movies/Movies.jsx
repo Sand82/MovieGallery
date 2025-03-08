@@ -1,9 +1,9 @@
-import TopRated from "./TopRated/TopRated.js";
+import TopRated from "./TopRated/TopRated.jsx";
 import { useContext, useEffect, useState } from "react";
 
 import { MovieContext } from "../../contexts/MovieContext.js";
 import * as helperService from "../../services/HelperService.js";
-import Search from "../Search/Search.js";
+import Search from "../Search/Search.jsx";
 
 const Movies = () => {
   const { movies } = useContext(MovieContext);

@@ -7,8 +7,8 @@ const ratingUrl = 'https://localhost:7222/api/ratings';
 const favoriteUrl = 'https://localhost:7222/api/favorites'
 
 export const create = async (data, token) => {
-    return request.post(baseUrl, data, token )
-  };
+  return request.post(baseUrl, data, token )
+};
 
 export const edit = async (data, token) => {
   return request.put(`${baseUrl}/${data.id}`, data, token)
