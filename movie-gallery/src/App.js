@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Header from "./component/Header/Header.jsx";
 import * as movieService from "./services/MoviesService.js";
-import { AuthContext } from "./contexts/AuthContext.js";
+import { AuthProvider } from "./contexts/AuthContext.js";
 import { MovieContext } from "./contexts/MovieContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.jsx";
@@ -27,7 +27,7 @@ import UnderConstruction from "./component/ErrorPage/UnderConstruction.jsx";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [user, setUser] = useLocalStorage("auth", {});
+  //const [user, setUser] = useLocalStorage("auth", {});
   const [movieDetails, setMovieDetails] = useState({});
 
   useEffect(() => {
@@ -37,13 +37,13 @@ function App() {
     });
   }, []);
 
-  const loginHandler = (data) => {
-    setUser(data);
-  };
+  // const loginHandler = (data) => {
+  //   setUser(data);
+  // };
 
-  const logoutHandler = () => {
-    setUser({});
-  };
+  // const logoutHandler = () => {
+  //   setUser({});
+  // };
 
   const createMovieHandler = () => {
     movieService.getAll().then((result) => {
@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ user, loginHandler, logoutHandler }}>
+      <AuthProvider>
         <ScrollToTop />
         <Header />
         <MovieContext.Provider
@@ -152,7 +152,7 @@ function App() {
         </MovieContext.Provider>
         <Scroll />
         <Footer />
-      </AuthContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

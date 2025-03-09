@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext.js";
 
 const Logout = () => {
-  const { logoutHandler } = useContext(AuthContext);
+  const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+
   useEffect(() => {
-    logoutHandler();
-    localStorage.clear();
+    userLogin({})
     navigate("/");
   },[]);
 

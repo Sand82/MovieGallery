@@ -12,7 +12,7 @@ const Login = () => {
         username: '',
         password: '',
     });
-    const {loginHandler} = useContext(AuthContext);
+    const { userLogin } = useContext(AuthContext);
     const [userNameError, setUserNameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Login = () => {
             if (result === 'Bad response') {
                 return navigate('/notfound') 
             }            
-                loginHandler(result);
+                userLogin(result);
                 return navigate('/')
            })
            .catch((error) => {
