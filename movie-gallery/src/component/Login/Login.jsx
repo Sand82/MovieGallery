@@ -1,58 +1,58 @@
-import { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from "react";
 
 import * as style from "../Login/Login.Module.css";
-import * as userValidator from '../../services/UserValidator.js';
 import * as authService from '../../services/AuthServices.js';
 import { AuthContext } from "../../contexts/AuthContext.js";
+import Input from "../UI/Input.jsx"
+import { useInput } from "../../hooks/useInput.js"
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import { hasLength, minLength } from "../../services/Validators.js"
 
-const Login = () => {
-    const [login, setLogin] = useState({
-        username: '',
-        password: '',
-    });
-    const { userLogin } = useContext(AuthContext);
-    const [userNameError, setUserNameError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
+const Login = () => {    
+
+    const {
+        value: usernameValue,
+        changeHeandler: usernameChangeHeandler,
+        hasError: usernameHasError,
+        inputBlurHeandler: usernameInputBluerHeandler,
+        isEmpty: isUsernameFieldEmpty,    
+      } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+    
+    const {
+        value: passwordValue,
+        changeHeandler: passwordChangeHeandler,
+        hasError: passwordError,
+        inputBlurHeandler: passwordInputBluerHeandler, 
+        isEmpty: isPasswordFieldEmpty,   
+      } = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
+
     const navigate = useNavigate();
-
-    const changeHandler = (e) => {
-        setLogin((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));        
-    };
+    const { userLogin } = useContext(AuthContext);
 
     const loginSubmitHandler = async (e) => {
-        e.preventDefault();
-       
-        authService.login(login)
-           .then(result => {
+        e.preventDefault();        
 
-            if (result === 'Bad response') {
-                return navigate('/notfound') 
-            }            
-                userLogin(result);
-                return navigate('/')
-           })
-           .catch((error) => {
-                throw console.error(error);
-           });
+        var loginCredential = {
+            username: usernameValue,
+            password: passwordValue
+        }
+       
+        authService.login(loginCredential)
+            .then(result => {   
+             if (result === 'Bad response') {
+                 return navigate('/notfound') 
+             }            
+                 userLogin(result);
+                 return navigate('/')
+            })
+            .catch((error) => {
+                 throw console.error(error);
+            });
         
     };
 
-    const validateUsername = (e) => {
-        const userName = e.target.value;        
-        setUserNameError(userValidator.user(userName));        
-    };
-
-    const validatePassword = (e) => {
-        const password = e.target.value;
-        setPasswordError(userValidator.password(password))
-    };
-
-    const isValid = Object.values(login).some(x => x == '') || userNameError || passwordError ;
+    let isLoginButtonDisaled = usernameHasError || passwordError || isUsernameFieldEmpty || isPasswordFieldEmpty;
 
     return (
         <div id="login" style={style}>
@@ -61,45 +61,30 @@ const Login = () => {
             </h1>
             <form onSubmit={loginSubmitHandler}>
                 <fieldset>
-                    <p>
-                        <input
-                            type="text"
-                            name="username"
-                            value={login.username}
-                            onChange={changeHandler}
-                            placeholder="Username"
-                            onBlur={validateUsername}
-                        />
-                        <label htmlFor="username">User name:</label>
-                    </p>
-                    {userNameError ? (
-                        <p className="alert alert-danger">
-                            User name should be more than 2 and less than 50 symbols.
-                        </p>
-                    ) : (
-                        <p></p>
-                    )}
-
-                    <p>                       
-                        <input
-                            type="password"
-                            name="password"
-                            value={login.password}
-                            onChange={changeHandler}
-                            placeholder="Password"
-                            onBlur={validatePassword}
-                        />
-                         <label htmlFor="password">Password:</label>
-                    </p>
-                    {passwordError ? (
-                        <p className="alert alert-danger">
-                            Password should be more than 5 and less than 50 symbols.
-                        </p>
-                    ) : (
-                        <p></p>
-                    )}
                     <p>                        
-                        <button className="button" type="submit" disabled={isValid}>Login</button>
+                        <Input
+                            label="Username"
+                            type="text"
+                            name="username"                           
+                            value={usernameValue}
+                            onChange={usernameChangeHeandler}
+                            onBlur={usernameInputBluerHeandler}
+                            error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
+                        />                        
+                    </p>
+                    <p>
+                        <Input
+                           label="Password"
+                           type="text"
+                           name="password"                           
+                           value={passwordValue}
+                           onChange={passwordChangeHeandler}
+                           onBlur={passwordInputBluerHeandler}
+                           error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
+                        />                        
+                    </p>                     
+                    <p>                        
+                        <button className="button" type="submit" disabled={isLoginButtonDisaled} >Login</button>
                     </p>
                 </fieldset>
             </form>
@@ -110,13 +95,13 @@ const Login = () => {
                 <a className="facebook-before">
                     <span className="fontawesome-facebook" />
                 </a>
-                <button className="facebook" disabled={isValid}>Login Using Facbook</button>
+                <button className="facebook" disabled={isLoginButtonDisaled} >Login Using Facbook</button>
             </p>
             <p>
                 <a className="twitter-before">
                     <span className="fontawesome-twitter" />
                 </a>
-                <button className="twitter" disabled={isValid}>Login Using Twitter</button>
+                <button className="twitter" disabled={isLoginButtonDisaled} >Login Using Twitter</button> 
             </p>
         </div>
     );

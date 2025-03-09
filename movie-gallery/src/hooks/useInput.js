@@ -28,6 +28,7 @@ export const useInput = (defaultValue, validationFn) => {
     changeHeandler,
     inputBlurHeandler,
     hasError: didEdit && !valioIsValid,
+    isEmpty: !didEdit,
     resetValue,
   };
 };

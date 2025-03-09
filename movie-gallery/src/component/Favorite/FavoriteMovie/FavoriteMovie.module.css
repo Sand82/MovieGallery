@@ -1,0 +1,18 @@
+.favoriteContent {
+  width: 87%;
+  margin: auto;
+}
+
+.imageContainer {
+  height: 85vh;
+  width: 80%;
+  margin: auto;
+  padding-top: 15px;
+}
+
+.favoriteImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}

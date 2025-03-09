@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import style from "./FavoriteMovie.module.css"
 
 const FavoriteMovie = ({movie}) => {
   return (
@@ -9,9 +10,9 @@ const FavoriteMovie = ({movie}) => {
           to={`/movies/details/${movie.id}`}
           data-role="hover-wrap"
         >
-          <span>
-            <img style={{maxWidth: '100%',  maxHeight: '100%', display: 'block'}} className="embed-responsive-item" src={movie.imageUrl} alt="" />
-          </span>
+          <div className={style.imageContainer}>
+            <img className={`embed-responsive-item ${style.favoriteImage}`} src={movie.imageUrl} alt="" />
+          </div>
           <span className="entity-date">
             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
               <span className="tape-dots"></span>
@@ -29,7 +30,7 @@ const FavoriteMovie = ({movie}) => {
             </span>
           </span>
         </Link>
-        <div className="entity-content">
+        <div className={`entity-content ${style.favoriteContent}`}>
           <h4 className="entity-title">
             <Link className="content-link" to={`/movies/details/${movie.id}`}>
             {movie.title}
