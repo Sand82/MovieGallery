@@ -33,7 +33,7 @@ const Header = () => {
           </button>
           <div className="navbar-collapse">
             <ul className="navbar-nav">
-              {user.username && <li>Welcome: {user.username}</li>}
+              {user.username && <li>Welcome {user.username}</li>}
               <li className="nav-item nav-item-arrow-down nav-hover-show-sub">
                 <Link className="nav-link" to="/">
                   Home

@@ -1,38 +1,60 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as authService from "../../services/AuthServices.js";
 import * as style from "./Register.Module.css";
-import * as userValidator from "../../services/UserValidator.js";
+import Input from "../UI/Input.jsx"
+import { useInput } from "../../hooks/useInput.js"
+import * as authService from '../../services/AuthServices.js';
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../services/Validators.js"
 
 const Register = () => {
-  const [register, setRegister] = useState({
-    username: '',
-    email: '',
-    password: '',
-    repeatPassword: '',
-  });
 
-  const [usernameError, setUsernameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [conformPasswordError, setConformPasswordError] = useState(false);
-  const [checkPasswords, setCheckPasswords] = useState(false);
+  	const {
+          value: usernameValue,
+          changeHeandler: usernameChangeHeandler,
+          hasError: usernameHasError,
+          inputBlurHeandler: usernameInputBluerHeandler,
+          isEmpty: isUsernameFieldEmpty,    
+        } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+	
+	const {
+		value: emailValue,
+		changeHeandler: emailChangeHeandler,
+		hasError: emailHasError,
+		inputBlurHeandler: emailInputBluerHeandler,
+		isEmpty: isEmailFieldEmpty,    
+	  } = useInput("", (value) => isEmail(value));
+
+	const {
+			value: passwordValue,
+			changeHeandler: passwordChangeHeandler,
+			hasError: passwordError,
+			inputBlurHeandler: passwordInputBluerHeandler, 
+			isEmpty: isPasswordFieldEmpty,   
+		} = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
+
+	const {
+		value: repeatPasswordValue,
+		changeHeandler: repeatPasswordChangeHeandler,
+		hasError: repeatPasswordError,
+		inputBlurHeandler: repeatPasswordInputBluerHeandler, 
+		isEmpty: isRepeatPasswordFieldEmpty,   
+	  } = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
 
   const navigate = useNavigate();
 
   const registerSubmitHandler = async (e) => {
     e.preventDefault();
 
-    if (register.password !== register.repeatPassword) {
-      setCheckPasswords(true);
-      return;
-    }else {
-      setCheckPasswords(false);
-    }
+    const registerCredential = {
+		username: usernameValue,
+		email: emailValue,
+		password: passwordValue,
+		repeatPassword: repeatPasswordValue,
+	  };
 
     authService
-      .register(register)
+      .register(registerCredential)
       .then((result) => {
         if (result === 'Bad response') {
           return navigate('/badrequest');
@@ -42,41 +64,10 @@ const Register = () => {
       .catch((error) => {
         throw console.error(error);
       });
-  };
+  };  
 
-  const changeHandler = (e) => {
-    setRegister((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const validateUsername = (e) => {
-    const userName = e.target.value;
-    setUsernameError(userValidator.user(userName));
-  };
-
-  const validateEmail = (e) => {
-    const currEmail = e.target.value;
-    setEmailError(userValidator.emailAddress(currEmail));
-  };
-
-  const validatePassword = (e) => {
-    const currPass = e.target.value;
-    setPasswordError(userValidator.password(currPass));
-  };
-
-  const validateConformePassword = (e) => {
-    const password = e.target.value;
-    setConformPasswordError(userValidator.password(password));
-  };
-
-  const isValid =
-    Object.values(register).some((x) => x == '') ||
-    usernameError ||
-    passwordError ||
-    conformPasswordError ||
-    emailError;
+  const isRegisterButtonDisaled = usernameHasError || emailHasError || passwordError || repeatPasswordError || 
+  	isUsernameFieldEmpty || isEmailFieldEmpty || isPasswordFieldEmpty || isRepeatPasswordFieldEmpty;   
 
   return (
     <section className="vh-100" style={style}>
@@ -96,130 +87,68 @@ const Register = () => {
                     >
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-user fa-lg me-3 fa-fw" />
-                        <div className="form-outline flex-fill mb-0">
-                          <input
+                        <div className="form-outline flex-fill mb-0">                          
+                          <Input
+                            label="Username"
                             type="text"
-                            id="form3Example1c"
-                            className="form-control"
                             name="username"
-                            onChange={changeHandler}
-                            value={register.username}
-                            onBlur={validateUsername}
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example1c"
-                          >
-                            User Name
-                          </label>
-                          {usernameError && (
-                            <p className="alert alert-danger">
-                              User name should be more than 2 and less than 50
-                              symbols.
-                            </p>
-                          )}
+							className="regester-input"                           
+                            value={usernameValue}
+                            onChange={usernameChangeHeandler}
+                            onBlur={usernameInputBluerHeandler}
+                            error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
+                        />
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-                          <input
-                            type="email"
-                            id="form3Example3c"
-                            className="form-control"
+						<Input
+                            label="Email address"
+                            type="text"
                             name="email"
-                            onChange={changeHandler}
-                            value={register.email}
-                            onBlur={validateEmail}
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example3c"
-                          >
-                            Your Email
-                          </label>
-                          {emailError && (
-                            <p className="alert alert-danger">
-                              Invalid email address.
-                            </p>
-                          )}
+							className="regester-input"                           
+                            value={emailValue}
+                            onChange={emailChangeHeandler}
+                            onBlur={emailInputBluerHeandler}
+                            error={emailHasError && `Email should be valid email address.`}/>
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-                          <input
-                            type="password"
-                            id="form3Example4c"
-                            className="form-control"
-                            name="password"
-                            onChange={changeHandler}
-                            value={register.password}
-                            onBlur={validatePassword}
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example4c"
-                          >
-                            Password
-                          </label>
-                          {passwordError && (
-                            <p className="alert alert-danger">
-                              Password should be more than 5 and less than 50
-                              symbols.
-                            </p>
-                          )}
+						<Input
+                           label="Password"
+                           type="password"
+                           name="password"  
+						   className="regester-input-password"                                                  
+                           value={passwordValue}
+                           onChange={passwordChangeHeandler}
+                           onBlur={passwordInputBluerHeandler}
+                           error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
+                        />                
                         </div>
                       </div>
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-key fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-                          <input
-                            type="password"
-                            id="form3Example4cd"
-                            className="form-control"
-                            name="repeatPassword"
-                            onChange={changeHandler}
-                            value={register.repeatPassword}
-                            onBlur={validateConformePassword}
-                          />
-                          <label
-                            className="form-label"
-                            htmlFor="form3Example4cd"
-                          >
-                            Repeat your password
-                          </label>
-                          {conformPasswordError && (
-                            <p className="alert alert-danger">
-                              Password conformation should be more than 5 and
-                              less than 50 symbols.
-                            </p>
-                          )}
-                          {checkPasswords && (
-                            <p className="alert alert-danger">
-                              Password and conformation password should be the
-                              same.
-                            </p>
-                          )}
+						<Input
+                           label="Repeat password"
+                           type="password"
+                           name="repeatPassword"
+						   className="regester-input-password"                                                     
+                           value={repeatPasswordValue}
+                           onChange={repeatPasswordChangeHeandler}
+                           onBlur={repeatPasswordInputBluerHeandler}
+                           error={repeatPasswordError && `The password and password confirmation do not match.`}
+                        />                
                         </div>
-                      </div>
-                      {/* <div className="form-check d-flex justify-content-center mb-5">
-                    <input
-                      className="form-check-input me-2"
-                      type="checkbox"
-                      defaultValue=""
-                      id="form2Example3c"
-                    />
-                    <label className="form-check-label" htmlFor="form2Example3">
-                      I agree all statements in{" "}
-                      <a href="#!">Terms of service</a>
-                    </label>
-                  </div> */}
+                      </div>                      
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           type="submit"
                           className="btn btn-lg"
-                          disabled={isValid}
+                          disabled={isRegisterButtonDisaled}
                         >
                           Register
                         </button>

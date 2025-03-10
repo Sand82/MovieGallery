@@ -75,8 +75,8 @@ const Login = () => {
                     <p>
                         <Input
                            label="Password"
-                           type="text"
-                           name="password"                           
+                           type="password"
+                           name="password"                                                    
                            value={passwordValue}
                            onChange={passwordChangeHeandler}
                            onBlur={passwordInputBluerHeandler}
