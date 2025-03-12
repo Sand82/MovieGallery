@@ -43,25 +43,36 @@
 
 View from Home page upper part.
 ![Home page upper part](https://user-images.githubusercontent.com/75274983/184317591-46d14bc2-0fb7-4777-99d4-701f43ff76ff.png)
+
 View from Home page down part.
 ![Home page down part](https://user-images.githubusercontent.com/75274983/184318115-ce68b5fa-9b10-44d2-833d-6cd2527a01f6.png)
+
 View from Movies area.
 ![Movies area](https://user-images.githubusercontent.com/75274983/184318726-a8f77581-a3e4-4b86-9f45-296b71b7d8e0.png)
+
 View from movie Details page upper part admin account.
 ![DetailsAdmin](https://user-images.githubusercontent.com/75274983/198112710-58e2df7d-2381-4e84-9a1b-a31417f72707.png)
+
 View from movie Details page upper part user account.
 ![Details upper part](https://user-images.githubusercontent.com/75274983/184319483-af9cd8d4-0f8e-4291-9998-0822da0bf948.png)
+
 View from movie Details page down part.
 ![Details down part](https://user-images.githubusercontent.com/75274983/184320101-c8a4f4ca-7cc7-4996-9b72-9b8a2b896d72.png)
+
 View from Favorite page.
 ![Favorite](https://user-images.githubusercontent.com/75274983/184320702-5e15b4fe-20d8-4cb0-82ee-b216df74fbc8.png)
+
 View from Contact As page upper part.
 ![Contact as upper part](https://user-images.githubusercontent.com/75274983/184321848-fda42623-d554-4ae4-a89e-f9e6b26dc03d.png)
+
 View from Contact As page down part.
 ![Contact as down part](https://user-images.githubusercontent.com/75274983/184321939-dca3aa53-ffe4-41af-892d-4ecb4db9841e.png)
+
 View from some Forms.
-![Login](https://user-images.githubusercontent.com/75274983/184322410-35c32741-5e57-47f1-a750-8dfd575e6d3f.png)
-![Register](https://user-images.githubusercontent.com/75274983/184322548-662e5d41-1be5-4bd1-8d1d-db6b0e3b7380.png)
+![Login](https://github.com/user-attachments/assets/8f3ba239-31eb-4e89-b2e7-cc5ee89fd0ed)
+
+![Register](https://github.com/user-attachments/assets/f4629744-979f-4e8f-acab-94465eeb93e0)
+
 ![Create](https://user-images.githubusercontent.com/75274983/184322702-05811237-0a18-449f-a7f5-22c581696e57.png)
 
 
