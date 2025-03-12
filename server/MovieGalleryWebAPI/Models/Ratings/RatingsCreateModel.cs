@@ -7,7 +7,7 @@ namespace MovieGalleryWebAPI.Models.Ratings
     public class RatingsCreateModel
     {
         [Required]
-        [Range(MinRaitingValue, MaxRaitingValue,
+        [Range(MinRatingValue, MaxRatingValue,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
 
         public string? Value { get; set; }

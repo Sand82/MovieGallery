@@ -86,7 +86,7 @@ export default function Footer () {
         </div>
     </div>
     <div className="footer-copy">
-        <div className="container">Copyright 2022 &copy; AmigosThemes. All rights reserved.</div>
+        <div className="container">Copyright {new Date().getFullYear()} &copy; All rights reserved.</div>
     </div>
 </footer>
 }

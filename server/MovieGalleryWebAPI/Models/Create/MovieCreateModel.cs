@@ -33,8 +33,8 @@ namespace MovieGalleryWebAPI.Models.Create
         public string? Year { get; set; }
 
         [Required]
-        [StringLength(MaxMovieDuration, MinimumLength =MinMovieDuration,
-            ErrorMessage = "The field {0} is not valid! Must be exact {1} symbols.")]
+        [StringLength(MaxMovieDuration, MinimumLength = MinMovieDuration,
+            ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
         public string? Duration { get; set; }        
     }
 }

@@ -9,7 +9,7 @@ namespace MovieGalleryWebAPI.Data.Models
     {
         public int Id { get; set; }
 
-        [Range(MinRaitingValue, MaxRaitingValue)]
+        [Range(MinRatingValue, MaxRatingValue)]
         public int Value { get; set; }
 
         [Required]

@@ -7,9 +7,14 @@ export const minLength = (value, minLength) => value.length > minLength;
 
 export const isEqualToOtherValue = (value, otherValue) => value === otherValue;
 
+export const isEqualToExactLenght = (value, otherValue) => value.length === otherValue;
+
 export const isValidUrl = (value) => value && validateImageUrl(value);
 
 export const isValidNumberValue = (value, limit) => +value >= limit;
+
+export const hasLengthNumberValue = (value, minBound, maxBound) =>
+  +value >= minBound && +value <= maxBound;
 
 export const isEmail = (value) => {
   let regex = new RegExp(

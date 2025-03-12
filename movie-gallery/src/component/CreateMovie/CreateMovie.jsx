@@ -6,92 +6,98 @@ import * as movieServis from "../../services/MoviesService.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import * as movieValidator from "../../services/MovieValidator.js";
+import Input from "../UI/Input.jsx"
+import { useInput } from "../../hooks/useInput.js"
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js"
 
 const CreateMovie = () => {
+
+const {
+	value: titleValue,
+	changeHeandler: titleChangeHeandler,
+	hasError: titleHasError,
+	inputBlurHeandler: titleInputBluerHeandler,
+	isEmpty: isTitleFieldEmpty,    
+  } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+
+const {
+	value: categoryValue,
+	changeHeandler: categoryChangeHeandler,
+	hasError: categoryHasError,
+	inputBlurHeandler: categoryInputBluerHeandler,
+	isEmpty: isCategoryFieldEmpty,    
+} = useInput("", (value) => hasLength(value, GlobalConstant.categoryMinLength, GlobalConstant.categoryMaxLength));
+
+const {
+	value: yearValue,
+	changeHeandler: yearChangeHeandler,
+	hasError: yearHasError,
+	inputBlurHeandler: yearInputBluerHeandler,
+	isEmpty: isYearFieldEmpty,    
+} = useInput("", (value) => isEqualToExactLenght(value, GlobalConstant.yearLength));
+
+const {
+	value: imageUrlValue,
+	changeHeandler: imageUrlChangeHeandler,
+	hasError: imageUrlHasError,
+	inputBlurHeandler: imageUrlInputBluerHeandler,
+	isEmpty: isImageUrlFieldEmpty,    
+} = useInput("", (value) => isValidUrl(value));
+
+const {
+	value: durationValue,
+	changeHeandler: durationChangeHeandler,
+	hasError: durationHasError,
+	inputBlurHeandler: durationInputBluerHeandler,
+	isEmpty: isDurationFieldEmpty,    
+} = useInput("", (value) => hasLengthNumberValue(value, GlobalConstant.durationMinLength, GlobalConstant.durationMaxLength));
+
+const {
+	value: descriptionValue,
+	changeHeandler: descriptionChangeHeandler,
+	hasError: descriptionHasError,
+	inputBlurHeandler: descriptionInputBluerHeandler,
+	isEmpty: isDescriptionFieldEmpty,    
+} = useInput("", (value) => hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength));
+
   const { user } = useContext(AuthContext);
-  const { createMovieHandler } = useContext(MovieContext);
-  const [createMovie, setCreateMovie] = useState({
-    title: "",
-    category: "",
-    year: "",
-    imageUrl: "",
-    duration: "",
-    description: "",
-  });
+  const { contextCreateMovieHandler } = useContext(MovieContext);  
 
-  const [titleError, setTitleError] = useState(false);
-  const [categoryError, setCategoryError] = useState(false);
-  const [yearError, setYearError] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const [durationError, setDurationError] = useState(false);
-  const [descriptionError, setDescriptionError] = useState(false);
+  const navigate = useNavigate();  
 
-  const navigate = useNavigate();
-
-  const changeHandler = (e) => {
-    setCreateMovie((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const createMovieHandle = (e) => {
+  const createMovieHandler = (e) => {
     e.preventDefault();
 
-    const movieData = Object.fromEntries(new FormData(e.target));
-
+    const movieData = {
+		title: titleValue,
+    	category: categoryValue,
+    	year: yearValue,
+    	imageUrl: imageUrlValue,
+    	duration: durationValue,
+    	description: descriptionValue,
+	}
+	
     movieServis
       .create(movieData, user.accessToken)
       .then((result) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        createMovieHandler();
+        contextCreateMovieHandler();
         return navigate("/movies");
       })
       .catch((error) => {
         throw console.error(error);
       });
   };
-
-  const validateTitle = (e) => {
-    const title = e.target.value;
-    setTitleError(movieValidator.title(title));
-  };
-
-  const validateCategory = (e) => {
-    const category = e.target.value;
-    setCategoryError(movieValidator.category(category));
-  };
-
-  const validateYear = (e) => {
-    const year = e.target.value;
-    setYearError(movieValidator.year(year));
-  };
-
-  const validateImage = (e) => {
-    const image = e.target.value;
-    setImageError(movieValidator.image(image));
-  };
-
-  const validateDuration = (e) => {
-    const duration = e.target.value;
-    setDurationError(movieValidator.duration(duration));
-  };
-
-  const validateDescription = (e) => {
-    const description = e.target.value;
-    setDescriptionError(movieValidator.description(description));
-  };
-
-  const isValid =
-    Object.values(createMovie).some((x) => x === "") ||
-    titleError ||
-    categoryError ||
-    yearError ||
-    imageError ||
-    durationError ||
-    descriptionError;
+  
+  const isValid = titleHasError || isTitleFieldEmpty ||
+  				categoryHasError || isCategoryFieldEmpty || 
+				yearHasError || isYearFieldEmpty ||
+				imageUrlHasError || isImageUrlFieldEmpty ||
+				durationHasError || isDurationFieldEmpty ||
+				descriptionHasError || isDescriptionFieldEmpty;    
 
   return (
     <div className="container px-12 form-container" style={style}>
@@ -100,132 +106,91 @@ const CreateMovie = () => {
           {user.isAdmin ? (
             <>
               <h2 className="heading text-center movie-title">Create Movie</h2>
-              <form onSubmit={createMovieHandle}>
-                <div className="form-outline mb-4">
-                  <input
-                    type="text"
-                    name="title"
-                    className="form-control"
-                    placeholder="Enter game title..."
-                    onChange={changeHandler}
-                    value={createMovie.title}
-                    onBlur={validateTitle}
-                  />
-                  <label className="form-label" htmlFor="title">
-                    Tite
-                  </label>
-                  {titleError && (
-                    <p className="alert alert-danger">
-                      Title should be more than 2 and less than 100 symbols.
-                    </p>
-                  )}
+              <form onSubmit={createMovieHandler}>
+                <div className="form-outline mb-4">                  
+                   	<Input
+                        label="Title"
+                        type="text"
+                        name="title" 
+						className="form-control"                          
+                        value={titleValue}
+                        onChange={titleChangeHeandler}
+                        onBlur={titleInputBluerHeandler}
+                        error={titleHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
+                    />
                 </div>
 
                 <div className="form-outline mb-4">
-                  <input
-                    type="text"
-                    name="category"
-                    className="form-control"
-                    placeholder="Enter game category..."
-                    onChange={changeHandler}
-                    value={createMovie.category}
-                    onBlur={validateCategory}
-                  />
-                  <label className="form-label" htmlFor="category">
-                    Category
-                  </label>
-                  {categoryError && (
-                    <p className="alert alert-danger">
-                      Category should be more than 2 and less than 50 symbols.
-                    </p>
-                  )}
+					<Input
+                        label="Category"
+                        type="text"
+                        name="category" 
+						className="form-control"                          
+                        value={categoryValue}
+                        onChange={categoryChangeHeandler}
+                        onBlur={categoryInputBluerHeandler}
+                        error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
+                    />                  
+                </div>
+
+                <div className="form-outline mb-4">                  
+				    <Input
+                        label="Year"
+                        type="text"
+                        name="year" 
+						className="form-control"                          
+                        value={yearValue}
+                        onChange={yearChangeHeandler}
+                        onBlur={yearInputBluerHeandler}
+                        error={yearHasError && `Year should be exact ${GlobalConstant.yearLength} symbols.`}
+                    /> 
+                </div>
+
+                <div className="form-outline mb-4"> 
+					<Input
+                        label="Image Link"
+                        type="text"
+                        name="imageUrl" 
+						className="form-control"                          
+                        value={imageUrlValue}
+                        onChange={imageUrlChangeHeandler}
+                        onBlur={imageUrlInputBluerHeandler}
+                        error={imageUrlHasError && `Image link shoud be valid Url.`}
+                    />                   
+                </div>
+
+                <div className="form-outline mb-4">                  
+				  	<Input
+                        label="Duration"
+                        type="text"
+                        name="duration" 
+						className="form-control"                          
+                        value={durationValue}
+                        onChange={durationChangeHeandler}
+                        onBlur={durationInputBluerHeandler}
+                        error={durationHasError && `Duration should be between ${GlobalConstant.durationMinLength} and ${GlobalConstant.durationMaxLength} symbols.`}
+                    /> 
                 </div>
 
                 <div className="form-outline mb-4">
-                  <input
-                    type="text"
-                    name="year"
-                    className="form-control"
-                    placeholder="Enter year in format yyyy"
-                    onChange={changeHandler}
-                    value={createMovie.year}
-                    onBlur={validateYear}
-                  />
-                  <label className="form-label" htmlFor="year">
-                    Year
-                  </label>
-                  {yearError && (
-                    <p className="alert alert-danger">
-                      Year should be exact 4 symbols.
-                    </p>
-                  )}
-                </div>
-
-                <div className="form-outline mb-4">
-                  <input
-                    type="text"
-                    name="imageUrl"
-                    className="form-control"
-                    placeholder="Enter game image..."
-                    onChange={changeHandler}
-                    value={createMovie.imageUrl}
-                    onBlur={validateImage}
-                  />
-                  <label className="form-label" htmlFor="imageUrl">
-                    Image
-                  </label>
-                  {imageError && (
-                    <p className="alert alert-danger">
-                      Image should be more than 5 and less than 300 symbols.
-                    </p>
-                  )}
-                </div>
-
-                <div className="form-outline mb-4">
-                  <input
-                    type="text"
-                    name="duration"
-                    className="form-control"
-                    placeholder="Enter game duration..."
-                    onChange={changeHandler}
-                    value={createMovie.duration}
-                    onBlur={validateDuration}
-                  />
-                  <label className="form-label" htmlFor="duration">
-                    Duration
-                  </label>
-                  {durationError && (
-                    <p className="alert alert-danger">
-                      Duration should be more than 2 and less than 20 symbols.
-                    </p>
-                  )}
-                </div>
-
-                <div className="form-outline mb-4">
-                  <textarea
-                    className="form-control"
-                    name="description"
-                    rows={3}
-                    placeholder="Enter game description..."
-                    onChange={changeHandler}
-                    value={createMovie.description}
-                    onBlur={validateDescription}
-                  />
-                  <label className="form-label" htmlFor="description">
-                    Description
-                  </label>
-                  {descriptionError && (
-                    <p className="alert alert-danger">
-                      Description should be more than 10 and less than 500
-                      symbols.
-                    </p>
-                  )}
+					<Input
+                        label="Description"
+                        type="textarea"
+                        name="duration"
+						fieldType="textarea"
+						rows={3} 
+						className="form-control"                          
+                        value={descriptionValue}
+                        onChange={descriptionChangeHeandler}
+                        onBlur={descriptionInputBluerHeandler}
+                        error={descriptionHasError && `description should be between ${GlobalConstant.descriptionMinLength} and ${GlobalConstant.descriptionMaxLength} symbols.`}
+                    />                 
                 </div>
                 {/* Submit button */}
                 <button
                   type="submit"
                   className="btn btn-block mb-4"
-                  disabled={isValid}
+				  disabled={isValid}
                 >
                   Send
                 </button>
