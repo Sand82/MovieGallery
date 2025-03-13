@@ -25,8 +25,7 @@ const CreateComment = ({ movieId, commentHandler }) => {
 		hasError: emailHasError,
 		inputBlurHeandler: emailInputBluerHeandler,
 		isEmpty: isEmailFieldEmpty,    
-	} = useInput("", (value) => isEmail(value));
-	
+	} = useInput("", (value) => isEmail(value));	
 		
 	const {
 		value: commentValue,

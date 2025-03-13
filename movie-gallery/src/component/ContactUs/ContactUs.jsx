@@ -5,88 +5,85 @@ import { useContext, useState, useRef, useEffect } from "react";
 import ContactInformation from "./ContactInformation/ContactInformation.jsx";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
-import * as movieValidator from "../../services/MovieValidator.js";
-import * as userValidator from "../../services/UserValidator.js";
 import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
+import Input from "../../component/UI/Input.jsx"
+import { useInput } from "../../hooks/useInput.js"
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import { hasLength, isEmail } from "../../services/Validators.js"
 
-const ContactUs = () => {
-  const { user } = useContext(AuthContext);
-  const [sendMail, setSendMail] = useState({
-    username: user.username,
-    email: user.email,
-    subject: '',
-    message: '',
-  });
-  const [usernameError, setUsernameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [subjectError, setSubjectError] = useState(false);
-  const [messegError, setMessegeError] = useState(false);
-  const [data, setData] = useState(null);  
-  const form = useRef();
 
-  useEffect(() => {   
-    setTimeout(() => {
-        setData(null);
-    }, 5000);
-  }, [data]); 
+const ContactUs = () => {    
 
-  const changeHandler = (e) => {
-    setSendMail((state) => ({
-      ...state,
-      [e.target.name]: e.target.value,
-    }));
-  };
+    const { user } = useContext(AuthContext); 
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+    const {
+            value: usernameValue,
+            changeHeandler: usernameChangeHeandler,
+            hasError: usernameHasError,
+            inputBlurHeandler: usernameInputBluerHeandler, 
+            isEmpty: isUsernameFieldEmpty, 
+            resetValue: usernameResetValue,  
+        } = useInput(user ? user.username : "", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+    
+    const {
+            value: emailValue,
+            changeHeandler: emailChangeHeandler,
+            hasError: emailHasError,
+            inputBlurHeandler: emailInputBluerHeandler,
+            isEmpty: isEmailFieldEmpty, 
+            resetValue: emailResetValue,   
+        } = useInput(user ? user.email : "", (value) => isEmail(value));
 
-    emailjs
-      .sendForm(
-        'service_ufh83g4',
-        'template_qgn844p',
-        form.current,
-        '97bvqzMYCmiGXN1wA'
-      )
-      .then(
-        (result) => {
-          if (result.text == 'OK') {
-            setData(result.text);            
-          }
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    const {
+            value: subjectValue,
+            changeHeandler: subjectChangeHeandler,
+            hasError: subjectHasError,
+            inputBlurHeandler: subjectInputBluerHeandler, 
+            isEmpty: isSubjectFieldEmpty,
+            resetValue: subjectResetValue,   
+        } = useInput("", (value) => hasLength(value, GlobalConstant.subjectMinLength, GlobalConstant.subjectMaxLength));
 
-    setSendMail({ subject: '', message: '' });
-  };
+    const {
+            value: messageValue,
+            changeHeandler: messageChangeHeandler,
+            hasError: messageHasError,
+            inputBlurHeandler: messageInputBluerHeandler, 
+            isEmpty: isMessageFieldEmpty, 
+            resetValue: messageResetValue,  
+        } = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
+        
+    const form = useRef();
+    const [data, setData] = useState(null); 
 
-  const validateUsername = (e) => {
-    const userName = e.target.value;
-    setUsernameError(userValidator.user(userName));
-  };
-
-  const validateEmail = (e) => {
-    const currEmail = e.target.value;
-    setEmailError(userValidator.emailAddress(currEmail));
-  };
-
-  const validateSubject = (e) => {
-    const subject = e.target.value;
-    setSubjectError(movieValidator.title(subject));
-  };
-
-  const validateMessage = (e) => {
-    const message = e.target.value;
-    setMessegeError(movieValidator.description(message));
-  };
-
-  const isValid =
-    Object.values(sendMail).some((x) => x === '') ||
-    usernameError ||
-    emailError ||
-    subjectError ||
-    messegError;  
+    const sendEmail = (e) => {
+        e.preventDefault();
+        console.log(form.current)
+        emailjs
+            .sendForm(
+            'service_ufh83g4',
+            'template_qgn844p',
+            form.current,
+            '97bvqzMYCmiGXN1wA'
+            )
+            .then((result) => {
+                if (result.text == 'OK') {
+                setData(true);
+                usernameResetValue();
+                emailResetValue();
+                subjectResetValue();
+                messageResetValue();          
+                }
+            },
+            (error) => {
+                console.log(error.text);
+            }
+          );       
+    };
+  
+    const isValid = usernameHasError || isUsernameFieldEmpty ||
+      emailHasError || isEmailFieldEmpty ||
+      subjectHasError || isSubjectFieldEmpty ||
+      messageHasError || isMessageFieldEmpty;    
 
   return (
     <>
@@ -108,79 +105,61 @@ const ContactUs = () => {
                   </p>
                   <form ref={form} onSubmit={sendEmail}>
                     <div className="row form-grid">
-                      <div className="col-sm-6">
+                      <div className="col-sm-6 ">
                         <div className="input-view-flat input-group">
-                          <input
-                            className="form-control"
-                            name="username"
-                            type="text"
-                            placeholder="Username"
-                            onChange={changeHandler}
-                            value={sendMail.username}
-                            onBlur={validateUsername}
-                          />
-                        </div>
-                        {usernameError && (
-                          <p className="alert alert-danger">
-                            User name should be more than 2 and less than 50
-                            symbols.
-                          </p>
-                        )}
+                            <Input
+            		    	        label="Username"
+            		    	        type="text"
+            		    	        name="username"
+							                className="form-control"
+            		    	        value={usernameValue}
+            		    	        onChange={usernameChangeHeandler}
+            		    	        onBlur={usernameInputBluerHeandler}
+            		    	        error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
+            			    />                           
+                        </div>                        
                       </div>
                       <div className="col-sm-6">
                         <div className="input-view-flat input-group">
-                          <input
-                            className="form-control"
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                            onChange={changeHandler}
-                            value={sendMail.email}
-                            onBlur={validateEmail}
-                          />
-                        </div>
-                        {emailError && (
-                          <p className="alert alert-danger">
-                            Invalid email address.
-                          </p>
-                        )}
+                            <Input
+                			        label="Email address"
+                			        type="text"
+                			        name="email"
+							                className="form-control"                          
+                			        value={emailValue}
+                			        onChange={emailChangeHeandler}
+                			        onBlur={emailInputBluerHeandler}
+                			        error={emailHasError && `Email should be valid email address.`}/> 
+                            </div>                        
                       </div>
                       <div className="col-sm-12">
-                        <div className="input-view-flat input-group">
-                          <input
-                            className="form-control"
-                            name="subject"
-                            placeholder="Subject"
-                            type="text"
-                            value={sendMail.subject}
-                            onChange={changeHandler}
-                            onBlur={validateSubject}
-                          />
-                        </div>
-                        {subjectError && (
-                          <p className="alert alert-danger">
-                            Subject should be more than 2 and less than 100
-                            symbols.
-                          </p>
-                        )}
+                        <div className="input-view-flat">                          
+                            <Input
+                			        label="Subject"
+                			        type="text"
+                			        name="subject"
+							                className="form-control"
+                			        value={subjectValue}
+                			        onChange={subjectChangeHeandler}
+                			        onBlur={subjectInputBluerHeandler}
+                			        error={subjectHasError && `Subject should be between ${GlobalConstant.subjectMinLength} and ${GlobalConstant.subjectMaxLength} symbols.`}/> 
+                        </div>                       
                       </div>
                       <div className="col-12">
-                        <div className="input-view-flat input-group">
-                          <textarea
-                            className="form-control"
-                            name="message"
-                            placeholder="Message"
-                            value={sendMail.message}
-                            onChange={changeHandler}
-                            onBlur={validateMessage}
-                          />
-                        </div>
-                        {messegError && (
-                          <p className="alert alert-danger">
-                            Message should be more than 10 and less than 500
-                            symbols.
-                          </p>
-                        )}
+                        <div className="input-view-flat">                          
+                            <Input
+                              label="Message"
+                              type="textarea"
+                              name="message"
+						                  fieldType="textarea"
+						                  rows={3} 
+						                  className="form-control"                          
+                              value={messageValue}
+                              onChange={messageChangeHeandler}
+                              onBlur={messageInputBluerHeandler}
+                              error={messageHasError && `Message should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
+                            />   
+                        </div>                        
                         {data == "OK" && (
                           <div className="input-view-flat input-group">
                             <p className="alert alert-success">

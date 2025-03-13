@@ -21,6 +21,7 @@ export const useInput = (defaultValue, validationFn) => {
 
   const resetValue = () => {
     setValue("");
+    setDidEdit(false);
   };
 
   return {
