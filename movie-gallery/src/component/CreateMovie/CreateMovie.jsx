@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as style from "./Create.Module.css";
 import * as movieServis from "../../services/MoviesService.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
-import * as movieValidator from "../../services/MovieValidator.js";
 import Input from "../UI/Input.jsx"
 import { useInput } from "../../hooks/useInput.js"
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
@@ -59,7 +58,7 @@ const {
 	hasError: descriptionHasError,
 	inputBlurHeandler: descriptionInputBluerHeandler,
 	isEmpty: isDescriptionFieldEmpty,    
-} = useInput("", (value) => hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength));
+} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
 
   const { user } = useContext(AuthContext);
   const { contextCreateMovieHandler } = useContext(MovieContext);  
@@ -68,6 +67,8 @@ const {
 
   const createMovieHandler = (e) => {
     e.preventDefault();
+
+	console.log("from heandler")
 
     const movieData = {
 		title: titleValue,
@@ -92,14 +93,14 @@ const {
       });
   };
   
-  const isValid = titleHasError || isTitleFieldEmpty ||
-  				categoryHasError || isCategoryFieldEmpty || 
-				yearHasError || isYearFieldEmpty ||
-				imageUrlHasError || isImageUrlFieldEmpty ||
-				durationHasError || isDurationFieldEmpty ||
-				descriptionHasError || isDescriptionFieldEmpty;    
+const isValid = titleHasError || isTitleFieldEmpty ||
+  	categoryHasError || isCategoryFieldEmpty || 
+	yearHasError || isYearFieldEmpty ||
+	imageUrlHasError || isImageUrlFieldEmpty ||
+	durationHasError || isDurationFieldEmpty ||
+	descriptionHasError || isDescriptionFieldEmpty;    
 
-  return (
+return (
     <div className="container px-12 form-container" style={style}>
       <div className="row top-buffer">
         <div className="col-sm-12 col-lg-3 col-lg-8 offset-xl-3 col-xl-6 col">
@@ -112,7 +113,7 @@ const {
                         label="Title"
                         type="text"
                         name="title" 
-						            className="form-control"                          
+						className="form-control"                          
                         value={titleValue}
                         onChange={titleChangeHeandler}
                         onBlur={titleInputBluerHeandler}
@@ -183,7 +184,7 @@ const {
                         value={descriptionValue}
                         onChange={descriptionChangeHeandler}
                         onBlur={descriptionInputBluerHeandler}
-                        error={descriptionHasError && `description should be between ${GlobalConstant.descriptionMinLength} and ${GlobalConstant.descriptionMaxLength} symbols.`}
+                        error={descriptionHasError && `description should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
                     />                 
                 </div>
                 {/* Submit button */}

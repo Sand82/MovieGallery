@@ -10,12 +10,12 @@ import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../servic
 const Register = () => {
 
   	const {
-          value: usernameValue,
-          changeHeandler: usernameChangeHeandler,
-          hasError: usernameHasError,
-          inputBlurHeandler: usernameInputBluerHeandler,
-          isEmpty: isUsernameFieldEmpty,    
-        } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+        value: usernameValue,
+        changeHeandler: usernameChangeHeandler,
+        hasError: usernameHasError,
+        inputBlurHeandler: usernameInputBluerHeandler,
+        isEmpty: isUsernameFieldEmpty,    
+    } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 	
 	const {
 		value: emailValue,
@@ -23,15 +23,15 @@ const Register = () => {
 		hasError: emailHasError,
 		inputBlurHeandler: emailInputBluerHeandler,
 		isEmpty: isEmailFieldEmpty,    
-	  } = useInput("", (value) => isEmail(value));
+	} = useInput("", (value) => isEmail(value));
 
 	const {
-			value: passwordValue,
-			changeHeandler: passwordChangeHeandler,
-			hasError: passwordError,
-			inputBlurHeandler: passwordInputBluerHeandler, 
-			isEmpty: isPasswordFieldEmpty,   
-		} = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
+		value: passwordValue,
+		changeHeandler: passwordChangeHeandler,
+		hasError: passwordError,
+		inputBlurHeandler: passwordInputBluerHeandler, 
+		isEmpty: isPasswordFieldEmpty,   
+	} = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
 
 	const {
 		value: repeatPasswordValue,
@@ -39,12 +39,12 @@ const Register = () => {
 		hasError: repeatPasswordError,
 		inputBlurHeandler: repeatPasswordInputBluerHeandler, 
 		isEmpty: isRepeatPasswordFieldEmpty,   
-	  } = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
+	} = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const registerSubmitHandler = async (e) => {
-    e.preventDefault();
+    const registerSubmitHandler = async (e) => {
+        e.preventDefault();
 
     const registerCredential = {
 		username: usernameValue,

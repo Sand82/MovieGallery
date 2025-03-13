@@ -12,7 +12,7 @@ export const categoryMaxLength = 50;
 export const durationMinLength = 2;
 export const durationMaxLength = 20;
 
-export const descriptionMinLength = 10;
-export const descriptionMaxLength = 500;
+export const textareaMinLength = 3;
+export const textareaMaxLength = 500;
 
 export const yearLength = 4;

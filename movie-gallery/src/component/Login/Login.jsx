@@ -61,29 +61,29 @@ const Login = () => {
             </h1>
             <form onSubmit={loginSubmitHandler}>
                 <fieldset>
-                    <p>                        
+                    <p>
                         <Input
                             label="Username"
                             type="text"
-                            name="username"                           
+                            name="username"
                             value={usernameValue}
                             onChange={usernameChangeHeandler}
                             onBlur={usernameInputBluerHeandler}
                             error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
-                        />                        
+                        />
                     </p>
                     <p>
                         <Input
                            label="Password"
                            type="password"
-                           name="password"                                                    
+                           name="password"
                            value={passwordValue}
                            onChange={passwordChangeHeandler}
                            onBlur={passwordInputBluerHeandler}
                            error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
-                        />                        
-                    </p>                     
-                    <p>                        
+                        />
+                    </p>
+                    <p>
                         <button className="button" type="submit" disabled={isLoginButtonDisaled} >Login</button>
                     </p>
                 </fieldset>
