@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useInput = (defaultValue, validationFn) => {
   const [value, setValue] = useState(defaultValue);
-  const [didEdit, setDidEdit] = useState(false);
+  const [didEdit, setDidEdit] = useState(defaultValue === "" ? false : true);
 
   useEffect(() => {
     setValue(defaultValue);

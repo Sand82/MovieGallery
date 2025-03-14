@@ -16,9 +16,7 @@ import Logout from "./component/Logout/Logout.jsx";
 import Register from "./component/Register/Register.jsx";
 import NotFound from "./component/ErrorPage/NotFound.jsx";
 import BadRequest from "./component/ErrorPage/BadRequest.jsx";
-import { useLocalStorage } from "./hooks/useLocalStorage.js";
-import CreateMovie from "./component/CreateMovie/CreateMovie.jsx";
-import EditMovie from "./component/EditMovie/EditMovie.jsx";
+import ManageMovie from "./component/ManageMovie/ManageMovie.jsx";
 import Details from "./component/Details/Details.jsx";
 import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./common/RouteGuard.js";
@@ -37,15 +35,7 @@ function App() {
     });
   }, []);
 
-  // const loginHandler = (data) => {
-  //   setUser(data);
-  // };
-
-  // const logoutHandler = () => {
-  //   setUser({});
-  // };
-
-  const createMovieHandler = () => {
+  const createHandler = () => {
     movieService.getAll().then((result) => {
       const moviesResult = result.sort((a, b) => b.id - a.id);
       setMovies(moviesResult);
@@ -78,7 +68,7 @@ function App() {
             detailsHandler,
             editHandler,
             deleteHandler,
-            createMovieHandler,
+            createHandler,
           }}
         >
           <Routes>
@@ -106,7 +96,7 @@ function App() {
               path="/create"
               element={
                 <RouteGuard>
-                  <CreateMovie />
+                  <ManageMovie />
                 </RouteGuard>
               }
             ></Route>
@@ -144,7 +134,7 @@ function App() {
               path="/movies/details/:movieId/edit"
               element={
                 <RouteGuard>
-                  <EditMovie movie={movieDetails} />
+                  <ManageMovie movie={movieDetails} />
                 </RouteGuard>
               }
             ></Route>

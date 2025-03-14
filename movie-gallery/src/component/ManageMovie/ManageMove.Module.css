@@ -1,0 +1,20 @@
+.form-container {
+  border: 1px solid #bebebe;
+  margin: 20px auto;
+  max-width: 500px;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 50%);
+  border-radius: 20px;
+}
+
+.movie-title {
+  margin: 20px 0px;
+  font-size: large;
+}
+
+.btn {
+  background-color: #ff8a00;
+}
+
+.btn:hover {
+  background-color: #ff680d;
+}

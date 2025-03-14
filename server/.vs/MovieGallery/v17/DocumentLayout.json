@@ -55,8 +55,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\CommentsController.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAiwBkAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-13T18:56:23.297Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-13T18:56:23.297Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAAACwAAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T21:14:42.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T21:14:42.339Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAuwBcAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T17:40:38.82Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-08T17:40:38.82Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\FavoritesController.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAuwB4AAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T17:40:06.528Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-08T17:40:06.528Z"
             }
           ]
         }
