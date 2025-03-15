@@ -9,8 +9,7 @@ const MovieRating = ({ movieId }) => {
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(null);
   const navigate = useNavigate();
-
-  console.log("from raiting");
+  
   useEffect(() => {
     const data = {
       userId: user.id,

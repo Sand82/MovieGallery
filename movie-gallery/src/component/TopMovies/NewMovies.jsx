@@ -1,9 +1,15 @@
+import { useContext } from "react";
+import { MovieContext } from "../../contexts/MovieContext.js";
+
 import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.jsx";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
 
-const NewMovies = ({ movies }) => {
+const NewMovies = () => {
+
+  const { movies } = useContext(MovieContext);
+
   const firstFiveMovies = movies
     .slice()
     .sort((a, b) => b.avergeRating - a.avergeRating)

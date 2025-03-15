@@ -11,11 +11,13 @@ import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
+import { MovieContext } from "../../contexts/MovieContext.js";
 
 const Details = () => {
   const { movieId } = useParams();
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
+  const { selectMovieHeandler } = useContext(MovieContext);
   const [hart, setHart] = useState(false);
   const navigate = useNavigate();
 
@@ -84,7 +86,12 @@ const Details = () => {
       .catch((error) => {
         throw console.error(error);
       });
-  };  
+  };
+  
+  const editMovieHeandler = () => {    
+    selectMovieHeandler(currMovie);
+      navigate(`/movies/details/${currMovie.id}/edit`);    
+  }
 
   let hartClass =
     hart == false
@@ -156,12 +163,12 @@ const Details = () => {
                       <DetailsLi />
                       {user.isAdmin ? (
                         <li style={style} className="button-holder">
-                          <Link
-                            to={`/movies/details/${currMovie.id}/edit`}
+                          <button
+                            onClick={editMovieHeandler}
                             className="btn btn-warning editButton"
                           >
                             Edit
-                          </Link>
+                          </button>
                           <button
                             className="btn btn-danger delButton"
                             data-toggle="modal"

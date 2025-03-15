@@ -3,11 +3,13 @@ import { useContext, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
-import * as movieValidator from "../../../services/MovieValidator.js";
 import * as commentService from "../../../services/CommentService.js";
 import * as helperService from "../../../services/HelperService.js";
+import * as GlobalConstant from "../../../constants/GlobalConstants.js"
+import { hasLength } from "../../../services/Validators.js"
 
 const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
+  
   const { user } = useContext(AuthContext);
   const [resetState, setResetState] = useState(false);
   const [editComment, setEditComment] = useState(comment);
@@ -26,7 +28,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
 
   const validateComment = (e) => {
     const description = e.target.value;
-    const isValidComment = movieValidator.description(description);
+    const isValidComment = !hasLength(description, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength);
 
     setCommentError(isValidComment);
     setResetState(false);
@@ -101,7 +103,7 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
         )}
         {commentError && (
           <p className="alert alert-danger">
-            Comment should be more than 10 and less than 500 symbols.
+            Comment should be more than {GlobalConstant.textareaMinLength} and less than {GlobalConstant.textareaMaxLength} symbols.
           </p>
         )}
       </div>

@@ -25,7 +25,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CommentCreateModel model)
         {
-            var userId = User.GetId();
+            var userId = User.GetId();            
 
             if (userId == null)
             {

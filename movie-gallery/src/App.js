@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./component/Header/Header.jsx";
 import * as movieService from "./services/MoviesService.js";
 import { AuthProvider } from "./contexts/AuthContext.js";
-import { MovieContext } from "./contexts/MovieContext.js";
+import { MovieProvider, MovieContext } from "./contexts/MovieContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.jsx";
 import Movies from "./component/Movies/Movies.jsx";
@@ -24,58 +24,16 @@ import Favorite from "./component/Favorite/Favorite.jsx";
 import UnderConstruction from "./component/ErrorPage/UnderConstruction.jsx";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  //const [user, setUser] = useLocalStorage("auth", {});
-  const [movieDetails, setMovieDetails] = useState({});
-
-  useEffect(() => {
-    movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
-    });
-  }, []);
-
-  const createHandler = () => {
-    movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
-    });
-  };
-
-  const detailsHandler = (movie) => {
-    setMovieDetails(movie);
-  };
-
-  const editHandler = () => {
-    movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
-    });
-  };
-
-  const deleteHandler = (movieId) => {
-    setMovies((state) => [...state.filter((m) => m.id !== movieId)]);
-  };
-
   return (
     <div className="App">
       <AuthProvider>
-        <ScrollToTop />
-        <Header />
-        <MovieContext.Provider
-          value={{
-            movies,
-            detailsHandler,
-            editHandler,
-            deleteHandler,
-            createHandler,
-          }}
-        >
+        <MovieProvider>
+          <ScrollToTop />
+          <Header />
           <Routes>
-            <Route path="/" element={<NewMovies movies={movies} />}></Route>
+            <Route path="/" element={<NewMovies />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
-
             <Route
               path="/logout"
               element={
@@ -134,14 +92,14 @@ function App() {
               path="/movies/details/:movieId/edit"
               element={
                 <RouteGuard>
-                  <ManageMovie movie={movieDetails} />
+                  <ManageMovie />
                 </RouteGuard>
               }
             ></Route>
           </Routes>
-        </MovieContext.Provider>
-        <Scroll />
-        <Footer />
+          <Scroll />
+          <Footer />
+        </MovieProvider>
       </AuthProvider>
     </div>
   );

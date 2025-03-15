@@ -10,7 +10,10 @@ import { useInput } from "../../hooks/useInput.js"
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js"
 
-const ManageMovie = ({movie}) => {
+const ManageMovie = () => {
+
+const { user } = useContext(AuthContext);
+const { movie } = useContext(MovieContext);
 
 const {
 	value: titleValue,
@@ -59,8 +62,8 @@ const {
 	inputBlurHeandler: descriptionInputBluerHeandler,
 	isEmpty: isDescriptionFieldEmpty,    
 } = useInput(movie ? movie.description :"", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
-
-  const { user } = useContext(AuthContext);
+ 
+  
   const { createHandler, editHandler } = useContext(MovieContext);  
 
   const navigate = useNavigate();  

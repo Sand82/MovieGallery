@@ -11,32 +11,27 @@ import { hasLength, isEmail } from "../../../services/Validators.js"
 
 const CreateComment = ({ movieId, commentHandler }) => {
 
+	const { user } = useContext(AuthContext);
+
 	const {
 		value: usernameValue,
-		changeHeandler: usernameChangeHeandler,
-		hasError: usernameHasError,
-		inputBlurHeandler: usernameInputBluerHeandler, 
-		isEmpty: isUsernameFieldEmpty,   
-	} = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+		changeHeandler: usernameChangeHeandler,		   
+	} = useInput(user.username, (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 
 	const {
 		value: emailValue,
 		changeHeandler: emailChangeHeandler,
-		hasError: emailHasError,
-		inputBlurHeandler: emailInputBluerHeandler,
-		isEmpty: isEmailFieldEmpty,    
-	} = useInput("", (value) => isEmail(value));	
+	} = useInput(user.email, (value) => isEmail(value));	
 		
 	const {
 		value: commentValue,
 		changeHeandler: commentChangeHeandler,
 		hasError: commentHasError,
 		inputBlurHeandler: commentInputBluerHeandler, 
-		isEmpty: isCommentFieldEmpty,   
+		isEmpty: isCommentFieldEmpty,
+		resetValue: commentResetValue,  
 	} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
 
-
-  	const { user } = useContext(AuthContext);  
   	const navigate = useNavigate();
 
   	const createCommentHandler = (e) => {
@@ -47,7 +42,7 @@ const CreateComment = ({ movieId, commentHandler }) => {
 			username: usernameValue,
 			email: emailValue,
 			movieId
-		}
+		}	
 
     	commentService
       		.create(currComment, user.accessToken)
@@ -55,16 +50,15 @@ const CreateComment = ({ movieId, commentHandler }) => {
       		  if (result === "Bad response") {
       		    return navigate("/notfound");
       		  }
-      		  commentHandler(result);        
+      		  commentHandler(result);
+				commentResetValue();        
       		})
       		.catch((error) => {
       		  throw console.error(error);
       		});
 	};  
 
-  	const isValid = usernameHasError || isUsernameFieldEmpty ||
-		emailHasError || isEmailFieldEmpty ||
-		commentHasError || isCommentFieldEmpty;
+  	const isValid = commentHasError || isCommentFieldEmpty;
 
   	return (
     	<div className="section-line">
@@ -82,9 +76,8 @@ const CreateComment = ({ movieId, commentHandler }) => {
             		    	name="username"
 							className="form-control"
             		    	value={usernameValue}
-            		    	onChange={usernameChangeHeandler}
-            		    	onBlur={usernameInputBluerHeandler}
-            		    	error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
+            		    	onChange={usernameChangeHeandler}            		    	
+							disabled={true}            		    	
             			/> 
 					</div>	          
             	</div>
@@ -98,9 +91,9 @@ const CreateComment = ({ movieId, commentHandler }) => {
                 			name="email"
 							className="form-control"                          
                 			value={emailValue}
-                			onChange={emailChangeHeandler}
-                			onBlur={emailInputBluerHeandler}
-                			error={emailHasError && `Email should be valid email address.`}/>                        
+                			onChange={emailChangeHeandler}                			
+							disabled={true}               			
+						/>                        
            			</div>
 				</div>			
           	</div>

@@ -18,7 +18,7 @@ namespace MovieGalleryWebAPI.Service.Comments
         }
         public async Task CreateComment(CommentCreateModel model, string userId)
         {
-            var coment = new Comment
+            var comment = new Comment
             {
                 Content = model.Comment,
                 UserId = userId,
@@ -27,11 +27,9 @@ namespace MovieGalleryWebAPI.Service.Comments
 
             var movie = await this.data.Movies.Where(m => m.Id == model.MovieId).FirstOrDefaultAsync();
 
-            movie.Comments.Add(coment);
+            movie!.Comments!.Add(comment);
 
             await this.data.SaveChangesAsync();
-
-           
         }
 
         public async Task<bool> EditComment(CommentEditModel model, DateTime date)
