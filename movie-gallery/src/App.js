@@ -54,7 +54,7 @@ function App() {
               path="/create"
               element={
                 <RouteGuard>
-                  <ManageMovie />
+                  <ManageMovie isCreated={true}/>
                 </RouteGuard>
               }
             ></Route>

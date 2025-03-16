@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 import * as style from "./ManageMove.Module.css";
-import * as movieServis from "../../services/MoviesService.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import Input from "../UI/Input.jsx"
@@ -10,10 +8,10 @@ import { useInput } from "../../hooks/useInput.js"
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js"
 
-const ManageMovie = () => {
+const ManageMovie = ({isCreated}) => {
 
 const { user } = useContext(AuthContext);
-const { movie } = useContext(MovieContext);
+const { createHandler, editHandler, movie } = useContext(MovieContext);
 
 const {
 	value: titleValue,
@@ -21,7 +19,7 @@ const {
 	hasError: titleHasError,
 	inputBlurHeandler: titleInputBluerHeandler,
 	isEmpty: isTitleFieldEmpty,    
-  } = useInput(movie ? movie.title :"", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+  } = useInput(isCreated ? "": movie.title, (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 
 const {
 	value: categoryValue,
@@ -29,7 +27,7 @@ const {
 	hasError: categoryHasError,
 	inputBlurHeandler: categoryInputBluerHeandler,
 	isEmpty: isCategoryFieldEmpty,    
-} = useInput(movie ? movie.category :"", (value) => hasLength(value, GlobalConstant.categoryMinLength, GlobalConstant.categoryMaxLength));
+} = useInput(isCreated ? "": movie.category, (value) => hasLength(value, GlobalConstant.categoryMinLength, GlobalConstant.categoryMaxLength));
 
 const {
 	value: yearValue,
@@ -37,7 +35,7 @@ const {
 	hasError: yearHasError,
 	inputBlurHeandler: yearInputBluerHeandler,
 	isEmpty: isYearFieldEmpty,    
-} = useInput(movie ? movie.year :"", (value) => isEqualToExactLenght(value, GlobalConstant.yearLength));
+} = useInput(isCreated ? "": movie.year, (value) => isEqualToExactLenght(value, GlobalConstant.yearLength));
 
 const {
 	value: imageUrlValue,
@@ -45,7 +43,7 @@ const {
 	hasError: imageUrlHasError,
 	inputBlurHeandler: imageUrlInputBluerHeandler,
 	isEmpty: isImageUrlFieldEmpty,    
-} = useInput(movie ? movie.imageUrl :"", (value) => isValidUrl(value));
+} = useInput(isCreated ? "": movie.imageUrl, (value) => isValidUrl(value));
 
 const {
 	value: durationValue,
@@ -53,7 +51,7 @@ const {
 	hasError: durationHasError,
 	inputBlurHeandler: durationInputBluerHeandler,
 	isEmpty: isDurationFieldEmpty,    
-} = useInput(movie ? movie.duration :"", (value) => hasLengthNumberValue(value, GlobalConstant.durationMinLength, GlobalConstant.durationMaxLength));
+} = useInput(isCreated ? "": movie.duration, (value) => hasLengthNumberValue(value, GlobalConstant.durationMinLength, GlobalConstant.durationMaxLength));
 
 const {
 	value: descriptionValue,
@@ -61,13 +59,8 @@ const {
 	hasError: descriptionHasError,
 	inputBlurHeandler: descriptionInputBluerHeandler,
 	isEmpty: isDescriptionFieldEmpty,    
-} = useInput(movie ? movie.description :"", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
+} = useInput(isCreated ? "": movie.description, (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
  
-  
-  const { createHandler, editHandler } = useContext(MovieContext);  
-
-  const navigate = useNavigate();  
-
   const manageMovieHandler = (e) => {
     e.preventDefault();	
 
@@ -81,42 +74,14 @@ const {
     	description: descriptionValue,
 	  }
 
-    if (movie) {
-      editMovie(movieData);
+    if (isCreated) {
+
+      createHandler(movieData);      
     } else {
-      createMovie(movieData);
+
+      editHandler(movieData);
     }   
-  };
-
-  const createMovie = (movieData) => {
-    movieServis
-      .create(movieData, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        createHandler();
-        return navigate("/movies");
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
-  }
-
-  const editMovie = (movieData) => {
-    movieServis
-      .edit(movieData, user.accessToken)
-      .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/notfound');
-        }
-        editHandler(result);
-        return navigate('/movies');
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
-  }
+  };   
   
 const isValid = titleHasError || isTitleFieldEmpty ||
   	categoryHasError || isCategoryFieldEmpty || 
@@ -125,7 +90,7 @@ const isValid = titleHasError || isTitleFieldEmpty ||
 	  durationHasError || isDurationFieldEmpty ||
 	  descriptionHasError || isDescriptionFieldEmpty; 
     
-const movieActionType = movie ? "Edit" : "Create";
+const movieActionType = isCreated ? "Create" : "Edit";
 
 return (
     <div className="container px-12 form-container" style={style}>

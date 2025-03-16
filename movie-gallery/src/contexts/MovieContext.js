@@ -1,57 +1,130 @@
-import { createContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useReducer,
+  useContext,
+} from "react";
 
+import {
+  ADD_MOVIES,
+  CREATE_MOVIE,
+  EDIT_MOVIE,
+  DELETE_MOVIE,
+} from "../constants/ReducerConstants.js";
 import * as movieService from "../services/MoviesService.js";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext.js";
 
 export const MovieContext = createContext();
 
+const movieReducer = (state, action) => {
+  let movies = [];
+
+  switch (action.type) {
+    case ADD_MOVIES:
+      return [...action.payload];
+
+    case CREATE_MOVIE:
+      return [action.payload, ...state];
+
+    case EDIT_MOVIE:
+      movies = state.filter((movie) => movie.id != action.payload.id);
+      return [action.payload, ...movies];
+
+    case DELETE_MOVIE:
+      movies = state.filter((movie) => movie.id != action.payload);
+      return [...movies];
+
+    default:
+      return state;
+  }
+};
+
 export const MovieProvider = ({ children }) => {
-  const [movies, setMovies] = useState([]);
-  const [movieDetails, setMovieDetails] = useState({});
+  const [movies, dispatch] = useReducer(movieReducer, []);
   const [movie, setMovie] = useState({});
+
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
+      if (result === "Bad response") {
+        return navigate("/notfound");
+      }
+
+      const moviesResult = sortMovies(result);
+
+      dispatch({
+        type: ADD_MOVIES,
+        payload: moviesResult,
+      });
     });
   }, []);
 
-  const createHandler = () => {
-    movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
-    });
+  const createHandler = (movieData) => {
+    movieService
+      .create(movieData, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+
+        dispatch({
+          type: CREATE_MOVIE,
+          payload: result,
+        });
+        return navigate("/movies");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
-  const detailsHandler = (movie) => {
-    setMovieDetails(movie);
-  };
+  const editHandler = (movieData) => {
+    movieService
+      .edit(movieData, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        dispatch({
+          type: EDIT_MOVIE,
+          payload: movieData,
+        });
 
-  const editHandler = () => {
-    movieService.getAll().then((result) => {
-      const moviesResult = result.sort((a, b) => b.id - a.id);
-      setMovies(moviesResult);
-    });
+        return navigate("/movies");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
   const deleteHandler = (movieId) => {
-    setMovies((state) => [...state.filter((m) => m.id !== movieId)]);
+    dispatch({
+      type: DELETE_MOVIE,
+      payload: movieId,
+    });
   };
 
-  const selectMovieHeandler = (movie) => {
-    setMovie(movie);
-  };  
+  const detailsHandler = (movieId) => {
+    setMovie(movies.find((movie) => movie.id == movieId));
+  };
+
+  const sortMovies = (movies) => {
+    return movies.sort((a, b) => b.id - a.id);
+  };
 
   return (
     <MovieContext.Provider
       value={{
         movies,
-        detailsHandler,
+        createHandler,
         editHandler,
         deleteHandler,
-        createHandler,
-        movieDetails,
-        selectMovieHeandler,
+        detailsHandler,
         movie,
       }}
     >

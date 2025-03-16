@@ -17,7 +17,7 @@ const Details = () => {
   const { movieId } = useParams();
   const [currMovie, setCurrMovie] = useState({});
   const { user } = useContext(AuthContext);
-  const { selectMovieHeandler } = useContext(MovieContext);
+  const { detailsHandler } = useContext(MovieContext);
   const [hart, setHart] = useState(false);
   const navigate = useNavigate();
 
@@ -89,7 +89,7 @@ const Details = () => {
   };
   
   const editMovieHeandler = () => {    
-    selectMovieHeandler(currMovie);
+    detailsHandler(movieId);
       navigate(`/movies/details/${currMovie.id}/edit`);    
   }
 

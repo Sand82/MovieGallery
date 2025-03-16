@@ -9,7 +9,7 @@ const NewMovieBlog = ({ movie }) => {
   const {detailsHandler} = useContext(MovieContext);
 
   const detailsMovieHandler = () => { 
-    detailsHandler(movie);
+    detailsHandler(movie.id);
   }
 
   return (
