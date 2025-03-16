@@ -18,7 +18,7 @@
         public const int MaxMovieDescriptionLength = 500;
 
         public const int MinMovieDuration = 2;
-        public const int MaxMovieDuration = 20;
+        public const int MaxMovieDuration = 400;
 
         public const int MovieYearLength = 4;
 

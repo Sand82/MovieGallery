@@ -19,8 +19,6 @@ import { AuthContext } from "./AuthContext.js";
 export const MovieContext = createContext();
 
 const movieReducer = (state, action) => {
-  let movies = [];
-
   switch (action.type) {
     case ADD_MOVIES:
       return [...action.payload];
@@ -29,12 +27,14 @@ const movieReducer = (state, action) => {
       return [action.payload, ...state];
 
     case EDIT_MOVIE:
-      movies = state.filter((movie) => movie.id != action.payload.id);
-      return [action.payload, ...movies];
+      return [
+        ...state.filter((movie) =>
+          movie.id == action.payload.id ? action.payload : movie
+        ),
+      ];
 
     case DELETE_MOVIE:
-      movies = state.filter((movie) => movie.id != action.payload);
-      return [...movies];
+      return [...state.filter((movie) => movie.id != action.payload)];
 
     default:
       return state;
@@ -46,7 +46,6 @@ export const MovieProvider = ({ children }) => {
   const [movie, setMovie] = useState({});
 
   const { user } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   useEffect(() => {
