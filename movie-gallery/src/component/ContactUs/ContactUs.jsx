@@ -57,7 +57,7 @@ const ContactUs = () => {
 
     const sendEmail = (e) => {
         e.preventDefault();
-        console.log(form.current)
+        
         emailjs
             .sendForm(
             'service_ufh83g4',

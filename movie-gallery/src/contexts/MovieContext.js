@@ -66,7 +66,7 @@ export const MovieProvider = ({ children }) => {
       .create(movieData, user.accessToken)
       .then((result) => {
         if (result === "Bad response") {
-          return navigate("/notfound");
+          return navigate("/badrequest");
         }
 
         dispatch({
@@ -85,7 +85,7 @@ export const MovieProvider = ({ children }) => {
       .edit(movieData, user.accessToken)
       .then((result) => {
         if (result === "Bad response") {
-          return navigate("/notfound");
+          return navigate("/badrequest");
         }
         dispatch({
           type: EDIT_MOVIE,
@@ -100,10 +100,23 @@ export const MovieProvider = ({ children }) => {
   };
 
   const deleteHandler = (movieId) => {
-    dispatch({
-      type: DELETE_MOVIE,
-      payload: movieId,
-    });
+    movieService
+      .remove(movieId, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/badrequest");
+        }
+
+        dispatch({
+          type: DELETE_MOVIE,
+          payload: movieId,
+        });
+
+        navigate("/movies");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
   };
 
   const detailsHandler = (movieId) => {

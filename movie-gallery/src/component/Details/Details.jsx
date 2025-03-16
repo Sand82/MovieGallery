@@ -94,9 +94,8 @@ const Details = () => {
   }
 
   let hartClass =
-    hart == false
-      ? "fa-solid fa-heart fa-2xl hart hart-not-active"
-      : "fa-solid fa-heart fa-2xl hart hart-active";
+    hart ? "fa-solid fa-heart fa-2xl hart hart-active"
+    : "fa-solid fa-heart fa-2xl hart hart-not-active";     
 
   return (
     <>
@@ -204,7 +203,7 @@ const Details = () => {
                   <h2 className="section-title text-uppercase">Comments</h2>
                 </div>
 
-                {currMovie.comments != undefined
+                {currMovie.comments
                   ? currMovie.comments.map((x) => (
                       <Comment
                         key={x.id}
