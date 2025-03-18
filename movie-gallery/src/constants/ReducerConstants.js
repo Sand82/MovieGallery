@@ -9,3 +9,5 @@ export const DELETE_MOVIE = "DELETE_MOVIE";
 export const ADD_MOVIE = "ADD_MOVIE";
 
 export const CREATE_COMMENT = "CREATE_COMMENT";
+
+export const EDIT_COMMENT = "EDIT_COMMENT";

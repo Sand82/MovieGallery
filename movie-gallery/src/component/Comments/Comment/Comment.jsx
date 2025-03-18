@@ -3,14 +3,16 @@ import { useContext, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
+import { DetailContext } from "../../../contexts/DetailContext.js";
 import * as commentService from "../../../services/CommentService.js";
 import * as helperService from "../../../services/HelperService.js";
 import * as GlobalConstant from "../../../constants/GlobalConstants.js"
 import { hasLength } from "../../../services/Validators.js"
 
-const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
+const Comment = ({ comment, deleteCommentHandler }) => {
   
   const { user } = useContext(AuthContext);
+  const { editCommentHandler } = useContext(DetailContext)
   const [resetState, setResetState] = useState(false);
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
@@ -39,20 +41,8 @@ const Comment = ({ comment, editCommentHandler, deleteCommentHandler }) => {
     }
   };
 
-  const editCurrentComment = (commentString) => {
-    comment.comment = commentString;
-    commentService
-      .edit(comment, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-
-        editCommentHandler(result);
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
+  const editCurrentComment = (editedComment) => {    
+    editCommentHandler(editedComment, comment);
   };
 
   const daleteHandler = () => {

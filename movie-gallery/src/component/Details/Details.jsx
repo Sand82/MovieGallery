@@ -41,24 +41,8 @@ const Details = () => {
       .catch((error) => {
         throw console.error(error);
       });
-  }, [movieId, user.accessToken, user.id]);
-
-  const commentHandler = (comment) => {
-    // setCurrMovie((state) => ({
-    //   ...state,
-    //   comments: [...state.comments, comment],
-    // }));
-  };
-
-  const editCommentHandler = (comment) => {
-    // setCurrMovie((state) => ({
-    //   ...state,
-    //   comments: [
-    //     ...state.comments.filter((c) => (c.id != comment.id ? c : comment)),
-    //   ],
-    // }));
-  };
-
+  }, [movieId, user.accessToken, user.id]);  
+  
   const deleteCommentHandler = () => {
     // moviesService.getOne(movieId).then((result) => {
     //   setCurrMovie(result);
@@ -199,8 +183,7 @@ const Details = () => {
                   ? currMovie.comments.map((x) => (
                       <Comment
                         key={x.id}
-                        comment={x}
-                        editCommentHandler={editCommentHandler}
+                        comment={x}                        
                         deleteCommentHandler={deleteCommentHandler}
                       />
                     ))
@@ -208,8 +191,7 @@ const Details = () => {
               </div>
 
               <CreateComment
-                movieId={movieId}
-                commentHandler={commentHandler}
+                movieId={movieId}                
               />
             </section>
           </div>

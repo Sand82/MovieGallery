@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import MovieRating from "../../Rating/MovieRaiting.jsx";
@@ -8,10 +8,10 @@ import * as GlobalConstant from "../../../constants/GlobalConstants.js"
 import { hasLength, isEmail } from "../../../services/Validators.js"
 import { DetailContext } from "../../../contexts/DetailContext.js";
 
-const CreateComment = ({ movieId, commentHandler }) => {
+const CreateComment = ({ movieId }) => {
 
 	const { user } = useContext(AuthContext);
-	const { createHeandler } = useContext(DetailContext)
+	const { createCommentHandler } = useContext(DetailContext)
 
 	const {
 		value: usernameValue,
@@ -32,7 +32,7 @@ const CreateComment = ({ movieId, commentHandler }) => {
 		resetValue: commentResetValue,  
 	} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
 
-  	const createCommentHandler = (e) => {
+  	const createHandler = (e) => {
     	e.preventDefault();
 
     	const currentCommentInfo = {
@@ -42,7 +42,7 @@ const CreateComment = ({ movieId, commentHandler }) => {
 			movieId		
 		}
 
-		createHeandler(currentCommentInfo);
+		createCommentHandler(currentCommentInfo);
 		commentResetValue(); 	
 	};  
 
@@ -53,7 +53,7 @@ const CreateComment = ({ movieId, commentHandler }) => {
       		<div className="section-head">
         	<h2 className="section-title text-uppercase">Add comment</h2>
       	</div>
-      	<form autoComplete="off" onSubmit={createCommentHandler}>
+      	<form autoComplete="off" onSubmit={createHandler}>
         	<div className="row form-grid">
           	<div className="col-12 col-sm-6">
             	<div className="input-view-flat input-group">
