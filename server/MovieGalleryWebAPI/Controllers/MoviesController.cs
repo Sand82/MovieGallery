@@ -35,9 +35,9 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<MovieDataModel> Get(int id)
         {
-            var movies = await moviesService.GetOneMovie(id);
+            var movie = await moviesService.GetOneMovie(id);
            
-            return movies;
+            return movie;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

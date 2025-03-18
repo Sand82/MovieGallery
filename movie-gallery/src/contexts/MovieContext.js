@@ -15,33 +15,12 @@ import {
 import * as movieService from "../services/MoviesService.js";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext.js";
+import { moviesReducer } from "./Reducers.js";
 
 export const MovieContext = createContext();
 
-const movieReducer = (state, action) => {
-  switch (action.type) {
-    case ADD_MOVIES:
-      return [...action.payload];
-
-    case CREATE_MOVIE:
-      return [action.payload, ...state];
-
-    case EDIT_MOVIE:
-      return state.map((movie) =>
-        movie.id == action.payload.id ? action.payload : movie
-      );
-
-    case DELETE_MOVIE:
-      return state.filter((movie) => movie.id != action.payload);
-
-    default:
-      return state;
-  }
-};
-
 export const MovieProvider = ({ children }) => {
-  const [movies, dispatch] = useReducer(movieReducer, []);
-  const [movie, setMovie] = useState({});
+  const [movies, dispatch] = useReducer(moviesReducer, []);  
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -64,14 +43,14 @@ export const MovieProvider = ({ children }) => {
   const createHandler = (movieData) => {
     movieService
       .create(movieData, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
+      .then((responce) => {
+        if (responce === "Bad response") {
           return navigate("/badrequest");
         }
 
         dispatch({
           type: CREATE_MOVIE,
-          payload: result,
+          payload: responce,
         });
         return navigate("/movies");
       })
@@ -83,8 +62,8 @@ export const MovieProvider = ({ children }) => {
   const editHandler = (movieData) => {
     movieService
       .edit(movieData, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
+      .then((responce) => {
+        if (responce === "Bad response") {
           return navigate("/badrequest");
         }
         dispatch({
@@ -118,11 +97,7 @@ export const MovieProvider = ({ children }) => {
         throw console.error(error);
       });
   };
-
-  const detailsHandler = (movieId) => {
-    setMovie(movies.find((movie) => movie.id == movieId));
-  };
-
+  
   const sortMovies = (movies) => {
     return movies.sort((a, b) => b.id - a.id);
   };
@@ -133,9 +108,7 @@ export const MovieProvider = ({ children }) => {
         movies,
         createHandler,
         editHandler,
-        deleteHandler,
-        detailsHandler,
-        movie,
+        deleteHandler,               
       }}
     >
       {children}

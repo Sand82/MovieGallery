@@ -11,27 +11,24 @@ import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
-import { MovieContext } from "../../contexts/MovieContext.js";
+import { DetailContext } from "../../contexts/DetailContext.js";
 
 const Details = () => {
-  const { movieId } = useParams();
-  const [currMovie, setCurrMovie] = useState({});
-  const { user } = useContext(AuthContext);
-  const { detailsHandler } = useContext(MovieContext);
+  const { movieId } = useParams();  
+  const { user } = useContext(AuthContext);  
+  const { movie: currMovie, detailsHandler } = useContext(DetailContext);
   const [hart, setHart] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    moviesService.getOne(movieId).then((result) => {
-      setCurrMovie(result);
-    });
-  }, [movieId]);
+  useEffect(() => {    
+    detailsHandler(movieId);    
+  }, [movieId]); 
 
   useEffect(() => {
     let data = {
       movieId: Number(movieId),
       userId: user.id,
-    };
+    };    
 
     favoriteService
       .getFavorite(data, user.accessToken)
@@ -47,25 +44,25 @@ const Details = () => {
   }, [movieId, user.accessToken, user.id]);
 
   const commentHandler = (comment) => {
-    setCurrMovie((state) => ({
-      ...state,
-      comments: [...state.comments, comment],
-    }));
+    // setCurrMovie((state) => ({
+    //   ...state,
+    //   comments: [...state.comments, comment],
+    // }));
   };
 
   const editCommentHandler = (comment) => {
-    setCurrMovie((state) => ({
-      ...state,
-      comments: [
-        ...state.comments.filter((c) => (c.id != comment.id ? c : comment)),
-      ],
-    }));
+    // setCurrMovie((state) => ({
+    //   ...state,
+    //   comments: [
+    //     ...state.comments.filter((c) => (c.id != comment.id ? c : comment)),
+    //   ],
+    // }));
   };
 
   const deleteCommentHandler = () => {
-    moviesService.getOne(movieId).then((result) => {
-      setCurrMovie(result);
-    });
+    // moviesService.getOne(movieId).then((result) => {
+    //   setCurrMovie(result);
+    // });
   };
 
   const hartClickHandler = (hart) => {
@@ -87,11 +84,6 @@ const Details = () => {
         throw console.error(error);
       });
   };
-  
-  const editMovieHeandler = () => {    
-    detailsHandler(movieId);
-      navigate(`/movies/details/${currMovie.id}/edit`);    
-  }
 
   let hartClass =
     hart ? "fa-solid fa-heart fa-2xl hart hart-active"
@@ -162,12 +154,12 @@ const Details = () => {
                       <DetailsLi />
                       {user.isAdmin ? (
                         <li style={style} className="button-holder">
-                          <button
-                            onClick={editMovieHeandler}
+                          <Link
+                            to={`/movies/details/${currMovie.id}/edit`}
                             className="btn btn-warning editButton"
                           >
                             Edit
-                          </button>
+                          </Link>
                           <button
                             className="btn btn-danger delButton"
                             data-toggle="modal"

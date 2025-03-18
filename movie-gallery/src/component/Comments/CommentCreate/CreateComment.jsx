@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../contexts/AuthContext.js";
-import * as commentService from "../../../services/CommentService.js";
 import MovieRating from "../../Rating/MovieRaiting.jsx";
 import Input from "../../UI/Input.jsx"
 import { useInput } from "../../../hooks/useInput.js"
 import * as GlobalConstant from "../../../constants/GlobalConstants.js"
 import { hasLength, isEmail } from "../../../services/Validators.js"
+import { DetailContext } from "../../../contexts/DetailContext.js";
 
 const CreateComment = ({ movieId, commentHandler }) => {
 
 	const { user } = useContext(AuthContext);
+	const { createHeandler } = useContext(DetailContext)
 
 	const {
 		value: usernameValue,
@@ -32,30 +32,18 @@ const CreateComment = ({ movieId, commentHandler }) => {
 		resetValue: commentResetValue,  
 	} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
 
-  	const navigate = useNavigate();
-
   	const createCommentHandler = (e) => {
     	e.preventDefault();
 
-    	const currComment = {
+    	const currentCommentInfo = {
 			comment: commentValue,
 			username: usernameValue,
 			email: emailValue,
-			movieId
-		}	
+			movieId		
+		}
 
-    	commentService
-      		.create(currComment, user.accessToken)
-      		.then((result) => {
-      		  if (result === "Bad response") {
-      		    return navigate("/notfound");
-      		  }
-      		  commentHandler(result);
-				commentResetValue();        
-      		})
-      		.catch((error) => {
-      		  throw console.error(error);
-      		});
+		createHeandler(currentCommentInfo);
+		commentResetValue(); 	
 	};  
 
   	const isValid = commentHasError || isCommentFieldEmpty;
