@@ -12,7 +12,7 @@ import { hasLength } from "../../../services/Validators.js"
 const Comment = ({ comment, deleteCommentHandler }) => {
   
   const { user } = useContext(AuthContext);
-  const { editCommentHandler } = useContext(DetailContext)
+  const { editCommentHandler, daleteCommentHandler } = useContext(DetailContext)
   const [resetState, setResetState] = useState(false);
   const [editComment, setEditComment] = useState(comment);
   const [commentError, setCommentError] = useState(false);
@@ -46,17 +46,7 @@ const Comment = ({ comment, deleteCommentHandler }) => {
   };
 
   const daleteHandler = () => {
-    commentService
-      .remove(comment.id, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        deleteCommentHandler();
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
+    daleteCommentHandler(comment.id);
   };
 
   const isValid = user.id === comment.userId;

@@ -2,8 +2,11 @@ import {
   ADD_MOVIES,
   CREATE_MOVIE,
   EDIT_MOVIE,
-  DELETE_MOVIE,
+  DELETE_MOVIE,  
+  ADD_MOVIE,
   CREATE_COMMENT,
+  EDIT_COMMENT, 
+  DELETE_COMMENT
 } from "../constants/ReducerConstants.js";
 
 export const moviesReducer = (state, action) => {
@@ -22,6 +25,35 @@ export const moviesReducer = (state, action) => {
     case DELETE_MOVIE:
       return state.filter((movie) => movie.id != action.payload);
     
+    default:
+      return state;
+  }
+};
+
+export const detailReducer = (state, action) => {
+  switch (action.type) {
+    case ADD_MOVIE:
+      return action.payload;
+
+    case CREATE_COMMENT:
+      return { ...state, comments: [...state.comments, action.payload] };
+
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.map((comment) =>
+          comment.id == action.payload.id ? action.payload : comment
+        ),
+      };
+
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        comments: state.comments.filter(
+          (comment) => comment.id != action.payload
+        ),
+      };
+
     default:
       return state;
   }

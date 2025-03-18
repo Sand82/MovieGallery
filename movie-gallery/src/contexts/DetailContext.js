@@ -5,33 +5,14 @@ import {
   CREATE_COMMENT,
   ADD_MOVIE,
   EDIT_COMMENT,
+  DELETE_COMMENT,
 } from "../constants/ReducerConstants.js";
 import * as commentService from "../services/CommentService.js";
 import { AuthContext } from "./AuthContext.js";
 import * as movieService from "../services/MoviesService.js";
+import { detailReducer } from "./Reducers.js";
 
 export const DetailContext = createContext();
-
-const detailReducer = (state, action) => {
-  switch (action.type) {
-    case ADD_MOVIE:
-      return action.payload;
-
-    case CREATE_COMMENT:
-      return { ...state, comments: [...state.comments, action.payload] };
-
-    case EDIT_COMMENT:
-      return {
-        ...state,
-        comments: state.comments.map((comment) =>
-          comment.id == action.payload.id ? action.payload : comment
-        ),
-      };
-
-    default:
-      return state;
-  }
-};
 
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
@@ -94,12 +75,31 @@ export const DetailProvider = ({ children }) => {
       });
   };
 
+  const daleteCommentHandler = (commentId) => {
+    commentService
+      .remove(commentId, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+
+        dispatch({
+          type: DELETE_COMMENT,
+          payload: commentId,
+        });
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
+
   return (
     <DetailContext.Provider
       value={{
         movie,
         createCommentHandler,
         editCommentHandler,
+        daleteCommentHandler,
         detailsHandler,
       }}
     >
