@@ -77,10 +77,8 @@ const {
 	  }
 
     if (isCreated) {
-
       createHandler(movieData);      
     } else {
-
       editHandler(movieData);
     }   
   };   
