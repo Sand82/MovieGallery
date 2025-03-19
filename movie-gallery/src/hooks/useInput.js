@@ -8,12 +8,12 @@ export const useInput = (defaultValue, validationFn) => {
     setValue(defaultValue);
   }, [defaultValue]);
 
-  const changeHeandler = (e) => {
+  const changeHeandler = (e) => {    
     setValue(e.target.value);
     setDidEdit(false);
   };
 
-  const valioIsValid = validationFn(value);
+  const valioIsValid = validationFn(value); 
 
   const inputBlurHeandler = () => {
     setDidEdit(true);

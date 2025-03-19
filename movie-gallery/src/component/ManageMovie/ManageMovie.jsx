@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-import * as style from "./ManageMove.Module.css";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import Input from "../UI/Input.jsx"
@@ -93,7 +92,7 @@ const isValid = titleHasError || isTitleFieldEmpty ||
 const movieActionType = isCreated ? "Create" : "Edit";
 
 return (
-    <div className="container px-12 form-container" style={style}>
+    <div className="container px-12 form-container">
       <div className="row top-buffer">
         <div className="col-sm-12 col-lg-3 col-lg-8 offset-xl-3 col-xl-6 col">
           {user.isAdmin ? (
