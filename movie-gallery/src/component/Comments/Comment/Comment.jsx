@@ -1,49 +1,34 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 
 import * as style from "./Comment.Module.css";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import { DetailContext } from "../../../contexts/DetailContext.js";
-import * as commentService from "../../../services/CommentService.js";
 import * as helperService from "../../../services/HelperService.js";
-import * as GlobalConstant from "../../../constants/GlobalConstants.js"
-import { hasLength } from "../../../services/Validators.js"
+import * as GlobalConstant from "../../../constants/GlobalConstants.js";
+import { hasLength } from "../../../services/Validators.js";
+import { useInput } from "../../../hooks/useInput.js";
+import Input from "../../UI/Input.jsx";
 
-const Comment = ({ comment, deleteCommentHandler }) => {
+const Comment = ({ comment }) => {
+
+  const {
+      value: commentValue,
+      changeHeandler: commentChangeHeandler,
+      hasError: commentHasError,
+      inputBlurHeandler: commentInputBluerHeandler,       
+  } = useInput(comment.comment, (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
   
   const { user } = useContext(AuthContext);
   const { editCommentHandler, daleteCommentHandler } = useContext(DetailContext)
-  const [resetState, setResetState] = useState(false);
-  const [editComment, setEditComment] = useState(comment);
-  const [commentError, setCommentError] = useState(false);
-  const navigate = useNavigate();
+  const [resetState, setResetState] = useState(false);  
 
-  const restartState = (e) => {
+  const editHandler = (e) => {
     e.preventDefault();
-
+    
+    editCommentHandler(commentValue, comment);
     setResetState(true);
-  };
-
-  const changeHandler = (e) => {
-    setEditComment((state) => state === e.target.value);
-  };
-
-  const validateComment = (e) => {
-    const description = e.target.value;
-    const isValidComment = !hasLength(description, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength);
-
-    setCommentError(isValidComment);
-    setResetState(false);
-
-    if (!isValidComment) {
-      editCurrentComment(description);
-      comment.comment = description;
-    }
-  };
-
-  const editCurrentComment = (editedComment) => {    
-    editCommentHandler(editedComment, comment);
-  };
+  };  
 
   const daleteHandler = () => {
     daleteCommentHandler(comment.id);
@@ -54,38 +39,36 @@ const Comment = ({ comment, deleteCommentHandler }) => {
   return (
     <div style={style} className="comment-entity">
       <div className="entity-inner">
-        <form className="entity-content" onSubmit={restartState}>
+        <form className="entity-content">
           <h4 className="entity-title">{comment.username}</h4>
           <p className="entity-subtext">
             {helperService.formatData(comment.creationData)}
           </p>
-          {resetState ? (
-            <input
-              name="comment"
-              className="form-control entity-text"
-              onChange={changeHandler}
-              defaultValue={comment.comment}
-              onBlur={validateComment}
-            />
+          {resetState ? (            
+            <Input
+                label="Comment"
+                type="text"
+                name="comment"    
+		            className="form-control entity-text"                          
+                value={commentValue}
+                onChange={commentChangeHeandler}
+                onBlur={commentInputBluerHeandler}
+                error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
+              />   
           ) : (
             <p className="entity-text"> {comment.comment} </p>
           )}
         </form>
         {isValid && (
           <div className="comment-div">
-            <Link className="comment-link" to="#" onClick={restartState}>
+            <Link className="comment-link" to="#" onClick={editHandler}>
               Edit
             </Link>
             <Link className="comment-link" to="#" onClick={daleteHandler}>
               Delete
             </Link>
           </div>
-        )}
-        {commentError && (
-          <p className="alert alert-danger">
-            Comment should be more than {GlobalConstant.textareaMinLength} and less than {GlobalConstant.textareaMaxLength} symbols.
-          </p>
-        )}
+        )}        
       </div>
     </div>
   );

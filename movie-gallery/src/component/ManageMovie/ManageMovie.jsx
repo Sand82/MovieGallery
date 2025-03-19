@@ -7,11 +7,13 @@ import Input from "../UI/Input.jsx"
 import { useInput } from "../../hooks/useInput.js"
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js"
+import { DetailContext } from "../../contexts/DetailContext.js";
 
 const ManageMovie = ({isCreated}) => {
 
 const { user } = useContext(AuthContext);
-const { createHandler, editHandler, movie } = useContext(MovieContext);
+const { createHandler, editHandler } = useContext(MovieContext);
+const { movie } = useContext(DetailContext);
 
 const {
 	value: titleValue,

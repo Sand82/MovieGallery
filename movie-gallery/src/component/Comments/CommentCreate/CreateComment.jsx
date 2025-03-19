@@ -98,7 +98,7 @@ const CreateComment = ({ movieId }) => {
                 			value={commentValue}
                 			onChange={commentChangeHeandler}
                 			onBlur={commentInputBluerHeandler}
-                			error={commentHasError && `comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
+                			error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
             			/>
 					</div>
             	</div>

@@ -42,17 +42,15 @@ namespace MovieGalleryWebAPI.Infrastructure
 
                     var role = new IdentityRole { Name = AdministratorRoleName };
 
-                    await roleManager.CreateAsync(role);
+                    await roleManager.CreateAsync(role);                   
 
                     var author = new IdentityUser
                     {
                         Email = "sandoki@abv.bg",
-                        UserName = "sandoki",                        
-                    };
+                        UserName = "sandoki",                         
+                    };                   
 
-                    var currPassword = passwordHasher.HashPassword(null, "123456");
-
-                    await userMagner.CreateAsync(author, currPassword);
+                    await userMagner.CreateAsync(author, "123456");
 
                     await userMagner.AddToRoleAsync(author, role.Name);
                 })
@@ -266,7 +264,7 @@ namespace MovieGalleryWebAPI.Infrastructure
             {
                 Title = "Million Dollar Baby",
                 Year = "2004",
-                ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/7170/7170018_so.jpg",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BMTkxNzA1NDQxOV5BMl5BanBnXkFtZTcwNTkyMTIzMw@@._V1_FMjpg_UX1000_.jpg",
                 Description = "A determined woman works with a hardened boxing trainer to become a professional.",
                 Category = "Drama",
                 Duration = "142",

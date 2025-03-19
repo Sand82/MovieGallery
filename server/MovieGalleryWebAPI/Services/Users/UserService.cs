@@ -57,7 +57,7 @@ namespace MovieGalleryWebAPI.Service.Users
             if (user == null)
             {
                 return null;
-            }
+            }            
            
             var result = passwordHasher.VerifyHashedPassword(null, user.PasswordHash, password);
 
