@@ -34,7 +34,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (userId == null || userId != model.UserId)
             {
-                return NotFound("User not found");
+                return NotFound("User not found.");
             }
 
             var IsFavorite = await favoriteService.SetFavorite(model);
@@ -53,7 +53,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (!isValidUser)
             {
-                return BadRequest("Unauthoraze request");
+                return BadRequest("Unauthorised request.");
             }
 
             var isFavorite = await favoriteService.GetFavorite(model.UserId, model.MovieId);

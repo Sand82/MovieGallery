@@ -16,6 +16,6 @@
 
         public string? Duration { get; set; }
 
-        public string? AvergeRating { get; set; }
+        public string? AverageRating { get; set; }
     }
 }

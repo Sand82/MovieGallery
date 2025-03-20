@@ -9,12 +9,7 @@ namespace MovieGalleryWebAPI.Models.Users
         [Required]
         [StringLength(UserNameMaxLength, MinimumLength = UserNameMinLength,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        public string? Username { get; set; }
-
-        //[Required]
-        //[StringLength(UserPropsMaxLength, MinimumLength = UserPropsMinLength,
-        //    ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        //public string? Email { get; set; }
+        public string? Username { get; set; }        
 
         [Required]
         [StringLength(UserPasswordMaxLength, MinimumLength = UserPasswordMinLength,

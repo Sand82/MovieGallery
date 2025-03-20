@@ -6,7 +6,8 @@ import {
   ADD_MOVIE,
   CREATE_COMMENT,
   EDIT_COMMENT, 
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  SET_FAVORITE_MOVIE
 } from "../constants/ReducerConstants.js";
 
 export const moviesReducer = (state, action) => {
@@ -52,6 +53,12 @@ export const detailReducer = (state, action) => {
         comments: state.comments.filter(
           (comment) => comment.id != action.payload
         ),
+      };
+
+    case SET_FAVORITE_MOVIE:
+      return {
+        ...state,
+        isFavorite: action.payload.isFavorite         
       };
 
     default:

@@ -12,7 +12,7 @@ namespace MovieGalleryWebAPI.Models.Users
         public string? UserName { get; set; }
 
         [Required]
-        [EmailAddress(ErrorMessage = "The field is not valid emai address.")]            
+        [EmailAddress(ErrorMessage = "The field is not valid email address.")]            
         public string? Email { get; set; }
 
         [Required]

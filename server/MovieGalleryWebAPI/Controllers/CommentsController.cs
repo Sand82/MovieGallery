@@ -51,7 +51,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (!isValidUser)
             {
-                return BadRequest("Unauthoraze request");
+                return BadRequest("Unauthorized request.");
             }
 
             var date = DateTime.UtcNow;
@@ -79,7 +79,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (!isRemoved)
             {
-                return BadRequest("Unauthoraze request");
+                return BadRequest("Unauthorized request.");
             }
 
             return Ok(isRemoved);

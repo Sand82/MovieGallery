@@ -6,6 +6,7 @@ import {
   ADD_MOVIE,
   EDIT_COMMENT,
   DELETE_COMMENT,
+  SET_FAVORITE_MOVIE,
 } from "../constants/ReducerConstants.js";
 import * as commentService from "../services/CommentService.js";
 import { AuthContext } from "./AuthContext.js";
@@ -20,9 +21,9 @@ export const DetailProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const detailsHandler = (movieId) => {
+  const detailsHandler = (movieId, userId) => {
     movieService
-      .getOne(movieId, user.AccessToken)
+      .getOne(movieId, userId, user.AccessToken)
       .then((responce) => {
         if (responce === "Bad response") {
           return navigate("/badrequest");
@@ -93,6 +94,23 @@ export const DetailProvider = ({ children }) => {
       });
   };
 
+  const favoriteMovieHandler = (data) => {
+    commentService
+    .addFavorite(data, user.accessToken)
+    .then((result) => {
+      if (result === "Bad response") {
+        return navigate("/notfound");
+      }
+      dispatch({
+        type: SET_FAVORITE_MOVIE,
+        payload: data,
+      })
+    })
+    .catch((error) => {
+      throw console.error(error);
+    });
+  }
+
   return (
     <DetailContext.Provider
       value={{
@@ -101,6 +119,7 @@ export const DetailProvider = ({ children }) => {
         editCommentHandler,
         daleteCommentHandler,
         detailsHandler,
+        favoriteMovieHandler,
       }}
     >
       {children}

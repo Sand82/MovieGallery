@@ -1,9 +1,7 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useEffect, useContext } from "react";
 
 import * as style from "./Details.Module.css";
-import * as moviesService from "../../services/MoviesService.js";
-import * as favoriteService from "../../services/CommentService.js";
 
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
 import DetailsLi from "../HardCoded/DetailsLi.jsx";
@@ -16,61 +14,25 @@ import { DetailContext } from "../../contexts/DetailContext.js";
 const Details = () => {
   const { movieId } = useParams();  
   const { user } = useContext(AuthContext);  
-  const { movie: currMovie, detailsHandler } = useContext(DetailContext);
-  const [hart, setHart] = useState(false);
-  const navigate = useNavigate();
+  const { movie, detailsHandler, favoriteMovieHandler } = useContext(DetailContext);    
 
   useEffect(() => {    
-    detailsHandler(movieId);    
-  }, [movieId]); 
-
-  useEffect(() => {
-    let data = {
-      movieId: Number(movieId),
-      userId: user.id,
-    };    
-
-    favoriteService
-      .getFavorite(data, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        setHart(result);
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
-  }, [movieId, user.accessToken, user.id]);  
+    detailsHandler(movieId, user.id);    
+  }, [movieId]);   
   
-  const deleteCommentHandler = () => {
-    // moviesService.getOne(movieId).then((result) => {
-    //   setCurrMovie(result);
-    // });
-  };
-
   const hartClickHandler = (hart) => {
+
     let data = {
       isFavorite: Boolean(hart),
       movieId: Number(movieId),
       userId: user.id,
     };
 
-    favoriteService
-      .addFavorite(data, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        setHart(result);
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
+    favoriteMovieHandler(data);    
   };
 
   let hartClass =
-    hart ? "fa-solid fa-heart fa-2xl hart hart-active"
+    movie.isFavorite ? "fa-solid fa-heart fa-2xl hart hart-active"
     : "fa-solid fa-heart fa-2xl hart hart-not-active";     
 
   return (
@@ -85,7 +47,7 @@ const Details = () => {
                     <div className="embed-responsive embed-responsive-poster">
                       <img
                         className="embed-responsive-item"
-                        src={currMovie.imageUrl}
+                        src={movie.imageUrl}
                         alt=""
                       />
                     </div>
@@ -108,8 +70,8 @@ const Details = () => {
                     </div>
                   </div>
                   <div className="entity-content">
-                    <h2 className="entity-title">{currMovie.title}</h2>
-                    <div className="entity-category">{currMovie.category}</div>
+                    <h2 className="entity-title">{movie.title}</h2>
+                    <div className="entity-category">{movie.category}</div>
                     <div className="entity-info">
                       <div className="info-lines">
                         <div className="info info-short">
@@ -117,8 +79,8 @@ const Details = () => {
                             <i className="fas fa-star" />
                           </span>
                           <span className="info-text">
-                            {currMovie.avergeRating
-                              ? currMovie.avergeRating
+                            {movie.avergeRating
+                              ? movie.avergeRating
                               : "0"}
                           </span>
                           <span className="info-rest">/10</span>
@@ -128,7 +90,7 @@ const Details = () => {
                             <i className="fas fa-clock" />
                           </span>
                           <span className="info-text">
-                            {currMovie.duration}
+                            {movie.duration}
                           </span>
                           <span className="info-rest">&nbsp;min</span>
                         </div>
@@ -139,7 +101,7 @@ const Details = () => {
                       {user.isAdmin ? (
                         <li style={style} className="button-holder">
                           <Link
-                            to={`/movies/details/${currMovie.id}/edit`}
+                            to={`/movies/details/${movie.id}/edit`}
                             className="btn btn-warning editButton"
                           >
                             Edit
@@ -161,8 +123,8 @@ const Details = () => {
                               className="hart-input"
                               type="radio"
                               name="favorite"
-                              value={hart}
-                              onClick={() => hartClickHandler(!hart)}
+                              value={movie.isFavorite}
+                              onClick={() => hartClickHandler(!movie.isFavorite)}
                             />
                           </label>
                         </span>
@@ -179,12 +141,11 @@ const Details = () => {
                   <h2 className="section-title text-uppercase">Comments</h2>
                 </div>
 
-                {currMovie.comments
-                  ? currMovie.comments.map((x) => (
+                {movie.comments
+                  ? movie.comments.map((x) => (
                       <Comment
                         key={x.id}
-                        comment={x}                        
-                        deleteCommentHandler={deleteCommentHandler}
+                        comment={x}
                       />
                     ))
                   : ""}

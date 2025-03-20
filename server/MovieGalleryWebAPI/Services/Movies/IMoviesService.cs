@@ -8,7 +8,7 @@ namespace MovieGalleryWebAPI.Service.Movies
     {
         Task<List<MoviesDataModel>> GetMovies();
 
-        Task<MovieDataModel> GetOneMovie(int movieId);
+        Task<MovieDataModel> GetOneMovie(int movieId, string userId);
 
         Task<bool> RemoveMovie(int movieId);
 
@@ -16,8 +16,8 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         Task<MovieGetModel> GetLastMovie();
 
-        Task<bool> EditMovei(MovieEditModel model);
+        Task<bool> EditMovie(MovieEditModel model);
 
-        Task<bool> ChackForDublicate(string title);
+        Task<bool> CheckForDuplicates(string title);
     }
 }

@@ -6,9 +6,9 @@ export const getAll = () => {
   return request.get(baseUrl);
 };
 
-export const getOne = (movieId, token) => {
+export const getOne = (movieId, userId, token) => {
   let data = {};
-  return request.get(`${baseUrl}/${movieId}`, data, token);
+  return request.get(`${baseUrl}/${movieId}?userId=${userId}`, data, token);
 };
 
 export const create = async (data, token) => {

@@ -6,19 +6,22 @@ using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using MovieGalleryWebAPI.Service.Favorites;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
     public class MoviesService : IMoviesService
     {
         private readonly MovieGalleryDbContext data;
+        private readonly IFavoriteService favoriteService;      
+
         private readonly IMapper mapper;
 
-        public MoviesService(MovieGalleryDbContext data, IMapper mapper)
+        public MoviesService(MovieGalleryDbContext data, IMapper mapper, IFavoriteService favoriteService)
         {
             this.data = data;
             this.mapper = mapper;
+            this.favoriteService = favoriteService;
         }
 
         public async Task CreateMovie(MovieCreateModel model)
@@ -52,7 +55,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Year= m.Year,
                     Category= m.Category,
                     ImageUrl= m.ImageUrl,
-                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1"),
+                    AverageRating = m.Ratings.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
                 })
                 .FirstOrDefaultAsync();
@@ -77,15 +80,16 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Duration = m.Duration,
                     AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1")
                 })
-                .ToListAsync();           
+                .ToListAsync();            
 
             return movies;
         }
 
-        public async Task<MovieDataModel> GetOneMovie(int movieId)
+        public async Task<MovieDataModel> GetOneMovie(int movieId , string userId)
         {
             var movie = await this.data.Movies
                 .Include(m => m.Comments).ThenInclude(c => c.User)
+                .Include(m => m.Favorites)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -96,7 +100,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
-                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1"),
+                    AverageRating = m.Ratings.Average(m => m.Value).ToString("F1"),                    
                     Comments = m.Comments.Where(c => c.IsDelete == false)
                         .Select(c => new MovieCommentModel
                         {
@@ -111,6 +115,10 @@ namespace MovieGalleryWebAPI.Service.Movies
                         .ToList()
                 })
                 .FirstOrDefaultAsync();
+
+            var favoriteMovieInfo = await favoriteService.FindFavorite(userId, movieId);
+
+            movie!.IsFavorite = favoriteMovieInfo == null ? false : favoriteMovieInfo.IsFavorite;
 
             return movie;
         }
@@ -131,7 +139,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             return true;
         }
 
-        public async Task<bool> EditMovei(MovieEditModel model)
+        public async Task<bool> EditMovie(MovieEditModel model)
         {
             var isEdited = true;
 
@@ -158,7 +166,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             return isEdited;
         }
 
-        public async Task<bool> ChackForDublicate(string title)
+        public async Task<bool> CheckForDuplicates(string title)
         {
             return await this.data.Movies.AnyAsync(m => m.Title == title);
         }

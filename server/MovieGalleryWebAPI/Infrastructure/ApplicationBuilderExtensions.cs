@@ -13,8 +13,8 @@ namespace MovieGalleryWebAPI.Infrastructure
         public static IApplicationBuilder PrepareDatabase(
          this IApplicationBuilder app)
         {
-            using var scolpedServices = app.ApplicationServices.CreateScope();
-            var serviceProvider = scolpedServices.ServiceProvider;
+            using var scopedServices = app.ApplicationServices.CreateScope();
+            var serviceProvider = scopedServices.ServiceProvider;
 
             var data = serviceProvider.GetRequiredService<MovieGalleryDbContext>();            
 

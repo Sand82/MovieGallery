@@ -13,6 +13,6 @@ namespace MovieGalleryWebAPI.Service.Users
 
         Task<string> CreateToken(string username, string password);
 
-        Task<bool> CheckIsAdmin(string uderId);
+        Task<bool> CheckIsAdmin(string userId);
     }
 }

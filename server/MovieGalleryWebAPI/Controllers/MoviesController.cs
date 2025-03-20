@@ -33,9 +33,9 @@ namespace MovieGalleryWebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<MovieDataModel> Get(int id)
+        public async Task<MovieDataModel> Get(int id, [FromQuery] string userId)
         {
-            var movie = await moviesService.GetOneMovie(id);
+            var movie = await moviesService.GetOneMovie(id, userId);
            
             return movie;
         }
@@ -53,7 +53,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest("Authorization denied");
             }
 
-            var isExist = await moviesService.ChackForDublicate(model.Title);
+            var isExist = await moviesService.CheckForDuplicates(model.Title);
 
             if (isExist)
             {
@@ -77,10 +77,10 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (!isAdmin)
             {
-                return BadRequest("Authorization denied");
+                return BadRequest("Authorization denied.");
             }
 
-            var movie = await moviesService.EditMovei(model);
+            var movie = await moviesService.EditMovie(model);
 
             return Ok(movie);
         }
@@ -95,14 +95,14 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (!isAdmin)
             {
-                return BadRequest("Authorization denied");
+                return BadRequest("Authorization denied.");
             }
 
             var isDelete = await moviesService.RemoveMovie(id);
 
             if (isDelete == false)
             {
-                return BadRequest("Movie is not deleted from data base");
+                return BadRequest("Movie still persist in the database.");
             }
 
             return Ok(id.ToString());

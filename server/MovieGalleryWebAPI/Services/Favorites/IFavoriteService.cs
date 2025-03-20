@@ -1,4 +1,5 @@
-﻿using MovieGalleryWebAPI.Models.Favorites;
+﻿using MovieGalleryWebAPI.Data.Models;
+using MovieGalleryWebAPI.Models.Favorites;
 
 namespace MovieGalleryWebAPI.Service.Favorites
 {
@@ -9,5 +10,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
         Task<bool> GetFavorite(string userId, int movieId);
 
         Task<ICollection<FavoriteMovieModel>> GetFavoriteMovies(string userId);
+
+        Task<Favorite> FindFavorite(string userId, int movieId);
     }
 }

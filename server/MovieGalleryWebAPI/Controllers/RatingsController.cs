@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MovieGalleryWebAPI.Infrastructure;
-using MovieGalleryWebAPI.Models.Comments;
 using MovieGalleryWebAPI.Models.Ratings;
 using MovieGalleryWebAPI.Service.Ratings;
 
@@ -27,12 +26,12 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (userId == null || userId != model.UserId)
             {
-                return NotFound("User not found");
+                return NotFound("User not found.");
             }
 
             await ratingService.AddRating(model);
 
-            var rating = await ratingService.SearcheRating(model.MovieId, model.UserId);
+            var rating = await ratingService.SearchRating(model.MovieId, model.UserId);
 
             return Ok(rating);
         }
@@ -45,10 +44,10 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (userId == null || userId != model.UserId)
             {
-                return NotFound("User not found");
+                return NotFound("User not found.");
             }
 
-            var rating = await ratingService.SearcheRating(model.MovieId, userId);
+            var rating = await ratingService.SearchRating(model.MovieId, userId);
 
             
             return Ok(rating);

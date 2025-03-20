@@ -20,7 +20,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
         public async Task<bool> GetFavorite(string userId, int movieId)
         {
             
-            var favorite = await Findfavorite(userId, movieId);
+            var favorite = await FindFavorite(userId, movieId);
 
             if (favorite == null || !favorite.IsFavorite )
             {
@@ -52,7 +52,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
 
         public async Task<bool> SetFavorite(FavoriteDataModel model)
         {
-            Favorite? favorite = await Findfavorite(model.UserId, model.MovieId);                
+            Favorite? favorite = await FindFavorite(model.UserId, model.MovieId);                
 
             if (favorite == null)
             {
@@ -75,7 +75,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
             return favorite.IsFavorite;
         }
 
-        private async Task<Favorite> Findfavorite(string userId, int movieId)
+        public async Task<Favorite> FindFavorite(string userId, int movieId)
         {
             var favorite = await this.data.Favorites
                 .Where(f => f.MovieId == movieId && f.UserId == userId)

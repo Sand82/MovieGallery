@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using MovieGalleryWebAPI.Models.Errors;
 using MovieGalleryWebAPI.Models.Users;
 using MovieGalleryWebAPI.Service.Users;
-using MovieGalleryWebAPI.Settings;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -24,14 +22,14 @@ namespace MovieGalleryWebAPI.Controllers
 
             if (model.Password.CompareTo(model.RepeatPassword) != 0)
             {
-                ModelState.AddModelError("RepeatPassword", "Passwort and confirm password should be the same.");
+                ModelState.AddModelError("RepeatPassword", "Password and confirm password should be the same.");
             }
 
-            var chekedUser = await userService.FindUserByEmail(model.Email);
+            var checkedUser = await userService.FindUserByEmail(model.Email);
 
-            if (chekedUser != null)
+            if (checkedUser != null)
             {
-                ModelState.AddModelError("User exsist", "This email address is already taken.");
+                ModelState.AddModelError("User exist", "This email address is already taken.");
             }
 
             if (!ModelState.IsValid)
