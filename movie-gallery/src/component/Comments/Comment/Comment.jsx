@@ -8,48 +8,50 @@ import * as GlobalConstant from "../../../constants/GlobalConstants.js";
 import { hasLength } from "../../../services/Validators.js";
 import { useInput } from "../../../hooks/useInput.js";
 import Input from "../../UI/Input.jsx";
-import styles from './Comment.module.css'
+import styles from './Comment.module.css';
 
 const Comment = ({ comment }) => {
   const {
     value: commentValue,
-    changeHeandler: commentChangeHeandler,
+    changeHandler: commentChangeHandler,
+    inputBlurHandler: commentBlurHandler, 
     hasError: commentHasError,
-    isEmpty: isCommentFieldEmpty,   
-  } = useInput(comment.comment, (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
-  
+  } = useInput(comment.comment, (value) =>
+    hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength)
+  );  
+
   const { user } = useContext(AuthContext);
-  const { editCommentHandler, daleteCommentHandler } = useContext(DetailContext);
+  const { editCommentHandler, deleteCommentHandler } = useContext(DetailContext);
   const [isEditing, setIsEditing] = useState(false);   
-  
+
   const handleClick = () => {
     setIsEditing(true);
   };
 
   const handleBlur = () => {
-    
     editComment();
-    setIsEditing(false);
-  };
+  }
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault();
-      
+      e.preventDefault();      
       editComment();
-      setIsEditing(false);
     }
   };
 
   const deleteHandler = () => {
-    daleteCommentHandler(comment.id);
+    deleteCommentHandler(comment.id);
   };
 
   const editComment = () => {
-    if (comment.comment !== commentValue && commentHasError ) {
+
+    commentBlurHandler();
+  
+    if(hasLength(commentValue, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength) && comment.comment !== commentValue.trim()) {
       editCommentHandler(commentValue, comment);
-    }
-  }
+      setIsEditing(false);
+    }    
+  };
 
   const isValidUser = user.id === comment.userId;
 
@@ -66,10 +68,10 @@ const Comment = ({ comment }) => {
                 name="comment"
                 className="form-control entity-text"
                 value={commentValue}
-                onChange={commentChangeHeandler}
+                onChange={commentChangeHandler}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
-                error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
+                error={commentHasError ? `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.` : ""}
               />            
           ) : (
             <p className="entity-text">{comment.comment}</p>
@@ -80,7 +82,7 @@ const Comment = ({ comment }) => {
             <Link className={styles["comment-link"]} to="#" onClick={handleClick}>
               Edit
             </Link>
-            <Link className={styles["comment-link"]} to="#" onClick={deleteHandler} >
+            <Link className={styles["comment-link"]} to="#" onClick={deleteHandler}>
               Delete
             </Link>
           </div>

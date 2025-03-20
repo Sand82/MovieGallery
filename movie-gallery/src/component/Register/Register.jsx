@@ -11,33 +11,33 @@ const Register = () => {
 
   	const {
         value: usernameValue,
-        changeHeandler: usernameChangeHeandler,
+        changeHandler: usernameChangeHandler,
         hasError: usernameHasError,
-        inputBlurHeandler: usernameInputBluerHeandler,
+        inputBlurHandler: usernameInputBluerHandler,
         isEmpty: isUsernameFieldEmpty,    
     } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 	
 	const {
 		value: emailValue,
-		changeHeandler: emailChangeHeandler,
+		changeHandler: emailChangeHandler,
 		hasError: emailHasError,
-		inputBlurHeandler: emailInputBluerHeandler,
+		inputBlurHandler: emailInputBluerHandler,
 		isEmpty: isEmailFieldEmpty,    
 	} = useInput("", (value) => isEmail(value));
 
 	const {
 		value: passwordValue,
-		changeHeandler: passwordChangeHeandler,
+		changeHandler: passwordChangeHandler,
 		hasError: passwordError,
-		inputBlurHeandler: passwordInputBluerHeandler, 
+		inputBlurHandler: passwordInputBluerHandler, 
 		isEmpty: isPasswordFieldEmpty,   
 	} = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
 
 	const {
 		value: repeatPasswordValue,
-		changeHeandler: repeatPasswordChangeHeandler,
+		changeHandler: repeatPasswordChangeHandler,
 		hasError: repeatPasswordError,
-		inputBlurHeandler: repeatPasswordInputBluerHeandler, 
+		inputBlurHandler: repeatPasswordInputBluerHandler, 
 		isEmpty: isRepeatPasswordFieldEmpty,   
 	} = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
 
@@ -94,8 +94,8 @@ const Register = () => {
                             name="username"
 							className="regester-input"                           
                             value={usernameValue}
-                            onChange={usernameChangeHeandler}
-                            onBlur={usernameInputBluerHeandler}
+                            onChange={usernameChangeHandler}
+                            onBlur={usernameInputBluerHandler}
                             error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
                         />
                         </div>
@@ -109,8 +109,8 @@ const Register = () => {
                             name="email"
 							className="regester-input"                           
                             value={emailValue}
-                            onChange={emailChangeHeandler}
-                            onBlur={emailInputBluerHeandler}
+                            onChange={emailChangeHandler}
+                            onBlur={emailInputBluerHandler}
                             error={emailHasError && `Email should be valid email address.`}/>
                         </div>
                       </div>
@@ -123,8 +123,8 @@ const Register = () => {
                            name="password"  
 						   className="regester-input-password"                                                  
                            value={passwordValue}
-                           onChange={passwordChangeHeandler}
-                           onBlur={passwordInputBluerHeandler}
+                           onChange={passwordChangeHandler}
+                           onBlur={passwordInputBluerHandler}
                            error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
                         />                
                         </div>
@@ -138,8 +138,8 @@ const Register = () => {
                            name="repeatPassword"
 						   className="regester-input-password"                                                     
                            value={repeatPasswordValue}
-                           onChange={repeatPasswordChangeHeandler}
-                           onBlur={repeatPasswordInputBluerHeandler}
+                           onChange={repeatPasswordChangeHandler}
+                           onBlur={repeatPasswordInputBluerHandler}
                            error={repeatPasswordError && `The password and password confirmation do not match.`}
                         />                
                         </div>

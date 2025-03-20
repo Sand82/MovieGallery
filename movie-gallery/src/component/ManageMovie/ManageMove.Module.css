@@ -7,14 +7,6 @@
 }
 
 .movie-title {
-  margin: 20px 0px;
-  font-size: large;
-}
-
-.btn {
-  background-color: #ff8a00;
-}
-
-.btn:hover {
-  background-color: #ff680d;
+  margin: 50px 0px 20px 0px;
+  font-size: 22px;
 }

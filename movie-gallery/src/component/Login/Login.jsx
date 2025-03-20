@@ -13,17 +13,17 @@ const Login = () => {
 
     const {
         value: usernameValue,
-        changeHeandler: usernameChangeHeandler,
+        changeHandler: usernameChangeHandler,
         hasError: usernameHasError,
-        inputBlurHeandler: usernameInputBluerHeandler,
+        inputBlurHandler: usernameInputBluerHandler,
         isEmpty: isUsernameFieldEmpty,    
       } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
     
     const {
         value: passwordValue,
-        changeHeandler: passwordChangeHeandler,
+        changeHandler: passwordChangeHandler,
         hasError: passwordError,
-        inputBlurHeandler: passwordInputBluerHeandler, 
+        inputBlurHandler: passwordInputBluerHandler, 
         isEmpty: isPasswordFieldEmpty,   
       } = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
 
@@ -67,8 +67,8 @@ const Login = () => {
                             type="text"
                             name="username"
                             value={usernameValue}
-                            onChange={usernameChangeHeandler}
-                            onBlur={usernameInputBluerHeandler}
+                            onChange={usernameChangeHandler}
+                            onBlur={usernameInputBluerHandler}
                             error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
                         />
                     </p>
@@ -78,8 +78,8 @@ const Login = () => {
                            type="password"
                            name="password"
                            value={passwordValue}
-                           onChange={passwordChangeHeandler}
-                           onBlur={passwordInputBluerHeandler}
+                           onChange={passwordChangeHandler}
+                           onBlur={passwordInputBluerHandler}
                            error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
                         />
                     </p>

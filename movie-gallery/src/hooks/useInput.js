@@ -8,14 +8,15 @@ export const useInput = (defaultValue, validationFn) => {
     setValue(defaultValue);
   }, [defaultValue]);
 
-  const changeHeandler = (e) => {    
+  const changeHandler = (e) => {
     setValue(e.target.value);
     setDidEdit(false);
   };
 
-  const valioIsValid = validationFn(value); 
+  const valioIsValid = validationFn(value);
+  
 
-  const inputBlurHeandler = () => {
+  const inputBlurHandler = () => {
     setDidEdit(true);
   };
 
@@ -26,8 +27,8 @@ export const useInput = (defaultValue, validationFn) => {
 
   return {
     value: value,
-    changeHeandler,
-    inputBlurHeandler,
+    changeHandler,
+    inputBlurHandler,
     hasError: didEdit && !valioIsValid,
     isEmpty: !didEdit,
     resetValue,

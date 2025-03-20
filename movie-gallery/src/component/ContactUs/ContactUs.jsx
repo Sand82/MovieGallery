@@ -18,36 +18,36 @@ const ContactUs = () => {
 
     const {
             value: usernameValue,
-            changeHeandler: usernameChangeHeandler,
+            changeHandler: usernameChangeHandler,
             hasError: usernameHasError,
-            inputBlurHeandler: usernameInputBluerHeandler, 
+            inputBlurHandler: usernameInputBluerHandler, 
             isEmpty: isUsernameFieldEmpty, 
             resetValue: usernameResetValue,  
         } = useInput(user ? user.username : "", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
     
     const {
             value: emailValue,
-            changeHeandler: emailChangeHeandler,
+            changeHandler: emailChangeHandler,
             hasError: emailHasError,
-            inputBlurHeandler: emailInputBluerHeandler,
+            inputBlurHandler: emailInputBluerHandler,
             isEmpty: isEmailFieldEmpty, 
             resetValue: emailResetValue,   
         } = useInput(user ? user.email : "", (value) => isEmail(value));
 
     const {
             value: subjectValue,
-            changeHeandler: subjectChangeHeandler,
+            changeHandler: subjectChangeHandler,
             hasError: subjectHasError,
-            inputBlurHeandler: subjectInputBluerHeandler, 
+            inputBlurHandler: subjectInputBluerHandler, 
             isEmpty: isSubjectFieldEmpty,
             resetValue: subjectResetValue,   
         } = useInput("", (value) => hasLength(value, GlobalConstant.subjectMinLength, GlobalConstant.subjectMaxLength));
 
     const {
             value: messageValue,
-            changeHeandler: messageChangeHeandler,
+            changeHandler: messageChangeHandler,
             hasError: messageHasError,
-            inputBlurHeandler: messageInputBluerHeandler, 
+            inputBlurHandler: messageInputBluerHandler, 
             isEmpty: isMessageFieldEmpty, 
             resetValue: messageResetValue,  
         } = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
@@ -113,8 +113,8 @@ const ContactUs = () => {
             		    	        name="username"
 							                className="form-control"
             		    	        value={usernameValue}
-            		    	        onChange={usernameChangeHeandler}
-            		    	        onBlur={usernameInputBluerHeandler}
+            		    	        onChange={usernameChangeHandler}
+            		    	        onBlur={usernameInputBluerHandler}
             		    	        error={usernameHasError && `User name should be between ${GlobalConstant.userNameMinLength} and ${GlobalConstant.userNameMaxLength} symbols.`}
             			    />                           
                         </div>                        
@@ -127,8 +127,8 @@ const ContactUs = () => {
                 			        name="email"
 							                className="form-control"                          
                 			        value={emailValue}
-                			        onChange={emailChangeHeandler}
-                			        onBlur={emailInputBluerHeandler}
+                			        onChange={emailChangeHandler}
+                			        onBlur={emailInputBluerHandler}
                 			        error={emailHasError && `Email should be valid email address.`}/> 
                             </div>                        
                       </div>
@@ -140,8 +140,8 @@ const ContactUs = () => {
                 			        name="subject"
 							                className="form-control"
                 			        value={subjectValue}
-                			        onChange={subjectChangeHeandler}
-                			        onBlur={subjectInputBluerHeandler}
+                			        onChange={subjectChangeHandler}
+                			        onBlur={subjectInputBluerHandler}
                 			        error={subjectHasError && `Subject should be between ${GlobalConstant.subjectMinLength} and ${GlobalConstant.subjectMaxLength} symbols.`}/> 
                         </div>                       
                       </div>
@@ -155,8 +155,8 @@ const ContactUs = () => {
 						                  rows={3} 
 						                  className="form-control"                          
                               value={messageValue}
-                              onChange={messageChangeHeandler}
-                              onBlur={messageInputBluerHeandler}
+                              onChange={messageChangeHandler}
+                              onBlur={messageInputBluerHandler}
                               error={messageHasError && `Message should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
                             />   
                         </div>                        

@@ -15,19 +15,19 @@ const CreateComment = ({ movieId }) => {
 
 	const {
 		value: usernameValue,
-		changeHeandler: usernameChangeHeandler,		   
+		changeHandler: usernameChangeHandler,		   
 	} = useInput(user.username, (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 
 	const {
 		value: emailValue,
-		changeHeandler: emailChangeHeandler,
+		changeHandler: emailChangeHandler,
 	} = useInput(user.email, (value) => isEmail(value));	
 		
 	const {
 		value: commentValue,
-		changeHeandler: commentChangeHeandler,
+		changeHandler: commentChangeHandler,
 		hasError: commentHasError,
-		inputBlurHeandler: commentInputBluerHeandler, 
+		inputBlurHandler: commentInputBluerHandler, 
 		isEmpty: isCommentFieldEmpty,
 		resetValue: commentResetValue,  
 	} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
@@ -64,7 +64,7 @@ const CreateComment = ({ movieId }) => {
             		    	name="username"
 							className="form-control"
             		    	value={usernameValue}
-            		    	onChange={usernameChangeHeandler}            		    	
+            		    	onChange={usernameChangeHandler}            		    	
 							disabled={true}            		    	
             			/> 
 					</div>	          
@@ -79,7 +79,7 @@ const CreateComment = ({ movieId }) => {
                 			name="email"
 							className="form-control"                          
                 			value={emailValue}
-                			onChange={emailChangeHeandler}                			
+                			onChange={emailChangeHandler}                			
 							disabled={true}               			
 						/>                        
            			</div>
@@ -96,8 +96,8 @@ const CreateComment = ({ movieId }) => {
 							rows={3} 
 							className="form-control"                          
                 			value={commentValue}
-                			onChange={commentChangeHeandler}
-                			onBlur={commentInputBluerHeandler}
+                			onChange={commentChangeHandler}
+                			onBlur={commentInputBluerHandler}
                 			error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
             			/>
 					</div>
