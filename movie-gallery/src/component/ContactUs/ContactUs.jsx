@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
-import { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useState, useRef } from "react";
 
 import ContactInformation from "./ContactInformation/ContactInformation.jsx";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
