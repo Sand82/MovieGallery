@@ -1,9 +1,9 @@
 import {
-  createContext,
-  useState,
+  createContext,  
   useEffect,
   useReducer,
   useContext,
+  useState,
 } from "react";
 
 import {
@@ -13,6 +13,7 @@ import {
   DELETE_MOVIE,
 } from "../constants/ReducerConstants.js";
 import * as movieService from "../services/MoviesService.js";
+import * as commentService from "../services/CommentService.js";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext.js";
 import { moviesReducer } from "./Reducers.js";
@@ -20,7 +21,8 @@ import { moviesReducer } from "./Reducers.js";
 export const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) => {
-  const [movies, dispatch] = useReducer(moviesReducer, []);  
+  const [movies, dispatch] = useReducer(moviesReducer, []); 
+  const [favMovies, setFavMovies] = useState([]); 
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -97,6 +99,20 @@ export const MovieProvider = ({ children }) => {
         throw console.error(error);
       });
   };
+
+  const favoritesHandler = (userId) => {
+    commentService.getFavoriteMovies(userId)
+    .then((result) => {       
+        if (result === 'Bad response') {
+          return navigate('/notfound');
+        }
+        console.log(result);
+        setFavMovies( result);               
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  }
   
   const sortMovies = (movies) => {
     return movies.sort((a, b) => b.id - a.id);
@@ -108,7 +124,9 @@ export const MovieProvider = ({ children }) => {
         movies,
         createHandler,
         editHandler,
-        deleteHandler,               
+        deleteHandler,
+        favoritesHandler,
+        favMovies,            
       }}
     >
       {children}

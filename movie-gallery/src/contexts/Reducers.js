@@ -22,7 +22,7 @@ export const moviesReducer = (state, action) => {
       return state.map((movie) =>
         movie.id == action.payload.id ? action.payload : movie
       );
-
+    
     case DELETE_MOVIE:
       return state.filter((movie) => movie.id != action.payload);
     

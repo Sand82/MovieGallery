@@ -5,23 +5,14 @@ import * as favoriteService from '../../services/CommentService.js'
 
 import { AuthContext } from "../../contexts/AuthContext.js";
 import FavoriteMovie from "./FavoriteMovie/FavoriteMovie.jsx";
+import { MovieContext } from "../../contexts/MovieContext.js";
 
 const Favorite = () => {
   const {user} =  useContext(AuthContext);
-  const [favMovies, setFavMovies] = useState([])
-  const navigate = useNavigate();     
+  const { favMovies, favoritesHandler } = useContext(MovieContext)  
 
   useEffect(()=>{
-    favoriteService.getFavoriteMovies(user.id)
-    .then((result) => {       
-        if (result === 'Bad response') {
-          return navigate('/notfound');
-        }
-        setFavMovies(state => state = [...result]);        
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
+    favoritesHandler(user.id);
   },[user.id])
 
   return (

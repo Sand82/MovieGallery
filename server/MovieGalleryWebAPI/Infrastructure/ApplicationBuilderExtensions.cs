@@ -103,7 +103,7 @@ namespace MovieGalleryWebAPI.Infrastructure
             {
                 Title = "The Lord of the Rings: The Two Towers",
                 Year = "2002",
-                ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9136/9136263_so.jpg",
+                ImageUrl = "https://m.media-amazon.com/images/M/MV5BMGQxMDdiOWUtYjc1Ni00YzM1LWE2NjMtZTg3Y2JkMjEzMTJjXkEyXkFqcGc@._V1_QL75_UX190_CR0,7,190,281_.jpg",
                 Description = "While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron's new ally, Saruman, and his hordes of Isengard.",
                 Category = "Adventure",
                 Duration = "180",

@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 
 import * as style from "./NewMovieBlog.Module.css";
 
-const NewMovieBlog = ({ movie }) => {
-  
+const NewMovieBlog = ({ movie }) => {  
 
   return (
     <div style={style} className="col-md-6">

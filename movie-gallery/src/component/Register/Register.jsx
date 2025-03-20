@@ -9,13 +9,13 @@ import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../servic
 
 const Register = () => {
 
-  	const {
-        value: usernameValue,
-        changeHandler: usernameChangeHandler,
-        hasError: usernameHasError,
-        inputBlurHandler: usernameInputBluerHandler,
-        isEmpty: isUsernameFieldEmpty,    
-    } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
+	const {
+      value: usernameValue,
+      changeHandler: usernameChangeHandler,
+      hasError: usernameHasError,
+      inputBlurHandler: usernameInputBluerHandler,
+      isEmpty: isUsernameFieldEmpty,    
+  } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 	
 	const {
 		value: emailValue,
@@ -92,7 +92,7 @@ const Register = () => {
                             label="Username"
                             type="text"
                             name="username"
-							className="regester-input"                           
+                            className="regester-input"                           
                             value={usernameValue}
                             onChange={usernameChangeHandler}
                             onBlur={usernameInputBluerHandler}
@@ -103,11 +103,11 @@ const Register = () => {
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-envelope fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-						<Input
+                          <Input
                             label="Email address"
                             type="text"
                             name="email"
-							className="regester-input"                           
+                            className="regester-input"                           
                             value={emailValue}
                             onChange={emailChangeHandler}
                             onBlur={emailInputBluerHandler}
@@ -117,11 +117,11 @@ const Register = () => {
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-						<Input
+                          <Input
                            label="Password"
                            type="password"
                            name="password"  
-						   className="regester-input-password"                                                  
+                           className="regester-input-password"                                                  
                            value={passwordValue}
                            onChange={passwordChangeHandler}
                            onBlur={passwordInputBluerHandler}
@@ -132,11 +132,11 @@ const Register = () => {
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-key fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">
-						<Input
+                          <Input
                            label="Repeat password"
                            type="password"
                            name="repeatPassword"
-						   className="regester-input-password"                                                     
+                           className="regester-input-password"                                                     
                            value={repeatPasswordValue}
                            onChange={repeatPasswordChangeHandler}
                            onBlur={repeatPasswordInputBluerHandler}
