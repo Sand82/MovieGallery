@@ -11,6 +11,7 @@ import {
   CREATE_MOVIE,
   EDIT_MOVIE,
   DELETE_MOVIE,
+  SET_AVARAGE_RATING
 } from "../constants/ReducerConstants.js";
 import * as movieService from "../services/MoviesService.js";
 import * as commentService from "../services/CommentService.js";
@@ -113,6 +114,13 @@ export const MovieProvider = ({ children }) => {
         throw console.error(error);
       });
   }
+
+  const avarageRatingHandler = (data) => {
+    dispatch({
+      type: SET_AVARAGE_RATING,
+      payload: data,
+    })
+  }
   
   const sortMovies = (movies) => {
     return movies.sort((a, b) => b.id - a.id);
@@ -126,7 +134,8 @@ export const MovieProvider = ({ children }) => {
         editHandler,
         deleteHandler,
         favoritesHandler,
-        favMovies,            
+        favMovies, 
+        avarageRatingHandler,           
       }}
     >
       {children}

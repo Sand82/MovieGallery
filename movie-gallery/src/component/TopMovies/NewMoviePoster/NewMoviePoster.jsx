@@ -58,7 +58,7 @@ const NewMoviePoster = ({ movie }) => {
                   <i className="fas fa-star" />
                 </span>
                 <span className="info-text">
-                  {movie.avergeRating ? movie.avergeRating : "0"}
+                  {movie.averageRating ? movie.averageRating : "0"}
                 </span>
                 <span className="info-rest">/10</span>
               </div>

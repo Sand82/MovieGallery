@@ -31,7 +31,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             await ratingService.AddRating(model);
 
-            var rating = await ratingService.SearchRating(model.MovieId, model.UserId);
+            var rating = await ratingService.SearchRating(model.UserId, model.MovieId);
 
             return Ok(rating);
         }
@@ -47,7 +47,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return NotFound("User not found.");
             }
 
-            var rating = await ratingService.SearchRating(model.MovieId, userId);
+            var rating = await ratingService.SearchRating(userId, model.MovieId);
 
             
             return Ok(rating);

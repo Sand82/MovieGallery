@@ -1,9 +1,23 @@
+import { useContext } from "react";
+
 import style from "../Star/Star.module.css"
+import { DetailContext } from "../../../contexts/DetailContext.js";
+import { AuthContext } from "../../../contexts/AuthContext.js";
 
-const Star = ({ movieRaitingHandler, value, rating }) => {
+const Star = ({ value, rating }) => {
 
-    const raitingHandler = () => {
-    movieRaitingHandler(value);    
+  const { movie, movieRatingHandler } = useContext(DetailContext); 
+  const { user } = useContext(AuthContext); 
+
+  const raitingHandler = () => {
+
+    const data = {
+      value: value.toString(),
+      userId: user.id,
+      movieId: movie.id,
+    };    
+    
+    movieRatingHandler(data);          
   };
 
   let currTypeStarCoefficient = value - rating;

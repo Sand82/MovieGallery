@@ -13,6 +13,8 @@ const Movies = () => {
     setFilteredMovies(movies);
   }, [movies]);
 
+  console.log(movies);
+
   const searchTermsHandler = (search, select) => {
     
     let sortedMovies;

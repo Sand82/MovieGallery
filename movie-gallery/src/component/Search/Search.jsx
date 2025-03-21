@@ -65,7 +65,7 @@ const Search = ({ searchTermsHandler }) => {
                   >
                     <option value="all">All movies</option>
                     <option value="year">Year</option>
-                    <option value="avergeRating">Rating</option>
+                    <option value="averageRating">Rating</option>
                     <option value="duration">Duration</option>
                   </select>
                 </div>

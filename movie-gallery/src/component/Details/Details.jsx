@@ -14,7 +14,7 @@ import { DetailContext } from "../../contexts/DetailContext.js";
 const Details = () => {
   const { movieId } = useParams();  
   const { user } = useContext(AuthContext);  
-  const { movie, detailsHandler, favoriteMovieHandler } = useContext(DetailContext);    
+  const { movie, detailsHandler, favoriteMovieHandler } = useContext(DetailContext);
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
@@ -79,9 +79,7 @@ const Details = () => {
                             <i className="fas fa-star" />
                           </span>
                           <span className="info-text">
-                            {movie.avergeRating
-                              ? movie.avergeRating
-                              : "0"}
+                            { movie.averageRating }
                           </span>
                           <span className="info-rest">/10</span>
                         </div>

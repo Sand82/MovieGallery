@@ -29,25 +29,26 @@ namespace MovieGalleryWebAPI.Service.Ratings
                 {
                     MovieId = model.MovieId,
                     UserId = model.UserId,
-                    Value = int.Parse(model.Value)
+                    Value = int.Parse(model.Value!)
                 };
 
                 await this.data.Ratings.AddAsync(rating);
             }
             else
             {
-                rating.Value = int.Parse(model.Value);
+                rating.Value = int.Parse(model.Value!);
             } 
 
             await this.data.SaveChangesAsync();                
-        }
+        }       
 
-        public async Task<RatingApiModel> SearchRating(int movieId, string userId)
+        public async Task<RatingApiModel> SearchRating(string userId, int movieId)
         {
             var rating = await this.data.Ratings
                 .Where(r => r.UserId == userId && r.MovieId == movieId)
                 .ProjectTo<RatingApiModel>(this.mapper.ConfigurationProvider)                
                 .FirstOrDefaultAsync();
+            
 
             if (rating == null)
             {
@@ -56,10 +57,21 @@ namespace MovieGalleryWebAPI.Service.Ratings
                    Value = "0",
                    MovieId = movieId,
                    UserId = userId,
+                   AverageRating = "0.0"
                 };
+            }else
+            {
+                rating.AverageRating = this.data.Ratings.Where(m => m.MovieId == movieId).Average(r => r.Value).ToString("F1");
             }
 
             return rating;
+        }
+
+        public async Task<string> SearchPersonalRating(string userId, int movieId)
+        {
+            var personalRating = await SearchRating(userId, movieId);
+
+            return personalRating.Value!;
         }
     }
 }

@@ -7,9 +7,11 @@ import {
   EDIT_COMMENT,
   DELETE_COMMENT,
   SET_FAVORITE_MOVIE,
+  SET_PERSONAL_RATING,
 } from "../constants/ReducerConstants.js";
 import * as commentService from "../services/CommentService.js";
 import { AuthContext } from "./AuthContext.js";
+import { MovieContext } from "./MovieContext.js";
 import * as movieService from "../services/MoviesService.js";
 import { detailReducer } from "./Reducers.js";
 
@@ -18,6 +20,7 @@ export const DetailContext = createContext();
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
   const { user } = useContext(AuthContext);
+  const { avarageRatingHandler } = useContext(MovieContext)
 
   const navigate = useNavigate();
 
@@ -96,20 +99,39 @@ export const DetailProvider = ({ children }) => {
 
   const favoriteMovieHandler = (data) => {
     commentService
-    .addFavorite(data, user.accessToken)
-    .then((result) => {
-      if (result === "Bad response") {
-        return navigate("/notfound");
-      }
-      dispatch({
-        type: SET_FAVORITE_MOVIE,
-        payload: data,
+      .addFavorite(data, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        dispatch({
+          type: SET_FAVORITE_MOVIE,
+          payload: data,
+        });
       })
-    })
-    .catch((error) => {
-      throw console.error(error);
-    });
-  }
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
+
+  const movieRatingHandler = (data) => {
+    commentService
+      .addRating(data, user.accessToken)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/notfound");
+        }
+        console.log(result);
+        avarageRatingHandler(result);
+        dispatch({
+          type: SET_PERSONAL_RATING,
+          payload: result,
+        });
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
 
   return (
     <DetailContext.Provider
@@ -120,6 +142,7 @@ export const DetailProvider = ({ children }) => {
         daleteCommentHandler,
         detailsHandler,
         favoriteMovieHandler,
+        movieRatingHandler,
       }}
     >
       {children}

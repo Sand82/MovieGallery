@@ -58,7 +58,7 @@ const TopRated = ({ movie }) => {
               <span className="text-theme info-icon">
                 <i className="fas fa-star"></i>
               </span>
-              <span className="info-text">{movie.avergeRating ? movie.avergeRating : "0"}</span>
+              <span className="info-text">{movie.averageRating ? movie.averageRating : "0"}</span>
               <span className="info-rest">/10</span>
             </div>
             <div className="info info-short">

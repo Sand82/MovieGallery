@@ -7,35 +7,33 @@ using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
 using AutoMapper;
 using MovieGalleryWebAPI.Service.Favorites;
+using MovieGalleryWebAPI.Service.Ratings;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
     public class MoviesService : IMoviesService
     {
         private readonly MovieGalleryDbContext data;
-        private readonly IFavoriteService favoriteService;      
+        private readonly IFavoriteService favoriteService;   
+        private readonly IRatingService ratingService;
 
         private readonly IMapper mapper;
 
-        public MoviesService(MovieGalleryDbContext data, IMapper mapper, IFavoriteService favoriteService)
+        public MoviesService(
+            MovieGalleryDbContext data, 
+            IMapper mapper, 
+            IFavoriteService favoriteService, 
+            IRatingService ratingService)
         {
             this.data = data;
             this.mapper = mapper;
             this.favoriteService = favoriteService;
+            this.ratingService = ratingService;
         }
 
         public async Task CreateMovie(MovieCreateModel model)
         {
-            var movieModel = this.mapper.Map<Movie>(model);
-
-            //var movie = new Movie
-            //{
-            //    Title = model.Title,
-            //    Description = model.Description,
-            //    Category = model.Category,
-            //    ImageUrl = model.ImageUrl,
-            //    Year = model.Year,
-            //};
+            var movieModel = this.mapper.Map<Movie>(model);            
 
             await this.data.Movies.AddAsync(movieModel);
 
@@ -55,12 +53,12 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Year= m.Year,
                     Category= m.Category,
                     ImageUrl= m.ImageUrl,
-                    AverageRating = m.Ratings.Average(m => m.Value).ToString("F1"),
+                    AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
                 })
                 .FirstOrDefaultAsync();
 
-            return movie;
+            return movie!;
         }
 
         public async Task<List<MoviesDataModel>> GetMovies()
@@ -78,7 +76,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
-                    AvergeRating = m.Ratings.Average(m => m.Value).ToString("F1")
+                    AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1")
                 })
                 .ToListAsync();            
 
@@ -88,8 +86,9 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<MovieDataModel> GetOneMovie(int movieId , string userId)
         {
             var movie = await this.data.Movies
-                .Include(m => m.Comments).ThenInclude(c => c.User)
+                .Include(m => m.Comments!).ThenInclude(c => c.User)
                 .Include(m => m.Favorites)
+                .Include(m => m.Ratings)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -100,15 +99,15 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
-                    AverageRating = m.Ratings.Average(m => m.Value).ToString("F1"),                    
-                    Comments = m.Comments.Where(c => c.IsDelete == false)
+                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),                    
+                    Comments = m.Comments!.Where(c => c.IsDelete == false)
                         .Select(c => new MovieCommentModel
                         {
                             Id = c.Id,
                             Comment = c.Content,
                             UserId = c.UserId,
                             MovieId = movieId,
-                            Username = c.User.UserName,
+                            Username = c.User!.UserName,
                             CreationData = c.CreationData,
                             
                         })
@@ -117,8 +116,10 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .FirstOrDefaultAsync();
 
             var favoriteMovieInfo = await favoriteService.FindFavorite(userId, movieId);
-
             movie!.IsFavorite = favoriteMovieInfo == null ? false : favoriteMovieInfo.IsFavorite;
+
+            var personalRating = await ratingService.SearchPersonalRating(userId, movieId);
+            movie.PersonalRating = personalRating;
 
             return movie;
         }

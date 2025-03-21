@@ -12,7 +12,7 @@ const NewMovies = () => {
 
   const firstFiveMovies = movies
     .slice()
-    .sort((a, b) => b.avergeRating - a.avergeRating)
+    .sort((a, b) => b.averageRating - a.averageRating)
     .slice(0, 4);
 
   return (

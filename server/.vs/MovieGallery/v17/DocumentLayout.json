@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\MovieGallery\\server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\models\\movies\\moviesdatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\models\\movies\\moviesdatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\models\\movies\\moviedatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\models\\movies\\moviedatamodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\ratings\\iratingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\ratings\\iratingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\controllers\\ratingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\controllers\\ratingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\infrastructure\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\infrastructure\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApplicationBuilderExtensions.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ViewState": "AQIAAFoAAAAAAAAAAAAAAGkAAACiAAAA",
+              "DocumentIndex": 1,
+              "Title": "MoviesDataModel.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBMAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T22:01:59.111Z",
+              "WhenOpened": "2025-03-21T12:26:08.982Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Program.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Program.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Program.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 5,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Infrastructure\\MappingProfile.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\MappingProfile.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Infrastructure\\MappingProfile.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T21:18:13.462Z",
+              "WhenOpened": "2025-03-21T11:47:07.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RatingsController.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAA5AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T10:10:13.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IRatingService.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Ratings\\IRatingService.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Ratings\\IRatingService.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Ratings\\IRatingService.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Ratings\\IRatingService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T09:54:26.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MovieDataModel.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Movies\\MovieDataModel.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Models\\Movies\\MovieDataModel.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Movies\\MovieDataModel.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MovieDataModel.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAkwBIAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T09:48:55.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MoviesService.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAAAE4AAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-21T09:48:15.801Z",
               "EditorCaption": ""
             }
           ]

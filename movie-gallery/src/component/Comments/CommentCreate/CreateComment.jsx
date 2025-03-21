@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { AuthContext } from "../../../contexts/AuthContext.js";
-import MovieRating from "../../Rating/MovieRaiting.jsx";
+import MovieRating from "../../Rating/MovieRating.jsx";
 import Input from "../../UI/Input.jsx"
 import { useInput } from "../../../hooks/useInput.js"
 import * as GlobalConstant from "../../../constants/GlobalConstants.js"
