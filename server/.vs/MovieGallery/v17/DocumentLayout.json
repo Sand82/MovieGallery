@@ -46,8 +46,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAwBMAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T12:26:08.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T12:26:08.982Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Infrastructure\\MappingProfile.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T11:47:07.366Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T11:47:07.366Z"
             },
             {
               "$type": "Document",
@@ -72,8 +70,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\RatingsController.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T10:10:13.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T10:10:13.781Z"
             },
             {
               "$type": "Document",
@@ -85,8 +82,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Ratings\\IRatingService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T09:54:26.766Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T09:54:26.766Z"
             },
             {
               "$type": "Document",
@@ -98,8 +94,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MovieDataModel.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAkwBIAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T09:48:55.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-21T09:48:55.243Z"
             },
             {
               "$type": "Document",
@@ -109,7 +104,7 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ViewState": "AQIAAEMAAAAAAAAAAAAAAE4AAAAhAAAA",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAwE4AAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-21T09:48:15.801Z",
               "EditorCaption": ""

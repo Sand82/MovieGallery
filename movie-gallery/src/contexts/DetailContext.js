@@ -20,7 +20,7 @@ export const DetailContext = createContext();
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
   const { user } = useContext(AuthContext);
-  const { avarageRatingHandler } = useContext(MovieContext)
+  const { avarageRatingHandler } = useContext(MovieContext);
 
   const navigate = useNavigate();
 
@@ -121,7 +121,6 @@ export const DetailProvider = ({ children }) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        console.log(result);
         avarageRatingHandler(result);
         dispatch({
           type: SET_PERSONAL_RATING,

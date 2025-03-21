@@ -74,13 +74,13 @@ const Login = () => {
                     </p>
                     <p>
                         <Input
-                           label="Password"
-                           type="password"
-                           name="password"
-                           value={passwordValue}
-                           onChange={passwordChangeHandler}
-                           onBlur={passwordInputBluerHandler}
-                           error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
+                            label="Password"
+                            type="password"
+                            name="password"
+                            value={passwordValue}
+                            onChange={passwordChangeHandler}
+                            onBlur={passwordInputBluerHandler}
+                            error={passwordError && `Password should be more than ${GlobalConstant.passwordLength} symbols.`}
                         />
                     </p>
                     <p>
