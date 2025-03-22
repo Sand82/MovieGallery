@@ -26,6 +26,7 @@ const Login = () => {
   } = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
     
   const { userLogin } = useContext(AuthContext);
+
   const loginSubmitHandler = async (e) => {
       e.preventDefault();        
       var loginCredential = {
@@ -34,7 +35,9 @@ const Login = () => {
       }
       userLogin(loginCredential);
   };
+
   let isLoginButtonDisaled = usernameHasError || passwordError || isUsernameFieldEmpty || isPasswordFieldEmpty;
+	
   return (
     <div id="login" style={style}>
       <h1>

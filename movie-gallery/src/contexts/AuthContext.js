@@ -17,8 +17,22 @@ export const AuthProvider = ({ children }) => {
         if (result === "Bad response") {
           return navigate("/notfound");
         }
-        setAuth(authData);
+        setAuth(result);
         return navigate("/");
+      })
+      .catch((error) => {
+        throw console.error(error);
+      });
+  };
+
+  const userRegister = (authData) => {
+    authService
+      .register(authData)
+      .then((result) => {
+        if (result === "Bad response") {
+          return navigate("/badrequest");
+        }
+        return navigate("/login");
       })
       .catch((error) => {
         throw console.error(error);
@@ -30,7 +44,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
+    <AuthContext.Provider
+      value={{ user: auth, userLogin, userRegister, userLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );

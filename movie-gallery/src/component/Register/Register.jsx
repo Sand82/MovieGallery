@@ -3,18 +3,19 @@ import { useNavigate } from "react-router-dom";
 import * as style from "./Register.Module.css";
 import Input from "../UI/Input.jsx"
 import { useInput } from "../../hooks/useInput.js"
-import * as authService from '../../services/AuthServices.js';
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../services/Validators.js"
+import { AuthContext } from "../../contexts/AuthContext.js"
+import { useContext } from "react";
 
 const Register = () => {
 
 	const {
-      value: usernameValue,
-      changeHandler: usernameChangeHandler,
-      hasError: usernameHasError,
-      inputBlurHandler: usernameInputBluerHandler,
-      isEmpty: isUsernameFieldEmpty,    
+    value: usernameValue,
+    changeHandler: usernameChangeHandler,
+    hasError: usernameHasError,
+    inputBlurHandler: usernameInputBluerHandler,
+    isEmpty: isUsernameFieldEmpty,    
   } = useInput("", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
 	
 	const {
@@ -41,29 +42,19 @@ const Register = () => {
 		isEmpty: isRepeatPasswordFieldEmpty,   
 	} = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
 
-    const navigate = useNavigate();
+  const { userRegister } = useContext(AuthContext);
 
-    const registerSubmitHandler = async (e) => {
-        e.preventDefault();
+  const registerSubmitHandler = async (e) => {
+      e.preventDefault();
 
-    const registerCredential = {
-		username: usernameValue,
-		email: emailValue,
-		password: passwordValue,
-		repeatPassword: repeatPasswordValue,
-	  };
-
-    authService
-      .register(registerCredential)
-      .then((result) => {
-        if (result === 'Bad response') {
-          return navigate('/badrequest');
-        }        
-        return navigate('/login');
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
+    const registerCredentials = {
+	    username: usernameValue,
+	    email: emailValue,
+	    password: passwordValue,
+	    repeatPassword: repeatPasswordValue,
+    };
+    
+    userRegister(registerCredentials);
   };  
 
   const isRegisterButtonDisaled = usernameHasError || emailHasError || passwordError || repeatPasswordError || 
