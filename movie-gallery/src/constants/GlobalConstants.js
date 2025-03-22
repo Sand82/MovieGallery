@@ -19,3 +19,5 @@ export const subjectMinLength = 2;
 export const subjectMaxLength = 100;
 
 export const yearLength = 4;
+
+export const badRequestStatusCode = "400";

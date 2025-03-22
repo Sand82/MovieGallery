@@ -1,4 +1,5 @@
 import style from "./Input.module.css"
+import Error from "../Error/Error.jsx"
 
 const Input = ({ id, label, error, fieldType = "input", ...props }) => {
      
@@ -11,7 +12,7 @@ const Input = ({ id, label, error, fieldType = "input", ...props }) => {
           ? (<textarea className="input-field" id={id} {...props}/>)
           : (<input className="input-field" id={id} {...props} />)
         }       
-        {error && <span className={style.error}>{error}</span>}      
+        <Error error={error}/>      
       </div>
     );
   };

@@ -2,17 +2,17 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useContext } from "react";
 
 import * as style from "./Details.Module.css";
-
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
 import DetailsLi from "../HardCoded/DetailsLi.jsx";
 import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
-import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
+import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 
 const Details = () => {
-  const { movieId } = useParams();  
+  const { movieId } = useParams();
+
   const { user } = useContext(AuthContext);  
   const { movie, detailsHandler, favoriteMovieHandler } = useContext(DetailContext);
 
@@ -110,7 +110,7 @@ const Details = () => {
                             data-target="#exampleModal"
                           >
                             Delete
-                          </button>
+                          </button>                          
                         </li>
                       ) : (
                         <span>

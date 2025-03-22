@@ -1,5 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
+import * as movieService from "../services/MoviesService.js";
+import * as commentService from "../services/CommentService.js";
 import {
-  createContext,  
+  createContext,
   useEffect,
   useReducer,
   useContext,
@@ -11,131 +15,121 @@ import {
   CREATE_MOVIE,
   EDIT_MOVIE,
   DELETE_MOVIE,
-  SET_AVARAGE_RATING
+  SET_AVARAGE_RATING,
 } from "../constants/ReducerConstants.js";
-import * as movieService from "../services/MoviesService.js";
-import * as commentService from "../services/CommentService.js";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext.js";
 import { moviesReducer } from "./Reducers.js";
+import { badRequestStatusCode } from "../constants/GlobalConstants.js";
 
 export const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) => {
-  const [movies, dispatch] = useReducer(moviesReducer, []); 
-  const [favMovies, setFavMovies] = useState([]); 
+  const [movies, dispatch] = useReducer(moviesReducer, []);
+  const [favMovies, setFavMovies] = useState([]);
+  const [serverErrors, setServerErrors] = useState(null);
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    movieService.getAll().then((result) => {
-      if (result === "Bad response") {
-        return navigate("/notfound");
+    const getAllMovies = async () => {
+      setServerErrors(null);
+      try {
+        const result = await movieService.getAll();
+        const moviesResult = sortMovies(result);
+        dispatch({
+          type: ADD_MOVIES,
+          payload: moviesResult,
+        });
+      } catch (error) {
+        serverErrorsHandler(error);
       }
-
-      const moviesResult = sortMovies(result);
-
-      dispatch({
-        type: ADD_MOVIES,
-        payload: moviesResult,
-      });
-    });
+    };
+    getAllMovies();
   }, []);
 
-  const createHandler = (movieData) => {
-    movieService
-      .create(movieData, user.accessToken)
-      .then((responce) => {
-        if (responce === "Bad response") {
-          return navigate("/badrequest");
-        }
-
-        dispatch({
-          type: CREATE_MOVIE,
-          payload: responce,
-        });
-        return navigate("/movies");
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const createHandler = async (movieData) => {
+    setServerErrors(null);
+    try {
+      const result = await movieService.create(movieData, user.accessToken);      
+      dispatch({
+        type: CREATE_MOVIE,
+        payload: result,
       });
+      navigate("/movies");
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const editHandler = (movieData) => {
-    movieService
-      .edit(movieData, user.accessToken)
-      .then((responce) => {
-        if (responce === "Bad response") {
-          return navigate("/badrequest");
-        }
-        dispatch({
-          type: EDIT_MOVIE,
-          payload: movieData,
-        });
-
-        return navigate("/movies");
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const editHandler = async (movieData) => {
+    setServerErrors(null);
+    try {
+      await movieService.edit(movieData, user.accessToken);
+      dispatch({
+        type: EDIT_MOVIE,
+        payload: movieData,
       });
+      navigate("/movies");
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const deleteHandler = (movieId) => {
-    movieService
-      .remove(movieId, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/badrequest");
-        }
-
-        dispatch({
-          type: DELETE_MOVIE,
-          payload: movieId,
-        });
-
-        navigate("/movies");
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const deleteHandler = async (movieId) => {
+    setServerErrors(null);
+    try {
+      await movieService.remove(movieId, user.accessToken);
+      dispatch({
+        type: DELETE_MOVIE,
+        payload: movieId,
       });
+      navigate("/movies");
+    } catch (error) {
+      serverErrorsHandler(error);
+    }    
   };
 
-  const favoritesHandler = (userId) => {
-    commentService.getFavoriteMovies(userId)
-    .then((result) => {       
-        if (result === 'Bad response') {
-          return navigate('/notfound');
-        }
-        console.log(result);
-        setFavMovies( result);               
-      })
-      .catch((error) => {
-        throw console.error(error);
-      });
-  }
+  const favoritesHandler = async (userId) => {
+    setServerErrors(null);
+    try {
+      let result = await commentService.getFavoriteMovies(userId);
+      setFavMovies(result);      
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
+  };
 
   const avarageRatingHandler = (data) => {
     dispatch({
       type: SET_AVARAGE_RATING,
       payload: data,
-    })
-  }
-  
+    });
+  };
+
   const sortMovies = (movies) => {
     return movies.sort((a, b) => b.id - a.id);
   };
+
+  const serverErrorsHandler = (error) => {
+    if (error.message.includes(badRequestStatusCode)) {
+      navigate("/badrequest");
+    } else {
+      setServerErrors(error.message);
+    }
+  }
 
   return (
     <MovieContext.Provider
       value={{
         movies,
+        favMovies,
         createHandler,
         editHandler,
         deleteHandler,
-        favoritesHandler,
-        favMovies, 
-        avarageRatingHandler,           
+        favoritesHandler,        
+        avarageRatingHandler,
+        serverErrors,
       }}
     >
       {children}

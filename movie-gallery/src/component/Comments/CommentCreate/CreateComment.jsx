@@ -46,74 +46,74 @@ const CreateComment = ({ movieId }) => {
 		commentResetValue(); 	
 	};  
 
-  	const isValid = commentHasError || isCommentFieldEmpty;
+  const isValid = commentHasError || isCommentFieldEmpty;
 
-  	return (
-    	<div className="section-line">
-      		<div className="section-head">
-        	<h2 className="section-title text-uppercase">Add comment</h2>
-      	</div>
-      	<form autoComplete="off" onSubmit={createHandler}>
-        	<div className="row form-grid">
-          	<div className="col-12 col-sm-6">
-            	<div className="input-view-flat input-group">
-					<div className="col-12">		
-            			<Input
-            		    	label="Username"
-            		    	type="text"
-            		    	name="username"
-							className="form-control"
-            		    	value={usernameValue}
-            		    	onChange={usernameChangeHandler}            		    	
-							disabled={true}            		    	
-            			/> 
-					</div>	          
-            	</div>
-          	</div>
-          	<div className="col-12 col-sm-6">
-            	<div className="input-view-flat input-group">
-					<div className="col-12">
-						<Input
-                			label="Email address"
-                			type="text"
-                			name="email"
-							className="form-control"                          
-                			value={emailValue}
-                			onChange={emailChangeHandler}                			
-							disabled={true}               			
-						/>                        
-           			</div>
-				</div>			
-          	</div>
-          	<div className="col-12">
-            	<div className="input-view-flat input-group">             
-					<div className="col-12">
-						<Input
-                			label="Comment"
-                			type="textarea"
-                			name="comment"
-							fieldType="textarea"
-							rows={3} 
-							className="form-control"                          
-                			value={commentValue}
-                			onChange={commentChangeHandler}
-                			onBlur={commentInputBluerHandler}
-                			error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
-            			/>
-					</div>
-            	</div>
-          	</div>
-          	<MovieRating movieId={movieId} />
-          	<div className="col-12">
-            	<button
-              		className="px-5 btn btn-theme"
-              		type="submit"
-              		disabled={isValid}
-            	>
-              	Send
-            	</button>
-          	</div>
-        	</div>
+  return (
+    <div className="section-line">
+      <div className="section-head">
+        <h2 className="section-title text-uppercase">Add comment</h2>
+      </div>
+      <form autoComplete="off" onSubmit={createHandler}>		  
+        <div className="row form-grid">
+          <div className="col-12 col-sm-6">
+            <div className="input-view-flat input-group">
+              <div className="col-12">		
+                <Input
+                  label="Username"
+                  type="text"
+                  name="username"
+                  className="form-control"
+                  value={usernameValue}
+                  onChange={usernameChangeHandler}            		    	
+                  disabled={true}            		    	
+                /> 
+              </div>	          
+            </div>
+          </div>
+          <div className="col-12 col-sm-6">
+            <div className="input-view-flat input-group"> 
+              <div className="col-12">
+                <Input
+                  label="Email address"
+                  type="text"
+                  name="email"
+                  className="form-control"                          
+                  value={emailValue}
+                  onChange={emailChangeHandler}                			
+                  disabled={true}               			
+                />                        
+              </div>
+            </div>			
+          </div>
+            <div className="col-12">
+              <div className="input-view-flat input-group">             
+                <div className="col-12">
+                  <Input
+                    label="Comment"
+                    type="textarea"
+                    name="comment"
+                    fieldType="textarea"
+                    rows={3} 
+                    className="form-control"                          
+                  	value={commentValue}
+                  	onChange={commentChangeHandler}
+                  	onBlur={commentInputBluerHandler}
+                  	error={commentHasError && `Comment should be between ${GlobalConstant.textareaMinLength} and ${GlobalConstant.textareaMaxLength} symbols.`}
+                  />
+                </div>
+              </div>
+            </div>
+            <MovieRating movieId={movieId} />
+              <div className="col-12">
+                <button
+                  className="px-5 btn btn-theme"
+                  type="submit"
+                  disabled={isValid}
+                >
+              	  Send
+            	  </button>
+          	  </div>
+        	  </div>
       	</form>
     </div>
   );

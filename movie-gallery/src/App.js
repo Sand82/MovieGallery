@@ -96,6 +96,7 @@ function App() {
                   </RouteGuard>
                 }
               />
+              <Route path="*" element={<NotFound />} />
             </Routes>
             <Scroll />
             <Footer />

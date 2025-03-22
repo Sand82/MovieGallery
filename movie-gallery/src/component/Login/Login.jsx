@@ -1,11 +1,12 @@
 import { useContext } from "react";
 
 import * as style from "../Login/Login.Module.css";
+import * as GlobalConstant from "../../constants/GlobalConstants.js";
+import Input from "../UI/Input.jsx";
+import Error from "../UI/Error/Error.jsx";
+import { useInput } from "../../hooks/useInput.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
-import Input from "../UI/Input.jsx"
-import { useInput } from "../../hooks/useInput.js"
-import * as GlobalConstant from "../../constants/GlobalConstants.js"
-import { hasLength, minLength } from "../../services/Validators.js"
+import { hasLength, minLength } from "../../services/Validators.js";
 
 const Login = () => {    
 
@@ -25,18 +26,18 @@ const Login = () => {
     isEmpty: isPasswordFieldEmpty,   
   } = useInput("", (value) => minLength(value, GlobalConstant.passwordLength));
     
-  const { userLogin } = useContext(AuthContext);
+  const { userLogin, serverErrors } = useContext(AuthContext);
 
   const loginSubmitHandler = async (e) => {
-      e.preventDefault();        
-      var loginCredential = {
-          username: usernameValue,
-          password: passwordValue
-      }
-      userLogin(loginCredential);
+    e.preventDefault();        
+    var loginCredential = {
+      username: usernameValue,
+      password: passwordValue
+    }
+    userLogin(loginCredential);
   };
 
-  let isLoginButtonDisaled = usernameHasError || passwordError || isUsernameFieldEmpty || isPasswordFieldEmpty;
+  let isLoginButtonDisaled = usernameHasError || passwordError || isUsernameFieldEmpty || isPasswordFieldEmpty || serverErrors;
 	
   return (
     <div id="login" style={style}>
@@ -44,6 +45,9 @@ const Login = () => {
           <strong>Welcome.</strong> Please login.
       </h1>
       <form onSubmit={loginSubmitHandler}>
+        <div>
+          <Error error={serverErrors}/>
+        </div>
         <fieldset>
           <div>
             <Input

@@ -1,18 +1,19 @@
 import { useContext } from "react";
 
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import Input from "../UI/Input.jsx"
+import Error from "../UI/Error/Error.jsx"
+import style from "./ManageMove.module.css"
+import { useInput } from "../../hooks/useInput.js"
+import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
-import Input from "../UI/Input.jsx"
-import { useInput } from "../../hooks/useInput.js"
-import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js"
-import { DetailContext } from "../../contexts/DetailContext.js";
-import style from "./ManageMove.module.css"
 
 const ManageMovie = ({isCreated}) => {
 
 const { user } = useContext(AuthContext);
-const { createHandler, editHandler } = useContext(MovieContext);
+const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
 const { movie } = useContext(DetailContext);
 
 const {
@@ -88,7 +89,7 @@ const isValid = titleHasError || isTitleFieldEmpty ||
 	  yearHasError || isYearFieldEmpty ||
 	  imageUrlHasError || isImageUrlFieldEmpty ||
 	  durationHasError || isDurationFieldEmpty ||
-	  descriptionHasError || isDescriptionFieldEmpty; 
+	  descriptionHasError || isDescriptionFieldEmpty || serverErrors; 
     
 const movieActionType = isCreated ? "Create" : "Edit";
 
@@ -100,6 +101,9 @@ return (
             <>
               <h2 className={`heading text-center ${style["movie-title"]}`}>{movieActionType} Movie</h2>
               <form onSubmit={manageMovieHandler}>
+                <div>
+                  <Error error={serverErrors}/>
+                </div>
                 <div className="form-outline mb-4">                  
                    	<Input
                         label="Title"

@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-
 import * as style from "./Register.Module.css";
-import Input from "../UI/Input.jsx"
-import { useInput } from "../../hooks/useInput.js"
-import * as GlobalConstant from "../../constants/GlobalConstants.js"
-import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../services/Validators.js"
-import { AuthContext } from "../../contexts/AuthContext.js"
+import * as GlobalConstant from "../../constants/GlobalConstants.js";
+import Error from "../UI/Error/Error.jsx";
+import Input from "../UI/Input.jsx";
 import { useContext } from "react";
+import { useInput } from "../../hooks/useInput.js";
+import { AuthContext } from "../../contexts/AuthContext.js";
+import { hasLength, minLength, isEmail, isEqualToOtherValue } from "../../services/Validators.js";
+
 
 const Register = () => {
 
@@ -42,7 +42,7 @@ const Register = () => {
 		isEmpty: isRepeatPasswordFieldEmpty,   
 	} = useInput("", (value) => isEqualToOtherValue(value, passwordValue));
 
-  const { userRegister } = useContext(AuthContext);
+  const { userRegister, serverErrors } = useContext(AuthContext);
 
   const registerSubmitHandler = async (e) => {
       e.preventDefault();
@@ -58,7 +58,7 @@ const Register = () => {
   };  
 
   const isRegisterButtonDisaled = usernameHasError || emailHasError || passwordError || repeatPasswordError || 
-  	isUsernameFieldEmpty || isEmailFieldEmpty || isPasswordFieldEmpty || isRepeatPasswordFieldEmpty;   
+  	isUsernameFieldEmpty || isEmailFieldEmpty || isPasswordFieldEmpty || isRepeatPasswordFieldEmpty || serverErrors;   
 
   return (
     <section className="vh-100" style={style}>
@@ -76,6 +76,9 @@ const Register = () => {
                       onSubmit={registerSubmitHandler}
                       className="mx-1 mx-md-4"
                     >
+                      <div>
+                        <Error error={serverErrors}/>
+                      </div>
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-user fa-lg me-3 fa-fw" />
                         <div className="form-outline flex-fill mb-0">                          
