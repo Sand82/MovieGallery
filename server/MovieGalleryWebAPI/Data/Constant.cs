@@ -28,7 +28,7 @@
         public const int UserPasswordMinLength = 5;
         public const int UserPasswordMaxLength = 50;
 
-        public const int MinContentLength = 10;
+        public const int MinContentLength = 3;
         public const int MaxContentLength = 500;
 
         public const int MinRatingValue = 1;

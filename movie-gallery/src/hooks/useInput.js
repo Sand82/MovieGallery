@@ -13,8 +13,7 @@ export const useInput = (defaultValue, validationFn) => {
     setDidEdit(false);
   };
 
-  const valioIsValid = validationFn(value);
-  
+  const valioIsValid = validationFn(value);  
 
   const inputBlurHandler = () => {
     setDidEdit(true);
