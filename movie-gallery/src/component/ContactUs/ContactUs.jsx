@@ -1,89 +1,89 @@
-import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
+import { Link } from "react-router-dom";
 import { useContext, useState, useRef } from "react";
 
-import ContactInformation from "./ContactInformation/ContactInformation.jsx";
-import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
+import * as GlobalConstant from "../../constants/GlobalConstants.js"
+import { useInput } from "../../hooks/useInput.js"
 import { AuthContext } from "../../contexts/AuthContext.js";
+import { hasLength, isEmail } from "../../services/Validators.js"
+import Input from "../../component/UI/Input.jsx"
 import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
 import Input from "../../component/UI/Input.jsx"
-import { useInput } from "../../hooks/useInput.js"
-import * as GlobalConstant from "../../constants/GlobalConstants.js"
-import { hasLength, isEmail } from "../../services/Validators.js"
-
+import ContactInformation from "./ContactInformation/ContactInformation.jsx";
+import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
 
 const ContactUs = () => {    
 
-    const { user } = useContext(AuthContext); 
+  const { user } = useContext(AuthContext); 
 
-    const {
-            value: usernameValue,
-            changeHandler: usernameChangeHandler,
-            hasError: usernameHasError,
-            inputBlurHandler: usernameInputBluerHandler, 
-            isEmpty: isUsernameFieldEmpty, 
-            resetValue: usernameResetValue,  
-        } = useInput(user ? user.username : "", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
-    
-    const {
-            value: emailValue,
-            changeHandler: emailChangeHandler,
-            hasError: emailHasError,
-            inputBlurHandler: emailInputBluerHandler,
-            isEmpty: isEmailFieldEmpty, 
-            resetValue: emailResetValue,   
-        } = useInput(user ? user.email : "", (value) => isEmail(value));
-
-    const {
-            value: subjectValue,
-            changeHandler: subjectChangeHandler,
-            hasError: subjectHasError,
-            inputBlurHandler: subjectInputBluerHandler, 
-            isEmpty: isSubjectFieldEmpty,
-            resetValue: subjectResetValue,   
-        } = useInput("", (value) => hasLength(value, GlobalConstant.subjectMinLength, GlobalConstant.subjectMaxLength));
-
-    const {
-            value: messageValue,
-            changeHandler: messageChangeHandler,
-            hasError: messageHasError,
-            inputBlurHandler: messageInputBluerHandler, 
-            isEmpty: isMessageFieldEmpty, 
-            resetValue: messageResetValue,  
-        } = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
-        
-    const form = useRef();
-    const [data, setData] = useState(null); 
-
-    const sendEmail = (e) => {
-        e.preventDefault();
-        
-        emailjs
-            .sendForm(
-            'service_ufh83g4',
-            'template_qgn844p',
-            form.current,
-            '97bvqzMYCmiGXN1wA'
-            )
-            .then((result) => {
-                if (result.text == 'OK') {
-                setData(true);
-                usernameResetValue();
-                emailResetValue();
-                subjectResetValue();
-                messageResetValue();          
-                }
-            },
-            (error) => {
-                console.log(error.text);
-            }
-          );       
-    };
+  const {
+    value: usernameValue,
+    changeHandler: usernameChangeHandler,
+    hasError: usernameHasError,
+    inputBlurHandler: usernameInputBluerHandler, 
+    isEmpty: isUsernameFieldEmpty, 
+    resetValue: usernameResetValue,  
+  } = useInput(user ? user.username : "", (value) => hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength));
   
-    const isValid = usernameHasError || isUsernameFieldEmpty ||
-      emailHasError || isEmailFieldEmpty ||
-      subjectHasError || isSubjectFieldEmpty ||
-      messageHasError || isMessageFieldEmpty;    
+  const {
+    value: emailValue,
+    changeHandler: emailChangeHandler,
+    hasError: emailHasError,
+    inputBlurHandler: emailInputBluerHandler,
+    isEmpty: isEmailFieldEmpty, 
+    resetValue: emailResetValue,   
+  } = useInput(user ? user.email : "", (value) => isEmail(value));
+
+  const {
+    value: subjectValue,
+    changeHandler: subjectChangeHandler,
+    hasError: subjectHasError,
+    inputBlurHandler: subjectInputBluerHandler, 
+    isEmpty: isSubjectFieldEmpty,
+    resetValue: subjectResetValue,   
+  } = useInput("", (value) => hasLength(value, GlobalConstant.subjectMinLength, GlobalConstant.subjectMaxLength));
+
+  const {
+    value: messageValue,
+    changeHandler: messageChangeHandler,
+    hasError: messageHasError,
+    inputBlurHandler: messageInputBluerHandler, 
+    isEmpty: isMessageFieldEmpty, 
+    resetValue: messageResetValue,  
+  } = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
+      
+  const form = useRef();
+  const [data, setData] = useState(null); 
+
+  const sendEmail = (e) => {
+  e.preventDefault();
+  
+  emailjs
+      .sendForm(
+      'service_ufh83g4',
+      'template_qgn844p',
+      form.current,
+      '97bvqzMYCmiGXN1wA'
+      )
+      .then((result) => {
+        if (result.text == 'OK') {
+        setData(true);
+        usernameResetValue();
+        emailResetValue();
+        subjectResetValue();
+        messageResetValue();          
+        }
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );       
+  };
+ 
+  const isValid = usernameHasError || isUsernameFieldEmpty ||
+    emailHasError || isEmailFieldEmpty ||
+    subjectHasError || isSubjectFieldEmpty ||
+    messageHasError || isMessageFieldEmpty;    
 
   return (
     <>

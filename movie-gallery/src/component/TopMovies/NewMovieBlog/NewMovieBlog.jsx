@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import * as style from "./NewMovieBlog.Module.css";
+import { cropText } from "../../../services/HelperService.js";
 
 const NewMovieBlog = ({ movie }) => {  
 
@@ -52,7 +53,7 @@ const NewMovieBlog = ({ movie }) => {
               {movie.category}
             </Link>
           </div>
-          <p className="text-short entity-text">{movie.description}</p>
+          <p className="text-short entity-text">{cropText(movie.description)}</p>
           <div className="entity-actions">
             <Link className="text-uppercase" to={`/movies/details/${movie.id}`}>
               Details

@@ -27,7 +27,7 @@ export const DetailProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const detailsHandler = async (movieId, userId) => {
-    setServerErrors(null);
+    setServerErrors(null);   
     try {
       const responce = await movieService.getOne(
         movieId,

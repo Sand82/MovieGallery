@@ -11,9 +11,7 @@ const Movies = () => {
 
   useEffect(() => {
     setFilteredMovies(movies);
-  }, [movies]);
-
-  console.log(movies);
+  }, [movies]);  
 
   const searchTermsHandler = (search, select) => {
     

@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom"
+
 import style from "./FavoriteMovie.module.css"
+import { cropText } from "../../../services/HelperService.js"
 
 const FavoriteMovie = ({movie}) => {
   return (
@@ -43,7 +45,7 @@ const FavoriteMovie = ({movie}) => {
             
           </div>
           <p className="text-short entity-text">
-          {movie.description}
+          {cropText(movie.description)}
           </p>
           <div className="entity-actions">
             <Link className="text-uppercase" to={`/movies/details/${movie.id}`}>
