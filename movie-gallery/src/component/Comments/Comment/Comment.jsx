@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState} from "react";
 
-import { AuthContext } from "../../../contexts/AuthContext.js";
-import { DetailContext } from "../../../contexts/DetailContext.js";
 import * as helperService from "../../../services/HelperService.js";
 import * as GlobalConstant from "../../../constants/GlobalConstants.js";
+import Input from "../../UI/Input.jsx";
+import Error from "../../UI/Error/Error.jsx"
+import styles from './Comment.module.css';
+import { AuthContext } from "../../../contexts/AuthContext.js";
+import { DetailContext } from "../../../contexts/DetailContext.js";
 import { hasLength } from "../../../services/Validators.js";
 import { useInput } from "../../../hooks/useInput.js";
-import Input from "../../UI/Input.jsx";
-import styles from './Comment.module.css';
 
 const Comment = ({ comment }) => {
   const {
@@ -21,7 +22,7 @@ const Comment = ({ comment }) => {
   );  
 
   const { user } = useContext(AuthContext);
-  const { editCommentHandler, deleteCommentHandler } = useContext(DetailContext);
+  const { editCommentHandler, daleteCommentHandler, serverErrors } = useContext(DetailContext);
   const [isEditing, setIsEditing] = useState(false); 
 
   const handleClick = () => {
@@ -41,13 +42,13 @@ const Comment = ({ comment }) => {
   };
 
   const deleteHandler = () => {
-    deleteCommentHandler(comment.id);
+    daleteCommentHandler(comment.id);
   };
 
   const editComment = () => {
 
     commentBlurHandler();  
-    if(hasLength(commentValue, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength)) {
+    if(hasLength(commentValue, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength) && !serverErrors) {
       
       editCommentHandler(commentValue, comment);
       setIsEditing(false);      
@@ -64,6 +65,9 @@ const Comment = ({ comment }) => {
     <div className="comment-entity" >      
       <div className="entity-inner">
         <form className="entity-content">
+          <div>
+            <Error error={serverErrors}/>
+          </div> 
           <h4 className="entity-title">{comment.username}</h4>
           <p className="entity-subtext">{helperService.formatData(comment.creationData)}</p>
           {isEditing ? (                       

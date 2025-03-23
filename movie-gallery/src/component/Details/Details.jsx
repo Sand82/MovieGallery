@@ -7,6 +7,7 @@ import DetailsLi from "../HardCoded/DetailsLi.jsx";
 import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
+import Error from "../UI/Error/Error.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 
@@ -14,7 +15,7 @@ const Details = () => {
   const { movieId } = useParams();
 
   const { user } = useContext(AuthContext);  
-  const { movie, detailsHandler, favoriteMovieHandler } = useContext(DetailContext);
+  const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
@@ -138,7 +139,9 @@ const Details = () => {
                 <div className="section-head">
                   <h2 className="section-title text-uppercase">Comments</h2>
                 </div>
-
+                <div>
+                  <Error error={serverErrors}/>
+                </div>
                 {movie.comments
                   ? movie.comments.map((x) => (
                       <Comment

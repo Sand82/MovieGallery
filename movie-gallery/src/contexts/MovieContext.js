@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import * as movieService from "../services/MoviesService.js";
-import * as commentService from "../services/CommentService.js";
+import * as commentService from "../services/DetailsService.js";
 import {
   createContext,
   useEffect,
@@ -35,11 +35,11 @@ export const MovieProvider = ({ children }) => {
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
-        const result = await movieService.getAll();
-        const moviesResult = sortMovies(result);
+        const responce = await movieService.getAll();
+        const sortedMovies = sortMovies(responce);
         dispatch({
           type: ADD_MOVIES,
-          payload: moviesResult,
+          payload: sortedMovies,
         });
       } catch (error) {
         serverErrorsHandler(error);
@@ -51,10 +51,10 @@ export const MovieProvider = ({ children }) => {
   const createHandler = async (movieData) => {
     setServerErrors(null);
     try {
-      const result = await movieService.create(movieData, user.accessToken);      
+      const responce = await movieService.create(movieData, user.accessToken);
       dispatch({
         type: CREATE_MOVIE,
-        payload: result,
+        payload: responce,
       });
       navigate("/movies");
     } catch (error) {
@@ -87,14 +87,14 @@ export const MovieProvider = ({ children }) => {
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
-    }    
+    }
   };
 
   const favoritesHandler = async (userId) => {
     setServerErrors(null);
     try {
-      let result = await commentService.getFavoriteMovies(userId);
-      setFavMovies(result);      
+      let responce = await commentService.getFavoriteMovies(userId);
+      setFavMovies(responce);
     } catch (error) {
       serverErrorsHandler(error);
     }
@@ -117,7 +117,7 @@ export const MovieProvider = ({ children }) => {
     } else {
       setServerErrors(error.message);
     }
-  }
+  };
 
   return (
     <MovieContext.Provider
@@ -127,7 +127,7 @@ export const MovieProvider = ({ children }) => {
         createHandler,
         editHandler,
         deleteHandler,
-        favoritesHandler,        
+        favoritesHandler,
         avarageRatingHandler,
         serverErrors,
       }}

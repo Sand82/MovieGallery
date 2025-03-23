@@ -1,17 +1,18 @@
 import { useContext } from "react";
 
-import { AuthContext } from "../../../contexts/AuthContext.js";
+import * as GlobalConstant from "../../../constants/GlobalConstants.js"
+import Error from "../../UI/Error/Error.jsx";
 import MovieRating from "../../Rating/MovieRating.jsx";
 import Input from "../../UI/Input.jsx"
 import { useInput } from "../../../hooks/useInput.js"
-import * as GlobalConstant from "../../../constants/GlobalConstants.js"
+import { AuthContext } from "../../../contexts/AuthContext.js";
 import { hasLength, isEmail } from "../../../services/Validators.js"
 import { DetailContext } from "../../../contexts/DetailContext.js";
 
 const CreateComment = ({ movieId }) => {
 
 	const { user } = useContext(AuthContext);
-	const { createCommentHandler } = useContext(DetailContext)
+	const { createCommentHandler, serverErrors } = useContext(DetailContext)
 
 	const {
 		value: usernameValue,
@@ -32,28 +33,30 @@ const CreateComment = ({ movieId }) => {
 		resetValue: commentResetValue,  
 	} = useInput("", (value) => hasLength(value, GlobalConstant.textareaMinLength, GlobalConstant.textareaMaxLength));
 
-  	const createHandler = (e) => {
-    	e.preventDefault();
+  const createHandler = (e) => {
+  	e.preventDefault();
+  	const currentCommentInfo = {
+		comment: commentValue,
+		username: usernameValue,
+		email: emailValue,
+		movieId		
+	}
 
-    	const currentCommentInfo = {
-			comment: commentValue,
-			username: usernameValue,
-			email: emailValue,
-			movieId		
-		}
-
-		createCommentHandler(currentCommentInfo);
-		commentResetValue(); 	
+	createCommentHandler(currentCommentInfo);
+	commentResetValue();
 	};  
 
-  const isValid = commentHasError || isCommentFieldEmpty;
+  const isValid = commentHasError || isCommentFieldEmpty || serverErrors;
 
   return (
     <div className="section-line">
       <div className="section-head">
         <h2 className="section-title text-uppercase">Add comment</h2>
       </div>
-      <form autoComplete="off" onSubmit={createHandler}>		  
+      <form autoComplete="off" onSubmit={createHandler}>
+        <div>
+          <Error error={serverErrors}/>
+        </div> 
         <div className="row form-grid">
           <div className="col-12 col-sm-6">
             <div className="input-view-flat input-group">

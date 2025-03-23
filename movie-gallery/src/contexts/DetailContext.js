@@ -1,6 +1,8 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import * as movieService from "../services/MoviesService.js";
+import * as detailsService from "../services/DetailsService.js";
 import {
   CREATE_COMMENT,
   ADD_MOVIE,
@@ -9,127 +11,114 @@ import {
   SET_FAVORITE_MOVIE,
   SET_PERSONAL_RATING,
 } from "../constants/ReducerConstants.js";
-import * as commentService from "../services/CommentService.js";
+import { badRequestStatusCode } from "../constants/GlobalConstants.js";
 import { AuthContext } from "./AuthContext.js";
 import { MovieContext } from "./MovieContext.js";
-import * as movieService from "../services/MoviesService.js";
 import { detailReducer } from "./Reducers.js";
 
 export const DetailContext = createContext();
 
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
+  const [serverErrors, setServerErrors] = useState(null);
   const { user } = useContext(AuthContext);
   const { avarageRatingHandler } = useContext(MovieContext);
 
   const navigate = useNavigate();
 
-  const detailsHandler = (movieId, userId) => {
-    movieService
-      .getOne(movieId, userId, user.AccessToken)
-      .then((responce) => {
-        if (responce === "Bad response") {
-          return navigate("/badrequest");
-        }
-
-        dispatch({
-          type: ADD_MOVIE,
-          payload: responce,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const detailsHandler = async (movieId, userId) => {
+    setServerErrors(null);
+    try {
+      const responce = await movieService.getOne(
+        movieId,
+        userId,
+        user.AccessToken
+      );
+      dispatch({
+        type: ADD_MOVIE,
+        payload: responce,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const createCommentHandler = (data) => {
-    commentService
-      .create(data, user.accessToken)
-      .then((responce) => {
-        if (responce === "Bad response") {
-          return navigate("/notfound");
-        }
-
-        dispatch({
-          type: CREATE_COMMENT,
-          payload: responce,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const createCommentHandler = async (data) => {
+    setServerErrors(null);
+    try {
+      const responce = await detailsService.createComment(
+        data,
+        user.accessToken
+      );
+      dispatch({
+        type: CREATE_COMMENT,
+        payload: responce,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const editCommentHandler = (editedComment, comment) => {
+  const editCommentHandler = async (editedComment, comment) => {
+    setServerErrors(null);
     comment.comment = editedComment;
-    commentService
-      .edit(comment, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-
-        dispatch({
-          type: EDIT_COMMENT,
-          payload: comment,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+    try {
+      await detailsService.editComment(comment, user.accessToken);
+      dispatch({
+        type: EDIT_COMMENT,
+        payload: comment,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const daleteCommentHandler = (commentId) => {
-    commentService
-      .remove(commentId, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-
-        dispatch({
-          type: DELETE_COMMENT,
-          payload: commentId,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const daleteCommentHandler = async (commentId) => {
+    setServerErrors(null);    
+    try {
+      await detailsService.removeComment(commentId, user.accessToken);
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: commentId,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }   
   };
 
-  const favoriteMovieHandler = (data) => {
-    commentService
-      .addFavorite(data, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        dispatch({
-          type: SET_FAVORITE_MOVIE,
-          payload: data,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const favoriteMovieHandler = async (data) => {
+    setServerErrors(null);    
+    try {
+      await detailsService.addFavorite(data, user.accessToken);
+      dispatch({
+        type: SET_FAVORITE_MOVIE,
+        payload: data,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
   };
 
-  const movieRatingHandler = (data) => {
-    commentService
-      .addRating(data, user.accessToken)
-      .then((result) => {
-        if (result === "Bad response") {
-          return navigate("/notfound");
-        }
-        avarageRatingHandler(result);
-        dispatch({
-          type: SET_PERSONAL_RATING,
-          payload: result,
-        });
-      })
-      .catch((error) => {
-        throw console.error(error);
+  const movieRatingHandler = async (data) => {
+    setServerErrors(null);    
+    try {
+      let responce = await detailsService.addRating(data, user.accessToken);
+      avarageRatingHandler(responce);
+      dispatch({
+        type: SET_PERSONAL_RATING,
+        payload: responce,
       });
+    } catch (error) {
+      serverErrorsHandler(error);
+    }    
+  };
+
+  const serverErrorsHandler = (error) => {
+    if (error.message.includes(badRequestStatusCode)) {
+      navigate("/badrequest");
+    } else {
+      setServerErrors(error.message);
+    }
   };
 
   return (
@@ -142,6 +131,7 @@ export const DetailProvider = ({ children }) => {
         detailsHandler,
         favoriteMovieHandler,
         movieRatingHandler,
+        serverErrors,
       }}
     >
       {children}
