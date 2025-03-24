@@ -1,17 +1,24 @@
-import TopRated from "./TopRated/TopRated.jsx";
 import { useContext, useEffect, useState } from "react";
 
-import { MovieContext } from "../../contexts/MovieContext.js";
 import * as helperService from "../../services/HelperService.js";
 import Search from "../Search/Search.jsx";
+import TopRated from "./TopRated/TopRated.jsx";
+import Pagination from "../UI/Pagination/Pagination.jsx";
+import { MovieContext } from "../../contexts/MovieContext.js";
 
 const Movies = () => {
   const { movies } = useContext(MovieContext);
-  const [filterMovies, setFilteredMovies] = useState(movies);
+  const [filterMovies, setFilteredMovies] = useState([]);
+  const [ itemsPerPage, setItemsPerPage] = useState(5)
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalItems = filterMovies.length;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const displayedItems = filterMovies.slice(startIndex, startIndex + itemsPerPage);
 
   useEffect(() => {
     setFilteredMovies(movies);
-  }, [movies]);  
+  }, [movies]);
 
   const searchTermsHandler = (search, select) => {
     
@@ -39,6 +46,11 @@ const Movies = () => {
     setFilteredMovies((state) => (state = [...sortedMovies]));
   };
 
+  const itemsPerPageHandler = (e) => {
+    setItemsPerPage(e.target.value);
+    setCurrentPage(1);
+  } 
+
   const date = new Date();
 
   return (
@@ -50,9 +62,34 @@ const Movies = () => {
           <p className="section-text">{helperService.formatData(date)}</p>
         </div>
 
-        {filterMovies.map((x) => (
+        {displayedItems.map((x) => (
           <TopRated key={x.id} movie={x} />
         ))}
+
+        <div className="mt-5 d-flex justify-content-between align-items-center">
+
+          <div className="p-4">      
+            <Pagination
+              totalItems={movies.length}
+              itemsPerPage={itemsPerPage}
+              currentPage={currentPage}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+
+          <div >
+            <select                    
+              name="pagination"
+              className="form-control list-group-item btn-warning btn-outline-warning text-white"               
+              onChange={itemsPerPageHandler}                                      
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+        </div>        
       </div>
     </section>
   );

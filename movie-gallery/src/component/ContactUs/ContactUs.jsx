@@ -8,7 +8,6 @@ import { AuthContext } from "../../contexts/AuthContext.js";
 import { hasLength, isEmail } from "../../services/Validators.js"
 import Input from "../../component/UI/Input.jsx"
 import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
-import Input from "../../component/UI/Input.jsx"
 import ContactInformation from "./ContactInformation/ContactInformation.jsx";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
 
