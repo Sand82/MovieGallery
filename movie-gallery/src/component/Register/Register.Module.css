@@ -1,25 +1,8 @@
-.vh-100 {
+.register-container {
   font-family: "Open Sans";
   background-color: #eee;
 }
 
-.card text-black {
+.register-card {
   border-radius: 25;
-}
-
-.btn {
-  background-color: #ff8a00;
-  color: white;
-}
-
-.btn:hover {
-  background-color: #ff680d;
-}
-
-.regester-input {
-  width: 100%;
-}
-
-.regester-input-password {
-  width: 100% !important;
 }

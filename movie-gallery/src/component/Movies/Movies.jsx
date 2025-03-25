@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import * as helperService from "../../services/HelperService.js";
 import Search from "../Search/Search.jsx";
@@ -67,8 +68,7 @@ const Movies = () => {
         ))}
 
         <div className="mt-5 d-flex justify-content-between align-items-center">
-
-          <div className="p-4">      
+          <div>      
             <Pagination
               totalItems={movies.length}
               itemsPerPage={itemsPerPage}
@@ -76,11 +76,10 @@ const Movies = () => {
               onPageChange={setCurrentPage}
             />
           </div>
-
-          <div >
+          <div >            
             <select                    
               name="pagination"
-              className="form-control list-group-item btn-warning btn-outline-warning text-white"               
+              className="form-select list-group-item text-dark"               
               onChange={itemsPerPageHandler}                                      
             >
               <option value="5">5</option>

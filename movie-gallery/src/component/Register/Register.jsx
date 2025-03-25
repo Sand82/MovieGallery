@@ -1,4 +1,4 @@
-import * as style from "./Register.Module.css";
+import style from "./Register.module.css";
 import * as GlobalConstant from "../../constants/GlobalConstants.js";
 import Error from "../UI/Error/Error.jsx";
 import Input from "../UI/Input.jsx";
@@ -61,11 +61,11 @@ const Register = () => {
   	isUsernameFieldEmpty || isEmailFieldEmpty || isPasswordFieldEmpty || isRepeatPasswordFieldEmpty || serverErrors;   
 
   return (
-    <section className="vh-100" style={style}>
+    <section className={`vh-100 ${style["register-container"]}`} style={style}>
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-lg-12 col-xl-11">
-            <div className="card text-black">
+            <div className={`card text-black ${style["register-card"]}`}>
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
@@ -86,7 +86,7 @@ const Register = () => {
                             label="Username"
                             type="text"
                             name="username"
-                            className="regester-input"                           
+                            className="w-100"                           
                             value={usernameValue}
                             onChange={usernameChangeHandler}
                             onBlur={usernameInputBluerHandler}
@@ -101,7 +101,7 @@ const Register = () => {
                             label="Email address"
                             type="text"
                             name="email"
-                            className="regester-input"                           
+                            className="w-100"                           
                             value={emailValue}
                             onChange={emailChangeHandler}
                             onBlur={emailInputBluerHandler}
@@ -114,8 +114,7 @@ const Register = () => {
                           <Input
                            label="Password"
                            type="password"
-                           name="password"  
-                           className="regester-input-password"                                                  
+                           name="password"                                                                               
                            value={passwordValue}
                            onChange={passwordChangeHandler}
                            onBlur={passwordInputBluerHandler}
@@ -129,8 +128,7 @@ const Register = () => {
                           <Input
                            label="Repeat password"
                            type="password"
-                           name="repeatPassword"
-                           className="regester-input-password"                                                     
+                           name="repeatPassword"                                                                             
                            value={repeatPasswordValue}
                            onChange={repeatPasswordChangeHandler}
                            onBlur={repeatPasswordInputBluerHandler}
@@ -141,7 +139,7 @@ const Register = () => {
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           type="submit"
-                          className="btn btn-lg"
+                          className="btn btn-warning text-light btn-lg"
                           disabled={isRegisterButtonDisaled}
                         >
                           Register
