@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import styles from "./Search.module.css"
+
 const Search = ({ searchTermsHandler }) => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("All");
+  const [sortDirection, setSortDirection] = useState(true);
 
   const searchChange = (e) => {
     e.preventDefault();
@@ -18,6 +21,12 @@ const Search = ({ searchTermsHandler }) => {
   const selecting = (e) => {
     setSelect(e.target.value);
   };
+
+  const sortDirectionHandler = () => {
+    setSortDirection(state => state = !state);
+  }
+
+  console.log(sortDirection)
 
   const clearSearch = () => {
     setSearch("");
@@ -55,7 +64,7 @@ const Search = ({ searchTermsHandler }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-7 col-lg-5">
+              <div className="col-sm-7 col-lg-5 d-flex">
                 <div className="input-view-flat input-group">
                   <select
                     className="form-control"
@@ -69,7 +78,14 @@ const Search = ({ searchTermsHandler }) => {
                     <option value="duration">Duration</option>
                   </select>
                 </div>
+                <div className={`col-1 d-flex align-self-center  ${styles["arrows-container"]}`} onClick={sortDirectionHandler}>                
+                {sortDirection ? 
+                  <i className={`fa-solid fa-arrow-up fa-sm ${styles["icon-arrow"]}`}/> : 
+                  <i className={`fa-solid fa-arrow-down fa-sm ${styles["icon-arrow"]}`}/>
+                }
               </div>
+              </div>
+              
             </div>
           </form>
         </div>

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
-import NewMoviePoster from "./NewMoviePoster/NewMoviePoster.jsx";
+import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
@@ -40,7 +40,7 @@ const NewMovies = () => {
                 <div className="slick-list draggable">
                   <div className="slick-track">
                     {firstFiveMovies.map((x) => (
-                      <NewMoviePoster key={x.id} movie={x} />
+                      <TopRatedCard key={x.id} movie={x} />
                     ))}
                   </div>
                 </div>

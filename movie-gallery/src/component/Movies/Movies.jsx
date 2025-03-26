@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import styles from "./Movies.module.css";
 
 import * as helperService from "../../services/HelperService.js";
 import Search from "../Search/Search.jsx";
-import TopRated from "./TopRated/TopRated.jsx";
+import MovieCard from "./MovieCard/MovieCard.jsx";
 import Pagination from "../UI/Pagination/Pagination.jsx";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
@@ -12,14 +12,13 @@ const Movies = () => {
   const [filterMovies, setFilteredMovies] = useState([]);
   const [ itemsPerPage, setItemsPerPage] = useState(5)
   
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalItems = filterMovies.length;
+  const [currentPage, setCurrentPage] = useState(1);  
   const startIndex = (currentPage - 1) * itemsPerPage;
   const displayedItems = filterMovies.slice(startIndex, startIndex + itemsPerPage);
 
   useEffect(() => {
     setFilteredMovies(movies);
-  }, [movies]);
+  }, [movies, itemsPerPage, currentPage]);
 
   const searchTermsHandler = (search, select) => {
     
@@ -64,7 +63,7 @@ const Movies = () => {
         </div>
 
         {displayedItems.map((x) => (
-          <TopRated key={x.id} movie={x} />
+          <MovieCard key={x.id} movie={x} />
         ))}
 
         <div className="mt-5 d-flex justify-content-between align-items-center">
@@ -76,10 +75,10 @@ const Movies = () => {
               onPageChange={setCurrentPage}
             />
           </div>
-          <div >            
+          <div className={`${styles["pagination-select"]}`}>            
             <select                    
               name="pagination"
-              className="form-select list-group-item text-dark"               
+              className={`form-select list-group-item text-dark ${styles["pagination-select"]}`}            
               onChange={itemsPerPageHandler}                                      
             >
               <option value="5">5</option>

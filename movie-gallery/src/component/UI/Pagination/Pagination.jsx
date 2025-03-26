@@ -1,5 +1,3 @@
-import style from "./Pagination.module.css"
-
 const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => {
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);

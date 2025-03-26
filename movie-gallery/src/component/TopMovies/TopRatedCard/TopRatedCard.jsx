@@ -1,4 +1,4 @@
-const NewMoviePoster = ({ movie }) => {
+const TopRatedCard = ({ movie }) => {
   return (
     <div
       className="slick-slide slick-cloned"
@@ -77,4 +77,4 @@ const NewMoviePoster = ({ movie }) => {
   );
 };
 
-export default NewMoviePoster;
+export default TopRatedCard;

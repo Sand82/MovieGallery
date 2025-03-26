@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const TopRated = ({ movie }) => {
+const MovieCard = ({ movie }) => {
 
   return (
     <article className="movie-line-entity">
@@ -76,4 +76,4 @@ const TopRated = ({ movie }) => {
   );
 };
 
-export default TopRated;
+export default MovieCard;
