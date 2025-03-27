@@ -9,7 +9,6 @@ import {
   useContext,
   useState,
 } from "react";
-
 import {
   ADD_MOVIES,
   CREATE_MOVIE,
@@ -17,6 +16,7 @@ import {
   DELETE_MOVIE,
   SET_AVARAGE_RATING,
 } from "../constants/ReducerConstants.js";
+import { SELECT_RATING } from "../constants/SelectConstants.js";
 import { AuthContext } from "./AuthContext.js";
 import { moviesReducer } from "./Reducers.js";
 import { badRequestStatusCode } from "../constants/GlobalConstants.js";
@@ -40,23 +40,22 @@ export const MovieProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(filters);
+    
+    const getAllMovies = async () => {
+      setServerErrors(null);
+      try {
+        const responce = await movieService.getAll(filters);
+        dispatch({
+          type: ADD_MOVIES,
+          payload: responce.movies,
+        });
+        setMoviesCount(responce.count);
+      } catch (error) {
+        serverErrorsHandler(error);
+      }
+    };
     getAllMovies();
   }, [filters]);
-
-  const getAllMovies = async () => {
-    setServerErrors(null);
-    try {
-      const responce = await movieService.getAll(filters);
-      dispatch({
-        type: ADD_MOVIES,
-        payload: responce.movies,
-      });
-      setMoviesCount(responce.count);
-    } catch (error) {
-      serverErrorsHandler(error);
-    }
-  };
 
   const createHandler = async (movieData) => {
     setServerErrors(null);
@@ -66,6 +65,7 @@ export const MovieProvider = ({ children }) => {
         type: CREATE_MOVIE,
         payload: responce,
       });
+      setMoviesCount((state) => state + 1);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -94,6 +94,7 @@ export const MovieProvider = ({ children }) => {
         type: DELETE_MOVIE,
         payload: movieId,
       });
+      setMoviesCount((state) => state - 1);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -108,6 +109,16 @@ export const MovieProvider = ({ children }) => {
     } catch (error) {
       serverErrorsHandler(error);
     }
+  };
+
+  const topRatedMovieHandler = () => {
+    setFilters({
+      search: "",
+      select: "SELECT_RATING",
+      sort: "desc",
+      itemsPerPage: 4,
+      currentPage: 1,
+    });
   };
 
   const avarageRatingHandler = (data) => {
@@ -155,6 +166,7 @@ export const MovieProvider = ({ children }) => {
         searchHandler,
         paginationHandler,
         moviesCount,
+        topRatedMovieHandler,
         serverErrors,
       }}
     >

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
 import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";
@@ -8,13 +8,12 @@ import { Link } from "react-router-dom";
 
 const NewMovies = () => {
 
-  const { movies } = useContext(MovieContext);
+  const { movies, topRatedMovieHandler } = useContext(MovieContext);
 
-  const firstFiveMovies = movies
-    .slice()
-    .sort((a, b) => b.averageRating - a.averageRating)
-    .slice(0, 4);
-
+  useEffect(() => {
+    topRatedMovieHandler()
+  }, [])  
+ 
   return (
     <>
       <section style={style} className="section-text-white position-relative">
@@ -39,7 +38,7 @@ const NewMovies = () => {
               <div className="slick-slides slick-initialized slick-slider">
                 <div className="slick-list draggable">
                   <div className="slick-track">
-                    {firstFiveMovies.map((x) => (
+                    {movies.map((x) => (
                       <TopRatedCard key={x.id} movie={x} />
                     ))}
                   </div>
@@ -56,7 +55,7 @@ const NewMovies = () => {
             <h2 className="section-title text-uppercase">Latest news</h2>
           </div>
           <div className="grid row">
-            {firstFiveMovies.map((x) => (
+            {movies.map((x) => (
               <NewMovieBlog key={x.id} movie={x} />
             ))}
           </div>
