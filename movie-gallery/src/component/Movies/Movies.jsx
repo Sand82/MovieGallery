@@ -8,71 +8,50 @@ import Pagination from "../UI/Pagination/Pagination.jsx";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
 const Movies = () => {
-  const { movies } = useContext(MovieContext);
-  const [filterMovies, setFilteredMovies] = useState([]);
-  const [ itemsPerPage, setItemsPerPage] = useState(5)
-  
-  const [currentPage, setCurrentPage] = useState(1);  
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const displayedItems = filterMovies.slice(startIndex, startIndex + itemsPerPage);
+  const { movies, moviesCount, paginationHandler } = useContext(MovieContext);   
+  const [paginationUtils, setPaginationUtils] = useState({ itemsPerPage: 5, currentPage: 1})
 
-  useEffect(() => {
-    setFilteredMovies(movies);
-  }, [movies, itemsPerPage, currentPage]);
-
-  const searchTermsHandler = (search, select) => {
-    
-    let sortedMovies;
-
-    if (select === 'all' && search === '') {
-
-      sortedMovies = movies.sort((a, b) => b.id - a.id);
-
-    } else if (search === '') {
-
-      sortedMovies = movies.sort((a, b) => b[select] - a[select]);
-
-    } else if (select === 'all') {
-
-      sortedMovies = movies
-        .filter((x) => x.title.toLowerCase()
-        .includes(search.toLowerCase()));
-
-    } else {
-      sortedMovies = movies
-        .filter((x) => x.title.toLowerCase().includes(search.toLowerCase()))
-        .sort((a, b) => b[select] - a[select]);
-    }
-    setFilteredMovies((state) => (state = [...sortedMovies]));
-  };
-
-  const itemsPerPageHandler = (e) => {
-    setItemsPerPage(e.target.value);
-    setCurrentPage(1);
+  const itemsPerPageHandler = (e) => { 
+    let currentItemPerPage = e.target.value; 
+    let currentPage = paginationUtils.currentPage;
+    setPaginationUtils((state) => ({
+      ...state,
+      itemsPerPage: currentItemPerPage
+    }))
+    paginationHandler({itemsPerPage: currentItemPerPage, currentPage});
   } 
+
+  const currentPageHandler = (page) => {
+    
+    setPaginationUtils((state) => ({
+      ...state, 
+      currentPage: page
+    }))
+    paginationHandler(paginationUtils);
+  }
 
   const date = new Date();
 
   return (
     <section className="section-long">
       <div className="container">
-        <Search searchTermsHandler={searchTermsHandler} />
+        <Search />
         <div className="section-head">
           <h2 className="section-title text-uppercase">Colection</h2>
           <p className="section-text">{helperService.formatData(date)}</p>
         </div>
 
-        {displayedItems.map((x) => (
+        {movies.map((x) => (
           <MovieCard key={x.id} movie={x} />
         ))}
 
         <div className="mt-5 d-flex justify-content-between align-items-center">
           <div>      
             <Pagination
-              totalItems={movies.length}
-              itemsPerPage={itemsPerPage}
-              currentPage={currentPage}
-              onPageChange={setCurrentPage}
+              totalItems={moviesCount}
+              itemsPerPage={paginationUtils.itemsPerPage}
+              currentPage={paginationUtils.currentPage}
+              onPageChange={currentPageHandler}
             />
           </div>
           <div className={`${styles["pagination-select"]}`}>            

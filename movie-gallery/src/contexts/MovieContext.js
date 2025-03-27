@@ -27,26 +27,36 @@ export const MovieProvider = ({ children }) => {
   const [movies, dispatch] = useReducer(moviesReducer, []);
   const [favMovies, setFavMovies] = useState([]);
   const [serverErrors, setServerErrors] = useState(null);
+  const [moviesCount, setMoviesCount] = useState(0);
+  const [filters, setFilters] = useState({
+    search: "",
+    select: "All",
+    sort: "desc",
+    itemsPerPage: 5,
+    currentPage: 1,
+  });
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getAllMovies = async () => {
-      setServerErrors(null);
-      try {
-        const responce = await movieService.getAll();
-        const sortedMovies = sortMovies(responce);
-        dispatch({
-          type: ADD_MOVIES,
-          payload: sortedMovies,
-        });
-      } catch (error) {
-        serverErrorsHandler(error);
-      }
-    };
+    console.log(filters);
     getAllMovies();
-  }, []);
+  }, [filters]);
+
+  const getAllMovies = async () => {
+    setServerErrors(null);
+    try {
+      const responce = await movieService.getAll(filters);
+      dispatch({
+        type: ADD_MOVIES,
+        payload: responce.movies,
+      });
+      setMoviesCount(responce.count);
+    } catch (error) {
+      serverErrorsHandler(error);
+    }
+  };
 
   const createHandler = async (movieData) => {
     setServerErrors(null);
@@ -107,8 +117,21 @@ export const MovieProvider = ({ children }) => {
     });
   };
 
-  const sortMovies = (movies) => {
-    return movies.sort((a, b) => b.id - a.id);
+  const searchHandler = (search, select, sort) => {
+    setFilters((state) => ({
+      ...state,
+      search: search,
+      select: select,
+      sort: sort,
+    }));
+  };
+
+  const paginationHandler = ({ itemsPerPage, currentPage }) => {
+    setFilters((state) => ({
+      ...state,
+      itemsPerPage,
+      currentPage,
+    }));
   };
 
   const serverErrorsHandler = (error) => {
@@ -129,6 +152,9 @@ export const MovieProvider = ({ children }) => {
         deleteHandler,
         favoritesHandler,
         avarageRatingHandler,
+        searchHandler,
+        paginationHandler,
+        moviesCount,
         serverErrors,
       }}
     >

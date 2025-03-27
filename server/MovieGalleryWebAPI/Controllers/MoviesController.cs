@@ -25,9 +25,9 @@ namespace MovieGalleryWebAPI.Controllers
         }
         
         [HttpGet]
-        public async Task<IEnumerable<MoviesDataModel>> Get()
+        public async Task<MoviesData> Get([FromQuery]GetMoviesModel model)
         {
-            var movies = await moviesService.GetMovies();
+            var movies = await moviesService.GetMovies(model);
 
             return movies;
         }

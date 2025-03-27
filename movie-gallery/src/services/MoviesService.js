@@ -2,8 +2,8 @@ import * as request from "./Requester.js";
 
 const baseUrl = 'https://localhost:7222/api/movies';
 
-export const getAll = () => {
-  return request.get(baseUrl);
+export const getAll = (filters) => {
+  return request.get(`${baseUrl}?search=${filters.search}&select=${filters.select}&sort=${filters.sort}&itemsPerPage=${filters.itemsPerPage}&currentPage=${filters.currentPage}`);
 };
 
 export const getOne = (movieId, userId, token) => {

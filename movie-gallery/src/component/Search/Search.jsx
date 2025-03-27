@@ -1,42 +1,43 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./Search.module.css"
+import { MovieContext } from "../../contexts/MovieContext.js";
 
-const Search = ({ searchTermsHandler }) => {
+const Search = () => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("All");
-  const [sortDirection, setSortDirection] = useState(true);
-
-  const searchChange = (e) => {
+  const [sort, setSort] = useState(true);
+  
+  const { searchHandler } = useContext(MovieContext)
+  
+  const searchChangeHandler = (e) => {
     e.preventDefault();
-
-    searchTermsHandler(search, select);
+    let sortString = sort ? "desc": "asc";
+    searchHandler(search, select, sortString);
   };
 
   const searching = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value);    
   };
 
   const selecting = (e) => {
-    setSelect(e.target.value);
+    setSelect(e.target.value);    
   };
 
-  const sortDirectionHandler = () => {
-    setSortDirection(state => state = !state);
-  }
-
-  console.log(sortDirection)
-
+  const sortDirectionHandler = (e) => {
+    setSort(state => state = !state);    
+  }  
+  
   const clearSearch = () => {
-    setSearch("");
+    setSearch("");    
   };
 
   return (
     <div className="section-pannel">
       <div className="grid row">
         <div className="col-md-10">
-          <form onSubmit={searchChange}>
+          <form onSubmit={searchChangeHandler}>
             <div className="row form-grid">
               <div className="col-sm-7 col-lg-5">
                 <div
@@ -79,7 +80,7 @@ const Search = ({ searchTermsHandler }) => {
                   </select>
                 </div>
                 <div className={`col-1 d-flex align-self-center  ${styles["arrows-container"]}`} onClick={sortDirectionHandler}>                
-                {sortDirection ? 
+                {sort ? 
                   <i className={`fa-solid fa-arrow-up fa-sm ${styles["icon-arrow"]}`}/> : 
                   <i className={`fa-solid fa-arrow-down fa-sm ${styles["icon-arrow"]}`}/>
                 }
@@ -96,7 +97,7 @@ const Search = ({ searchTermsHandler }) => {
               <Link
                 className="content-link transparent-link"
                 to="#"
-                onClick={searchChange}
+                onClick={searchChangeHandler}
               >
                 <i className="fa-solid fa-magnifying-glass"></i>
               </Link>

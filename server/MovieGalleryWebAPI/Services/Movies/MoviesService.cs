@@ -8,6 +8,7 @@ using MovieGalleryWebAPI.Models.Edit;
 using AutoMapper;
 using MovieGalleryWebAPI.Service.Favorites;
 using MovieGalleryWebAPI.Service.Ratings;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -61,12 +62,47 @@ namespace MovieGalleryWebAPI.Service.Movies
             return movie!;
         }
 
-        public async Task<List<MoviesDataModel>> GetMovies()
+        public async Task<MoviesData> GetMovies(GetMoviesModel model)
         {
-            var movies = await this.data.Movies
+            var moviesQuery = this.data.Movies
                 .Include(m => m.Ratings)
-                .Where(m => m.IsDelete == false)
-                //.ProjectTo<MoviesDataModel>(this.mapper.ConfigurationProvider)
+                .Where(m => !m.IsDelete) 
+                .AsQueryable();
+
+            var moviesData = new MoviesData();
+            moviesData.Count = this.data.Movies.Where(m => m.IsDelete == false).Count();
+
+            if (!string.IsNullOrWhiteSpace(model.Search))
+            {
+                moviesQuery = moviesQuery.Where(m => m.Title.Contains(model.Search));
+                moviesData.Count = moviesQuery.Where(m => m.Title.Contains(model.Search)).Count();
+            }
+            
+            bool isAscending = model.Sort == "asc";
+            
+            switch (model.Select)
+            {
+                case "year":
+                    moviesQuery = isAscending ? moviesQuery.OrderBy(m => m.Year) : moviesQuery.OrderByDescending(m => m.Year);
+                    break;
+                case "averageRating":
+                    moviesQuery = isAscending
+                        ? moviesQuery.OrderBy(m => m.Ratings.Any() ? m.Ratings.Average(r => r.Value) : 0)
+                        : moviesQuery.OrderByDescending(m => m.Ratings.Any() ? m.Ratings.Average(r => r.Value) : 0);
+                    break;
+                case "duration":
+                    moviesQuery = isAscending ? moviesQuery.OrderBy(m => m.Duration) : moviesQuery.OrderByDescending(m => m.Duration);
+                    break;
+                default:
+                    moviesQuery = moviesQuery.OrderByDescending(m => m.Id);
+                    break;
+            }
+            
+            moviesQuery = moviesQuery
+                .Skip((model.CurrentPage - 1) * model.ItemsPerPage)
+                .Take(model.ItemsPerPage);
+           
+            var movies = await moviesQuery
                 .Select(m => new MoviesDataModel
                 {
                     Id = m.Id,
@@ -76,11 +112,15 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
-                    AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1")
+                    AverageRating = m.Ratings != null && m.Ratings.Any()
+                        ? m.Ratings.Average(r => r.Value).ToString("F1")
+                        : "0.0"
                 })
-                .ToListAsync();            
+                .ToListAsync();
+            
+            moviesData.Movies = movies;            
 
-            return movies;
+            return moviesData;
         }
 
         public async Task<MovieDataModel> GetOneMovie(int movieId , string userId)
@@ -119,7 +159,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie!.IsFavorite = favoriteMovieInfo == null ? false : favoriteMovieInfo.IsFavorite;
 
             var personalRating = await ratingService.SearchPersonalRating(userId, movieId);
-            movie.PersonalRating = personalRating;
+            movie.PersonalRating = personalRating;            
 
             return movie;
         }
