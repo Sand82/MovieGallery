@@ -2,26 +2,28 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import styles from "./Search.module.css"
-import { MovieContext } from "../../contexts/MovieContext.js";
+import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
 const Search = () => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("All");
   const [sort, setSort] = useState(true);
   
-  const { searchHandler } = useContext(MovieContext)
+  const { searchHandler, selectHandler, sortHandler } = useContext(FilterCotntext)
   
   const searchChangeHandler = (e) => {
     e.preventDefault();
     let sortString = sort ? "desc": "asc";
-    searchHandler(search, select, sortString);
+    searchHandler(search);
+    selectHandler(select);
+    sortHandler(sortString);
   };
 
-  const searching = (e) => {
+  const searchChnageHandler = (e) => {
     setSearch(e.target.value);    
   };
 
-  const selecting = (e) => {
+  const selectChangeHandler = (e) => {
     setSelect(e.target.value);    
   };
 
@@ -50,7 +52,7 @@ const Search = () => {
                     type="text"
                     placeholder="Search"
                     value={search}
-                    onChange={searching}
+                    onChange={searchChnageHandler}
                   />
                   <div className="input-group-append">
                     {search.length > 0 && (
@@ -71,7 +73,7 @@ const Search = () => {
                     className="form-control"
                     name="sortBy"
                     placeholder="Sort By"
-                    onChange={selecting}
+                    onChange={selectChangeHandler}
                   >
                     <option value="all">All movies</option>
                     <option value="year">Year</option>

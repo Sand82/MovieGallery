@@ -13,7 +13,6 @@ import {
 } from "../constants/ReducerConstants.js";
 import { badRequestStatusCode } from "../constants/GlobalConstants.js";
 import { AuthContext } from "./AuthContext.js";
-import { MovieContext } from "./MovieContext.js";
 import { detailReducer } from "./Reducers.js";
 
 export const DetailContext = createContext();
@@ -21,8 +20,7 @@ export const DetailContext = createContext();
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
   const [serverErrors, setServerErrors] = useState(null);
-  const { user } = useContext(AuthContext);
-  const { avarageRatingHandler } = useContext(MovieContext);
+  const { user } = useContext(AuthContext);  
 
   const navigate = useNavigate();
 
@@ -102,8 +100,7 @@ export const DetailProvider = ({ children }) => {
   const movieRatingHandler = async (data) => {
     setServerErrors(null);    
     try {
-      let responce = await detailsService.addRating(data, user.accessToken);
-      avarageRatingHandler(responce);
+      let responce = await detailsService.addRating(data, user.accessToken);     
       dispatch({
         type: SET_PERSONAL_RATING,
         payload: responce,

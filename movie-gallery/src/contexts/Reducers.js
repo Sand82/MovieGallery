@@ -1,47 +1,17 @@
 import {
-  ADD_MOVIES,
-  CREATE_MOVIE,
-  EDIT_MOVIE,
-  DELETE_MOVIE,
   ADD_MOVIE,
   CREATE_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
   SET_FAVORITE_MOVIE,
   SET_PERSONAL_RATING,
-  SET_AVARAGE_RATING,
+  SEARCH_CHANGE,
+  SELECT_CHANGE,
+  SORT_CHANGE,
+  ITEM_PER_PAGE_CHANGE,
+  CURRENT_PAGE_CHANGE,
+  TOP_RATED_CHANGE,
 } from "../constants/ReducerConstants.js";
-
-export const moviesReducer = (state, action) => {
-  switch (action.type) {
-    case ADD_MOVIES:
-      return [...action.payload];
-
-    case CREATE_MOVIE:
-      return [action.payload, ...state];
-
-    case EDIT_MOVIE:
-      return state.map((movie) =>
-        movie.id == action.payload.id ? action.payload : movie
-      );
-
-    case DELETE_MOVIE:
-      return state.filter((movie) => movie.id != action.payload);
-
-    case SET_AVARAGE_RATING:
-      let selectedMovie = state.find(
-        (movie) => movie.id == action.payload.movieId
-      );
-      selectedMovie.averageRating = action.payload.averageRating;
-
-      return state.map((movie) =>
-        movie.id == action.payload.movieId ? selectedMovie : movie
-      );
-
-    default:
-      return state;
-  }
-};
 
 export const detailReducer = (state, action) => {
   switch (action.type) {
@@ -78,6 +48,38 @@ export const detailReducer = (state, action) => {
         ...state,
         personalRating: action.payload.value,
         averageRating: action.payload.averageRating,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const filterReducer = (state, action) => {
+  switch (action.type) {
+    case SEARCH_CHANGE:
+      return { ...state, search: action.payload };
+
+    case SELECT_CHANGE:
+      return { ...state, select: action.payload };
+
+    case SORT_CHANGE:
+      return { ...state, sort: action.payload };
+
+    case ITEM_PER_PAGE_CHANGE:
+      return { ...state, itemsPerPage: action.payload };
+
+    case CURRENT_PAGE_CHANGE:
+      return { ...state, currentPage: action.payload };
+
+    case TOP_RATED_CHANGE:
+      console.log(action.payload);
+      return {
+        search: action.payload.search,
+        select: action.payload.select,
+        sort: action.payload.sort,
+        itemsPerPage: action.payload.itemsPerPage,
+        currentPage: action.payload.currentPage,
       };
 
     default:

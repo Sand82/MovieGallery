@@ -21,87 +21,90 @@ import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./services/RouteGuard.js";
 import Favorite from "./component/Favorite/Favorite.jsx";
 import UnderConstruction from "./component/ErrorPage/UnderConstruction.jsx";
+import { FilterProvider } from "./contexts/FiltersContext.js";
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
-        <MovieProvider>
-          <DetailProvider>
-            <ScrollToTop />
-            <Header />
-            <Routes>
-              <Route path="/" element={<NewMovies />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route
-                path="/logout"
-                element={
-                  <RouteGuard>
-                    <Logout />
-                  </RouteGuard>
-                }
-              />
-              <Route
-                path="/movies"
-                element={
-                  <RouteGuard>
-                    <Movies />
-                  </RouteGuard>
-                }
-              />
-              <Route
-                path="/create"
-                element={
-                  <RouteGuard>
-                    <ManageMovie isCreated={true} />
-                  </RouteGuard>
-                }
-              />
-              <Route
-                path="/favorite"
-                element={
-                  <RouteGuard>
-                    <Favorite />
-                  </RouteGuard>
-                }
-              />
-              <Route
-                path="/contactus"
-                element={
-                  <RouteGuard>
-                    <ContactUs />
-                  </RouteGuard>
-                }
-              />
-              <Route path="/notfound" element={<NotFound />} />
-              <Route path="/badrequest" element={<BadRequest />} />
-              <Route
-                path="/underconstruction"
-                element={<UnderConstruction />}
-              />
-              <Route
-                path="/movies/details/:movieId"
-                element={
-                  <RouteGuard>
-                    <Details />
-                  </RouteGuard>
-                }
-              />
-              <Route
-                path="/movies/details/:movieId/edit"
-                element={
-                  <RouteGuard>
-                    <ManageMovie />
-                  </RouteGuard>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Scroll />
-            <Footer />
-          </DetailProvider>
-        </MovieProvider>
+        <FilterProvider>
+          <MovieProvider>
+            <DetailProvider>
+              <ScrollToTop />
+              <Header />
+              <Routes>
+                <Route path="/" element={<NewMovies />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route
+                  path="/logout"
+                  element={
+                    <RouteGuard>
+                      <Logout />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/movies"
+                  element={
+                    <RouteGuard>
+                      <Movies />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/create"
+                  element={
+                    <RouteGuard>
+                      <ManageMovie isCreated={true} />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/favorite"
+                  element={
+                    <RouteGuard>
+                      <Favorite />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/contactus"
+                  element={
+                    <RouteGuard>
+                      <ContactUs />
+                    </RouteGuard>
+                  }
+                />
+                <Route path="/notfound" element={<NotFound />} />
+                <Route path="/badrequest" element={<BadRequest />} />
+                <Route
+                  path="/underconstruction"
+                  element={<UnderConstruction />}
+                />
+                <Route
+                  path="/movies/details/:movieId"
+                  element={
+                    <RouteGuard>
+                      <Details />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/movies/details/:movieId/edit"
+                  element={
+                    <RouteGuard>
+                      <ManageMovie />
+                    </RouteGuard>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <Scroll />
+              <Footer />
+            </DetailProvider>
+          </MovieProvider>
+        </FilterProvider>
       </AuthProvider>
     </div>
   );

@@ -1,11 +1,3 @@
-export const ADD_MOVIES = "ADD_MOVIES";
-
-export const CREATE_MOVIE = "CREATE_MOVIE";
-
-export const EDIT_MOVIE = "EDIT_MOVIE";
-
-export const DELETE_MOVIE = "DELETE_MOVIE";
-
 export const ADD_MOVIE = "ADD_MOVIE";
 
 export const CREATE_COMMENT = "CREATE_COMMENT";
@@ -19,3 +11,15 @@ export const SET_FAVORITE_MOVIE = "SET_FAVORITE_MOVIE";
 export const SET_PERSONAL_RATING = "SET_PERSONAL_RATING";
 
 export const SET_AVARAGE_RATING = "SET_AVARAGE_RATING";
+
+export const SEARCH_CHANGE = "SEARCH_CHANGE";
+
+export const SELECT_CHANGE = "SELECT_CHANGE";
+
+export const SORT_CHANGE = "SORT_CHANGE";
+
+export const ITEM_PER_PAGE_CHANGE = "ITEM_PER_PAGE_CHANGE";
+
+export const CURRENT_PAGE_CHANGE = "CURRENT_PAGE_CHANGE";
+
+export const TOP_RATED_CHANGE = "TOP_RATED_CHANGE";

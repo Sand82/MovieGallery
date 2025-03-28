@@ -1,17 +1,19 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
 import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
+import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
 const NewMovies = () => {
 
-  const { movies, topRatedMovieHandler } = useContext(MovieContext);
+  const { movies } = useContext(MovieContext);
+  const { topRatedMovieHandler } = useContext(FilterCotntext); 
 
   useEffect(() => {
-    topRatedMovieHandler()
+    topRatedMovieHandler()    
   }, [])  
  
   return (
@@ -38,7 +40,7 @@ const NewMovies = () => {
               <div className="slick-slides slick-initialized slick-slider">
                 <div className="slick-list draggable">
                   <div className="slick-track">
-                    {movies.map((x) => (
+                    {movies.slice(0, 4).map((x) => (
                       <TopRatedCard key={x.id} movie={x} />
                     ))}
                   </div>
@@ -55,7 +57,7 @@ const NewMovies = () => {
             <h2 className="section-title text-uppercase">Latest news</h2>
           </div>
           <div className="grid row">
-            {movies.map((x) => (
+            {movies.slice(0, 4).map((x) => (
               <NewMovieBlog key={x.id} movie={x} />
             ))}
           </div>

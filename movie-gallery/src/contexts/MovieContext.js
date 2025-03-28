@@ -4,51 +4,32 @@ import * as movieService from "../services/MoviesService.js";
 import * as commentService from "../services/DetailsService.js";
 import {
   createContext,
-  useEffect,
-  useReducer,
+  useEffect,  
   useContext,
   useState,
 } from "react";
-import {
-  ADD_MOVIES,
-  CREATE_MOVIE,
-  EDIT_MOVIE,
-  DELETE_MOVIE,
-  SET_AVARAGE_RATING,
-} from "../constants/ReducerConstants.js";
-import { SELECT_RATING } from "../constants/SelectConstants.js";
 import { AuthContext } from "./AuthContext.js";
-import { moviesReducer } from "./Reducers.js";
 import { badRequestStatusCode } from "../constants/GlobalConstants.js";
+import { FilterCotntext } from "./FiltersContext.js";
 
 export const MovieContext = createContext();
 
-export const MovieProvider = ({ children }) => {
-  const [movies, dispatch] = useReducer(moviesReducer, []);
+export const MovieProvider = ({ children }) => {  
+  const [movies, setMovies] = useState([]);
   const [favMovies, setFavMovies] = useState([]);
   const [serverErrors, setServerErrors] = useState(null);
   const [moviesCount, setMoviesCount] = useState(0);
-  const [filters, setFilters] = useState({
-    search: "",
-    select: "All",
-    sort: "desc",
-    itemsPerPage: 5,
-    currentPage: 1,
-  });
+  const { filters } = useContext(FilterCotntext);
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
-        const responce = await movieService.getAll(filters);
-        dispatch({
-          type: ADD_MOVIES,
-          payload: responce.movies,
-        });
+        const responce = await movieService.getAll(filters);        
+        setMovies(responce.movies);
         setMoviesCount(responce.count);
       } catch (error) {
         serverErrorsHandler(error);
@@ -60,12 +41,7 @@ export const MovieProvider = ({ children }) => {
   const createHandler = async (movieData) => {
     setServerErrors(null);
     try {
-      const responce = await movieService.create(movieData, user.accessToken);
-      dispatch({
-        type: CREATE_MOVIE,
-        payload: responce,
-      });
-      setMoviesCount((state) => state + 1);
+      await movieService.create(movieData, user.accessToken);      
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -75,11 +51,7 @@ export const MovieProvider = ({ children }) => {
   const editHandler = async (movieData) => {
     setServerErrors(null);
     try {
-      await movieService.edit(movieData, user.accessToken);
-      dispatch({
-        type: EDIT_MOVIE,
-        payload: movieData,
-      });
+      await movieService.edit(movieData, user.accessToken);      
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -89,12 +61,7 @@ export const MovieProvider = ({ children }) => {
   const deleteHandler = async (movieId) => {
     setServerErrors(null);
     try {
-      await movieService.remove(movieId, user.accessToken);
-      dispatch({
-        type: DELETE_MOVIE,
-        payload: movieId,
-      });
-      setMoviesCount((state) => state - 1);
+      await movieService.remove(movieId, user.accessToken);      
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -109,41 +76,7 @@ export const MovieProvider = ({ children }) => {
     } catch (error) {
       serverErrorsHandler(error);
     }
-  };
-
-  const topRatedMovieHandler = () => {
-    setFilters({
-      search: "",
-      select: "SELECT_RATING",
-      sort: "desc",
-      itemsPerPage: 4,
-      currentPage: 1,
-    });
-  };
-
-  const avarageRatingHandler = (data) => {
-    dispatch({
-      type: SET_AVARAGE_RATING,
-      payload: data,
-    });
-  };
-
-  const searchHandler = (search, select, sort) => {
-    setFilters((state) => ({
-      ...state,
-      search: search,
-      select: select,
-      sort: sort,
-    }));
-  };
-
-  const paginationHandler = ({ itemsPerPage, currentPage }) => {
-    setFilters((state) => ({
-      ...state,
-      itemsPerPage,
-      currentPage,
-    }));
-  };
+  };  
 
   const serverErrorsHandler = (error) => {
     if (error.message.includes(badRequestStatusCode)) {
@@ -161,12 +94,8 @@ export const MovieProvider = ({ children }) => {
         createHandler,
         editHandler,
         deleteHandler,
-        favoritesHandler,
-        avarageRatingHandler,
-        searchHandler,
-        paginationHandler,
+        favoritesHandler,        
         moviesCount,
-        topRatedMovieHandler,
         serverErrors,
       }}
     >

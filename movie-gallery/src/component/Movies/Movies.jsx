@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import * as helperService from "../../services/HelperService.js";
 import Search from "../Search/Search.jsx";
@@ -6,26 +6,18 @@ import Select from "../UI/Select/Select.jsx"
 import MovieCard from "./MovieCard/MovieCard.jsx";
 import Pagination from "../UI/Pagination/Pagination.jsx";
 import { MovieContext } from "../../contexts/MovieContext.js";
+import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
 const Movies = () => {
-  const { movies, moviesCount, paginationHandler } = useContext(MovieContext);   
-  const [paginationUtils, setPaginationUtils] = useState({ itemsPerPage: 5, currentPage: 1})
+  const { movies, moviesCount } = useContext(MovieContext);   
+  const { itemsPerPageHandler,  currentPageHandler, filters} = useContext(FilterCotntext)
 
-  const itemsPerPageHandler = (itemsPerPage) => { 
-    
-    setPaginationUtils((state) => ({
-      ...state,
-      itemsPerPage: itemsPerPage
-    }))
-    paginationHandler(paginationUtils);
+  const itemsPerPageChnageHandler = (itemsPerPage) => { 
+    itemsPerPageHandler(itemsPerPage)   
   } 
 
-  const currentPageHandler = (page) => {      
-    setPaginationUtils((state) => ({
-      ...state, 
-      currentPage: page
-    }))
-    paginationHandler(paginationUtils);
+  const currentPageChangeHandler = (page) => {      
+    currentPageHandler(page)
   } 
 
   const date = new Date();
@@ -47,13 +39,13 @@ const Movies = () => {
           <div>      
             <Pagination
               totalItems={moviesCount}
-              itemsPerPage={paginationUtils.itemsPerPage}
-              currentPage={paginationUtils.currentPage}
-              currentPageHandler={currentPageHandler}
+              itemsPerPage={filters.itemsPerPage}
+              currentPage={filters.currentPage}
+              currentPageHandler={currentPageChangeHandler}
             />
           </div>          
           <div>         
-            <Select itemsPerPageHandler={itemsPerPageHandler}/>
+            <Select itemsPerPageHandler={itemsPerPageChnageHandler}/>
           </div>
         </div>        
       </div>

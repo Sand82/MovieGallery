@@ -38,8 +38,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MoviesData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T16:09:22.387Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T16:09:22.387Z"
             },
             {
               "$type": "Document",
@@ -51,8 +50,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MoviesDataModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T16:04:03.15Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T16:04:03.15Z"
             },
             {
               "$type": "Document",
@@ -60,9 +58,9 @@
               "Title": "MoviesService.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs*",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs*",
-              "ViewState": "AQIAADsAAAAAAAAAAAAuwE0AAABiAAAA",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAAAFcAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T15:12:44.983Z",
               "EditorCaption": ""
@@ -77,8 +75,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\IMoviesService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T15:12:18.974Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T15:12:18.974Z"
             }
           ]
         }
