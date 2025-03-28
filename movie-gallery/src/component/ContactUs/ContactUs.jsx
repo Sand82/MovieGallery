@@ -111,6 +111,7 @@ const ContactUs = () => {
             		    	        type="text"
             		    	        name="username"
 							                className="form-control"
+                              disabled={true}
             		    	        value={usernameValue}
             		    	        onChange={usernameChangeHandler}
             		    	        onBlur={usernameInputBluerHandler}
@@ -124,7 +125,8 @@ const ContactUs = () => {
                 			        label="Email address"
                 			        type="text"
                 			        name="email"
-							                className="form-control"                          
+							                className="form-control"
+                              disabled={true}
                 			        value={emailValue}
                 			        onChange={emailChangeHandler}
                 			        onBlur={emailInputBluerHandler}

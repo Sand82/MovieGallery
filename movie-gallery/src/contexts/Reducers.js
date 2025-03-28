@@ -73,7 +73,6 @@ export const filterReducer = (state, action) => {
       return { ...state, currentPage: action.payload };
 
     case TOP_RATED_CHANGE:
-      console.log(action.payload);
       return {
         search: action.payload.search,
         select: action.payload.select,

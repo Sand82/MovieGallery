@@ -176,7 +176,7 @@ namespace MovieGalleryWebAPI.Infrastructure
             {
                 Title = "F9: The Fast Saga",
                 Year = "2021",
-                ImageUrl = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6469/6469286_so.jpg",
+                ImageUrl = "https://i5.walmartimages.com/seo/F9-The-Fast-Saga-Blu-ray-DVD-Digital-Copy-Universal-Studios-Action-Adventure_2c37275b-b8f9-4a88-93d7-7bb785960479.7b553d31cf2b5302be3e1904111717d4.jpeg",
                 Description = "Dom and the crew must take on an international terrorist who turns out to be Dom and Mia's estranged brother.",
                 Category = "Action",
                 Duration = "143",

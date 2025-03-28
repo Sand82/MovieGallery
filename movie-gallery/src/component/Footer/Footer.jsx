@@ -5,7 +5,7 @@ export default function Footer () {
     <div className="footer-body container">
         <div className="row">
             <div className="col-sm-6 col-lg-3">
-                <Link className="footer-logo" to="/">
+                <Link className="col footer-logo" to="/">
                     <span className="logo-element">
                         <span className="logo-tape">
                             <span className="svg-content svg-fill-theme" data-svg="./images/svg/logo-part.svg"></span>
@@ -14,7 +14,7 @@ export default function Footer () {
                             Movie Gallery</span>
                     </span>
                 </Link>
-                <div className="footer-content">
+                <div className="col footer-content">
                     <p className="footer-text">Hristo Botev 15, Sofia,
                         <br/>Bulgaria</p>
                     <p className="footer-text">Call us:&nbsp;&nbsp;(+359) 888 411 621</p>

@@ -13,6 +13,7 @@
 
 .comment-input-close {
   position: absolute;
+  cursor: pointer;
   right: 10px;
   top: 48px;
   z-index: 10;

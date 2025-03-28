@@ -3,7 +3,7 @@ const TopRatedCard = ({ movie }) => {
     <div
       className="slick-slide slick-cloned"
       tabIndex={-1}
-      style={{ width: 260 }}
+      style={{ width: 260, margin: "10px 0" }}
       data-slick-index={14}
       aria-hidden="true"
     >

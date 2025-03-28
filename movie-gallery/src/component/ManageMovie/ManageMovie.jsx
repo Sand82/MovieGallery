@@ -194,8 +194,8 @@ return (
                 </div>
                 {/* Submit button */}
                 <button
-                  type="submit"
-                  className="btn btn-block mb-4"                  
+                  type="submit"                                   
+                  className={`btn btn-block mb-4 ${style["create-button"]}`}                  
                   disabled={isValid}
                 >
                   {movieActionType}

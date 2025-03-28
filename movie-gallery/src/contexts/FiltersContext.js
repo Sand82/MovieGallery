@@ -27,6 +27,7 @@ export const FilterProvider = ({ children }) => {
       type: SEARCH_CHANGE,
       payload: search,
     });
+    currentPageHandler(1);
   };
 
   const selectHandler = (select) => {
@@ -48,6 +49,7 @@ export const FilterProvider = ({ children }) => {
       type: ITEM_PER_PAGE_CHANGE,
       payload: itemsPerPage,
     });
+    currentPageHandler(1);
   };
 
   const currentPageHandler = (currentPage) => {

@@ -10,3 +10,8 @@
   margin: 50px 0px 20px 0px;
   font-size: 22px;
 }
+
+.create-button {
+  background-color: #ff8a00;
+  color: #fff;
+}
