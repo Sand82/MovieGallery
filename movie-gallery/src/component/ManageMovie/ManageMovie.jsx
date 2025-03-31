@@ -1,16 +1,16 @@
 import { useContext } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 
 import * as GlobalConstant from "../../constants/GlobalConstants.js";
-import Input from "../UI/Input.jsx";
+import Input from "../UI/Input/Input.jsx";
 import Error from "../UI/Error/Error.jsx";
+import TextEditor from "../UI/TextEditor/TextEditor.jsx";
 import style from "./ManageMove.module.css";
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
-import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
+import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue, minLength } from "../../services/Validators.js";
+import { useTextEditor } from "../../hooks/useTextEditor.js";
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
@@ -62,21 +62,24 @@ const ManageMovie = ({ isCreated }) => {
   } = useInput(isCreated ? "" : movie.duration, (value) =>
     hasLengthNumberValue(value, GlobalConstant.durationMinLength, GlobalConstant.durationMaxLength)
   );
-
-  const descriptionChangeHandler = (content) => {
-    console.log(content);
-  }
   
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: isCreated ? "" : movie.description,
-    onUpdate: ({ editor }) => {
-      descriptionChangeHandler(editor.getHTML());
-    },
-  });
+  const {
+    editorState: textEditorState,
+    textEditorInput: textEditorInput,
+    handleKeyCommand: textEditorKeyCommnad,
+    handleEditorChange: textEditorChangeHandler,
+    inputBlurHandler: textEditorInputBluerHandler,
+    applyStyle: textEditorApplyStyle,
+    applyBlockStyle: textEditorApplyBlockStyle,
+    applyLink: textEditorApplyLink,
+    hasError: textEditorHasError,
+    isEmpty: isTextEditorFieldEmpty, 
+  } = useTextEditor("", (value) =>
+    minLength(value, GlobalConstant.textareaMinLength)
+  );  
 
   const manageMovieHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault();    
 
     const movieData = {
       id: movie.id,
@@ -84,8 +87,7 @@ const ManageMovie = ({ isCreated }) => {
       category: categoryValue,
       year: yearValue,
       imageUrl: imageUrlValue,
-      duration: durationValue,
-      description: editor.getHTML(), // Use TipTap HTML content
+      duration: durationValue,      
     };
 
     if (isCreated) {
@@ -93,7 +95,7 @@ const ManageMovie = ({ isCreated }) => {
     } else {
       editHandler(movieData);
     }
-  };
+  };  
 
   const isValid =
     titleHasError ||
@@ -106,96 +108,104 @@ const ManageMovie = ({ isCreated }) => {
     isImageUrlFieldEmpty ||
     durationHasError ||
     isDurationFieldEmpty ||
+    isTextEditorFieldEmpty ||
     serverErrors;
 
   const movieActionType = isCreated ? "Create" : "Edit";
 
   return (
     <div className={`container px-12 ${style["form-container"]}`}>
-      <div className="row top-buffer">
-        <div className="col-sm-12 col-lg-2 col-lg-9 offset-xl-2 col-xl-8 col">
+      <div className="row">
+        <div className="col">
           {user.isAdmin ? (
             <>
               <h2 className={`heading text-center ${style["movie-title"]}`}>{movieActionType} Movie</h2>
               <form onSubmit={manageMovieHandler}>
-                <div>
+                <div className="col-12">
                   <Error error={serverErrors} />
                 </div>
-                <div className="form-outline mb-3">
-                  <Input
-                    label="Title"
-                    type="text"
-                    name="title"
-                    className="form-control"
-                    value={titleValue}
-                    onChange={titleChangeHandler}
-                    onBlur={titleInputBluerHandler}
-                    error={titleHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
-                  />
-                </div>
+                <div className="row mb-4">                  
+                  <div className="col-12 col-md-6">
+                    <Input
+                      label="Title"
+                      type="text"
+                      name="title"
+                      className="form-control"
+                      value={titleValue}
+                      onChange={titleChangeHandler}
+                      onBlur={titleInputBluerHandler}
+                      error={titleHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
+                    />
+                    </div>
+                  <div className="col-12 col-md-6">
+                    <Input
+                      label="Category"
+                      type="text"
+                      name="category"
+                      className="form-control"
+                      value={categoryValue}
+                      onChange={categoryChangeHandler}
+                      onBlur={categoryInputBluerHandler}
+                      error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
+                    />                
+                  </div>
+                </div> 
+                <div className="row mb-4">
+                  <div className="col-12 col-md-4">
+                    <Input
+                      label="Year"
+                      type="text"
+                      name="year"
+                      className="form-control"
+                      value={yearValue}
+                      onChange={yearChangeHandler}
+                      onBlur={yearInputBluerHandler}
+                      error={yearHasError && `Year should be exact ${GlobalConstant.yearLength} symbols.`}
+                    />
+                  </div>
 
-                <div className="form-outline mb-3">
-                  <Input
-                    label="Category"
-                    type="text"
-                    name="category"
-                    className="form-control"
-                    value={categoryValue}
-                    onChange={categoryChangeHandler}
-                    onBlur={categoryInputBluerHandler}
-                    error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
-                  />
-                </div>
+                  <div className="col-12 col-md-4">
+                    <Input
+                      label="Image Link"
+                      type="text"
+                      name="imageUrl"
+                      className="form-control"
+                      value={imageUrlValue}
+                      onChange={imageUrlChangeHandler}
+                      onBlur={imageUrlInputBluerHandler}
+                      error={imageUrlHasError && `Image link should be a valid URL.`}
+                    />
+                  </div>
 
-                <div className="form-outline mb-3">
-                  <Input
-                    label="Year"
-                    type="text"
-                    name="year"
-                    className="form-control"
-                    value={yearValue}
-                    onChange={yearChangeHandler}
-                    onBlur={yearInputBluerHandler}
-                    error={yearHasError && `Year should be exact ${GlobalConstant.yearLength} symbols.`}
-                  />
-                </div>
-
-                <div className="form-outline mb-3">
-                  <Input
-                    label="Image Link"
-                    type="text"
-                    name="imageUrl"
-                    className="form-control"
-                    value={imageUrlValue}
-                    onChange={imageUrlChangeHandler}
-                    onBlur={imageUrlInputBluerHandler}
-                    error={imageUrlHasError && `Image link should be a valid URL.`}
-                  />
-                </div>
-
-                <div className="form-outline mb-3">
-                  <Input
-                    label="Duration"
-                    type="text"
-                    name="duration"
-                    className="form-control"
-                    value={durationValue}
-                    onChange={durationChangeHandler}
-                    onBlur={durationInputBluerHandler}
-                    error={durationHasError && `Duration should be between ${GlobalConstant.durationMinLength} and ${GlobalConstant.durationMaxLength} symbols.`}
-                  />
-                </div>
-
-                {/* TipTap Rich Text Editor */}
-                <div className="form-outline mb-3">
-                  <label>Description (Rich Text Editor)</label>
-                  <div className={style["text-editor"]}>
-                    <EditorContent editor={editor} />
+                  <div className="col-12 col-md-4">
+                    <Input
+                      label="Duration"
+                      type="text"
+                      name="duration"
+                      className="form-control"
+                      value={durationValue}
+                      onChange={durationChangeHandler}
+                      onBlur={durationInputBluerHandler}
+                      error={durationHasError && `Duration should be between ${GlobalConstant.durationMinLength} and ${GlobalConstant.durationMaxLength} symbols.`}
+                    />
                   </div>
                 </div>
-
-                {/* Submit button */}
-                <button type="submit" className={`btn btn-block mb-4 ${style["create-button"]}`} disabled={isValid}>
+                <div className="row">
+                  <div className="col-12">
+                    <TextEditor 
+                      editorState={textEditorState}
+                      onChange={textEditorChangeHandler} 
+                      handleKeyCommand={textEditorKeyCommnad}
+                      onBlur={textEditorInputBluerHandler}                       
+                      applyStyle={textEditorApplyStyle} 
+                      applyBlockStyle={textEditorApplyBlockStyle}
+                      applyLink={textEditorApplyLink}                      
+                      error={textEditorHasError && `Long description should be more than ${GlobalConstant.textareaMinLength} symbols.`}
+                    />                       
+                  </div>
+                </div>
+                
+                <button type="submit" className={`btn btn-block col-4 offset-md-4 mb-4 ${style["create-button"]}`} disabled={isValid}>
                   {movieActionType}
                 </button>
               </form>

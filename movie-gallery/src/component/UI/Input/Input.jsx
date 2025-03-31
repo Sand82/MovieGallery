@@ -1,4 +1,3 @@
-import style from "./Input.module.css"
 import Error from "../Error/Error.jsx"
 
 const Input = ({ id, label, error, fieldType = "input", ...props }) => {

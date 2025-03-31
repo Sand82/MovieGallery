@@ -1,7 +1,7 @@
 import style from "./Register.module.css";
 import * as GlobalConstant from "../../constants/GlobalConstants.js";
 import Error from "../UI/Error/Error.jsx";
-import Input from "../UI/Input.jsx";
+import Input from "../UI/Input/Input.jsx";
 import { useContext } from "react";
 import { useInput } from "../../hooks/useInput.js";
 import { AuthContext } from "../../contexts/AuthContext.js";

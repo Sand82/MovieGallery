@@ -1,7 +1,6 @@
 .input-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .input-label {
@@ -16,4 +15,9 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
 }

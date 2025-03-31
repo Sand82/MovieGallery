@@ -6,7 +6,7 @@ import * as GlobalConstant from "../../constants/GlobalConstants.js"
 import { useInput } from "../../hooks/useInput.js"
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { hasLength, isEmail } from "../../services/Validators.js"
-import Input from "../../component/UI/Input.jsx"
+import Input from "../../component/UI/Input/Input.jsx"
 import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
 import ContactInformation from "./ContactInformation/ContactInformation.jsx";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";

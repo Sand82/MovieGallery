@@ -1,7 +1,7 @@
 .form-container {
   border: 1px solid #bebebe;
   margin: 20px auto;
-  max-width: 500px;
+  max-width: 1000px;
   box-shadow: 0 5px 5px rgb(0 0 0 / 50%);
   border-radius: 20px;
 }

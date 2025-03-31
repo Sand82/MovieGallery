@@ -2,7 +2,7 @@ import { useContext } from "react";
 
 import * as style from "../Login/Login.Module.css";
 import * as GlobalConstant from "../../constants/GlobalConstants.js";
-import Input from "../UI/Input.jsx";
+import Input from "../UI/Input/Input.jsx";
 import Error from "../UI/Error/Error.jsx";
 import { useInput } from "../../hooks/useInput.js";
 import { AuthContext } from "../../contexts/AuthContext.js";

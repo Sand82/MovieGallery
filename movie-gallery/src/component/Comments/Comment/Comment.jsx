@@ -3,7 +3,7 @@ import { useContext, useState} from "react";
 
 import * as helperService from "../../../services/HelperService.js";
 import * as GlobalConstant from "../../../constants/GlobalConstants.js";
-import Input from "../../UI/Input.jsx";
+import Input from "../../UI/Input/Input.jsx";
 import Error from "../../UI/Error/Error.jsx"
 import styles from './Comment.module.css';
 import { AuthContext } from "../../../contexts/AuthContext.js";
