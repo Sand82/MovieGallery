@@ -15,6 +15,9 @@ export const durationMaxLength = 400;
 export const textareaMinLength = 3;
 export const textareaMaxLength = 500;
 
+export const descriptionMinLength = 3;
+export const descriptionMaxLength = 10000;
+
 export const subjectMinLength = 2;
 export const subjectMaxLength = 100;
 

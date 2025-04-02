@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import { cropText } from "../../../services/HelperService.js";
+
 const MovieCard = ({ movie }) => {
 
   return (
@@ -70,7 +72,7 @@ const MovieCard = ({ movie }) => {
             </div>
           </div>
         </div>
-        <p className="text-short entity-text">{movie.description}</p>
+        <p className="text-short entity-text">{cropText(movie.description)}</p>
       </div>
     </article>
   );

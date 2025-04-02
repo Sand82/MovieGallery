@@ -14,8 +14,8 @@
         public const int MinMovieImageUrlLength = 5;
         public const int MaxMovieImageUrlLength = 300;
 
-        public const int MinMovieDescriptionLength = 10;
-        public const int MaxMovieDescriptionLength = 500;
+        public const int MinMovieDescriptionLength = 3;
+        public const int MaxMovieDescriptionLength = 10000;
 
         public const int MinMovieDuration = 2;
         public const int MaxMovieDuration = 400;

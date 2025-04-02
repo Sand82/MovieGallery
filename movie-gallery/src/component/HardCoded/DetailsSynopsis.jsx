@@ -4,7 +4,7 @@ const DetailsSynopsis = () => {
   return (
     <div className="section-line">
       <div className="section-head">
-        <h2 className="section-title text-uppercase">Synopsis</h2>
+        <h2 className="section-title text-uppercase">Description</h2>
       </div>
       <div className="section-description">
         <p className="lead">

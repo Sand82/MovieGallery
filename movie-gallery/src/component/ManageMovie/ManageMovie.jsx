@@ -75,7 +75,7 @@ const ManageMovie = ({ isCreated }) => {
     hasError: textEditorHasError,
     isEmpty: isTextEditorFieldEmpty, 
   } = useTextEditor("", (value) =>
-    minLength(value, GlobalConstant.textareaMinLength)
+    hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength)
   );  
 
   const manageMovieHandler = (e) => {
@@ -87,7 +87,8 @@ const ManageMovie = ({ isCreated }) => {
       category: categoryValue,
       year: yearValue,
       imageUrl: imageUrlValue,
-      duration: durationValue,      
+      duration: durationValue,
+      description: textEditorInput,      
     };
 
     if (isCreated) {
@@ -200,7 +201,7 @@ const ManageMovie = ({ isCreated }) => {
                       applyStyle={textEditorApplyStyle} 
                       applyBlockStyle={textEditorApplyBlockStyle}
                       applyLink={textEditorApplyLink}                      
-                      error={textEditorHasError && `Long description should be more than ${GlobalConstant.textareaMinLength} symbols.`}
+                      error={textEditorHasError && `Description should be between ${GlobalConstant.descriptionMinLength} and ${GlobalConstant.descriptionMaxLength} symbols.`}
                     />                       
                   </div>
                 </div>

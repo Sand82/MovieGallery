@@ -4,7 +4,7 @@ import { useEffect, useContext } from "react";
 import * as style from "./Details.Module.css";
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
 import DetailsLi from "../HardCoded/DetailsLi.jsx";
-import DetailsSynopsis from "../HardCoded/DetailsSynopsis.jsx";
+import Description from "./Description.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import Error from "../UI/Error/Error.jsx";
@@ -133,7 +133,7 @@ const Details = () => {
                 </div>
               </div>
 
-              <DetailsSynopsis />
+              <Description description={movie.description} />
 
               <div className="section-line">
                 <div className="section-head">
