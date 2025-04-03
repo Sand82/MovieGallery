@@ -74,7 +74,7 @@ const ManageMovie = ({ isCreated }) => {
     applyLink: textEditorApplyLink,
     hasError: textEditorHasError,
     isEmpty: isTextEditorFieldEmpty, 
-  } = useTextEditor("", (value) =>
+  } = useTextEditor(isCreated ? "" : movie.description, (value) =>
     hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength)
   );  
 

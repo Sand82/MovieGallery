@@ -1,3 +1,5 @@
+import { convertFromHTML, ContentState } from "draft-js";
+
 export const formatData = (currentDate) => {
   const dataChange = new Date(currentDate).toLocaleDateString("en-us", {
     year: "numeric",
@@ -6,6 +8,14 @@ export const formatData = (currentDate) => {
   });
 
   return dataChange;
+};
+
+export const convertHtmlToContentState = (html) => {
+  const blocksFromHTML = convertFromHTML(html);
+  return ContentState.createFromBlockArray(
+    blocksFromHTML.contentBlocks,
+    blocksFromHTML.entityMap
+  );
 };
 
 export const cropText = (text, symbolsCount = 200) => {

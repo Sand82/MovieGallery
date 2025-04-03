@@ -1,13 +1,22 @@
 import { useState } from "react";
-import { EditorState, RichUtils } from "draft-js";
+import { EditorState, RichUtils, ContentState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 
+import { convertHtmlToContentState } from "../services/HelperService.js";
+
 export const useTextEditor = (value, validationFn) => {
-  const [editorState, setEditorState] = useState(
-    value ? EditorState.createWithContent(value) : EditorState.createEmpty()
-  );
   const [textEditorInput, setTextEditorInput] = useState("");
   const [didEdit, setDidEdit] = useState(value === "" ? false : true);
+
+  const initialState = value
+    ? convertHtmlToContentState(value)
+    : ContentState.createFromText("");
+
+  const [editorState, setEditorState] = useState(
+    value
+      ? EditorState.createWithContent(initialState)
+      : EditorState.createEmpty()
+  );
 
   const handleEditorChange = (newState) => {
     setEditorState(newState);

@@ -1,13 +1,12 @@
 import { useContext } from "react";
 
 import style from "../Star/Star.module.css"
-import Error from "../../UI/Error/Error.jsx";
 import { DetailContext } from "../../../contexts/DetailContext.js";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 
 const Star = ({ value, rating }) => {
 
-  const { movie, movieRatingHandler, serverErrors } = useContext(DetailContext); 
+  const { movie, movieRatingHandler } = useContext(DetailContext); 
   const { user } = useContext(AuthContext); 
 
   const raitingHandler = () => {
@@ -29,10 +28,7 @@ const Star = ({ value, rating }) => {
   }
 
   return (    
-  <>
-    <div>
-      <Error error={serverErrors}/>
-    </div>
+  <>    
     <label className={style.raitingLabel}>
         <input type="radio" id="star" name="star" className={style.raitingInput} />
         <i className={"fas fa-star " + starFillStyle} onClick={raitingHandler} />
