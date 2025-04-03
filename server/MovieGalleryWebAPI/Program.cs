@@ -11,6 +11,7 @@ using System.Text;
 using MovieGalleryWebAPI.Service.Comments;
 using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Service.Favorites;
+using Microsoft.OpenApi.Models;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -70,13 +71,25 @@ builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://localhost:3000", "http://localhost:3000/login");
-                      });
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://localhost:3000/login");
+    });
 });
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "My API",
+        Version = "v1",
+        Description = "ASP.NET Core 6 Web API with Swagger",
+    });
+});
 
 var app = builder.Build();
 
@@ -86,6 +99,14 @@ app.PrepareDatabase();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+        c.RoutePrefix = ""; // Makes Swagger the default page
+    });
 }
 else
 {
