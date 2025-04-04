@@ -60,8 +60,9 @@ const Details = () => {
                       <div className="entity-play">
                         <Link
                           className="action-icon-theme action-icon-bordered rounded-circle"
-                          to="https://www.youtube.com/watch?v=d96cjJhvlMA"
+                          to={`/details/video/${movie.id}?details=true`}
                           data-magnific-popup="iframe"
+                          
                         >
                           <span className="icon-content">
                             <i className="fas fa-play" />

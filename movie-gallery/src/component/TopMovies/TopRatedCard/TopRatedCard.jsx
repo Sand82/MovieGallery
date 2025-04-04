@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
+
+import styles from "./TopRated.module.css";
+
 const TopRatedCard = ({ movie }) => {
   return (
     <div
-      className="slick-slide slick-cloned"
-      tabIndex={-1}
-      style={{ width: 260, margin: "10px 0" }}
+      className={`slick-slide slick-cloned ${styles["card-container"]}`}
+      tabIndex={-1}      
       data-slick-index={14}
       aria-hidden="true"
     >
@@ -15,28 +18,29 @@ const TopRatedCard = ({ movie }) => {
           className="d-background bg-theme-lighted collapse animated faster"
           data-show-class="fadeIn show"
           data-hide-class="fadeOut show"
-        />
+        >
         <div className="d-over bg-highlight-bottom">
           <div
             className="collapse animated faster entity-play"
             data-show-class="fadeIn show"
             data-hide-class="fadeOut show"
           >
-            <div
-              className="action-icon-theme action-icon-bordered rounded-circle"
-              href="https://www.youtube.com/watch?v=d96cjJhvlMA"
-              data-magnific-popup="iframe"
-              tabIndex={-1}
-            >
-              <span className="icon-content">
-                <i className="fas fa-play" />
-              </span>
-            </div>
+              <Link
+                className="action-icon-theme action-icon-bordered rounded-circle"
+                to={`/details/video/${movie.id}`}
+                data-magnific-popup="iframe"
+                tabIndex={-1}
+              > 
+                <span className="icon-content">
+                  <i className="fas fa-play" />
+                </span>               
+              </Link>
+            </div>            
           </div>
           <h4 className="entity-title">
             <div
               className="content-link"
-              // href="movie-info-sidebar-right.html"
+              href="movie-info-sidebar-right.html"
               tabIndex={-1}
             >
               {movie.title}
@@ -45,7 +49,7 @@ const TopRatedCard = ({ movie }) => {
           <div className="entity-category">
             <div
               className="content-link"
-              // href="movies-blocks.html"
+              href="movies-blocks.html"
               tabIndex={-1}
             >
               {movie.category}

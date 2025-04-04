@@ -55,6 +55,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     ImageUrl= m.ImageUrl,
                     AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
+                    EmbededVideo = m.EmbededVideo,
                 })
                 .FirstOrDefaultAsync();
 
@@ -103,6 +104,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
+                    EmbededVideo = m.EmbededVideo,
                     AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),                    
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
                         .Select(c => new MovieCommentModel
@@ -165,6 +167,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Category = model.Category;
             movie.Year = model.Year;
             movie.Duration = model.Duration;
+            movie.EmbededVideo = model.EmbededVideo;
 
             await this.data.SaveChangesAsync();
 
@@ -220,6 +223,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                    Category = m.Category,
                    Year = m.Year,
                    Duration = m.Duration,
+                   EmbededVideo = m.EmbededVideo,
                    AverageRating = m.Ratings != null && m.Ratings.Any()
                        ? m.Ratings.Average(r => r.Value).ToString("F1")
                        : "0.0"

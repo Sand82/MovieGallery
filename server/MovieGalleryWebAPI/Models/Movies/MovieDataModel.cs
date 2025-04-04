@@ -19,7 +19,9 @@
         public string? AverageRating { get; set; }
         
         public string? PersonalRating { get; set; }
-        
+
+        public string? EmbededVideo { get; set; }
+
         public bool IsFavorite { get; set; }       
 
         public ICollection<MovieCommentModel>? Comments { get; set; }

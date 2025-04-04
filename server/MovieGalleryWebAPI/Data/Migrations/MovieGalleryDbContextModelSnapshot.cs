@@ -309,6 +309,11 @@ namespace MovieGalleryWebAPI.Data.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("nvarchar(400)");
 
+                    b.Property<string>("EmbededVideo")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(300)

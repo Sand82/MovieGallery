@@ -41,6 +41,10 @@ namespace MovieGalleryWebAPI.Data.Models
         [StringLength(MaxMovieDuration)]
         public string? Duration { get; set; }
 
+        [Required]
+        [StringLength(MaxMovieEmbededLength)]
+        public string? EmbededVideo { get; set; } 
+
         public bool IsDelete { get; set; } = false;
 
         public ICollection<Comment>? Comments { get; set; }

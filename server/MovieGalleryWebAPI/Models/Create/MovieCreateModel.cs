@@ -35,6 +35,10 @@ namespace MovieGalleryWebAPI.Models.Create
         [Required]
         [StringLength(MaxMovieDuration, MinimumLength = MinMovieDuration,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        public string? Duration { get; set; }        
+        public string? Duration { get; set; }
+
+        [Required]
+        [StringLength(MaxMovieEmbededLength)]         
+        public string? EmbededVideo { get; set; }
     }
 }

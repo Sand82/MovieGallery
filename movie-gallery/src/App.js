@@ -4,6 +4,7 @@ import Header from "./component/Header/Header.jsx";
 import { AuthProvider } from "./contexts/AuthContext.js";
 import { MovieProvider } from "./contexts/MovieContext.js";
 import { DetailProvider } from "./contexts/DetailContext.js";
+import { FilterProvider } from "./contexts/FiltersContext.js";
 
 import NewMovies from "./component/TopMovies/NewMovies.jsx";
 import Movies from "./component/Movies/Movies.jsx";
@@ -21,7 +22,7 @@ import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./services/RouteGuard.js";
 import Favorite from "./component/Favorite/Favorite.jsx";
 import UnderConstruction from "./component/ErrorPage/UnderConstruction.jsx";
-import { FilterProvider } from "./contexts/FiltersContext.js";
+import Video from "./component/UI/Video/Video.jsx";
 
 function App() {
   return (
@@ -87,6 +88,14 @@ function App() {
                   element={
                     <RouteGuard>
                       <Details />
+                    </RouteGuard>
+                  }
+                />
+                <Route
+                  path="/details/video/:movieId"
+                  element={
+                    <RouteGuard>
+                      <Video />
                     </RouteGuard>
                   }
                 />
