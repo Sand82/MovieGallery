@@ -1,0 +1,8 @@
+.card-container {
+  width: 16.25rem;
+  margin: 10px 0;  
+}
+
+.transition {
+  transition: all 0.2s !important;
+}

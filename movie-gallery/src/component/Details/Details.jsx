@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 import * as style from "./Details.Module.css";
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
@@ -15,7 +15,8 @@ const Details = () => {
   const { movieId } = useParams();
 
   const { user } = useContext(AuthContext);  
-  const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);
+  const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
@@ -32,6 +33,14 @@ const Details = () => {
     favoriteMovieHandler(data);    
   };
 
+  let animationClass = "";
+
+  if (hovered) {    
+    animationClass = "fadeIn show"
+  } else {    
+    animationClass = "fadeOut show"
+  }
+
   let hartClass =
     movie.isFavorite ? "fa-solid fa-heart fa-2xl hart hart-active"
     : "fa-solid fa-heart fa-2xl hart hart-not-active";     
@@ -44,7 +53,10 @@ const Details = () => {
             <section className="section-long">
               <div className="section-line">
                 <div className="movie-info-entity">
-                  <div className="entity-poster" data-role="hover-wrap">
+                  <div className="entity-poster" 
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}   
+                    data-role="hover-wrap">
                     <div className="embed-responsive embed-responsive-poster">
                       <img
                         className="embed-responsive-item"
@@ -53,9 +65,7 @@ const Details = () => {
                       />
                     </div>
                     <div
-                      className="d-over bg-theme-lighted collapse animated faster"
-                      data-show-class="fadeIn show"
-                      data-hide-class="fadeOut show"
+                      className={`d-background bg-theme-lighted collapse delay-4s d-flex ${animationClass}`} 
                     >
                       <div className="entity-play">
                         <Link

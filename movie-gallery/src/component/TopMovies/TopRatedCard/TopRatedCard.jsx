@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import styles from "./TopRated.module.css";
+import styles from "./TopRatedCard.module.css";
 
 const TopRatedCard = ({ movie }) => {
   return (
@@ -13,17 +13,17 @@ const TopRatedCard = ({ movie }) => {
       <article className="poster-entity" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
           <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
-        </div>
+        </div>        
         <div
-          className="d-background bg-theme-lighted collapse animated faster"
+          className="d-background bg-theme-lighted collapse delay-4s"
           data-show-class="fadeIn show"
-          data-hide-class="fadeOut show"
+          
         >
         <div className="d-over bg-highlight-bottom">
           <div
-            className="collapse animated faster entity-play"
+            className="collapse animated faster entity-play delay-4s"
             data-show-class="fadeIn show"
-            data-hide-class="fadeOut show"
+            
           >
               <Link
                 className="action-icon-theme action-icon-bordered rounded-circle"

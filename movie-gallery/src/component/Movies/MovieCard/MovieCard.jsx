@@ -20,14 +20,11 @@ const MovieCard = ({ movie }) => {
         </div>
         <div
           className="d-over bg-theme-lighted collapse animated faster"
-          data-show-classname="fadeIn show"
-          data-hide-classname="fadeOut show"
+          data-show-classname="fadeIn show"          
         >
           <div className="entity-play">
             <Link
               className="action-icon-theme action-icon-bordered rounded-circle"
-              // href="https://www.youtube.com/watch?v=nuTU5XcZTLA"
-              data-magnific-popup="iframe"              
               to={`/movies/details/${movie.id}`}
             >
               <span className="icon-content">

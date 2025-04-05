@@ -1,8 +1,7 @@
 .form-container {
-  border: 1px solid #bebebe;
   margin: 20px auto;
   max-width: 1000px;
-  box-shadow: 0 5px 5px rgb(0 0 0 / 50%);
+  box-shadow: 0 0.5rem 1.75rem rgba(0, 0, 0, 0.08);
   border-radius: 20px;
 }
 

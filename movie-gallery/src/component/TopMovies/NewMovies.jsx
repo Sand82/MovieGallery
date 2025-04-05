@@ -38,7 +38,7 @@ const NewMovies = () => {
               data-slick-view="navigation responsive-4"
             >
               <div className="slick-slides slick-initialized slick-slider">
-                <div className="slick-list draggable">
+                <div className="slick-list draggable">                
                   <div className="slick-track">
                     {movies.slice(0, 4).map((x) => (
                       <TopRatedCard key={x.id} movie={x} />
