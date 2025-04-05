@@ -9,7 +9,7 @@ import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
-import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue, minLength } from "../../services/Validators.js";
+import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
 
 const ManageMovie = ({ isCreated }) => {
@@ -62,6 +62,16 @@ const ManageMovie = ({ isCreated }) => {
   } = useInput(isCreated ? "" : movie.duration, (value) =>
     hasLengthNumberValue(value, GlobalConstant.durationMinLength, GlobalConstant.durationMaxLength)
   );
+
+  const {
+    value: embededVideoValue,
+    changeHandler: embededVideoChangeHandler,
+    hasError: embededVideoHasError,
+    inputBlurHandler: embededVideoInputBluerHandler,
+    isEmpty: isEmbededVideoFieldEmpty,
+  } = useInput(isCreated ? "" : movie.embededVideo, (value) =>
+    isEqualToExactLenght(value, GlobalConstant.embededVideoLength)
+  );
   
   const {
     editorState: textEditorState,
@@ -88,7 +98,8 @@ const ManageMovie = ({ isCreated }) => {
       year: yearValue,
       imageUrl: imageUrlValue,
       duration: durationValue,
-      description: textEditorInput,      
+      description: textEditorInput,
+      embededVideo: embededVideoValue,      
     };
 
     if (isCreated) {
@@ -110,6 +121,8 @@ const ManageMovie = ({ isCreated }) => {
     durationHasError ||
     isDurationFieldEmpty ||
     isTextEditorFieldEmpty ||
+    embededVideoHasError ||
+    isEmbededVideoFieldEmpty ||
     serverErrors;
 
   const movieActionType = isCreated ? "Create" : "Edit";
@@ -120,13 +133,16 @@ const ManageMovie = ({ isCreated }) => {
         <div className="col">
           {user.isAdmin ? (
             <>
-              <h2 className={`heading text-center ${style["movie-title"]}`}>{movieActionType} Movie</h2>
+            <div className="mt-5 mb-5 section-head">
+              <h2 className="section-title text-uppercase">{movieActionType} Movie</h2>
+            </div>	
+              
               <form onSubmit={manageMovieHandler}>
                 <div className="col-12">
                   <Error error={serverErrors} />
                 </div>
                 <div className="row mb-4">                  
-                  <div className="col-12 col-md-6">
+                  <div className="col-12 col-md-4">
                     <Input
                       label="Title"
                       type="text"
@@ -137,8 +153,8 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={titleInputBluerHandler}
                       error={titleHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
                     />
-                    </div>
-                  <div className="col-12 col-md-6">
+                  </div>
+                  <div className="col-12 col-md-4">
                     <Input
                       label="Category"
                       type="text"
@@ -149,6 +165,18 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={categoryInputBluerHandler}
                       error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
                     />                
+                  </div>
+                  <div className="col-12 col-md-4">
+                    <Input
+                      label="You Tude Embeded Video Code"
+                      type="text"
+                      name="embededVideo"
+                      className="form-control"
+                      value={embededVideoValue}
+                      onChange={embededVideoChangeHandler}
+                      onBlur={embededVideoInputBluerHandler}
+                      error={embededVideoHasError && `Embeded video code should be exact ${GlobalConstant.embededVideoLength} symbols.`}
+                    />
                   </div>
                 </div> 
                 <div className="row mb-4">

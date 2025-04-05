@@ -814,7 +814,7 @@ a:hover {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  max-width: 720px;
+  /* max-width: 720px; */
 }
 .section-head {
   background-image: url("../images/svg/tape-pattern.svg");

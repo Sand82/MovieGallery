@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { MovieContext } from "../../../contexts/MovieContext.js";
 import { AuthContext } from "../../../contexts/AuthContext.js";
+import styels from "./DeleteModal.module.css"
 
 const DeleteModal = ({ movieId }) => {
   const { deleteHandler } = useContext(MovieContext);
@@ -15,9 +16,8 @@ const DeleteModal = ({ movieId }) => {
     <div className="modal-content">
       {user.isAdmin ? (
         <>
-          <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">
-              Delete Movie
+          <div className={`modal-header ${styels["modal-title"]}`}>
+            <h5 id="exampleModalLabel">              
             </h5>
             <button
               type="button"
@@ -28,20 +28,20 @@ const DeleteModal = ({ movieId }) => {
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div className="modal-body">
+          <div className={`modal-body ${styels["modal-title"]}`}>
             Are you sure you want to delete this movie ?
           </div>
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary closeButton"
+              className="btn btn-secondary"
               data-dismiss="modal"
             >
               Close
             </button>
             <button
               type="button"
-              className="btn btn-primary delButton"
+              className="btn btn-danger delButton"
               onClick={deleteMovie}
               data-dismiss="modal"
             >
@@ -50,9 +50,9 @@ const DeleteModal = ({ movieId }) => {
           </div>
         </>
       ) : (
-        <h1 style={{ textAlign: "center" }}>
+        <h2 className={styels["modal-title"]}>
           You don't have rights to delete movie.
-        </h1>
+        </h2>
       )}
     </div>
   );

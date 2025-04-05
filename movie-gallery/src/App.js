@@ -14,14 +14,14 @@ import Footer from "./component/Footer/Footer.jsx";
 import Login from "./component/Login/Login.jsx";
 import Logout from "./component/Logout/Logout.jsx";
 import Register from "./component/Register/Register.jsx";
-import NotFound from "./component/ErrorPage/NotFound.jsx";
-import BadRequest from "./component/ErrorPage/BadRequest.jsx";
+import NotFound from "./component/ErrorsPage/NotFound.jsx";
+import BadRequest from "./component/ErrorsPage/BadRequest.jsx";
 import ManageMovie from "./component/ManageMovie/ManageMovie.jsx";
 import Details from "./component/Details/Details.jsx";
 import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./services/RouteGuard.js";
 import Favorite from "./component/Favorite/Favorite.jsx";
-import UnderConstruction from "./component/ErrorPage/UnderConstruction.jsx";
+import UnderConstruction from "./component/ErrorsPage/UnderConstruction.jsx";
 import Video from "./component/UI/Video/Video.jsx";
 
 function App() {

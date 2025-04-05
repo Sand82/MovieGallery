@@ -29,15 +29,6 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.mapper = mapper;
             this.favoriteService = favoriteService;
             this.ratingService = ratingService;
-        }
-
-        public async Task CreateMovie(MovieCreateModel model)
-        {
-            var movieModel = this.mapper.Map<Movie>(model);            
-
-            await this.data.Movies.AddAsync(movieModel);
-
-            await this.data.SaveChangesAsync();
         }        
 
         public async Task<MovieGetModel> GetLastMovie()
@@ -130,21 +121,14 @@ namespace MovieGalleryWebAPI.Service.Movies
             return movie;
         }
 
-        public async Task<bool> RemoveMovie(int movieId)
+        public async Task CreateMovie(MovieCreateModel model)
         {
-            var movie = await this.data.Movies
-                .Where(m => m.Id == movieId && m.IsDelete == false)
-                .FirstOrDefaultAsync();
+            var movieModel = this.mapper.Map<Movie>(model);
 
-            if (movie == null)
-            {
-                return false;
-            }
+            await this.data.Movies.AddAsync(movieModel);
 
-            await DeleteMovie(movie);
-
-            return true;
-        }
+            await this.data.SaveChangesAsync();
+        }        
 
         public async Task<bool> EditMovie(MovieEditModel model)
         {
@@ -172,6 +156,22 @@ namespace MovieGalleryWebAPI.Service.Movies
             await this.data.SaveChangesAsync();
 
             return isEdited;
+        }
+
+        public async Task<bool> RemoveMovie(int movieId)
+        {
+            var movie = await this.data.Movies
+                .Where(m => m.Id == movieId && m.IsDelete == false)
+                .FirstOrDefaultAsync();
+
+            if (movie == null)
+            {
+                return false;
+            }
+
+            await DeleteMovie(movie);
+
+            return true;
         }
 
         public async Task<bool> CheckForDuplicates(string title)

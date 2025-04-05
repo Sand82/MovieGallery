@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import styles from "./Search.module.css"
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
 const Search = () => {
@@ -80,15 +79,20 @@ const Search = () => {
                     <option value="averageRating">Rating</option>
                     <option value="duration">Duration</option>
                   </select>
+                  <div className="input-group-append">                    
+                    <Link
+                      className="input-group-text"
+                      to="#"
+                      onClick={sortDirectionHandler}
+                    >
+                     {sort ? 
+                      <i className="fa-solid fa-arrow-up fa-sm"/> : 
+                      <i className="fa-solid fa-arrow-down fa-sm"/>
+                      }
+                    </Link>                   
+                  </div>
                 </div>
-                <div className={`col-1 d-flex align-self-center  ${styles["arrows-container"]}`} onClick={sortDirectionHandler}>                
-                {sort ? 
-                  <i className={`fa-solid fa-arrow-up fa-sm ${styles["icon-arrow"]}`}/> : 
-                  <i className={`fa-solid fa-arrow-down fa-sm ${styles["icon-arrow"]}`}/>
-                }
-              </div>
-              </div>
-              
+              </div>              
             </div>
           </form>
         </div>

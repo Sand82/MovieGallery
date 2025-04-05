@@ -1,49 +1,33 @@
 .button-holder {
-    text-align: left;    
+  text-align: left;
 }
 
 .delButton {
-    background-color: rgb(224, 16, 16);
-    margin: 5px;
-}
-
-.editButton {
-    background-color:orange;
-}
-
-.editButton:hover {    
-    border-color: black;
+  background-color: rgb(224, 16, 16);
+  margin-left: 5px;
 }
 
 .closeButton {
-    background-color: rgb(71, 226, 226);
+  background-color: rgb(71, 226, 226);
 }
 
-.closeButton:hover,
-.delButton:hover  {
-    color: black;
-}
-
-.hart {        
-     margin: 18px 5px;
-     cursor: pointer;
+.hart {
+  margin: 18px 5px;
+  cursor: pointer;
 }
 
 .hart:hover {
-    color: #FF8A00;
+  color: #ff8a00;
 }
 
 .hart-not-active {
-    color: gray; 
+  color: gray;
 }
 
 .hart-active {
-    color: red; 
+  color: red;
 }
 
 .hart-input {
-    display: none;
+  display: none;
 }
-
-
-

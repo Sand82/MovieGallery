@@ -4,9 +4,10 @@ import * as movieService from "../services/MoviesService.js";
 import * as commentService from "../services/DetailsService.js";
 import {
   createContext,
-  useEffect,  
+  useEffect,
   useContext,
   useState,
+  useCallback,
 } from "react";
 import { AuthContext } from "./AuthContext.js";
 import { badRequestStatusCode } from "../constants/GlobalConstants.js";
@@ -14,7 +15,7 @@ import { FilterCotntext } from "./FiltersContext.js";
 
 export const MovieContext = createContext();
 
-export const MovieProvider = ({ children }) => {  
+export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [favMovies, setFavMovies] = useState([]);
   const [serverErrors, setServerErrors] = useState(null);
@@ -24,11 +25,22 @@ export const MovieProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const serverErrorsHandler = useCallback(
+    (error) => {
+      if (error.message.includes(badRequestStatusCode)) {
+        navigate("/badrequest");
+      } else {
+        setServerErrors(error.message);
+      }
+    },
+    [navigate]
+  );
+
   useEffect(() => {
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
-        const responce = await movieService.getAll(filters);        
+        const responce = await movieService.getAll(filters);
         setMovies(responce.movies);
         setMoviesCount(responce.count);
       } catch (error) {
@@ -36,12 +48,12 @@ export const MovieProvider = ({ children }) => {
       }
     };
     getAllMovies();
-  }, [filters]);
+  }, [filters, serverErrorsHandler]);
 
   const createHandler = async (movieData) => {
     setServerErrors(null);
     try {
-      await movieService.create(movieData, user.accessToken);      
+      await movieService.create(movieData, user.accessToken);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -51,7 +63,7 @@ export const MovieProvider = ({ children }) => {
   const editHandler = async (movieData) => {
     setServerErrors(null);
     try {
-      await movieService.edit(movieData, user.accessToken);      
+      await movieService.edit(movieData, user.accessToken);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -61,7 +73,7 @@ export const MovieProvider = ({ children }) => {
   const deleteHandler = async (movieId) => {
     setServerErrors(null);
     try {
-      await movieService.remove(movieId, user.accessToken);      
+      await movieService.remove(movieId, user.accessToken);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
@@ -76,14 +88,6 @@ export const MovieProvider = ({ children }) => {
     } catch (error) {
       serverErrorsHandler(error);
     }
-  };  
-
-  const serverErrorsHandler = (error) => {
-    if (error.message.includes(badRequestStatusCode)) {
-      navigate("/badrequest");
-    } else {
-      setServerErrors(error.message);
-    }
   };
 
   return (
@@ -94,7 +98,7 @@ export const MovieProvider = ({ children }) => {
         createHandler,
         editHandler,
         deleteHandler,
-        favoritesHandler,        
+        favoritesHandler,
         moviesCount,
         serverErrors,
       }}

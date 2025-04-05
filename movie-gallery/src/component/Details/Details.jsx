@@ -102,7 +102,7 @@ const Details = () => {
                         <li style={style} className="button-holder">
                           <Link
                             to={`/movies/details/${movie.id}/edit`}
-                            className="btn btn-warning editButton"
+                            className="btn btn-theme"
                           >
                             Edit
                           </Link>

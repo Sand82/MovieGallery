@@ -20,7 +20,7 @@ const Header = () => {
                 ></span>
               </span>
               <span className="logo-text text-uppercase">
-                <span>M</span>Movies
+                Movie Gallery
               </span>
             </span>
           </Link>
