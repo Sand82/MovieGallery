@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 import styles from "./TopRatedCard.module.css";
 
-const TopRatedCard = ({ movie }) => {
+const TopRatedCard = ({ movie }) => { 
+
   return (
     <div
       className={`slick-slide slick-cloned ${styles["card-container"]}`}
@@ -10,6 +11,7 @@ const TopRatedCard = ({ movie }) => {
       data-slick-index={14}
       aria-hidden="true"
     >
+      
       <article className="poster-entity" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
           <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
@@ -77,7 +79,7 @@ const TopRatedCard = ({ movie }) => {
           </div>
         </div>
       </article>
-    </div>
+    </div>    
   );
 };
 

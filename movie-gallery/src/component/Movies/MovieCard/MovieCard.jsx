@@ -4,7 +4,7 @@ import { cropText } from "../../../services/HelperService.js";
 
 const MovieCard = ({ movie }) => {
 
-  return (
+  return (    
     <article className="movie-line-entity">
       <div className="entity-poster" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
@@ -15,7 +15,7 @@ const MovieCard = ({ movie }) => {
               className="embed-responsive-item"
               src={movie.imageUrl}
               alt=""
-            />
+            ></img>
           </Link>
         </div>
         <div

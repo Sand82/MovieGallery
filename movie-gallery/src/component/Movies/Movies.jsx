@@ -22,8 +22,6 @@ const Movies = () => {
 
   const date = new Date();
 
-  console.log(movies);
-
   return (
     <section className="section-long">
       <div className="container">

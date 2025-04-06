@@ -10,11 +10,11 @@ import { FilterCotntext } from "../../contexts/FiltersContext.js";
 const NewMovies = () => {
 
   const { movies } = useContext(MovieContext);
-  const { topRatedMovieHandler } = useContext(FilterCotntext); 
+  const { topRatedMovieHandler } = useContext(FilterCotntext);
 
   useEffect(() => {
     topRatedMovieHandler()    
-  }, [])  
+  }, []) 
  
   return (
     <>

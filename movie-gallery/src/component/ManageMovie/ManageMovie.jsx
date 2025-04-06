@@ -135,8 +135,7 @@ const ManageMovie = ({ isCreated }) => {
             <>
             <div className="mt-5 mb-5 section-head">
               <h2 className="section-title text-uppercase">{movieActionType} Movie</h2>
-            </div>	
-              
+            </div>
               <form onSubmit={manageMovieHandler}>
                 <div className="col-12">
                   <Error error={serverErrors} />
