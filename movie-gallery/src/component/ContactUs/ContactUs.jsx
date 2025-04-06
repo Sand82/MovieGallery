@@ -1,5 +1,4 @@
 import emailjs from "emailjs-com";
-import { Link } from "react-router-dom";
 import { useContext, useState, useRef } from "react";
 
 import * as GlobalConstant from "../../constants/GlobalConstants.js"
@@ -10,6 +9,7 @@ import Input from "../../component/UI/Input/Input.jsx"
 import ContactUsMap from "./ContactUsMap/ContactUsMap.jsx";
 import ContactInformation from "./ContactInformation/ContactInformation.jsx";
 import ContactUsHeader from "./ContactUsHeader/ContactUsHeader.jsx";
+import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
 
 const ContactUs = () => {    
 
@@ -187,9 +187,7 @@ const ContactUs = () => {
         </div>
       </section>
       <ContactInformation />
-      <Link className="scroll-top disabled" to="#">
-        <i className="fas fa-angle-up" aria-hidden="true" />
-      </Link>
+      <ScrollToTop route="/contactus"/>   
     </>
   );
 };

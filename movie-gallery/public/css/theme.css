@@ -40,6 +40,10 @@ Theme colors: #FF8A00
 /*------------------------------------------------------------------
     [1. Body]
 */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Open Sans";
   color: #666;
@@ -1194,8 +1198,8 @@ textarea.form-control {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
 }
-.input-view-flat .form-check-input:[type="radio"] ~ .form-check-icon,
-.input-view-flat .form-check-input:[type="radio"] ~ .form-check-icon:after {
+.input-view-flat .form-check-input[type="radio"] ~ .form-check-icon,
+.input-view-flat .form-check-input[type="radio"] ~ .form-check-icon::after {
   border-radius: 50%;
 }
 .input-view-flat

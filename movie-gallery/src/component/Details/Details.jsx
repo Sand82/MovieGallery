@@ -7,6 +7,7 @@ import DetailsLi from "../HardCoded/DetailsLi.jsx";
 import Description from "./Description.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
+import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx"
 import Error from "../UI/Error/Error.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
@@ -183,6 +184,7 @@ const Details = () => {
           <DeleteModal movieId={movieId} />
         </div>
       </div>
+      <ScrollToTop route={`/movies/details/${movieId}`}/>
     </>
   );
 };

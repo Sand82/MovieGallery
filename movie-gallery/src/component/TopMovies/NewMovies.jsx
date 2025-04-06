@@ -3,6 +3,7 @@ import { MovieContext } from "../../contexts/MovieContext.js";
 
 import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
+import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
@@ -37,6 +38,8 @@ const NewMovies = () => {
               className="slick-spaced slick-carousel"
               data-slick-view="navigation responsive-4"
             >
+            <div>             
+              </div>
               <div className="slick-slides slick-initialized slick-slider">
                 <div className="slick-list draggable">                
                   <div className="slick-track">
@@ -68,7 +71,8 @@ const NewMovies = () => {
           </div>
         </div>
       </section>
-    </>
+      <ScrollToTop route={`/`}/>
+    </>    
   );
 };
 

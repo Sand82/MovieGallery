@@ -9,7 +9,6 @@ import { FilterProvider } from "./contexts/FiltersContext.js";
 import NewMovies from "./component/TopMovies/NewMovies.jsx";
 import Movies from "./component/Movies/Movies.jsx";
 import ContactUs from "./component/ContactUs/ContactUs.jsx";
-import Scroll from "./component/Scroll.js";
 import Footer from "./component/Footer/Footer.jsx";
 import Login from "./component/Login/Login.jsx";
 import Logout from "./component/Logout/Logout.jsx";
@@ -18,7 +17,6 @@ import NotFound from "./component/ErrorsPage/NotFound.jsx";
 import BadRequest from "./component/ErrorsPage/BadRequest.jsx";
 import ManageMovie from "./component/ManageMovie/ManageMovie.jsx";
 import Details from "./component/Details/Details.jsx";
-import ScrollToTop from "./services/ScrollToTop.js";
 import RouteGuard from "./services/RouteGuard.js";
 import Favorite from "./component/Favorite/Favorite.jsx";
 import UnderConstruction from "./component/ErrorsPage/UnderConstruction.jsx";
@@ -31,7 +29,6 @@ function App() {
         <FilterProvider>
           <MovieProvider>
             <DetailProvider>
-              <ScrollToTop />
               <Header />
               <Routes>
                 <Route path="/" element={<NewMovies />} />
@@ -109,7 +106,6 @@ function App() {
                 />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-              <Scroll />
               <Footer />
             </DetailProvider>
           </MovieProvider>

@@ -5,6 +5,7 @@ import Search from "../Search/Search.jsx";
 import Select from "../UI/Select/Select.jsx"
 import MovieCard from "./MovieCard/MovieCard.jsx";
 import Pagination from "../UI/Pagination/Pagination.jsx";
+import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
@@ -23,6 +24,7 @@ const Movies = () => {
   const date = new Date();
 
   return (
+    <>
     <section className="section-long">
       <div className="container">
         <Search />
@@ -50,6 +52,8 @@ const Movies = () => {
         </div>        
       </div>
     </section>
+    <ScrollToTop route="/movies"/>  
+    </>
   );
 };
 

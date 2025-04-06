@@ -43,10 +43,7 @@ const NotFound = () => {
             </div>
           </div>
         </div>
-      </section>
-      <a className="scroll-top disabled" href="#">
-        <i className="fas fa-angle-up" aria-hidden="true" />
-      </a>
+      </section>     
     </>
   );
 };
