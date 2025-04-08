@@ -184,7 +184,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Title = "F9: The Fast Saga",
                 Year = "2021",
                 ImageUrl = "https://i5.walmartimages.com/seo/F9-The-Fast-Saga-Blu-ray-DVD-Digital-Copy-Universal-Studios-Action-Adventure_2c37275b-b8f9-4a88-93d7-7bb785960479.7b553d31cf2b5302be3e1904111717d4.jpeg",
-                Description = "<h3>Storyline</h3>\n<p>Dom and the crew must take on an international terrorist who turns out to be Dom and Mia's estranged brother.</p>",
+                Description = "<h3>Storyline</h3>\n<p>Vin Diesel's Dom Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he's going to save those he loves most.Dom and the crew must take on an international terrorist who turns out to be Dom and Mia's estranged brother.</p>",
                 Category = "Action",
                 Duration = "143",
                 EmbededVideo = "aSiDu3Ywi8E?si=3Vpcfph__NmTuBy6",

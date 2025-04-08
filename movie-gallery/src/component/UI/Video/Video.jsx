@@ -23,22 +23,22 @@ const Video = () => {
 
   return (
     <div className="container">
-			<div className="row">
-				<div className="col">
+	  	<div className="row">
+	  		<div className="col">
           <div className="mt-5 mb-4 section-head">
             <h2 className="section-title text-uppercase">{movieInfo.title}</h2>
           </div>					
-					<div className={styles["video-container"]}>
-					 <iframe className={styles["video"]} src={`https://www.youtube.com/embed/${movieInfo.embededVideo}`} title="YouTube video" allowFullScreen={true}></iframe>
-					</div>
+	  			<div className={styles["video-container"]}>
+	  			 <iframe className={styles["video"]} src={`https://www.youtube.com/embed/${movieInfo.embededVideo}`} title="YouTube video" allowFullScreen={true}></iframe>
+	  			</div>
           <div>
             <Link className="btn btn-theme mb-5" to={linkTo}>
               Back
             </Link>
           </div>
-				</div>
-			</div>
-		</div>		
+	  		</div>
+	  	</div>
+	  </div>		
   )
 }
 

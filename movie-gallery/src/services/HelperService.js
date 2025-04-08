@@ -20,7 +20,16 @@ export const convertHtmlToContentState = (html) => {
 
 export const cropText = (text, symbolsCount = 200) => {
   text = convertToPlaneText(text);
-  return text.substring(0, symbolsCount).concat("", "...");
+
+  let cropedText = text.substring(0, symbolsCount);
+  let index = symbolsCount;
+
+  while (text.charAt(index + 1) !== " " && index < text.length - 1) {
+    cropedText += text.charAt(index);
+    index++;
+  }
+
+  return cropedText.concat(text.charAt(index), "...");
 };
 
 const convertToPlaneText = (text) => {
