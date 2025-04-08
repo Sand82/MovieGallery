@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 
-import * as style from "./Details.Module.css";
+import styles from "./Details.module.css";
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
 import DetailsLi from "../HardCoded/DetailsLi.jsx";
 import Description from "./Description.jsx";
@@ -34,21 +34,19 @@ const Details = () => {
     favoriteMovieHandler(data);    
   };
 
-  let animationClass = "";
+  let animationClass = "d-over bg-black-40 collapse animated faster";
 
   if (hovered) {    
-    animationClass = "fadeIn show"
-  } else {    
-    animationClass = "fadeOut show"
-  }
+    animationClass = "d-background bg-theme-lighted collapse delay-4s"
+  } 
 
   let hartClass =
-    movie.isFavorite ? "fa-solid fa-heart fa-2xl hart hart-active"
-    : "fa-solid fa-heart fa-2xl hart hart-not-active";     
+    movie.isFavorite ? `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-active"]}`
+    : `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-not-active"]}`;     
 
   return (
     <>
-      <div style={style} className="container">
+      <div className="container">
         <div className="sidebar-container">
           <div className="content">
             <section className="section-long">
@@ -66,10 +64,10 @@ const Details = () => {
                       />
                     </div>
                     <div
-                      className={`d-background bg-theme-lighted collapse delay-4s d-flex ${animationClass}`} 
+                      className={`d-flex ${animationClass}`} 
                     >
                       <div className="entity-play">
-                        <Link
+                        {hovered && <Link
                           className="action-icon-theme action-icon-bordered rounded-circle"
                           to={`/details/video/${movie.id}?details=true`}
                           data-magnific-popup="iframe"
@@ -78,7 +76,7 @@ const Details = () => {
                           <span className="icon-content">
                             <i className="fas fa-play" />
                           </span>
-                        </Link>
+                        </Link>}
                       </div>
                     </div>
                   </div>
@@ -110,7 +108,7 @@ const Details = () => {
                     <ul className="entity-list">
                       <DetailsLi />
                       {user.isAdmin ? (
-                        <li style={style} className="button-holder">
+                        <li className={styles["button-holder"]}>
                           <Link
                             to={`/movies/details/${movie.id}/edit`}
                             className="btn btn-theme"
@@ -118,7 +116,7 @@ const Details = () => {
                             Edit
                           </Link>
                           <button
-                            className="btn btn-danger delButton"
+                            className={`btn btn-danger ${styles["button-delete"]}`}
                             data-toggle="modal"
                             data-target="#exampleModal"
                           >
@@ -135,6 +133,7 @@ const Details = () => {
                               type="radio"
                               name="favorite"
                               value={movie.isFavorite}
+                              hidden={true}
                               onClick={() => hartClickHandler(!movie.isFavorite)}
                             />
                           </label>

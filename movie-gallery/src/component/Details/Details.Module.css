@@ -2,18 +2,24 @@
   text-align: left;
 }
 
-.delButton {
+.button-delete {
   background-color: rgb(224, 16, 16);
   margin-left: 5px;
-}
-
-.closeButton {
-  background-color: rgb(71, 226, 226);
 }
 
 .hart {
   margin: 18px 5px;
   cursor: pointer;
+}
+
+.animation {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeIn;
+}
+
+.animation:hover {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
 
 .hart:hover {
