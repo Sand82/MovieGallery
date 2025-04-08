@@ -1,3 +1,11 @@
 html {
   scroll-behavior: smooth;
 }
+
+.movie-img {
+  transition: all, 0.2s;
+}
+
+.movie-img:hover {
+  transform: scale(1.02);
+}

@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 
 import { cropText } from "../../../services/HelperService.js";
+import styels from "./MovieCard.module.css"
 
 const MovieCard = ({ movie }) => {
 
   return (    
-    <article className="movie-line-entity">
+    <article className="movie-line-entity p-3">
       <div className="entity-poster" data-role="hover-wrap">
-        <div className="embed-responsive embed-responsive-poster">
+        <div className="embed-responsive embed-responsive-poster ">
           <Link
             to={`/movies/details/${movie.id}`}            
           >
             <img
-              className="embed-responsive-item"
+              className="embed-responsive-item movie-img"
               src={movie.imageUrl}
               alt=""
             ></img>

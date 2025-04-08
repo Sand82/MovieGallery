@@ -13,7 +13,7 @@ const FavoriteMovie = ({movie}) => {
           data-role="hover-wrap"
         >
           <div className={style.imageContainer}>
-            <img className={`embed-responsive-item ${style.favoriteImage}`} src={movie.imageUrl} alt="" />
+            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={movie.imageUrl} alt="" />
           </div>
           <span className="entity-date">
             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
@@ -23,9 +23,7 @@ const FavoriteMovie = ({movie}) => {
             </span>
           </span>
           <span
-            className="d-over bg-black-80 collapse animated faster"
-            data-show-classname="fadeIn show"
-            data-hide-classname="fadeOut show"
+            className="d-over bg-black-80 collapse animated faster"            
           >
             <span className="m-auto">
               <i className="fas fa-search"></i>

@@ -2,7 +2,8 @@ const JsxComntainer = ()=> {
     return(
         <>
         {/* {category selector} */}
-         {/* <div className="col-sm-6 col-lg-3">
+         {
+         /* <div className="col-sm-6 col-lg-3">
                 <div className="input-view-flat input-group">
                   <select className="form-control" name="genre">
                     <option selected="true">genre</option>
@@ -27,7 +28,8 @@ const JsxComntainer = ()=> {
                     <option>western</option>
                   </select>
                 </div>
-              </div> */}
+              </div> */
+              }
 
 
 

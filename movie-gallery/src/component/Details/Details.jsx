@@ -34,7 +34,7 @@ const Details = () => {
     favoriteMovieHandler(data);    
   };
 
-  let animationClass = "d-over bg-black-40 collapse animated faster";
+  let animationClass = "d-over bg-black-40 collapse animated slow";
 
   if (hovered) {    
     animationClass = "d-background bg-theme-lighted collapse delay-4s"
