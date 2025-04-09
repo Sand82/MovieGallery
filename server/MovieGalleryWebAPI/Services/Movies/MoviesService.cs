@@ -60,6 +60,8 @@ namespace MovieGalleryWebAPI.Service.Movies
             var moviesData = new MoviesData();
             moviesData.Count = this.data.Movies.Where(m => m.IsDelete == false).Count();
 
+            var latestMovies = await GetLatestMovies(moviesQuery);
+
             if (!string.IsNullOrWhiteSpace(model.Search))
             {
                 moviesQuery = moviesQuery.Where(m => m.Title!.Contains(model.Search));
@@ -74,7 +76,8 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             var movies = await MaterializeMoviesQuery(moviesQuery);
 
-            moviesData.Movies = movies;            
+            moviesData.Movies = movies;
+            moviesData.LatestMovies = latestMovies;
 
             return moviesData;
         }        
@@ -177,7 +180,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<bool> CheckForDuplicates(string title)
         {
             return await this.data.Movies.AnyAsync(m => m.Title == title);
-        }
+        }        
 
         private IQueryable<Movie> GetQueryMovies()
         {
@@ -185,6 +188,15 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.Ratings)
                 .Where(m => !m.IsDelete)
                 .AsQueryable();
+        }
+
+        private async Task<List<MoviesDataModel>> GetLatestMovies(IQueryable<Movie> moviesQuery)
+        {
+            moviesQuery = moviesQuery.OrderByDescending(m => m.Year).AsQueryable().Take(4);
+
+            var movies = await MaterializeMoviesQuery(moviesQuery);
+
+            return movies;
         }
 
         private IQueryable<Movie> SelectQueryMoviesBy(string select, string sort, IQueryable<Movie> moviesQuery)

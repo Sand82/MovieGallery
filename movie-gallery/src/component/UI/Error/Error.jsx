@@ -4,7 +4,7 @@ const Error = ({error}) => {
 
   return (
     <>
-        {error && <span className={style.error}>{error}</span>}    
+      {error && <span className={style.error}>{error}</span>}    
     </>    
   )
 }

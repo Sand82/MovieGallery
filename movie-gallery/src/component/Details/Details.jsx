@@ -21,7 +21,7 @@ const Details = () => {
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
-  }, [movieId]);   
+  }, [movieId]);
   
   const hartClickHandler = (hart) => {
 

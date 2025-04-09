@@ -10,12 +10,12 @@ import { FilterCotntext } from "../../contexts/FiltersContext.js";
 
 const NewMovies = () => {
 
-  const { movies } = useContext(MovieContext);
+  const { movies, latestMovies } = useContext(MovieContext);
   const { topRatedMovieHandler } = useContext(FilterCotntext);
 
   useEffect(() => {
     topRatedMovieHandler()    
-  }, []) 
+  }, [])   
  
   return (
     <>
@@ -57,10 +57,10 @@ const NewMovies = () => {
       <section className="section-long">
         <div className="container">
           <div className="section-head">
-            <h2 className="section-title text-uppercase">Latest news</h2>
+            <h2 className="section-title text-uppercase">Newest</h2>
           </div>
           <div className="grid row">
-            {movies.slice(0, 4).map((x) => (
+            {latestMovies.map((x) => (
               <NewMovieBlog key={x.id} movie={x} />
             ))}
           </div>

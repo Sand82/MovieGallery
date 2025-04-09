@@ -39,6 +39,7 @@ namespace MovieGalleryWebAPI.Controllers
            
             return movie;
         }
+        
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]

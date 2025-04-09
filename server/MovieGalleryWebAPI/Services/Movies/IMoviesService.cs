@@ -9,6 +9,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         Task<MoviesData> GetMovies(GetMoviesModel model);
 
         Task<MovieDataModel> GetOneMovie(int movieId, string userId);
+        
 
         Task<bool> RemoveMovie(int movieId);
 

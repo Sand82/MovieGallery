@@ -17,9 +17,7 @@
   font-family: "Open Sans";
 }
 
-/* ---------- GENERAL ---------- */
-
-body {
+---------- GENERAL ---------- body {
   background: #f4f4f4;
   color: #5a5656;
   display: grid;

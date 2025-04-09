@@ -18,8 +18,10 @@ export const MovieContext = createContext();
 export const MovieProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [favMovies, setFavMovies] = useState([]);
-  const [serverErrors, setServerErrors] = useState(null);
   const [moviesCount, setMoviesCount] = useState(0);
+  const [latestMovies, setLatestMovies] = useState([]);
+
+  const [serverErrors, setServerErrors] = useState(null);
   const { filters } = useContext(FilterCotntext);
 
   const { user } = useContext(AuthContext);
@@ -43,6 +45,7 @@ export const MovieProvider = ({ children }) => {
         const responce = await movieService.getAll(filters);
         setMovies(responce.movies);
         setMoviesCount(responce.count);
+        setLatestMovies(responce.latestMovies);
       } catch (error) {
         serverErrorsHandler(error);
       }
@@ -95,6 +98,7 @@ export const MovieProvider = ({ children }) => {
       value={{
         movies,
         favMovies,
+        latestMovies,
         createHandler,
         editHandler,
         deleteHandler,

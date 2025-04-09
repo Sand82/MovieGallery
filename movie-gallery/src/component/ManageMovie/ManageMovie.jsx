@@ -86,10 +86,12 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isTextEditorFieldEmpty, 
   } = useTextEditor(isCreated ? "" : movie.description, (value) =>
     hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength)
-  );  
+  );   
 
   const manageMovieHandler = (e) => {
-    e.preventDefault();    
+    e.preventDefault();      
+    
+    console.log(textEditorInput); 
 
     const movieData = {
       id: movie.id,
