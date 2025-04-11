@@ -11,7 +11,8 @@
   <li>Json Web Token Authorization</li>
   <li>Server Side Data Validation</li> 
   <li>Web Api</li>
-  <li>Automapper</li>  
+  <li>Automapper</li>
+  <li>Server site sorting searching nad pagination</li>    
 </ul>
 <h3>Data base diagram</h3>
 
@@ -24,7 +25,7 @@
 <ul>
   <li>React JS</li>
   <li>Functional Components</li>
-  <li>Hooks: State, Effect, Params, Context, Custom and more</li>
+  <li>Hooks: Reducer, State, Effect, Params, Context, Callback, Custom and more</li>
   <li>AJAX Feching Data</li>
   <li>React Router</li>
   <li>Route Guard</li>
@@ -35,7 +36,7 @@
   <li>CSS Modules</li>
   <li>Integrate with Google Maps</li>
   <li>Integrate with Gmail owner</li>
-  <li>Deploy in Firebasе</li>
+  <li>Provider Pattern</li>
 </ul>
 
 
