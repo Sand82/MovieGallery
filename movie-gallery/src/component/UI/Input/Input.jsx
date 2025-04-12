@@ -4,7 +4,7 @@ const Input = ({ id, label, error, fieldType = "input", ...props }) => {
      
     return (
       <div className="input-container">   
-       <label className="form-label input-label" htmlFor={id}>
+       <label className="form-label" htmlFor={id}>
           {label}
         </label>     
         { fieldType === "textarea" 

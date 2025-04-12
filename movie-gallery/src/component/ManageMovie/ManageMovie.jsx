@@ -4,6 +4,7 @@ import * as GlobalConstant from "../../constants/GlobalConstants.js";
 import Input from "../UI/Input/Input.jsx";
 import Error from "../UI/Error/Error.jsx";
 import TextEditor from "../UI/TextEditor/TextEditor.jsx";
+import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
@@ -218,8 +219,13 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={durationInputBluerHandler}
                       error={durationHasError && `Duration should be between ${GlobalConstant.durationMinLength} and ${GlobalConstant.durationMaxLength} symbols.`}
                     />
-                  </div>
+                  </div>                  
                 </div>
+                <div className="row mb-4">
+                  <div className="col-12">
+                      <DynamicInput sectionName={"Starting Section"}/>
+                  </div>
+                  </div>
                 <div className="row">
                   <div className="col-12">
                     <TextEditor 
