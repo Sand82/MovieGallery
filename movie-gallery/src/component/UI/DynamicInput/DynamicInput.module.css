@@ -1,3 +1,13 @@
 .dynamic-container {
-    
+  /* border: 1px solid #777; */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1.2rem 3.2rem rgba(20, 20, 20, 0.1);
+}
+
+.dynamic-title {
+  padding: 10px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-transform: uppercase;
 }

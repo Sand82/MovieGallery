@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import styels from "./DynamicInput.module.css"
+
 const DynamicInput = ({sectionName}) => {
 
 	const [inputFields, setInputFields] = useState([
@@ -24,13 +26,13 @@ const DynamicInput = ({sectionName}) => {
 	}	
 
   return(
-		<div className="dynamic-container">
-			<h1 className="container">{sectionName}</h1>
+		<div className={styels["dynamic-container"]}>
+			<h2 className={`container ${styels["dynamic-title"]}`}>{sectionName}</h2>
     	<div className="row">
 			
 			{inputFields.map((input, index) => {
           return (
-            <div key={index} className="col-6 mb-4">
+            <div key={index} className="col-12 col-md-6 mb-4">
               <label className="form-label" htmlFor={"name"}>
       		      {"Name"}
    			      </label>
