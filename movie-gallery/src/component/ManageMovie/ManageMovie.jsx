@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import * as GlobalConstant from "../../constants/GlobalConstants.js";
 import Input from "../UI/Input/Input.jsx";
@@ -17,6 +17,8 @@ const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
   const { movie } = useContext(DetailContext);
+
+  const [startingValue, setStartingValue] = useState([]);
 
   const {
     value: titleValue,
@@ -73,7 +75,7 @@ const ManageMovie = ({ isCreated }) => {
   } = useInput(isCreated ? "" : movie.embededVideo, (value) =>
     isEqualToExactLenght(value, GlobalConstant.embededVideoLength)
   );
-  
+    
   const {
     editorState: textEditorState,
     textEditorInput: textEditorInput,
@@ -87,12 +89,17 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isTextEditorFieldEmpty, 
   } = useTextEditor(isCreated ? "" : movie.description, (value) =>
     hasLength(value, GlobalConstant.descriptionMinLength, GlobalConstant.descriptionMaxLength)
-  );   
+  ); 
+
+  const startingInputHandler = (newValues) => {
+    setStartingValue(newValues);
+    //console.log("Updated from child:", newValues);
+  }
 
   const manageMovieHandler = (e) => {
-    e.preventDefault();      
-    
-    console.log(textEditorInput); 
+    e.preventDefault();
+
+    console.log(startingValue)
 
     const movieData = {
       id: movie.id,
@@ -102,7 +109,8 @@ const ManageMovie = ({ isCreated }) => {
       imageUrl: imageUrlValue,
       duration: durationValue,
       description: textEditorInput,
-      embededVideo: embededVideoValue,      
+      embededVideo: embededVideoValue,
+      starting: startingValue
     };
 
     if (isCreated) {
@@ -126,7 +134,9 @@ const ManageMovie = ({ isCreated }) => {
     isTextEditorFieldEmpty ||
     embededVideoHasError ||
     isEmbededVideoFieldEmpty ||
-    serverErrors;
+    serverErrors || 
+    startingValue.some(input => input.error) ||
+    startingValue.some(input => !input.isFieldEdited);
 
   const movieActionType = isCreated ? "Create" : "Edit";
 
@@ -223,7 +233,7 @@ const ManageMovie = ({ isCreated }) => {
                 </div>
                 <div className="row mb-4">
                   <div className="col-12">
-                      <DynamicInput sectionName={"Starting Section"}/>
+                      <DynamicInput sectionName={"Starting Section"} onChange={startingInputHandler}/>
                   </div>
                   </div>
                 <div className="row">

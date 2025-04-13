@@ -49,7 +49,7 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ViewState": "AQIAAK4AAAAAAAAAAAAYwLcAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAALcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T19:42:51.063Z",
               "IsPinned": true,
@@ -63,10 +63,11 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\IMoviesService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\IMoviesService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\IMoviesService.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAoAAABFAAAA",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAuwAoAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-09T19:42:55.063Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -78,7 +79,8 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\MoviesData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-09T19:57:56.043Z"
+              "WhenOpened": "2025-04-09T19:57:56.043Z",
+              "EditorCaption": ""
             }
           ]
         }

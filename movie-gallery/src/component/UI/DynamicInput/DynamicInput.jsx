@@ -1,29 +1,51 @@
 import { useState } from "react";
 
+import * as GlobalConstants from "../../../constants/GlobalConstants.js"
 import styels from "./DynamicInput.module.css"
+import Error from "../Error/Error.jsx"
+import { hasLength } from "../../../services/Validators.js"
 
-const DynamicInput = ({sectionName}) => {
+const DynamicInput = ({sectionName, onChange}) => {
 
 	const [inputFields, setInputFields] = useState([
-    {name: ''}
+    {name: '', error: false, isFieldEdited: false,}
 	])
 
 	const formChangeHandler = (e, index) => {
 		let data = [...inputFields];
 		data[index][e.target.name] = e.target.value;
 		setInputFields(data);
+		onChange(data);
 	}	
 
 	const addFieldsHandler = () => {
-    let newfield = { name: ''}
-		setInputFields([...inputFields, newfield])
+    let newfield = { name: '' };
+  	const updatedFields = [...inputFields, newfield];
+  	setInputFields(updatedFields);
+  	onChange(updatedFields);
 	}	
 
-	const removeFieldshandler = (index) => {
+	const removeFieldsHandler = (index) => {
 		let data = [...inputFields];
-    data.splice(index, 1)
-    setInputFields(data)
+    data.splice(index, 1);
+    setInputFields(data);
+		onChange(data);
 	}	
+
+	const errorHandler = (index) => {
+		let data = [...inputFields];
+  	let isValidInput = hasLength(
+    	data[index].name,
+    	GlobalConstants.titleMinLength,
+    	GlobalConstants.titelMaxLength
+  	);
+
+  	data[index].error = !isValidInput;
+  	data[index].isFieldEdited = true;
+
+  	setInputFields(data);
+  	onChange(data);
+	}
 
   return(
 		<div className={styels["dynamic-container"]}>
@@ -36,9 +58,13 @@ const DynamicInput = ({sectionName}) => {
               <label className="form-label" htmlFor={"name"}>
       		      {"Name"}
    			      </label>
-      	    <input className="form-control" name="name" value={input.name} onChange={(e) => formChangeHandler(e, index)}/>  
-						<button type="button" className="btn btn-danger mt-2" onClick={() => removeFieldshandler(index)}>Remove</button>
-    		    {/* <Error error={error}/>       */}
+							<div className="container">
+								<div className="row d-flex">
+							  	<input className="col-8 form-control" name="name" onBlur={() => errorHandler(index)} value={input.name} onChange={(e) => formChangeHandler(e, index)}/>  
+							  	<button type="button" className="btn btn-danger col-3 m-auto" onClick={() => removeFieldsHandler(index)}>Remove</button>
+								</div> 
+							</div>     	    
+    		     {inputFields[index].error && <Error error={`Name shoud be between ${GlobalConstants.titleMinLength} and ${GlobalConstants.titelMaxLength} symbols.`}/> }
   		      </div>
           )
         })
