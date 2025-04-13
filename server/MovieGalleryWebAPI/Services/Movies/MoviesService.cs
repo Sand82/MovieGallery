@@ -8,6 +8,7 @@ using MovieGalleryWebAPI.Models.Edit;
 using AutoMapper;
 using MovieGalleryWebAPI.Service.Favorites;
 using MovieGalleryWebAPI.Service.Ratings;
+using MovieGalleryWebAPI.Models.Starring;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -88,6 +89,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.Comments!).ThenInclude(c => c.User)
                 .Include(m => m.Favorites)
                 .Include(m => m.Ratings)
+                .Include(m => m.MovieStarrings)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -99,7 +101,13 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Year = m.Year,
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
-                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),                    
+                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),
+                    Starring = m.MovieStarrings.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
+                    {
+                        Id = ms.Starring.Id,
+                        Name = ms.Starring.Name
+
+                    }).ToList(),
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
                         .Select(c => new MovieCommentModel
                         {
@@ -111,7 +119,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                             CreationData = c.CreationData,
                             
                         })
-                        .ToList()
+                        .ToList()                  
                 })
                 .FirstOrDefaultAsync();
 
@@ -126,7 +134,6 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public async Task CreateMovie(MovieCreateModel model)
         {
-
             var movie = new Movie
             {
                 Title = model.Title,
@@ -135,32 +142,35 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Category = model.Category,
                 Year = model.Year,
                 Duration = model.Duration,
-                EmbededVideo = model.EmbededVideo
+                EmbededVideo = model.EmbededVideo,
+                MovieStarrings = new List<MovieStarring>() // 👈 initialize this
             };
-           
 
-            foreach (var starting  in model.Starring)
+            foreach (var starringName in model.Starring)
             {
-                var currentStarting = this.data
-                    .Starring
-                    .FirstOrDefault(s => s.Name == starting);
-
-                if (currentStarting == null)
+                var currentStarring = this.data.Starring.FirstOrDefault(s => s.Name == starringName);
+                
+                if (currentStarring == null)
                 {
-                    currentStarting = new Starring
+                    currentStarring = new Starring
                     {
-                        Name = starting,
+                        Name = starringName
                     };
+
+                    this.data.Starring.Add(currentStarring);
                 }
 
-                movie?.Startings?.Add(currentStarting);
+                
+                movie.MovieStarrings.Add(new MovieStarring
+                {
+                    Movie = movie,
+                    Starring = currentStarring
+                });
             }
 
             await this.data.Movies.AddAsync(movie);
-
             await this.data.SaveChangesAsync();
-
-        }        
+        }
 
         public async Task<bool> EditMovie(MovieEditModel model)
         {

@@ -271,24 +271,24 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MovieStarring",
+                name: "MovieStarrings",
                 columns: table => new
                 {
-                    MoviesId = table.Column<int>(type: "int", nullable: false),
-                    StartingsId = table.Column<int>(type: "int", nullable: false)
+                    MovieId = table.Column<int>(type: "int", nullable: false),
+                    StarringId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieStarring", x => new { x.MoviesId, x.StartingsId });
+                    table.PrimaryKey("PK_MovieStarrings", x => new { x.MovieId, x.StarringId });
                     table.ForeignKey(
-                        name: "FK_MovieStarring_Movies_MoviesId",
-                        column: x => x.MoviesId,
+                        name: "FK_MovieStarrings_Movies_MovieId",
+                        column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieStarring_Starring_StartingsId",
-                        column: x => x.StartingsId,
+                        name: "FK_MovieStarrings_Starring_StarringId",
+                        column: x => x.StarringId,
                         principalTable: "Starring",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -354,9 +354,9 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MovieStarring_StartingsId",
-                table: "MovieStarring",
-                column: "StartingsId");
+                name: "IX_MovieStarrings_StarringId",
+                table: "MovieStarrings",
+                column: "StarringId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_MovieId",
@@ -393,7 +393,7 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 name: "Favorites");
 
             migrationBuilder.DropTable(
-                name: "MovieStarring");
+                name: "MovieStarrings");
 
             migrationBuilder.DropTable(
                 name: "Ratings");

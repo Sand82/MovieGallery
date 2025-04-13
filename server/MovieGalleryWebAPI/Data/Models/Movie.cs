@@ -14,7 +14,7 @@ namespace MovieGalleryWebAPI.Data.Models
 
             this.Favorites = new HashSet<Favorite>();
 
-            this.Startings = new HashSet<Starring>();
+            this.MovieStarrings = new HashSet<MovieStarring>();
         }
 
         public int Id { get; set; }
@@ -55,6 +55,6 @@ namespace MovieGalleryWebAPI.Data.Models
 
         public ICollection<Favorite>? Favorites { get; set; }
 
-        public ICollection<Starring>? Startings { get; set; }
+        public ICollection<MovieStarring>? MovieStarrings { get; set; }        
     }
 }

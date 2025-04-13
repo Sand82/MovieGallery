@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const DetailsLi = () => {
+const DetailsLi = ({starring}) => {
   return (
     <>
       <li>
@@ -19,21 +19,7 @@ const DetailsLi = () => {
       </li>
       <li>
         <span className="entity-list-title">Starring:</span>
-        <Link className="content-link" to="#">
-          Octopus Wardens
-        </Link>
-        ,
-        <Link className="content-link" to="#">
-          Quanta Wardens
-        </Link>
-        ,
-        <Link className="content-link" to="#">
-          Anabelle Two
-        </Link>
-        ,
-        <Link className="content-link" to="#">
-          Anabelle Three
-        </Link>
+        {starring}       
       </li>
       <li>
         <span className="entity-list-title">Production company:</span>

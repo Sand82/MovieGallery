@@ -8,7 +8,7 @@ namespace MovieGalleryWebAPI.Data.Models
     {
         public Starring()
         {
-            this.Movies = new List<Movie>();
+            this.MovieStarrings = new List<MovieStarring>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace MovieGalleryWebAPI.Data.Models
         [StringLength(MaxMovieTitleLength)]
         public string? Name { get; set; }
 
-        public ICollection<Movie>? Movies { get; set;}
+        public ICollection<MovieStarring>? MovieStarrings { get; set; }
     }
 }

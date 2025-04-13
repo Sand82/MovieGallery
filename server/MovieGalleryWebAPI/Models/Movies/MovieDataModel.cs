@@ -1,4 +1,6 @@
-﻿namespace MovieGalleryWebAPI.Models.Movies
+﻿using MovieGalleryWebAPI.Models.Starring;
+
+namespace MovieGalleryWebAPI.Models.Movies
 {
     public class MovieDataModel
     {
@@ -25,5 +27,7 @@
         public bool IsFavorite { get; set; }       
 
         public ICollection<MovieCommentModel>? Comments { get; set; }
+
+        public ICollection<MovieStarringModel>? Starring { get; set; }
     }
 }
