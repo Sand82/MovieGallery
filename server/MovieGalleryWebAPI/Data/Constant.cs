@@ -34,5 +34,7 @@
 
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 10;
+
+        public const int MaxStartingNameValue = 100;
     }
 }

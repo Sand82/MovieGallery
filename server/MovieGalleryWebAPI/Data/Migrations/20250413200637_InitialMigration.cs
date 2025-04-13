@@ -69,6 +69,19 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Starring",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Starring", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -257,6 +270,30 @@ namespace MovieGalleryWebAPI.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "MovieStarring",
+                columns: table => new
+                {
+                    MoviesId = table.Column<int>(type: "int", nullable: false),
+                    StartingsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MovieStarring", x => new { x.MoviesId, x.StartingsId });
+                    table.ForeignKey(
+                        name: "FK_MovieStarring_Movies_MoviesId",
+                        column: x => x.MoviesId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MovieStarring_Starring_StartingsId",
+                        column: x => x.StartingsId,
+                        principalTable: "Starring",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -317,6 +354,11 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MovieStarring_StartingsId",
+                table: "MovieStarring",
+                column: "StartingsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_MovieId",
                 table: "Ratings",
                 column: "MovieId");
@@ -351,10 +393,16 @@ namespace MovieGalleryWebAPI.Data.Migrations
                 name: "Favorites");
 
             migrationBuilder.DropTable(
+                name: "MovieStarring");
+
+            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Starring");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

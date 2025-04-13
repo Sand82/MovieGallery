@@ -12,7 +12,7 @@ using MovieGalleryWebAPI.Data;
 namespace MovieGalleryWebAPI.Data.Migrations
 {
     [DbContext(typeof(MovieGalleryDbContext))]
-    [Migration("20250404190224_InitialMigration")]
+    [Migration("20250413200637_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,6 +366,39 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("Ratings");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Starring", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Starring");
+                });
+
+            modelBuilder.Entity("MovieStarring", b =>
+                {
+                    b.Property<int>("MoviesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartingsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MoviesId", "StartingsId");
+
+                    b.HasIndex("StartingsId");
+
+                    b.ToTable("MovieStarring");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -472,6 +505,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MovieStarring", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Starring", null)
+                        .WithMany()
+                        .HasForeignKey("StartingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Movie", b =>

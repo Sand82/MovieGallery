@@ -18,7 +18,7 @@ const ManageMovie = ({ isCreated }) => {
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
   const { movie } = useContext(DetailContext);
 
-  const [startingValue, setStartingValue] = useState([]);
+  const [starringValue, setStarringValue] = useState([]);
 
   const {
     value: titleValue,
@@ -92,15 +92,12 @@ const ManageMovie = ({ isCreated }) => {
   ); 
 
   const startingInputHandler = (newValues) => {
-    setStartingValue(newValues);
-    //console.log("Updated from child:", newValues);
+    setStarringValue(newValues);    
   }
 
   const manageMovieHandler = (e) => {
     e.preventDefault();
-
-    console.log(startingValue)
-
+    
     const movieData = {
       id: movie.id,
       title: titleValue,
@@ -110,7 +107,7 @@ const ManageMovie = ({ isCreated }) => {
       duration: durationValue,
       description: textEditorInput,
       embededVideo: embededVideoValue,
-      starting: startingValue
+      starring: starringValue.map(field => field.name)
     };
 
     if (isCreated) {
@@ -135,8 +132,8 @@ const ManageMovie = ({ isCreated }) => {
     embededVideoHasError ||
     isEmbededVideoFieldEmpty ||
     serverErrors || 
-    startingValue.some(input => input.error) ||
-    startingValue.some(input => !input.isFieldEdited);
+    starringValue.some(input => input.error) ||
+    starringValue.some(input => !input.isFieldEdited);
 
   const movieActionType = isCreated ? "Create" : "Edit";
 
@@ -233,7 +230,7 @@ const ManageMovie = ({ isCreated }) => {
                 </div>
                 <div className="row mb-4">
                   <div className="col-12">
-                      <DynamicInput sectionName={"Starting Section"} onChange={startingInputHandler}/>
+                      <DynamicInput sectionName={"Starring Section"} onChange={startingInputHandler}/>
                   </div>
                   </div>
                 <div className="row">

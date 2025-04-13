@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Data.Models;
 
@@ -19,5 +18,7 @@ namespace MovieGalleryWebAPI.Data
         public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Favorite> Favorites { get; set; }
+
+        public DbSet<Starring> Starring { get; set; }
     }
 }

@@ -126,11 +126,40 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public async Task CreateMovie(MovieCreateModel model)
         {
-            var movieModel = this.mapper.Map<Movie>(model);
 
-            await this.data.Movies.AddAsync(movieModel);
+            var movie = new Movie
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                Category = model.Category,
+                Year = model.Year,
+                Duration = model.Duration,
+                EmbededVideo = model.EmbededVideo
+            };
+           
+
+            foreach (var starting  in model.Starring)
+            {
+                var currentStarting = this.data
+                    .Starring
+                    .FirstOrDefault(s => s.Name == starting);
+
+                if (currentStarting == null)
+                {
+                    currentStarting = new Starring
+                    {
+                        Name = starting,
+                    };
+                }
+
+                movie?.Startings?.Add(currentStarting);
+            }
+
+            await this.data.Movies.AddAsync(movie);
 
             await this.data.SaveChangesAsync();
+
         }        
 
         public async Task<bool> EditMovie(MovieEditModel model)

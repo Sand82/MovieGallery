@@ -2,7 +2,6 @@
   margin: 20px auto;
   max-width: 1000px;
   box-shadow: 0 0.5rem 1.75rem rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
 }
 
 .movie-title {
@@ -19,6 +18,5 @@
 .text-editor {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 5px;
   min-height: 100px;
 }
