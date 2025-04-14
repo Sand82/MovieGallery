@@ -46,7 +46,7 @@ const Details = () => {
     movie.isFavorite ? `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-active"]}`
     : `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-not-active"]}`;     
 
-  let starring = movie.starring && movie.starring.map(s => s.name).join(', '); 
+  let starring = movie.starring && movie.starring.map(s => s.name).join(', ');   
     
   return (
     <>

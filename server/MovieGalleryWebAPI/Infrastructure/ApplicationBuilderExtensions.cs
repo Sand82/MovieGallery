@@ -4,6 +4,8 @@ using static MovieGalleryWebAPI.GlobalConstans;
 
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MovieGalleryWebAPI.Models.Seed;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {
@@ -21,6 +23,8 @@ namespace MovieGalleryWebAPI.Infrastructure
             data.Database.Migrate();
 
             SeedAdministrator(serviceProvider);
+
+            SeedStarring(data);
 
             SeedMovies(data);
 
@@ -58,28 +62,102 @@ namespace MovieGalleryWebAPI.Infrastructure
                 .GetResult();
         }
 
+        private static void SeedStarring(MovieGalleryDbContext data)
+        {
+            if (data.Starring.Any())
+            {
+                return;
+            }
+
+            var starring = new List<Starring>();
+
+            starring.Add(new Starring { Name = "Ewan McGregor" });
+            starring.Add(new Starring { Name = "Moses Ingram" });
+            starring.Add(new Starring { Name = "Vivien Lyra Blair" });
+            starring.Add(new Starring { Name = "Hayden Christensen" });            
+            starring.Add(new Starring { Name = "Chris Hemsworth" });
+            starring.Add(new Starring { Name = "Natalie Portman" });
+            starring.Add(new Starring { Name = "Christian Bale" });
+            starring.Add(new Starring { Name = "Tessa Thompson" });
+            starring.Add(new Starring { Name = "Russell Crowe" });
+            starring.Add(new Starring { Name = "Idris Elba" });
+            starring.Add(new Starring { Name = "Chris Pratt" });            
+            starring.Add(new Starring { Name = "Sean Bean" });
+            starring.Add(new Starring { Name = "Cate Blanchett" });
+            starring.Add(new Starring { Name = "Orlando Bloom" });
+            starring.Add(new Starring { Name = "Ian McKellen" });
+            starring.Add(new Starring { Name = "Viggo Mortensen" });
+            starring.Add(new Starring { Name = "Elijah Wood" });  
+            starring.Add(new Starring { Name = "Al Pacino" });
+            starring.Add(new Starring { Name = "Robert De Niro"});
+            starring.Add(new Starring { Name = "Val Kilmer" });
+            starring.Add(new Starring { Name = "Jon Voight" });
+            starring.Add(new Starring { Name = "Ashley Judd" });
+            starring.Add(new Starring { Name = "Tom Cruise" });
+            starring.Add(new Starring { Name = "Jennifer Connelly"});
+            starring.Add(new Starring { Name = "Robert Duvall" });
+            starring.Add(new Starring { Name = "Diane Keaton" });
+            starring.Add(new Starring { Name = "Marlon Brando" });
+            starring.Add(new Starring { Name = "James Caan" });
+            starring.Add(new Starring { Name = "Vin Diesel" });
+            starring.Add(new Starring { Name = "Paul Walker" });
+            starring.Add(new Starring { Name = "Michelle Rodriguez" });
+            starring.Add(new Starring { Name = "Tyrese Gibson" });
+            starring.Add(new Starring { Name = "Charlize Theron" });
+            starring.Add(new Starring { Name = "John Cena" });
+            starring.Add(new Starring { Name = "Kurt Russell" });
+            starring.Add(new Starring { Name = "Bruce Willis" });
+            starring.Add(new Starring { Name = "Alan Rickman" });
+            starring.Add(new Starring { Name = "Bonnie Bedelia" });
+            starring.Add(new Starring { Name = "Jeremy Irons" });
+            starring.Add(new Starring { Name = "Samuel L. Jackson" });
+            starring.Add(new Starring { Name = "Graham Greene" });
+            starring.Add(new Starring { Name = "Justin Long" });
+            starring.Add(new Starring { Name = "Timothy Olyphant" });
+            starring.Add(new Starring { Name = "Maggie Q" });
+            starring.Add(new Starring { Name = "Ed Harris" });
+            starring.Add(new Starring { Name = "Christopher Plummer"});
+            starring.Add(new Starring { Name = "Renée Zellweger" });
+            starring.Add(new Starring { Name = "Paul Giamatti" });
+            starring.Add(new Starring { Name = "Bruce McGill" });
+            starring.Add(new Starring { Name = "Tim Robbins" });
+            starring.Add(new Starring { Name = "Morgan Freeman" });
+            starring.Add(new Starring { Name = "Clancy Brown" });
+            starring.Add(new Starring { Name = "Hilary Swank" });
+            starring.Add(new Starring { Name = "Clint Eastwood" });
+            starring.Add(new Starring { Name = "Anthony Mackie" });
+            starring.Add(new Starring { Name = "Michael Peña" });
+            
+            starring.Distinct().ToList();
+
+            data.Starring.AddRange(starring);
+            data.SaveChanges();
+        }
+
 
         private static void SeedMovies(MovieGalleryDbContext data)
         {
             if (data.Movies.Any())
             {
                 return;
-            }
+            }                  
 
-            var movies = new List<Movie>();
+            var moviesInfo = new List<SeedMovies>();
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Obi-Wan Kenobi",
                 Category = "Adventure",
                 Year = "2022",
                 ImageUrl = "https://zamunda-net.com/wp-content/uploads/2022/03/obi-wan-kenobi-season-1-2.jpg",
-                Description = "<h3>Storyline</h3>\n<p>Jedi Master Obi-Wan Kenobi has to save young Leia after she is kidnapped, all the while being pursued by Imperial Inquisitors and his former Padawan, now known as Darth Vader.</p>",                
+                Description = "<h3>Storyline</h3>\n<p>Jedi Master Obi-Wan Kenobi has to save young Leia after she is kidnapped, all the while being pursued by Imperial Inquisitors and his former Padawan, now known as Darth Vader.</p>",
                 Duration = "150",
                 EmbededVideo = "3Yh_6_zItPU?si=dk1ssOZsTDw_kog0",
-            }) ;
+                StartingString = "Ewan McGregor,Moses Ingram,Vivien Lyra Blair,Hayden Christensen",
+            });
 
-            movies.Add(new Movie
+
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Thor: Love and Thunder",
                 Year = "2022",
@@ -88,10 +166,11 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "130",
                 EmbededVideo = "Go8nTmfrQd8?si=inrwJR4btkt0Dv_h",
+                StartingString = "Chris Hemsworth,Natalie Portman,Christian Bale,Tessa Thompson,Russell Crowe,Idris Elba,Chris Pratt",
 
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Lord of the Rings: The Fellowship of the Ring",
                 Year = "2001",
@@ -100,9 +179,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Adventure",
                 Duration = "180",
                 EmbededVideo = "V75dMMIW2B4?si=-WwtuTm9MxKw45dv",
+                StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Lord of the Rings: The Two Towers",
                 Year = "2002",
@@ -111,9 +191,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Adventure",
                 Duration = "180",
                 EmbededVideo = "hYcw5ksV8YQ?si=yjLxoErFwFW9Q9O-",
+                StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Lord of the Rings: The Return of the King",
                 Year = "2003",
@@ -122,9 +203,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Adventure",
                 Duration = "160",
                 EmbededVideo = "r5X-hFf6Bwo?si=oXspWluTpsIYS_zm",
+                StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Heat",
                 Year = "1995",
@@ -133,9 +215,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "180",
                 EmbededVideo = "h7N1gsQY4Io?si=CDDdxEGHQWolaDET",
+                StartingString = "Al Pacino,Robert De Niro,Val Kilmer,Jon Voight,Ashley Judd",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Top Gun: Maverick",
                 Year = "2021",
@@ -144,9 +227,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "140",
                 EmbededVideo = "qSqVVswa420?si=Ij4Y9cDwTv9fV382",
+                StartingString = "Val Kilmer,Tom Cruise,Jennifer Connelly",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Godfather Part II",
                 Year = "1974",
@@ -155,9 +239,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Crime",
                 Duration = "210",
                 EmbededVideo = "OA1ij0alE0w?si=SobU9AA0FfCoJmrH",
+                StartingString = "Al Pacino,Robert De Niro,Robert Duvall,Diane Keaton",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Godfather",
                 Year = "1972",
@@ -166,9 +251,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Crime",
                 Duration = "175",
                 EmbededVideo = "sY1S34973zA?si=ZK5p4zr19R2E0L4h",
+                StartingString = "Al Pacino,Robert Duvall,Diane Keaton,Marlon Brando,James Caan",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Fast and the Furious",
                 Year = "2001",
@@ -177,9 +263,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Adventure",
                 Duration = "105",
                 EmbededVideo = "ZsJz2TJAPjw?si=OYiiIb0QkIOSYjMs",
+                StartingString = "Vin Diesel,Paul Walker,Michelle Rodriguez",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "F9: The Fast Saga",
                 Year = "2021",
@@ -188,9 +275,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "143",
                 EmbededVideo = "aSiDu3Ywi8E?si=3Vpcfph__NmTuBy6",
+                StartingString = "Vin Diesel,Michelle Rodriguez,Tyrese Gibson,Charlize Theron,John Cena,Kurt Russell",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Die hard",
                 Year = "1981",
@@ -199,9 +287,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "132",
                 EmbededVideo = "gYWvwkXreaI?si=aE24822eejdNg9Pe",
+                StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Die hard 2",
                 Year = "1990",
@@ -210,9 +299,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "124",
                 EmbededVideo = "OyxfXQ4MGLQ?si=eWXb1or-5-9rUqzs",
+                StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Die Hard with a Vengeance",
                 Year = "1995",
@@ -221,9 +311,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "128" ,
                 EmbededVideo = "gQ0uSh2Hgcs?si=YXdCMA0hvr4if4PP",
+                StartingString = "Bruce Willis,Jeremy Irons,Samuel L. Jackson,Graham Greene",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Live Free or Die Hard",
                 Year = "2007",
@@ -232,9 +323,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Action",
                 Duration = "128",
                 EmbededVideo = "pVgGRLH5n6U?si=ZXbJV4tfg0yfgyBE",
+                StartingString = "Bruce Willis,Justin Long,Timothy Olyphant,Maggie Q",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Beautiful mind",
                 Year = "2001",
@@ -243,9 +335,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Drama",
                 Duration = "135",
                 EmbededVideo = "EajIlG_OCvw?si=qVQ3hV-o7wcWKs99",
-            });        
+                StartingString = "Russell Crowe,Jennifer Connelly,Ed Harris,Christopher Plummer",
+            });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Cinderella Man",
                 Year = "2005",
@@ -254,9 +347,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Drama",
                 Duration = "145",
                 EmbededVideo = "DlbHzcH4VJY?si=KWvYEO76ycZ9ZMJp",
-            });        
+                StartingString = "Russell Crowe,Renée Zellweger,Paul Giamatti,Bruce McGill",
+            });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "The Shawshank Redemption",
                 Year = "1994",
@@ -265,9 +359,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Drama",
                 Duration = "142",
                 EmbededVideo = "PLl99DlL6b4?si=ZL1XdFVDcCww_SJK",
+                StartingString = "Tim Robbins,Morgan Freeman,Clancy Brown",
             });
 
-            movies.Add(new Movie
+            moviesInfo.Add(new SeedMovies
             {
                 Title = "Million Dollar Baby",
                 Year = "2004",
@@ -276,10 +371,46 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Category = "Drama",
                 Duration = "142",
                 EmbededVideo = "5_RsHRmIRBY?si=Ebv4n-9nSJpqx-_H",
-            });           
+                StartingString = "Morgan Freeman,Hilary Swank,Clint Eastwood,Anthony Mackie,Michael Peña",
+            });
+
+            var movies = GenerateMovies(moviesInfo, data);
 
             data.Movies.AddRange(movies);
             data.SaveChanges();
         }
+
+        private static List<Movie> GenerateMovies(List<SeedMovies> seedMovies, MovieGalleryDbContext data)
+        {
+            var movies = new List<Movie>();
+
+            foreach (var movieInfo in seedMovies)
+            {
+                var currentMovie = new Movie
+                {
+                    Title = movieInfo.Title,
+                    Year = movieInfo.Year,
+                    ImageUrl = movieInfo.ImageUrl,
+                    Description = movieInfo.Description,
+                    Category = movieInfo.Category,
+                    Duration = movieInfo.Duration,
+                    EmbededVideo = movieInfo.EmbededVideo,
+                };
+
+                var movieOneStarring = movieInfo.StartingString!.Split(",").ToList();
+
+                foreach (var starringName in movieOneStarring)
+                {
+                    var currentStarring = data.Starring.FirstOrDefault(x => x.Name == starringName);
+
+                    currentMovie.MovieStarrings!.Add(new MovieStarring { Starring = currentStarring!, Movie = currentMovie });
+                }
+
+                movies.Add(currentMovie);
+            }
+
+            return movies;
+        }
     }
+    
 }
