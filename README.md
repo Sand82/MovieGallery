@@ -29,6 +29,7 @@
   <li>React JS</li>
   <li>Functional Components</li>
   <li>Hooks: Reducer, State, Effect, Params, Context, Callback, Custom and more</li>
+  <li>Provider Pattern</li>
   <li>AJAX Feching Data</li>
   <li>React Router</li>
   <li>Route Guard</li>
@@ -36,10 +37,12 @@
   <li>Client Side Data Validation</li>
   <li>Json Web Token Authorization</li>   
   <li>Services and Helpers</li>
-  <li>CSS Modules</li>
-  <li>Integrate with Google Maps</li>
-  <li>Integrate with Gmail owner</li>
-  <li>Provider Pattern</li>
+  <li>Reusable components</li>
+  <li>Embeded videos</li>
+  <li>CSS modules</li>
+  <li>Integrate Google Maps</li>
+  <li>Integrate Gmail owner</li>
+  <li>Integrate Rich text editor</li>
 </ul>
 
 
