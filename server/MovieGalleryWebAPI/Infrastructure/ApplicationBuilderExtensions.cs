@@ -4,7 +4,6 @@ using static MovieGalleryWebAPI.GlobalConstans;
 
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MovieGalleryWebAPI.Models.Seed;
 
 namespace MovieGalleryWebAPI.Infrastructure
@@ -71,6 +70,7 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             var starring = new List<Starring>();
 
+            //Seed starring
             starring.Add(new Starring { Name = "Ewan McGregor" });
             starring.Add(new Starring { Name = "Moses Ingram" });
             starring.Add(new Starring { Name = "Vivien Lyra Blair" });
