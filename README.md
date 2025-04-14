@@ -12,7 +12,8 @@
   <li>Server Side Data Validation</li> 
   <li>Web Api</li>
   <li>Automapper</li>
-  <li>Server site sorting searching nad pagination</li>    
+  <li>Server site sorting searching nad pagination</li>   
+  <li>Swagger</li>
 </ul>
 <h3>Data base diagram</h3>
 
