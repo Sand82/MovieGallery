@@ -102,10 +102,10 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
                     AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),
-                    Starring = m.MovieStarrings.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
+                    Starring = m.MovieStarrings!.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
                     {
                         Id = ms.Starring.Id,
-                        Name = ms.Starring.Name
+                        Name = ms.Starring.Name!,
 
                     }).ToList(),
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
@@ -143,10 +143,10 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
-                MovieStarrings = new List<MovieStarring>() // 👈 initialize this
+                MovieStarrings = new List<MovieStarring>()
             };
 
-            foreach (var starringName in model.Starring)
+            foreach (var starringName in model.Starring!)
             {
                 var currentStarring = this.data.Starring.FirstOrDefault(s => s.Name == starringName);
                 
@@ -195,10 +195,39 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
 
+            RemoveStarringMappings(movie.Id);
+
+            foreach (var starring in model.Starring!)
+            {
+                Starring currentStarring;
+
+                if (starring.Id == -1)
+                {
+                    currentStarring = new Starring { Name = starring.Name };
+                    this.data.Starring.Add(currentStarring);
+                }
+                else
+                {
+                    currentStarring = this.data.Starring.FirstOrDefault(s => s.Id == starring.Id)!;
+
+                    if (currentStarring.Name != starring.Name)
+                    {
+                        currentStarring.Name = starring.Name;
+                    }
+                } 
+
+                movie.MovieStarrings!.Add(new MovieStarring
+                {
+                    Movie = movie,
+                    Starring = currentStarring
+                });
+            }
+
             await this.data.SaveChangesAsync();
 
             return isEdited;
         }
+        
 
         public async Task<bool> RemoveMovie(int movieId)
         {
@@ -219,7 +248,14 @@ namespace MovieGalleryWebAPI.Service.Movies
         public async Task<bool> CheckForDuplicates(string title)
         {
             return await this.data.Movies.AnyAsync(m => m.Title == title);
-        }        
+        }   
+        
+        private void RemoveStarringMappings(int movieId)
+        {
+            var mappingsToRemove = data.MovieStarrings.Where(m => m.MovieId == movieId).ToList();
+
+            data.MovieStarrings.RemoveRange(mappingsToRemove);
+        }
 
         private IQueryable<Movie> GetQueryMovies()
         {

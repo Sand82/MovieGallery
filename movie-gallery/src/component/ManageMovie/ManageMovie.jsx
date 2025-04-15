@@ -12,7 +12,6 @@ import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
-import { UndoIcon } from "lucide-react";
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
@@ -111,8 +110,12 @@ const ManageMovie = ({ isCreated }) => {
       duration: durationValue,
       description: textEditorInput,
       embededVideo: embededVideoValue,
-      starring: starringValue.map(field => field.name)
-    };    
+      starring: isCreated 
+      ? starringValue.map(field => field.name) 
+      : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
+    };
+
+    console.log(movieData)
 
     if (isCreated) {
       createHandler(movieData);

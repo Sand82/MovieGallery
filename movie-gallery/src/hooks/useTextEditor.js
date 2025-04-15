@@ -5,7 +5,7 @@ import { stateToHTML } from "draft-js-export-html";
 import { convertHtmlToContentState } from "../services/HelperService.js";
 
 export const useTextEditor = (value, validationFn) => {
-  const [textEditorInput, setTextEditorInput] = useState("");
+  const [textEditorInput, setTextEditorInput] = useState(value ? value : "");
   const [didEdit, setDidEdit] = useState(value === "" ? false : true);
 
   const initialState = value
