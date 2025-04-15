@@ -19,7 +19,7 @@ const DetailsLi = ({starring}) => {
       </li>
       <li>
         <span className="entity-list-title">Starring:</span>
-        {starring}       
+        {starring + " and more..."}       
       </li>
       <li>
         <span className="entity-list-title">Production company:</span>

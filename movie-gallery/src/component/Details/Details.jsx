@@ -17,9 +17,7 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);  
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);
-
-  console.log(movie);
+  const [hovered, setHovered] = useState(false); 
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
@@ -112,7 +110,7 @@ const Details = () => {
                     <ul className="entity-list">
                       <DetailsLi starring={starring}/>
                       {user.isAdmin ? (
-                        <li className={styles["button-holder"]}>
+                        <li className={`mt-3 ${styles["button-holder"]}`}>
                           <Link
                             to={`/movies/details/${movie.id}/edit`}
                             className="btn btn-theme"

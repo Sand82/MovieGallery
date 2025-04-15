@@ -5,10 +5,11 @@ import styels from "./DynamicInput.module.css"
 import Error from "../Error/Error.jsx"
 import { hasLength } from "../../../services/Validators.js"
 
-const DynamicInput = ({sectionName, onChange}) => {
+const DynamicInput = ({sectionName, staring, onChange}) => {
 
-	const [inputFields, setInputFields] = useState([
-    {name: '', error: false, isFieldEdited: false,}
+	const [inputFields, setInputFields] = useState(staring 
+		? staring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id})) 
+		: [{name: '', error: false, isFieldEdited: false}
 	])
 
 	const formChangeHandler = (e, index) => {

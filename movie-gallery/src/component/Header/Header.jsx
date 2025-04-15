@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="header header-horizontal header-view-pannel">
       <div className="container">
-        <nav className="navbar">
+        <nav className="navbar d-flex">
           <Link className="navbar-brand" to="/">
             <span className="logo-element">
               <span className="logo-tape">
@@ -31,7 +31,7 @@ const Header = () => {
               <span></span>
             </span>
           </button>
-          <div className="navbar-collapse">
+          <div className="navbar-collapse justify-content-end">
             <ul className="navbar-nav">
               {user.username && <li>Welcome {user.username}</li>}
               <li className="nav-item nav-item-arrow-down nav-hover-show-sub">

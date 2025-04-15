@@ -12,13 +12,17 @@ import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
+import { UndoIcon } from "lucide-react";
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
-  const { movie } = useContext(DetailContext);
+  const { movie } = useContext(DetailContext);  
 
-  const [starringValue, setStarringValue] = useState([]);
+  const [starringValue, setStarringValue] = useState(isCreated && movie
+    ? [] 
+    : movie.starring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
+  );
 
   const {
     value: titleValue,
@@ -108,7 +112,7 @@ const ManageMovie = ({ isCreated }) => {
       description: textEditorInput,
       embededVideo: embededVideoValue,
       starring: starringValue.map(field => field.name)
-    };
+    };    
 
     if (isCreated) {
       createHandler(movieData);
@@ -133,7 +137,7 @@ const ManageMovie = ({ isCreated }) => {
     isEmbededVideoFieldEmpty ||
     serverErrors || 
     starringValue.some(input => input.error) ||
-    starringValue.some(input => !input.isFieldEdited);
+    starringValue.some(input => !input.isFieldEdited);  
 
   const movieActionType = isCreated ? "Create" : "Edit";
 
@@ -230,7 +234,11 @@ const ManageMovie = ({ isCreated }) => {
                 </div>
                 <div className="row mb-4">
                   <div className="col-12">
-                      <DynamicInput sectionName={"Starring Section"} onChange={startingInputHandler}/>
+                      <DynamicInput 
+                        sectionName={"Starring Section"} 
+                        staring={isCreated ? undefined : movie.starring} 
+                        onChange={startingInputHandler}
+                      />
                   </div>
                   </div>
                 <div className="row">
