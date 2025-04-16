@@ -18,7 +18,7 @@
 <h3>Endpoints diagram</h3>
 
 ![swagger](https://github.com/user-attachments/assets/367bf0dd-c67d-427a-afee-c8a2fb2a8140)
-<h3>Data base diagram</h3>
+<h3>Database diagram</h3>
 ![db-diagram](https://github.com/user-attachments/assets/dabf42be-4f71-4f28-998e-7dc11c9b6e3d)
 
 <h2>Client side</h2>
