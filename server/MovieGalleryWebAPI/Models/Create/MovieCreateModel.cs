@@ -43,5 +43,8 @@ namespace MovieGalleryWebAPI.Models.Create
 
         [Required]
         public List<string>? Starring { get; set; }
+
+        [Required]
+        public List<string>? Director {  get; set; }  
     }
 }

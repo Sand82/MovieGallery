@@ -259,6 +259,24 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Director", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Directors");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Favorite", b =>
                 {
                     b.Property<int>("Id")
@@ -335,6 +353,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieDirector", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DirectorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "DirectorId");
+
+                    b.HasIndex("DirectorId");
+
+                    b.ToTable("MovieDirectors");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieStarring", b =>
@@ -486,6 +519,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieDirector", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Director", "Director")
+                        .WithMany("MovieDirectors")
+                        .HasForeignKey("DirectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieDirectors")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Director");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieStarring", b =>
                 {
                     b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
@@ -524,11 +576,18 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Director", b =>
+                {
+                    b.Navigation("MovieDirectors");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Movie", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("MovieDirectors");
 
                     b.Navigation("MovieStarrings");
 

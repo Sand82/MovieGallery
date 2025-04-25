@@ -23,6 +23,12 @@ const ManageMovie = ({ isCreated }) => {
     : movie.starring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );
 
+  const [directorValue, setDirectorValue] = useState([]
+    // isCreated && movie
+    // ? [] 
+    // : movie.starring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
+  );
+
   const {
     value: titleValue,
     changeHandler: titleChangeHandler,
@@ -98,6 +104,10 @@ const ManageMovie = ({ isCreated }) => {
     setStarringValue(newValues);    
   }
 
+  const directorInputHandler = (newValues) => {
+    setDirectorValue(newValues);    
+  }
+
   const manageMovieHandler = (e) => {
     e.preventDefault();
     
@@ -113,6 +123,9 @@ const ManageMovie = ({ isCreated }) => {
       starring: isCreated 
       ? starringValue.map(field => field.name) 
       : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
+      director: isCreated
+      ? directorValue.map(field => field.name)
+      : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
     };
 
     console.log(movieData)
@@ -140,7 +153,9 @@ const ManageMovie = ({ isCreated }) => {
     isEmbededVideoFieldEmpty ||
     serverErrors || 
     starringValue.some(input => input.error) ||
-    starringValue.some(input => !input.isFieldEdited);  
+    starringValue.some(input => !input.isFieldEdited) ||
+    directorValue.some(input => input.error) ||
+    directorValue.some(input => !input.isFieldEdited); 
 
   const movieActionType = isCreated ? "Create" : "Edit";
 
@@ -238,12 +253,21 @@ const ManageMovie = ({ isCreated }) => {
                 <div className="row mb-4">
                   <div className="col-12">
                       <DynamicInput 
+                        sectionName={"Director Section"} 
+                        inputData={isCreated ? undefined : movie.starring} 
+                        onChange={directorInputHandler}
+                      />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <div className="col-12">
+                      <DynamicInput 
                         sectionName={"Starring Section"} 
                         staring={isCreated ? undefined : movie.starring} 
                         onChange={startingInputHandler}
                       />
                   </div>
-                  </div>
+                </div>                
                 <div className="row">
                   <div className="col-12">
                     <TextEditor 

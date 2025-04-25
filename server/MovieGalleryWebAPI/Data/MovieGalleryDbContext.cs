@@ -21,7 +21,11 @@ namespace MovieGalleryWebAPI.Data
 
         public DbSet<Starring> Starring { get; set; }
 
+        public DbSet<Director> Directors { get; set; }
+
         public DbSet<MovieStarring> MovieStarrings { get; set; }
+
+        public DbSet<MovieDirector> MovieDirectors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +43,19 @@ namespace MovieGalleryWebAPI.Data
                 .HasOne(ms => ms.Starring)
                 .WithMany(s => s.MovieStarrings)
                 .HasForeignKey(ms => ms.StarringId);
+
+            modelBuilder.Entity<MovieDirector>()
+                .HasKey(md => new { md.MovieId, md.DirectorId });
+
+            modelBuilder.Entity<MovieDirector>()
+                .HasOne(md => md.Movie)
+                .WithMany(m => m.MovieDirectors)
+                .HasForeignKey(md => md.MovieId);
+
+            modelBuilder.Entity<MovieDirector>()
+                .HasOne(md => md.Director)
+                .WithMany(m => m.MovieDirectors)
+                .HasForeignKey(md => md.DirectorId);
         }
     }
 }
