@@ -126,9 +126,7 @@ const ManageMovie = ({ isCreated }) => {
       director: isCreated
       ? directorValue.map(field => field.name)
       : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
-    };
-
-    console.log(movieData)
+    };    
 
     if (isCreated) {
       createHandler(movieData);
