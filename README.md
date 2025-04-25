@@ -1,6 +1,6 @@
 <h1>MovieGallery</h1>
 <div>Project application for the React JS June 2022 course SoftUni university.</div>
-<h2>Server side</h2>
+<h2>Server-side</h2>
 <p>ASP.NET Core Web API with Entity Framework Core, both on version 6.0, MSSQL Ralation Database code first approach.</p>
 <h3>Build in</h3>
 <ul>
@@ -12,21 +12,22 @@
   <li>Server Side Data Validation</li> 
   <li>Web Api</li>
   <li>Automapper</li>
-  <li>Server site sorting searching nad pagination</li>   
+  <li>Server site sorting searching and pagination</li>   
   <li>Swagger</li>
 </ul>
-<h3>Data base diagram</h3>
+<h3>Endpoints diagram</h3>
 
 ![swagger](https://github.com/user-attachments/assets/367bf0dd-c67d-427a-afee-c8a2fb2a8140)
+<h3>Database diagram</h3>
 
 ![db-diagram](https://github.com/user-attachments/assets/dabf42be-4f71-4f28-998e-7dc11c9b6e3d)
 
-<h2>Client side</h2>
+<h2>Client-side</h2>
 <p> MovieGallery is written on React JS for my project defence. It is application for movies, basic version on IMDb (Internet Movie Database), User part and Admin part. Like User you can create your unique account, manage favorite list of movies, rate movies, post comments in comment section. In Contact us page Users can send messages to application owner. From Administration part you can manage the application. All movie CRUD operation are available.</p>
 
 <h3>Build in</h3>
 <ul>
-  <li>React JS</li>
+  <li>React</li>
   <li>Functional Components</li>
   <li>Hooks: Reducer, State, Effect, Params, Context, Callback, Custom and more</li>
   <li>Provider Pattern</li>
