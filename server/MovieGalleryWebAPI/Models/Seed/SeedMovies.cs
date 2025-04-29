@@ -17,5 +17,7 @@
         public string? EmbededVideo { get; set; }
 
         public string? StartingString { get; set; }
+
+        public string? DirectorsString { get; set; }
     }
 }

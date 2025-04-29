@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 using static MovieGalleryWebAPI.GlobalConstans;
 
 using MovieGalleryWebAPI.Data;
@@ -24,6 +25,8 @@ namespace MovieGalleryWebAPI.Infrastructure
             SeedAdministrator(serviceProvider);
 
             SeedStarring(data);
+
+            SeedDirectors(data);
 
             SeedMovies(data);
 
@@ -59,7 +62,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 })
                 .GetAwaiter()
                 .GetResult();
-        }
+        }       
 
         private static void SeedStarring(MovieGalleryDbContext data)
         {
@@ -134,6 +137,37 @@ namespace MovieGalleryWebAPI.Infrastructure
             data.SaveChanges();
         }
 
+        private static void SeedDirectors(MovieGalleryDbContext data)
+        {
+            if (data.Directors.Any())
+            {
+                return;
+            }
+
+            var directors = new List<Director>();
+           
+            directors.Add(new Director { Name = "Joby Harold" });            
+            directors.Add(new Director { Name = "Taika Waititi" });
+            directors.Add(new Director { Name = "Peter Jackson" });            
+            directors.Add(new Director { Name = "Michael Mann" });
+            directors.Add(new Director { Name = "Joseph Kosinski" });
+            directors.Add(new Director { Name = "Francis Ford Coppola" });            
+            directors.Add(new Director { Name = "Rob Cohen" });        
+            directors.Add(new Director { Name = "Justin Lin" });           
+            directors.Add(new Director { Name = "John McTiernan" });           
+            directors.Add(new Director { Name = "Renny Harlin" });            
+            directors.Add(new Director { Name = "John McTiernan" });        
+            directors.Add(new Director { Name = "Len Wiseman" });            
+            directors.Add(new Director { Name = "Ron Howard" });            
+            directors.Add(new Director { Name = "Ron Howard" });            
+            directors.Add(new Director { Name = "Frank Darabont" });            
+            directors.Add(new Director { Name = "Clint Eastwood" });
+
+            directors.Distinct().ToList();
+
+            data.Directors.AddRange(directors);
+            data.SaveChanges();
+        }
 
         private static void SeedMovies(MovieGalleryDbContext data)
         {
@@ -154,6 +188,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "150",
                 EmbededVideo = "3Yh_6_zItPU?si=dk1ssOZsTDw_kog0",
                 StartingString = "Ewan McGregor,Moses Ingram,Vivien Lyra Blair,Hayden Christensen",
+                DirectorsString = "Joby Harold",
             });
 
 
@@ -167,7 +202,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "130",
                 EmbededVideo = "Go8nTmfrQd8?si=inrwJR4btkt0Dv_h",
                 StartingString = "Chris Hemsworth,Natalie Portman,Christian Bale,Tessa Thompson,Russell Crowe,Idris Elba,Chris Pratt",
-
+                DirectorsString = "Taika Waititi",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -180,6 +215,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "180",
                 EmbededVideo = "V75dMMIW2B4?si=-WwtuTm9MxKw45dv",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
+                DirectorsString = "Peter Jackson",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -192,6 +228,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "180",
                 EmbededVideo = "hYcw5ksV8YQ?si=yjLxoErFwFW9Q9O-",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
+                DirectorsString = "Peter Jackson",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -204,6 +241,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "160",
                 EmbededVideo = "r5X-hFf6Bwo?si=oXspWluTpsIYS_zm",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
+                DirectorsString = "Peter Jackson",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -216,6 +254,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "180",
                 EmbededVideo = "h7N1gsQY4Io?si=CDDdxEGHQWolaDET",
                 StartingString = "Al Pacino,Robert De Niro,Val Kilmer,Jon Voight,Ashley Judd",
+                DirectorsString = "Michael Mann",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -228,6 +267,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "140",
                 EmbededVideo = "qSqVVswa420?si=Ij4Y9cDwTv9fV382",
                 StartingString = "Val Kilmer,Tom Cruise,Jennifer Connelly",
+                DirectorsString = "Joseph Kosinski",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -240,6 +280,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "210",
                 EmbededVideo = "OA1ij0alE0w?si=SobU9AA0FfCoJmrH",
                 StartingString = "Al Pacino,Robert De Niro,Robert Duvall,Diane Keaton",
+                DirectorsString = "Francis Ford Coppola",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -252,6 +293,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "175",
                 EmbededVideo = "sY1S34973zA?si=ZK5p4zr19R2E0L4h",
                 StartingString = "Al Pacino,Robert Duvall,Diane Keaton,Marlon Brando,James Caan",
+                DirectorsString = "Francis Ford Coppola",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -264,6 +306,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "105",
                 EmbededVideo = "ZsJz2TJAPjw?si=OYiiIb0QkIOSYjMs",
                 StartingString = "Vin Diesel,Paul Walker,Michelle Rodriguez",
+                DirectorsString = "Rob Cohen",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -276,6 +319,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "143",
                 EmbededVideo = "aSiDu3Ywi8E?si=3Vpcfph__NmTuBy6",
                 StartingString = "Vin Diesel,Michelle Rodriguez,Tyrese Gibson,Charlize Theron,John Cena,Kurt Russell",
+                DirectorsString = "Justin Lin",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -288,6 +332,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "132",
                 EmbededVideo = "gYWvwkXreaI?si=aE24822eejdNg9Pe",
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
+                DirectorsString = "John McTiernan",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -300,6 +345,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "124",
                 EmbededVideo = "OyxfXQ4MGLQ?si=eWXb1or-5-9rUqzs",
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
+                DirectorsString = "Renny Harlin",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -312,6 +358,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "128" ,
                 EmbededVideo = "gQ0uSh2Hgcs?si=YXdCMA0hvr4if4PP",
                 StartingString = "Bruce Willis,Jeremy Irons,Samuel L. Jackson,Graham Greene",
+                DirectorsString = "John McTiernan",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -324,6 +371,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "128",
                 EmbededVideo = "pVgGRLH5n6U?si=ZXbJV4tfg0yfgyBE",
                 StartingString = "Bruce Willis,Justin Long,Timothy Olyphant,Maggie Q",
+                DirectorsString = "Len Wiseman",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -336,6 +384,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "135",
                 EmbededVideo = "EajIlG_OCvw?si=qVQ3hV-o7wcWKs99",
                 StartingString = "Russell Crowe,Jennifer Connelly,Ed Harris,Christopher Plummer",
+                DirectorsString = "Ron Howard",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -348,6 +397,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "145",
                 EmbededVideo = "DlbHzcH4VJY?si=KWvYEO76ycZ9ZMJp",
                 StartingString = "Russell Crowe,Renée Zellweger,Paul Giamatti,Bruce McGill",
+                DirectorsString = "Ron Howard",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -360,6 +410,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "142",
                 EmbededVideo = "PLl99DlL6b4?si=ZL1XdFVDcCww_SJK",
                 StartingString = "Tim Robbins,Morgan Freeman,Clancy Brown",
+                DirectorsString = "Frank Darabont",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -372,6 +423,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Duration = "142",
                 EmbededVideo = "5_RsHRmIRBY?si=Ebv4n-9nSJpqx-_H",
                 StartingString = "Morgan Freeman,Hilary Swank,Clint Eastwood,Anthony Mackie,Michael Peña",
+                DirectorsString = "Clint Eastwood",
             });
 
             var movies = GenerateMovies(moviesInfo, data);
@@ -397,14 +449,18 @@ namespace MovieGalleryWebAPI.Infrastructure
                     EmbededVideo = movieInfo.EmbededVideo,
                 };
 
-                var movieOneStarring = movieInfo.StartingString!.Split(",").ToList();
+                var movieStarring = movieInfo.StartingString!.Split(",").ToList();
 
-                foreach (var starringName in movieOneStarring)
+                foreach (var starringName in movieStarring)
                 {
                     var currentStarring = data.Starring.FirstOrDefault(x => x.Name == starringName);
 
                     currentMovie.MovieStarrings!.Add(new MovieStarring { Starring = currentStarring!, Movie = currentMovie });
                 }
+
+                var currentDirector = data.Directors.FirstOrDefault(x => x.Name == movieInfo.DirectorsString);
+
+                currentMovie.MovieDirectors!.Add( new MovieDirector { Director = currentDirector, Movie = currentMovie });
 
                 movies.Add(currentMovie);
             }

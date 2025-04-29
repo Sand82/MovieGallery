@@ -231,75 +231,6 @@ namespace MovieGalleryWebAPI.Service.Movies
             return await this.data.Movies.AnyAsync(m => m.Title == title);
         }
 
-        private TEntity AddRelations<TEntity, TRelation, TJoin>(
-            TEntity entity,
-            IEnumerable<string> names,
-            Func<string, TRelation?> findExisting,
-            Func<string, TRelation> createNew,
-            Action<TEntity, TRelation> addJoin)
-        {
-            foreach (var name in names)
-            {
-                var related = findExisting(name);
-
-                if (related == null)
-                {
-                    related = createNew(name);
-                }
-
-                addJoin(entity, related);
-            }
-
-            return entity;
-        }
-
-        private Movie AddStarring(Movie movie, MovieCreateModel model)
-        {
-            return AddRelations<Movie, Starring, MovieStarring>(
-                movie,
-                model.Starring!,
-                name => this.data.Starring.FirstOrDefault(s => s.Name == name),
-                name =>
-                {
-                    var newStarring = new Starring { Name = name };
-                    this.data.Starring.Add(newStarring);
-                    return newStarring;
-                },
-                (m, s) => m.MovieStarrings!.Add(new MovieStarring { Movie = m, Starring = s })
-            );
-        }
-
-        private Movie AddDirector(Movie movie, MovieCreateModel model)
-        {
-            return AddRelations<Movie, Director, MovieDirector>(
-                movie,
-                model.Starring!,
-                name => this.data.Directors.FirstOrDefault(s => s.Name == name),
-                name =>
-                {
-                    var newDirector = new Director { Name = name };
-                    this.data.Directors.Add(newDirector);
-                    return newDirector;
-                },
-                (m, d) => m.MovieDirectors!.Add(new MovieDirector { Movie = m, Director = d })
-            );
-        }
-
-        private void RemoveStarringMappings(int movieId)
-        {
-            var mappingsToRemove = data.MovieStarrings.Where(m => m.MovieId == movieId).ToList();
-
-            data.MovieStarrings.RemoveRange(mappingsToRemove);
-        }
-
-        private IQueryable<Movie> GetQueryMovies()
-        {
-            return this.data.Movies
-                .Include(m => m.Ratings)
-                .Where(m => !m.IsDelete)
-                .AsQueryable();
-        }
-
         private async Task<List<MoviesDataModel>> GetLatestMovies(IQueryable<Movie> moviesQuery)
         {
             moviesQuery = moviesQuery.OrderByDescending(m => m.Year).AsQueryable().Take(4);
@@ -354,6 +285,76 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             return movies;
         }
+
+
+        private Movie AddStarring(Movie movie, MovieCreateModel model)
+        {
+            return AddRelations<Movie, Starring, MovieStarring>(
+                movie,
+                model.Starring!,
+                name => this.data.Starring.FirstOrDefault(s => s.Name == name),
+                name =>
+                {
+                    var newStarring = new Starring { Name = name };
+                    this.data.Starring.Add(newStarring);
+                    return newStarring;
+                },
+                (m, s) => m.MovieStarrings!.Add(new MovieStarring { Movie = m, Starring = s })
+            );
+        }
+
+        private Movie AddDirector(Movie movie, MovieCreateModel model)
+        {
+            return AddRelations<Movie, Director, MovieDirector>(
+                movie,
+                model.Starring!,
+                name => this.data.Directors.FirstOrDefault(s => s.Name == name),
+                name =>
+                {
+                    var newDirector = new Director { Name = name };
+                    this.data.Directors.Add(newDirector);
+                    return newDirector;
+                },
+                (m, d) => m.MovieDirectors!.Add(new MovieDirector { Movie = m, Director = d })
+            );
+        }
+
+        private TEntity AddRelations<TEntity, TRelation, TJoin>(
+            TEntity entity,
+            IEnumerable<string> names,
+            Func<string, TRelation?> findExisting,
+            Func<string, TRelation> createNew,
+            Action<TEntity, TRelation> addJoin)
+        {
+            foreach (var name in names)
+            {
+                var related = findExisting(name);
+
+                if (related == null)
+                {
+                    related = createNew(name);
+                }
+
+                addJoin(entity, related);
+            }
+
+            return entity;
+        }
+
+        private void RemoveStarringMappings(int movieId)
+        {
+            var mappingsToRemove = data.MovieStarrings.Where(m => m.MovieId == movieId).ToList();
+
+            data.MovieStarrings.RemoveRange(mappingsToRemove);
+        }
+
+        private IQueryable<Movie> GetQueryMovies()
+        {
+            return this.data.Movies
+                .Include(m => m.Ratings)
+                .Where(m => !m.IsDelete)
+                .AsQueryable();
+        }       
 
         private async Task DeleteMovie(Movie movie)
         {
