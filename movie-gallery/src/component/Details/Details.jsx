@@ -17,7 +17,7 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);  
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false); 
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
@@ -44,8 +44,12 @@ const Details = () => {
     movie.isFavorite ? `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-active"]}`
     : `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-not-active"]}`;     
 
-  let starring = movie.starring && movie.starring.map(s => s.name).join(', ');   
+  let starring = movie.starring && movie.starring.map(s => s.name).join(', '); 
+  
+  let directors = movie.directors && movie.directors.map(d => d.name).join(', ');
     
+  console.log(directors);
+
   return (
     <>
       <div className="container">
@@ -108,7 +112,7 @@ const Details = () => {
                       </div>
                     </div>
                     <ul className="entity-list">
-                      <DetailsLi starring={starring}/>
+                      <DetailsLi starring={starring} directors={directors}/>
                       {user.isAdmin ? (
                         <li className={`mt-3 ${styles["button-holder"]}`}>
                           <Link

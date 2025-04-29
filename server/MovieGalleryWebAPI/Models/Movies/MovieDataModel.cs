@@ -1,4 +1,5 @@
-﻿using MovieGalleryWebAPI.Models.Starring;
+﻿using MovieGalleryWebAPI.Models.Directors;
+using MovieGalleryWebAPI.Models.Starring;
 
 namespace MovieGalleryWebAPI.Models.Movies
 {
@@ -29,5 +30,7 @@ namespace MovieGalleryWebAPI.Models.Movies
         public ICollection<MovieCommentModel>? Comments { get; set; }
 
         public ICollection<MovieStarringModel>? Starring { get; set; }
+
+        public ICollection<MovieDirectorsModel>? Directors { get; set; }
     }
 }

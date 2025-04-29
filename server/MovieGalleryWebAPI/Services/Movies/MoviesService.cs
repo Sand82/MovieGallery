@@ -90,6 +90,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.Favorites)
                 .Include(m => m.Ratings)
                 .Include(m => m.MovieStarrings)
+                .Include(m => m.MovieDirectors)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -106,6 +107,12 @@ namespace MovieGalleryWebAPI.Service.Movies
                     {
                         Id = ms.Starring.Id,
                         Name = ms.Starring.Name!,
+
+                    }).ToList(),
+                    Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId).Select(md => new Models.Directors.MovieDirectorsModel
+                    {
+                        Id = md.Director!.Id,
+                        Name = md.Director!.Name!,
 
                     }).ToList(),
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
