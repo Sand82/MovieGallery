@@ -47,8 +47,6 @@ const Details = () => {
   let starring = movie.starring && movie.starring.map(s => s.name).join(', '); 
   
   let directors = movie.directors && movie.directors.map(d => d.name).join(', ');
-    
-  console.log(directors);
 
   return (
     <>

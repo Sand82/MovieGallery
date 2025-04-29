@@ -183,11 +183,49 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
 
-            RemoveStarringMappings(movie.Id);
+            await RemoveMappings(movie.Id);
+            await AddNewStarringMappings(model, movie);
+            await AddNewDirectorsMappings(model, movie);
 
+            await this.data.SaveChangesAsync();
+
+            return isEdited;
+        }
+
+        private async Task AddNewDirectorsMappings(MovieEditModel model, Movie movie)
+        {
+            foreach (var director in model.Directors!)
+            {
+                Director? currentDirector;
+
+                if (director.Id == -1)
+                {
+                    currentDirector = new Director { Name = director.Name };
+                    this.data.Directors.Add(currentDirector);
+                }
+                else
+                {
+                    currentDirector = await this.data.Directors!.FirstOrDefaultAsync(d => d.Id == director.Id);
+
+                    if (currentDirector!.Name != director.Name)
+                    {
+                        currentDirector.Name = director.Name;
+                    }
+                }
+
+                movie.MovieDirectors!.Add(new MovieDirector
+                {
+                    Movie = movie,
+                    Director = currentDirector
+                });
+            }
+        }
+
+        private async Task AddNewStarringMappings(MovieEditModel model, Movie movie)
+        {
             foreach (var starring in model.Starring!)
             {
-                Starring currentStarring;
+                Starring? currentStarring;
 
                 if (starring.Id == -1)
                 {
@@ -196,13 +234,13 @@ namespace MovieGalleryWebAPI.Service.Movies
                 }
                 else
                 {
-                    currentStarring = this.data.Starring.FirstOrDefault(s => s.Id == starring.Id)!;
+                    currentStarring = await this.data.Starring.FirstOrDefaultAsync(s => s.Id == starring.Id);
 
-                    if (currentStarring.Name != starring.Name)
+                    if (currentStarring!.Name != starring.Name)
                     {
                         currentStarring.Name = starring.Name;
                     }
-                } 
+                }
 
                 movie.MovieStarrings!.Add(new MovieStarring
                 {
@@ -210,12 +248,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Starring = currentStarring
                 });
             }
-
-            await this.data.SaveChangesAsync();
-
-            return isEdited;
         }
-        
 
         public async Task<bool> RemoveMovie(int movieId)
         {
@@ -348,11 +381,13 @@ namespace MovieGalleryWebAPI.Service.Movies
             return entity;
         }
 
-        private void RemoveStarringMappings(int movieId)
+        private async Task RemoveMappings(int movieId)
         {
-            var mappingsToRemove = data.MovieStarrings.Where(m => m.MovieId == movieId).ToList();
+            var starringMappingsToRemove = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
+            var directorsMappingsToRemove = await data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
 
-            data.MovieStarrings.RemoveRange(mappingsToRemove);
+            data.MovieStarrings.RemoveRange(starringMappingsToRemove); 
+            data.MovieDirectors.RemoveRange(directorsMappingsToRemove);
         }
 
         private IQueryable<Movie> GetQueryMovies()

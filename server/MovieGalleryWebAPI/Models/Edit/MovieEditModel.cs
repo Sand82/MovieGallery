@@ -44,5 +44,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public string? EmbededVideo { get; set; }
         
         public List<StarringEditModel>? Starring { get; set; }
+
+        public List<DirectorsEditModel>? Directors { get; set; }
     }
 }

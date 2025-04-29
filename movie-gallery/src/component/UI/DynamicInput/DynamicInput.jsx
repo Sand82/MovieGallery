@@ -7,6 +7,8 @@ import { hasLength } from "../../../services/Validators.js"
 
 const DynamicInput = ({sectionName, inputData, onChange}) => {
 
+	console.log(inputData)
+
 	const [inputFields, setInputFields] = useState(inputData 
 		? inputData.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id})) 
 		: [{name: '', error: false, isFieldEdited: false}

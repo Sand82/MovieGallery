@@ -36,5 +36,6 @@
         public const int MaxRatingValue = 10;
 
         public const int MaxStarringNameValue = 100;
+        public const int MaxDirectorNameValue = 100;
     }
 }

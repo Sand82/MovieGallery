@@ -16,17 +16,16 @@ import { useTextEditor } from "../../hooks/useTextEditor.js";
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
-  const { movie } = useContext(DetailContext);  
+  const { movie } = useContext(DetailContext);    
 
   const [starringValue, setStarringValue] = useState(isCreated && movie
     ? [] 
     : movie.starring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
-  );
+  ); 
 
-  const [directorValue, setDirectorValue] = useState([]
-    // isCreated && movie
-    // ? [] 
-    // : movie.starring.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
+  const [directorValue, setDirectorValue] = useState(isCreated && movie
+    ? [] 
+    : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );
 
   const {
@@ -252,7 +251,7 @@ const ManageMovie = ({ isCreated }) => {
                   <div className="col-12">
                       <DynamicInput 
                         sectionName={"Director Section"} 
-                        inputData={isCreated ? undefined : movie.starring} 
+                        inputData={isCreated ? undefined : movie.directors} 
                         onChange={directorInputHandler}
                       />
                   </div>
@@ -261,7 +260,7 @@ const ManageMovie = ({ isCreated }) => {
                   <div className="col-12">
                       <DynamicInput 
                         sectionName={"Starring Section"} 
-                        staring={isCreated ? undefined : movie.starring} 
+                        inputData={isCreated ? undefined : movie.starring} 
                         onChange={startingInputHandler}
                       />
                   </div>
