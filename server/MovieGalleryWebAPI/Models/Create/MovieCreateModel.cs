@@ -42,6 +42,10 @@ namespace MovieGalleryWebAPI.Models.Create
         public string? EmbededVideo { get; set; }
 
         [Required]
+        [StringLength(MaxMovieReleaseLength)]
+        public string? Release { get; set; }
+
+        [Required]
         public List<string>? Starring { get; set; } 
 
         [Required]

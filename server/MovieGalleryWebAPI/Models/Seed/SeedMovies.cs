@@ -19,5 +19,7 @@
         public string? StartingString { get; set; }
 
         public string? DirectorsString { get; set; }
+
+        public string? ReleaseInfo { get; set; }
     }
 }

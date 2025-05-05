@@ -25,6 +25,8 @@ namespace MovieGalleryWebAPI.Models.Movies
 
         public string? EmbededVideo { get; set; }
 
+        public string? Release { get; set; }
+
         public bool IsFavorite { get; set; }       
 
         public ICollection<MovieCommentModel>? Comments { get; set; }

@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\models\\create\\moviecreatemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\models\\create\\moviecreatemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\controllers\\moviescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\models\\edit\\movieeditmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\models\\edit\\movieeditmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\models\\create\\moviecreatemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\models\\create\\moviecreatemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,45 +22,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MovieCreateModel.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs*",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs*",
-              "ViewState": "AQIAACIAAAAAAAAAAAAkwAYAAAAhAAAA",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Create\\MovieCreateModel.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAowC0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T19:26:04.378Z",
+              "WhenOpened": "2025-05-05T21:33:56.165Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MoviesController.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAWwEgAAAA8AAAA",
+              "ViewState": "AQIAADsAAAAAAAAAAAAQwEgAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T19:25:55.482Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MovieEditModel.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Edit\\MovieEditModel.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Models\\Edit\\MovieEditModel.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Models\\Edit\\MovieEditModel.cs*",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Edit\\MovieEditModel.cs*",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowAcAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T19:20:48.387Z",
+              "WhenOpened": "2025-05-05T21:33:50.463Z",
               "EditorCaption": ""
             },
             {
@@ -73,11 +56,11 @@
               "Title": "MoviesService.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs*",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs*",
-              "ViewState": "AQIAALkAAAAAAAAAAAAEwMIAAABBAAAA",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
+              "ViewState": "AQIAAFYBAAAAAAAAAAAQwLcAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:07:47.642Z",
+              "WhenOpened": "2025-05-05T19:56:51.334Z",
               "EditorCaption": ""
             }
           ]

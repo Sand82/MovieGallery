@@ -146,6 +146,7 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             var directors = new List<Director>();
            
+            //seed directors
             directors.Add(new Director { Name = "Joby Harold" });            
             directors.Add(new Director { Name = "Taika Waititi" });
             directors.Add(new Director { Name = "Peter Jackson" });            
@@ -189,6 +190,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "3Yh_6_zItPU?si=dk1ssOZsTDw_kog0",
                 StartingString = "Ewan McGregor,Moses Ingram,Vivien Lyra Blair,Hayden Christensen",
                 DirectorsString = "Joby Harold",
+                ReleaseInfo = "TV Mini Series 2022 TV-14",
             });
 
 
@@ -203,6 +205,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "Go8nTmfrQd8?si=inrwJR4btkt0Dv_h",
                 StartingString = "Chris Hemsworth,Natalie Portman,Christian Bale,Tessa Thompson,Russell Crowe,Idris Elba,Chris Pratt",
                 DirectorsString = "Taika Waititi",
+                ReleaseInfo = "United States June 23, 2022(Los Angeles, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -216,6 +219,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "V75dMMIW2B4?si=-WwtuTm9MxKw45dv",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
+                ReleaseInfo = "December 10, 2001(London, premiere)"
             });
 
             moviesInfo.Add(new SeedMovies
@@ -229,6 +233,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "hYcw5ksV8YQ?si=yjLxoErFwFW9Q9O-",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
+                ReleaseInfo = "United States December 5, 2002(New York City, New York, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -242,6 +247,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "r5X-hFf6Bwo?si=oXspWluTpsIYS_zm",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
+                ReleaseInfo = "New Zealand December 1, 2003(Wellington, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -255,6 +261,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "h7N1gsQY4Io?si=CDDdxEGHQWolaDET",
                 StartingString = "Al Pacino,Robert De Niro,Val Kilmer,Jon Voight,Ashley Judd",
                 DirectorsString = "Michael Mann",
+                ReleaseInfo = "United States December 6, 1995(Burbank, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -268,6 +275,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "qSqVVswa420?si=Ij4Y9cDwTv9fV382",
                 StartingString = "Val Kilmer,Tom Cruise,Jennifer Connelly",
                 DirectorsString = "Joseph Kosinski",
+                ReleaseInfo = "France May 18, 2022(Cannes Film Festival, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -281,6 +289,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "OA1ij0alE0w?si=SobU9AA0FfCoJmrH",
                 StartingString = "Al Pacino,Robert De Niro,Robert Duvall,Diane Keaton",
                 DirectorsString = "Francis Ford Coppola",
+                ReleaseInfo = "United States December 12, 1974(New York City, New York, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -294,6 +303,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "sY1S34973zA?si=ZK5p4zr19R2E0L4h",
                 StartingString = "Al Pacino,Robert Duvall,Diane Keaton,Marlon Brando,James Caan",
                 DirectorsString = "Francis Ford Coppola",
+                ReleaseInfo = "United States March 14, 1972(New York City, New York, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -307,6 +317,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "ZsJz2TJAPjw?si=OYiiIb0QkIOSYjMs",
                 StartingString = "Vin Diesel,Paul Walker,Michelle Rodriguez",
                 DirectorsString = "Rob Cohen",
+                ReleaseInfo = "United States June 18, 2001(premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -320,6 +331,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "aSiDu3Ywi8E?si=3Vpcfph__NmTuBy6",
                 StartingString = "Vin Diesel,Michelle Rodriguez,Tyrese Gibson,Charlize Theron,John Cena,Kurt Russell",
                 DirectorsString = "Justin Lin",
+                ReleaseInfo = "Egypt May 19, 2021",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -333,6 +345,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "gYWvwkXreaI?si=aE24822eejdNg9Pe",
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
                 DirectorsString = "John McTiernan",
+                ReleaseInfo = "United States July 12, 1988(Westwood, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -346,6 +359,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "OyxfXQ4MGLQ?si=eWXb1or-5-9rUqzs",
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
                 DirectorsString = "Renny Harlin",
+                ReleaseInfo = "United States July 2, 1990(Los Angeles, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -359,6 +373,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "gQ0uSh2Hgcs?si=YXdCMA0hvr4if4PP",
                 StartingString = "Bruce Willis,Jeremy Irons,Samuel L. Jackson,Graham Greene",
                 DirectorsString = "John McTiernan",
+                ReleaseInfo = "United States May 15, 1995(New York City, New York, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -372,6 +387,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "pVgGRLH5n6U?si=ZXbJV4tfg0yfgyBE",
                 StartingString = "Bruce Willis,Justin Long,Timothy Olyphant,Maggie Q",
                 DirectorsString = "Len Wiseman",
+                ReleaseInfo = "Japan June 12, 2007(Tokyo, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -385,6 +401,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "EajIlG_OCvw?si=qVQ3hV-o7wcWKs99",
                 StartingString = "Russell Crowe,Jennifer Connelly,Ed Harris,Christopher Plummer",
                 DirectorsString = "Ron Howard",
+                ReleaseInfo = "United States December 13, 2001(Beverly Hills, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -398,6 +415,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "DlbHzcH4VJY?si=KWvYEO76ycZ9ZMJp",
                 StartingString = "Russell Crowe,Renée Zellweger,Paul Giamatti,Bruce McGill",
                 DirectorsString = "Ron Howard",
+                ReleaseInfo = "United States May 23, 2005(Universal City, California, premiere)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -411,6 +429,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "PLl99DlL6b4?si=ZL1XdFVDcCww_SJK",
                 StartingString = "Tim Robbins,Morgan Freeman,Clancy Brown",
                 DirectorsString = "Frank Darabont",
+                ReleaseInfo = "Canada September 10, 1994(Toronto International Film Festival)",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -424,6 +443,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "5_RsHRmIRBY?si=Ebv4n-9nSJpqx-_H",
                 StartingString = "Morgan Freeman,Hilary Swank,Clint Eastwood,Anthony Mackie,Michael Peña",
                 DirectorsString = "Clint Eastwood",
+                ReleaseInfo = "United States December 5, 2004(New York City, New York, premiere)",
             });
 
             var movies = GenerateMovies(moviesInfo, data);
@@ -447,6 +467,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                     Category = movieInfo.Category,
                     Duration = movieInfo.Duration,
                     EmbededVideo = movieInfo.EmbededVideo,
+                    Release = movieInfo.ReleaseInfo,
                 };
 
                 var movieStarring = movieInfo.StartingString!.Split(",").ToList();

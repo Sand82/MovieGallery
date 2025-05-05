@@ -102,7 +102,8 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Year = m.Year,
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
-                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),
+                    Release = m.Release,
+                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),                    
                     Starring = m.MovieStarrings!.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
                     {
                         Id = ms.Starring.Id,
@@ -150,6 +151,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
+                Release = model.Release,
                 MovieStarrings = new List<MovieStarring>()
             };
 
@@ -182,6 +184,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Year = model.Year;
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
+            movie.Release = model.Release;
 
             await RemoveMappings(movie.Id);
             await AddNewStarringMappings(model, movie);
@@ -193,8 +196,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         }
 
         private async Task AddNewDirectorsMappings(MovieEditModel model, Movie movie)
-        {
-             ;
+        {             
             foreach (var director in model.Directors!)
             {
                 Director? currentDirector;
@@ -327,7 +329,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             return movies;
         }
 
-
+        //TODO Refactoring
         private Movie AddStarring(Movie movie, MovieCreateModel model)
         {
             return AddRelations<Movie, Starring, MovieStarring>(
@@ -344,6 +346,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             );
         }
 
+        //TODO Refactoring
         private Movie AddDirector(Movie movie, MovieCreateModel model)
         {
             return AddRelations<Movie, Director, MovieDirector>(
@@ -360,6 +363,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             );
         }
 
+        //TODO Refactoring
         private TEntity AddRelations<TEntity, TRelation, TJoin>(
             TEntity entity,
             IEnumerable<string> names,
@@ -382,6 +386,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             return entity;
         }
 
+        //TODO Refactoring
         private async Task RemoveMappings(int movieId)
         {
             var starringMappingsToRemove = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();

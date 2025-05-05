@@ -22,7 +22,7 @@ const Details = () => {
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
   }, [movieId]);
-  
+
   const hartClickHandler = (hart) => {
 
     let data = {
@@ -110,7 +110,7 @@ const Details = () => {
                       </div>
                     </div>
                     <ul className="entity-list">
-                      <DetailsLi starring={starring} directors={directors}/>
+                      <DetailsLi starring={starring} directors={directors} release={movie.release}/>
                       {user.isAdmin ? (
                         <li className={`mt-3 ${styles["button-holder"]}`}>
                           <Link

@@ -83,6 +83,16 @@ const ManageMovie = ({ isCreated }) => {
   } = useInput(isCreated ? "" : movie.embededVideo, (value) =>
     isEqualToExactLenght(value, GlobalConstant.embededVideoLength)
   );
+
+  const {
+    value: releaseValue,
+    changeHandler: releaseChangeHandler,
+    hasError: releaseHasError,
+    inputBlurHandler: releaseInputBluerHandler,
+    isEmpty: isReleaseFieldEmpty,
+  } = useInput(isCreated ? "" : movie.release, (value) =>
+    hasLength(value, GlobalConstant.releaseMinLength, GlobalConstant.releaseMaxLength)
+  );
     
   const {
     editorState: textEditorState,
@@ -119,15 +129,14 @@ const ManageMovie = ({ isCreated }) => {
       duration: durationValue,
       description: textEditorInput,
       embededVideo: embededVideoValue,
+      release: releaseValue,
       starring: isCreated 
       ? starringValue.map(field => field.name) 
       : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),      
       directors: isCreated
       ? directorValue.map(field => field.name)
       : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
-    };   
-    
-    console.log(movieData)
+    };    
 
     if (isCreated) {
       createHandler(movieData);
@@ -151,6 +160,8 @@ const ManageMovie = ({ isCreated }) => {
     embededVideoHasError ||
     isEmbededVideoFieldEmpty ||
     serverErrors || 
+    releaseHasError ||
+    isReleaseFieldEmpty ||
     starringValue.some(input => input.error) ||
     starringValue.some(input => !input.isFieldEdited) ||
     directorValue.some(input => input.error) ||
@@ -172,7 +183,7 @@ const ManageMovie = ({ isCreated }) => {
                   <Error error={serverErrors} />
                 </div>
                 <div className="row mb-4">                  
-                  <div className="col-12 col-md-4">
+                  <div className="col-12 col-md-6">
                     <Input
                       label="Title"
                       type="text"
@@ -184,7 +195,7 @@ const ManageMovie = ({ isCreated }) => {
                       error={titleHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
                     />
                   </div>
-                  <div className="col-12 col-md-4">
+                  <div className="col-12 col-md-6">
                     <Input
                       label="Category"
                       type="text"
@@ -195,19 +206,7 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={categoryInputBluerHandler}
                       error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
                     />                
-                  </div>
-                  <div className="col-12 col-md-4">
-                    <Input
-                      label="You Tude Embeded Video Code"
-                      type="text"
-                      name="embededVideo"
-                      className="form-control"
-                      value={embededVideoValue}
-                      onChange={embededVideoChangeHandler}
-                      onBlur={embededVideoInputBluerHandler}
-                      error={embededVideoHasError && `Embeded video code should be exact ${GlobalConstant.embededVideoLength} symbols.`}
-                    />
-                  </div>
+                  </div>                  
                 </div> 
                 <div className="row mb-4">
                   <div className="col-12 col-md-4">
@@ -249,6 +248,32 @@ const ManageMovie = ({ isCreated }) => {
                     />
                   </div>                  
                 </div>
+                <div className="row mb-6">                  
+                  <div className="col-12 col-md-6">
+                    <Input
+                      label="Release Information"
+                      type="text"
+                      name="release"
+                      className="form-control"
+                      value={releaseValue}
+                      onChange={releaseChangeHandler}
+                      onBlur={releaseInputBluerHandler}
+                      error={releaseHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
+                    />
+                  </div>                  
+                  <div className="col-12 col-md-6">
+                    <Input
+                      label="You Tude Embeded Video Code"
+                      type="text"
+                      name="embededVideo"
+                      className="form-control"
+                      value={embededVideoValue}
+                      onChange={embededVideoChangeHandler}
+                      onBlur={embededVideoInputBluerHandler}
+                      error={embededVideoHasError && `Embeded video code should be exact ${GlobalConstant.embededVideoLength} symbols.`}
+                    />
+                  </div>
+                </div> 
                 <div className="row mb-4">
                   <div className="col-12">
                       <DynamicInput 

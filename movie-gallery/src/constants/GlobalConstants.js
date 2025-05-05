@@ -19,9 +19,12 @@ export const descriptionMinLength = 3;
 export const descriptionMaxLength = 10000;
 
 export const subjectMinLength = 2;
-export const subjectMaxLength = 100
+export const subjectMaxLength = 100;
 
 export const embededVideoLength = 31;
+
+export const releaseMinLength = 2;
+export const releaseMaxLength = 200;
 
 export const yearLength = 4;
 

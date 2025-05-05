@@ -12,7 +12,7 @@ using MovieGalleryWebAPI.Data;
 namespace MovieGalleryWebAPI.Data.Migrations
 {
     [DbContext(typeof(MovieGalleryDbContext))]
-    [Migration("20250429191741_InitialMigration")]
+    [Migration("20250505195453_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -341,6 +341,11 @@ namespace MovieGalleryWebAPI.Data.Migrations
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Release")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Title")
                         .IsRequired()

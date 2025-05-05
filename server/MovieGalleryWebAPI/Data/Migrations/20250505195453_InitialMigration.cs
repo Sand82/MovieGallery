@@ -74,6 +74,7 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     Category = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Duration = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false),
                     EmbededVideo = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Release = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

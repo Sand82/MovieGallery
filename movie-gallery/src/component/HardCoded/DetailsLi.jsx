@@ -1,21 +1,21 @@
+import styles from "./DetailsLi.module.css"
 import { Link } from "react-router-dom";
 
-const DetailsLi = ({starring, directors}) => {
+const DetailsLi = ({starring, directors, release}) => {
   return (
     <>
-      <li>
-        <span className="entity-list-title">Release:</span>July 21, 2014 (Dolby
-        Theatre), August 1, 2014 (United States)
+      <li className={styles["details-li"]}>
+        <span className="entity-list-title">Release:</span> {release}
       </li>
-      <li>
+      <li className={styles["details-li"]}>
         <span className="entity-list-title">Directed:</span>
         {directors}        
       </li>
-      <li>
+      <li className={styles["details-li"]}>
         <span className="entity-list-title">Starring:</span>
         {starring + " and more..."}       
       </li>
-      <li>
+      <li className={styles["details-li"]}>
         <span className="entity-list-title">Production company:</span>
         <Link className="content-link" to="#">
           Re-Production Bro.
@@ -25,7 +25,7 @@ const DetailsLi = ({starring, directors}) => {
           Pentakid
         </Link>
       </li>
-      <li>
+      <li className={styles["details-li"]}>
         <span className="entity-list-title">Country:</span>
         <Link className="content-link" to="#">
           USA

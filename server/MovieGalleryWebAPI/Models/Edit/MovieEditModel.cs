@@ -42,7 +42,11 @@ namespace MovieGalleryWebAPI.Models.Edit
         [Required]
         [StringLength(MaxMovieEmbededLength)]
         public string? EmbededVideo { get; set; }
-        
+
+        [Required]
+        [StringLength(MaxMovieReleaseLength)]
+        public string? Release { get; set; }
+
         public List<StarringEditModel>? Starring { get; set; } 
 
         public List<DirectorsEditModel>? Directors { get; set; } 

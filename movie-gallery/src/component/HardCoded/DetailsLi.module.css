@@ -1,0 +1,7 @@
+details-li {
+  cursor: pointer;
+}
+
+details-li:hover {
+  color: #ff8a00 !important;
+}
