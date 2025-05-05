@@ -194,6 +194,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         private async Task AddNewDirectorsMappings(MovieEditModel model, Movie movie)
         {
+             ;
             foreach (var director in model.Directors!)
             {
                 Director? currentDirector;

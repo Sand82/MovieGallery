@@ -121,11 +121,13 @@ const ManageMovie = ({ isCreated }) => {
       embededVideo: embededVideoValue,
       starring: isCreated 
       ? starringValue.map(field => field.name) 
-      : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
-      director: isCreated
+      : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),      
+      directors: isCreated
       ? directorValue.map(field => field.name)
-      : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
-    };    
+      : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
+    };   
+    
+    console.log(movieData)
 
     if (isCreated) {
       createHandler(movieData);

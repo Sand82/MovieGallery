@@ -42,9 +42,9 @@ namespace MovieGalleryWebAPI.Models.Create
         public string? EmbededVideo { get; set; }
 
         [Required]
-        public List<string>? Starring { get; set; }
+        public List<string>? Starring { get; set; } 
 
         [Required]
-        public List<string>? Director {  get; set; }  
+        public List<string>? Director { get; set; }
     }
 }
