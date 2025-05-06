@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data.Models;
 
 namespace MovieGalleryWebAPI.Data
@@ -22,6 +23,8 @@ namespace MovieGalleryWebAPI.Data
         public DbSet<Starring> Starring { get; set; }
 
         public DbSet<Director> Directors { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
 
         public DbSet<MovieStarring> MovieStarrings { get; set; }
 
@@ -56,6 +59,12 @@ namespace MovieGalleryWebAPI.Data
                 .HasOne(md => md.Director)
                 .WithMany(m => m.MovieDirectors)
                 .HasForeignKey(md => md.DirectorId);
+
+            modelBuilder.Entity<Movie>()
+                .HasOne(m => m.Company)
+                .WithMany(c => c.Movies)
+                .HasForeignKey(m => m.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -28,6 +28,8 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             SeedDirectors(data);
 
+            SeedCompanies(data);
+
             SeedMovies(data);
 
             return app;
@@ -167,6 +169,33 @@ namespace MovieGalleryWebAPI.Infrastructure
             directors.Distinct().ToList();
 
             data.Directors.AddRange(directors);
+            data.SaveChanges();
+        }
+
+        private static void SeedCompanies(MovieGalleryDbContext data)
+        {
+            if (data.Companies.Any())
+            {
+                return;
+            }
+
+            var companies = new List<Company>();
+
+            //seed companies
+            companies.Add(new Company { Name = "Lucasfilm" });
+            companies.Add(new Company { Name = "Marvel Studios" });
+            companies.Add(new Company { Name = "New Line Cinema" });
+            companies.Add(new Company { Name = "Warner Bros" });
+            companies.Add(new Company { Name = "Paramount Pictures" });
+            companies.Add(new Company { Name = "Universal Pictures" });
+            companies.Add(new Company { Name = "One Race Films" });
+            companies.Add(new Company { Name = "Twentieth Century Fox" });
+            companies.Add(new Company { Name = "Cinergi Pictures Entertainment" });
+            companies.Add(new Company { Name = "Castle Rock Entertainment" });            
+
+            companies.Distinct().ToList();
+
+            data.Companies.AddRange(companies);
             data.SaveChanges();
         }
 
@@ -396,7 +425,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
                 DirectorsString = "Renny Harlin",
                 ReleaseInfo = "United States July 2, 1990(Los Angeles, California, premiere)",
-                Company = "Twentieth Century Fox\r\n\r\n",
+                Company = "Twentieth Century Fox",
                 CountryString = "United States",
                 LanguageString = "English,Spanish",
             });
@@ -525,7 +554,8 @@ namespace MovieGalleryWebAPI.Infrastructure
                     Duration = movieInfo.Duration,
                     EmbededVideo = movieInfo.EmbededVideo,
                     Release = movieInfo.ReleaseInfo,
-                };
+                    Company = data.Companies.FirstOrDefault(x => x.Name == movieInfo.Company),
+            };                
 
                 var movieStarring = movieInfo.StartingString!.Split(",").ToList();
 

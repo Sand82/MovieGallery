@@ -89,8 +89,9 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.Comments!).ThenInclude(c => c.User)
                 .Include(m => m.Favorites)
                 .Include(m => m.Ratings)
+                .Include(m => m.Company)
                 .Include(m => m.MovieStarrings)
-                .Include(m => m.MovieDirectors)
+                .Include(m => m.MovieDirectors)                
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -103,7 +104,8 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
                     Release = m.Release,
-                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),                    
+                    AverageRating = m.Ratings!.Count == 0 ? "0.0" : m.Ratings!.Average(m => m.Value).ToString("F1"),   
+                    Company = m.Company!.Name,
                     Starring = m.MovieStarrings!.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
                     {
                         Id = ms.Starring.Id,

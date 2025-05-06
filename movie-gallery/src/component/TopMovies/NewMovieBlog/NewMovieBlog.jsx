@@ -3,7 +3,7 @@ import styles from "./NewMovieBlog.module.css";
 import { cropText } from "../../../services/HelperService.js";
 
 const NewMovieBlog = ({ movie }) => {
-  
+
   return (
     <div className="col-6 ">
     <article
@@ -19,11 +19,7 @@ const NewMovieBlog = ({ movie }) => {
             {movie.title}
           </Link>
         </h4>
-        <div className="entity-category">
-          <Link className="content-link" to={`/movies/details/${movie.id}`}>
-            {movie.title}
-          </Link>
-          ,{" "}
+        <div className="entity-category">         
           <Link className="content-link" to={`/movies/details/${movie.id}`}>
             {movie.category}
           </Link>

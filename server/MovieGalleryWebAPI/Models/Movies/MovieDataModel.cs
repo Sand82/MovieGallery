@@ -27,6 +27,8 @@ namespace MovieGalleryWebAPI.Models.Movies
 
         public string? Release { get; set; }
 
+        public string? Company { get; set; }
+
         public bool IsFavorite { get; set; }       
 
         public ICollection<MovieCommentModel>? Comments { get; set; }

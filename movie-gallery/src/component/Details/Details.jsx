@@ -3,7 +3,7 @@ import { useEffect, useContext, useState } from "react";
 
 import styles from "./Details.module.css";
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";
-import DetailsLi from "../HardCoded/DetailsLi.jsx";
+import DetailsLi from "./DetailsLi.jsx";
 import Description from "./Description.jsx";
 import Comment from "../Comments/Comment/Comment.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
@@ -17,11 +17,11 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);  
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);  
 
   useEffect(() => {    
     detailsHandler(movieId, user.id);    
-  }, [movieId]);
+  }, [movieId, user.id]);
 
   const hartClickHandler = (hart) => {
 
@@ -110,7 +110,7 @@ const Details = () => {
                       </div>
                     </div>
                     <ul className="entity-list">
-                      <DetailsLi starring={starring} directors={directors} release={movie.release}/>
+                      <DetailsLi starring={starring} directors={directors} release={movie.release} company={movie.company}/>
                       {user.isAdmin ? (
                         <li className={`mt-3 ${styles["button-holder"]}`}>
                           <Link

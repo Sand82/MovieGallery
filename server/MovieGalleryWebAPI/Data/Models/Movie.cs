@@ -53,6 +53,10 @@ namespace MovieGalleryWebAPI.Data.Models
         [StringLength(MaxMovieReleaseLength)]
         public string? Release { get; set; }
 
+        public int CompanyId { get; set; }
+
+        public Company? Company { get; set; }
+
         public bool IsDelete { get; set; } = false;
 
         public ICollection<Comment>? Comments { get; set; }
