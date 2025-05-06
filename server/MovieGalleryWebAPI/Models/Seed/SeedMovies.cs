@@ -21,5 +21,11 @@
         public string? DirectorsString { get; set; }
 
         public string? ReleaseInfo { get; set; }
+
+        public string? Company { get; set; }
+
+        public string? CountryString { get; set; }
+
+        public  string? LanguageString { get; set; }
     }
 }

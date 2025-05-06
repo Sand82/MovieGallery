@@ -190,7 +190,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "3Yh_6_zItPU?si=dk1ssOZsTDw_kog0",
                 StartingString = "Ewan McGregor,Moses Ingram,Vivien Lyra Blair,Hayden Christensen",
                 DirectorsString = "Joby Harold",
-                ReleaseInfo = "TV Mini Series 2022 TV-14",
+                ReleaseInfo = "TV Mini Series, May 27 2022 (United States), TV-14",
+                Company = "Lucasfilm",
+                CountryString = "United States",
+                LanguageString = "English",
             });
 
 
@@ -206,6 +209,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Chris Hemsworth,Natalie Portman,Christian Bale,Tessa Thompson,Russell Crowe,Idris Elba,Chris Pratt",
                 DirectorsString = "Taika Waititi",
                 ReleaseInfo = "United States June 23, 2022(Los Angeles, California, premiere)",
+                Company = "Marvel Studios",
+                CountryString = "Australia,United States",
+                LanguageString = "English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -219,7 +225,10 @@ namespace MovieGalleryWebAPI.Infrastructure
                 EmbededVideo = "V75dMMIW2B4?si=-WwtuTm9MxKw45dv",
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
-                ReleaseInfo = "December 10, 2001(London, premiere)"
+                ReleaseInfo = "December 10, 2001(London, premiere)",
+                Company = "New Line Cinema",
+                CountryString = "New Zealand,UnitedStates,United Kingdom",
+                LanguageString = "English,Sindarin",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -234,6 +243,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
                 ReleaseInfo = "United States December 5, 2002(New York City, New York, premiere)",
+                Company = "New Line Cinema",
+                CountryString = "New Zealand,United States",
+                LanguageString = "English,Sindarin,Old English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -248,6 +260,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Sean Bean,Cate Blanchett,Orlando Bloom,Ian McKellen,Viggo Mortensen,Elijah Wood",
                 DirectorsString = "Peter Jackson",
                 ReleaseInfo = "New Zealand December 1, 2003(Wellington, premiere)",
+                Company = "New Line Cinema",
+                CountryString = "New Zealand,United States",
+                LanguageString = "English,Quenya,Old English,Sindarin",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -262,6 +277,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Al Pacino,Robert De Niro,Val Kilmer,Jon Voight,Ashley Judd",
                 DirectorsString = "Michael Mann",
                 ReleaseInfo = "United States December 6, 1995(Burbank, California, premiere)",
+                Company = "Warner Bros",
+                CountryString = "United States",
+                LanguageString = "English,Spanish",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -276,6 +294,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Val Kilmer,Tom Cruise,Jennifer Connelly",
                 DirectorsString = "Joseph Kosinski",
                 ReleaseInfo = "France May 18, 2022(Cannes Film Festival, premiere)",
+                Company = "Paramount Pictures",
+                CountryString = "United States",
+                LanguageString = "English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -290,6 +311,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Al Pacino,Robert De Niro,Robert Duvall,Diane Keaton",
                 DirectorsString = "Francis Ford Coppola",
                 ReleaseInfo = "United States December 12, 1974(New York City, New York, premiere)",
+                Company = "Paramount Pictures",
+                CountryString = "United States",
+                LanguageString = "English,Italian,Spanish,Latin,Sicilian",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -304,6 +328,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Al Pacino,Robert Duvall,Diane Keaton,Marlon Brando,James Caan",
                 DirectorsString = "Francis Ford Coppola",
                 ReleaseInfo = "United States March 14, 1972(New York City, New York, premiere)",
+                Company = "Paramount Pictures",
+                CountryString = "United States",
+                LanguageString = "English,Italian,Latin",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -318,6 +345,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Vin Diesel,Paul Walker,Michelle Rodriguez",
                 DirectorsString = "Rob Cohen",
                 ReleaseInfo = "United States June 18, 2001(premiere)",
+                Company = "Universal Pictures",
+                CountryString = "United States,Germany",
+                LanguageString = "English,Spanish",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -332,6 +362,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Vin Diesel,Michelle Rodriguez,Tyrese Gibson,Charlize Theron,John Cena,Kurt Russell",
                 DirectorsString = "Justin Lin",
                 ReleaseInfo = "Egypt May 19, 2021",
+                Company = "One Race Films",
+                CountryString = "United States,Thailand,Canada,Japan",
+                LanguageString = "English,Japanese,Spanish",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -346,6 +379,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
                 DirectorsString = "John McTiernan",
                 ReleaseInfo = "United States July 12, 1988(Westwood, California, premiere)",
+                Company = "Twentieth Century Fox",
+                CountryString = "United States",
+                LanguageString = "English,German,Italian,Japanese",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -360,6 +396,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Bruce Willis,Alan Rickman,Bonnie Bedelia",
                 DirectorsString = "Renny Harlin",
                 ReleaseInfo = "United States July 2, 1990(Los Angeles, California, premiere)",
+                Company = "Twentieth Century Fox\r\n\r\n",
+                CountryString = "United States",
+                LanguageString = "English,Spanish",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -374,6 +413,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Bruce Willis,Jeremy Irons,Samuel L. Jackson,Graham Greene",
                 DirectorsString = "John McTiernan",
                 ReleaseInfo = "United States May 15, 1995(New York City, New York, premiere)",
+                Company = "Cinergi Pictures Entertainment",
+                CountryString = "United States",
+                LanguageString = "English,German,Romanian",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -388,6 +430,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Bruce Willis,Justin Long,Timothy Olyphant,Maggie Q",
                 DirectorsString = "Len Wiseman",
                 ReleaseInfo = "Japan June 12, 2007(Tokyo, premiere)",
+                Company = "Twentieth Century Fox",
+                CountryString = "United States,United Kingdom",
+                LanguageString = "English,Italian,French",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -402,6 +447,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Russell Crowe,Jennifer Connelly,Ed Harris,Christopher Plummer",
                 DirectorsString = "Ron Howard",
                 ReleaseInfo = "United States December 13, 2001(Beverly Hills, California, premiere)",
+                Company = "Universal Pictures",
+                CountryString = "United States",
+                LanguageString = "English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -416,6 +464,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Russell Crowe,Renée Zellweger,Paul Giamatti,Bruce McGill",
                 DirectorsString = "Ron Howard",
                 ReleaseInfo = "United States May 23, 2005(Universal City, California, premiere)",
+                Company = "Universal Pictures",
+                CountryString = "United States",
+                LanguageString = "English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -430,6 +481,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Tim Robbins,Morgan Freeman,Clancy Brown",
                 DirectorsString = "Frank Darabont",
                 ReleaseInfo = "Canada September 10, 1994(Toronto International Film Festival)",
+                Company = "Castle Rock Entertainment",
+                CountryString = "United States",
+                LanguageString = "English",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -444,6 +498,9 @@ namespace MovieGalleryWebAPI.Infrastructure
                 StartingString = "Morgan Freeman,Hilary Swank,Clint Eastwood,Anthony Mackie,Michael Peña",
                 DirectorsString = "Clint Eastwood",
                 ReleaseInfo = "United States December 5, 2004(New York City, New York, premiere)",
+                Company = "Warner Bros",
+                CountryString = "United States",
+                LanguageString = "English,Irish,Gaelic,German",
             });
 
             var movies = GenerateMovies(moviesInfo, data);
