@@ -1,9 +1,8 @@
-const JsxComntainer = ()=> {
-    return(
-        <>
-        {/* {category selector} */}
-         {
-         /* <div className="col-sm-6 col-lg-3">
+const JsxComntainer = () => {
+  return (
+    <>
+      {/* {category selector} */}
+      {/* <div className="col-sm-6 col-lg-3">
                 <div className="input-view-flat input-group">
                   <select className="form-control" name="genre">
                     <option selected="true">genre</option>
@@ -28,14 +27,10 @@ const JsxComntainer = ()=> {
                     <option>western</option>
                   </select>
                 </div>
-              </div> */
-              }
+              </div> */}
 
-
-
-        {/*Photos and videos*/}
-
-         {/* <div className="section-line">
+      {/*Photos and videos*/}
+      {/* <div className="section-line">
               <div className="section-head">
                 <h2 className="section-title text-uppercase">
                   Photos &amp; videos
@@ -254,8 +249,8 @@ const JsxComntainer = ()=> {
               </div>
             </div> */}
 
-            {/* Side bar */}
-            {/* <div className="sidebar section-long order-lg-last">
+      {/* Side bar */}
+      {/* <div className="sidebar section-long order-lg-last">
           <section className="section-sidebar">
             <div className="section-head">
               <h2 className="section-title text-uppercase">Latest movies</h2>
@@ -373,6 +368,6 @@ const JsxComntainer = ()=> {
             </a>
           </section>
         </div> */}
-        </>
-    )
-}
+    </>
+  );
+};

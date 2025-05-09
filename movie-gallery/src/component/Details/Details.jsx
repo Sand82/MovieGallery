@@ -15,12 +15,12 @@ import { DetailContext } from "../../contexts/DetailContext.js";
 const Details = () => {
   const { movieId } = useParams();
 
-  const { user } = useContext(AuthContext);  
+  const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);  
+  const [hovered, setHovered] = useState(false);
 
-  useEffect(() => {    
-    detailsHandler(movieId, user.id);    
+  useEffect(() => {
+    detailsHandler(movieId, user.id);
   }, [movieId, user.id]);
 
   const hartClickHandler = (hart) => {
@@ -31,7 +31,7 @@ const Details = () => {
       userId: user.id,
     };
 
-    favoriteMovieHandler(data);    
+    favoriteMovieHandler(data);
   };
 
   let animationClass = "d-over bg-black-40 collapse animated slow";
@@ -44,9 +44,13 @@ const Details = () => {
     movie.isFavorite ? `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-active"]}`
     : `fa-solid fa-heart fa-2xl ${styles["hart"]} ${styles["hart-not-active"]}`;     
 
-  let starring = movie.starring && movie.starring.map(s => s.name).join(', '); 
+  let starring = movie.starring && movie.starring.map(s => s.name).join(', ');
   
   let directors = movie.directors && movie.directors.map(d => d.name).join(', ');
+
+  let countries = movie.countries && movie.countries.map(c => c.name).join(', ');
+
+  let languages = movie.languages && movie.languages.map(l => l.name).join(', ');
 
   return (
     <>
@@ -110,7 +114,14 @@ const Details = () => {
                       </div>
                     </div>
                     <ul className="entity-list">
-                      <DetailsLi starring={starring} directors={directors} release={movie.release} company={movie.company}/>
+                      <DetailsLi 
+                        starring={starring} 
+                        directors={directors} 
+                        release={movie.release} 
+                        company={movie.company} 
+                        countries={countries} 
+                        languages={languages}
+                      />
                       {user.isAdmin ? (
                         <li className={`mt-3 ${styles["button-holder"]}`}>
                           <Link
@@ -125,7 +136,7 @@ const Details = () => {
                             data-target="#exampleModal"
                           >
                             Delete
-                          </button>                          
+                          </button>
                         </li>
                       ) : (
                         <span>

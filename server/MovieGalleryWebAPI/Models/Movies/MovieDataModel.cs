@@ -1,4 +1,7 @@
-﻿using MovieGalleryWebAPI.Models.Directors;
+﻿using MovieGalleryWebAPI.Data.Models;
+using MovieGalleryWebAPI.Models.Countries;
+using MovieGalleryWebAPI.Models.Directors;
+using MovieGalleryWebAPI.Models.Languagies;
 using MovieGalleryWebAPI.Models.Starring;
 
 namespace MovieGalleryWebAPI.Models.Movies
@@ -36,5 +39,9 @@ namespace MovieGalleryWebAPI.Models.Movies
         public ICollection<MovieStarringModel>? Starring { get; set; }
 
         public ICollection<MovieDirectorsModel>? Directors { get; set; }
+
+        public ICollection<MovieCountriesModel>? Countries { get; set; }
+
+        public ICollection<MovieLanguagesModel>? Languages { get; set; }
     }
 }

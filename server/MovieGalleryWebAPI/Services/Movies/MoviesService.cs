@@ -9,6 +9,9 @@ using AutoMapper;
 using MovieGalleryWebAPI.Service.Favorites;
 using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Models.Starring;
+using MovieGalleryWebAPI.Models.Directors;
+using MovieGalleryWebAPI.Models.Countries;
+using MovieGalleryWebAPI.Models.Languagies;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -91,7 +94,9 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.Ratings)
                 .Include(m => m.Company)
                 .Include(m => m.MovieStarrings)
-                .Include(m => m.MovieDirectors)                
+                .Include(m => m.MovieDirectors)
+                .Include(m => m.MovieCountries)
+                .Include(m => m.MovieLanguages)                
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -112,10 +117,22 @@ namespace MovieGalleryWebAPI.Service.Movies
                         Name = ms.Starring.Name!,
 
                     }).ToList(),
-                    Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId).Select(md => new Models.Directors.MovieDirectorsModel
+                    Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId).Select(md => new MovieDirectorsModel
                     {
                         Id = md.Director!.Id,
                         Name = md.Director!.Name!,
+
+                    }).ToList(),
+                    Countries = m.MovieCountries!.Where(m => m.MovieId == movieId).Select(mc => new MovieCountriesModel
+                    {
+                        Id = mc.Country!.Id,
+                        Name = mc.Country!.Name!,
+
+                    }).ToList(),
+                    Languages = m.MovieLanguages!.Where(m => m.MovieId == movieId).Select(ml => new MovieLanguagesModel 
+                    { 
+                        Id = ml.Language!.Id,
+                        Name = ml.Language!.Name!,
 
                     }).ToList(),
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
@@ -126,8 +143,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                             UserId = c.UserId,
                             MovieId = movieId,
                             Username = c.User!.UserName,
-                            CreationData = c.CreationData,
-                            
+                            CreationData = c.CreationData,                            
                         })
                         .ToList()                  
                 })

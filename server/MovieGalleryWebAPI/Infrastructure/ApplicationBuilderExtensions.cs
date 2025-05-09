@@ -30,10 +30,15 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             SeedCompanies(data);
 
+            SeedCountries(data);
+
+            SeedLanguage(data);
+
             SeedMovies(data);
 
             return app;
-        }
+        }        
+
         private static void SeedAdministrator(IServiceProvider service)
         {
             var userMagner = service.GetRequiredService<UserManager<IdentityUser>>();
@@ -199,6 +204,62 @@ namespace MovieGalleryWebAPI.Infrastructure
             data.SaveChanges();
         }
 
+        private static void SeedCountries(MovieGalleryDbContext data)
+        {
+            if (data.Countries.Any())
+            {
+                return;
+            }
+
+            var countries = new List<Country>();
+
+            //seed countries
+            countries.Add(new Country { Name = "United States" });
+            countries.Add(new Country { Name = "Australia" });
+            countries.Add(new Country { Name = "New Zealand" });
+            countries.Add(new Country { Name = "United Kingdom" });
+            countries.Add(new Country { Name = "Germany" });
+            countries.Add(new Country { Name = "Thailand" });
+            countries.Add(new Country { Name = "Canada" });
+            countries.Add(new Country { Name = "Japan" });            
+
+            countries.Distinct().ToList();
+
+            data.Countries.AddRange(countries);
+            data.SaveChanges();
+        }
+
+        private static void SeedLanguage(MovieGalleryDbContext data)
+        {
+            if (data.Languages.Any())
+            {
+                return;
+            }
+
+            var languages = new List<Language>();
+
+            //seed languages
+            languages.Add(new Language { Name = "English" });
+            languages.Add(new Language { Name = "Sindarin" });
+            languages.Add(new Language { Name = "Old English" });
+            languages.Add(new Language { Name = "Quenya" });
+            languages.Add(new Language { Name = "Spanish" });
+            languages.Add(new Language { Name = "Italian" });
+            languages.Add(new Language { Name = "Latin" });
+            languages.Add(new Language { Name = "Sicilian" });
+            languages.Add(new Language { Name = "Japanese" });
+            languages.Add(new Language { Name = "German" });
+            languages.Add(new Language { Name = "Gaelic" });
+            languages.Add(new Language { Name = "Irish" });
+            languages.Add(new Language { Name = "French" });
+            languages.Add(new Language { Name = "Romanian" });
+
+            languages.Distinct().ToList();
+
+            data.Languages.AddRange(languages);
+            data.SaveChanges();
+        }
+
         private static void SeedMovies(MovieGalleryDbContext data)
         {
             if (data.Movies.Any())
@@ -256,7 +317,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 DirectorsString = "Peter Jackson",
                 ReleaseInfo = "December 10, 2001(London, premiere)",
                 Company = "New Line Cinema",
-                CountryString = "New Zealand,UnitedStates,United Kingdom",
+                CountryString = "New Zealand,United States,United Kingdom",
                 LanguageString = "English,Sindarin",
             });
 
@@ -564,6 +625,24 @@ namespace MovieGalleryWebAPI.Infrastructure
                     var currentStarring = data.Starring.FirstOrDefault(x => x.Name == starringName);
 
                     currentMovie.MovieStarrings!.Add(new MovieStarring { Starring = currentStarring!, Movie = currentMovie });
+                }
+
+                var movieCountry = movieInfo.CountryString!.Split(",").ToList();
+
+                foreach (var countryName in movieCountry)
+                {
+                    var currentCountry = data.Countries.FirstOrDefault(x => x.Name == countryName);
+
+                    currentMovie.MovieCountries!.Add(new MovieCountry { Country = currentCountry!, Movie = currentMovie });
+                }
+
+                var movieLanguage = movieInfo.LanguageString!.Split(",").ToList();
+
+                foreach (var languageName in movieLanguage)
+                {
+                    var currentLanguage= data.Languages.FirstOrDefault(x => x.Name == languageName);
+
+                    currentMovie.MovieLanguages!.Add(new MovieLanguage { Language = currentLanguage!, Movie = currentMovie });
                 }
 
                 var currentDirector = data.Directors.FirstOrDefault(x => x.Name == movieInfo.DirectorsString);

@@ -39,5 +39,7 @@
         public const int MaxStarringNameValue = 100;
         public const int MaxDirectorNameValue = 100;
         public const int MaxCompanyNameValue = 100;
+        public const int MaxCountryNameValue = 100;
+        public const int MaxLanguageValue = 100;
     }
 }

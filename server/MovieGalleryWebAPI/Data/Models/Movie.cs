@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.Build.Execution;
+using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
 
@@ -17,6 +18,10 @@ namespace MovieGalleryWebAPI.Data.Models
             this.MovieStarrings = new HashSet<MovieStarring>();
 
             this.MovieDirectors = new HashSet<MovieDirector>();
+
+            this.MovieCountries = new HashSet<MovieCountry>();
+
+            this.MovieLanguages = new HashSet<MovieLanguage>();
         }
 
         public int Id { get; set; }
@@ -68,5 +73,9 @@ namespace MovieGalleryWebAPI.Data.Models
         public ICollection<MovieStarring>? MovieStarrings { get; set; }
 
         public ICollection<MovieDirector>? MovieDirectors { get; set; }
+
+        public ICollection<MovieCountry>? MovieCountries { get; set; }
+
+        public ICollection<MovieLanguage>? MovieLanguages { get; set; }
     }
 }

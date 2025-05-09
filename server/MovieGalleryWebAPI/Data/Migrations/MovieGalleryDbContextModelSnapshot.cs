@@ -277,6 +277,24 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("Companies");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Director", b =>
                 {
                     b.Property<int>("Id")
@@ -320,6 +338,24 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Favorites");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Movie", b =>
@@ -383,6 +419,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCountry", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CountryId");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("MovieCountries");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieDirector", b =>
                 {
                     b.Property<int>("MovieId")
@@ -396,6 +447,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.HasIndex("DirectorId");
 
                     b.ToTable("MovieDirectors");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieLanguage", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "LanguageId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("MovieLanguages");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieStarring", b =>
@@ -558,6 +624,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCountry", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Country", "Country")
+                        .WithMany("MovieCountries")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieCountries")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieDirector", b =>
                 {
                     b.HasOne("MovieGalleryWebAPI.Data.Models.Director", "Director")
@@ -573,6 +658,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Director");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieLanguage", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Language", "Language")
+                        .WithMany("MovieLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieLanguages")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
 
                     b.Navigation("Movie");
                 });
@@ -620,9 +724,19 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Movies");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Country", b =>
+                {
+                    b.Navigation("MovieCountries");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Director", b =>
                 {
                     b.Navigation("MovieDirectors");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Language", b =>
+                {
+                    b.Navigation("MovieLanguages");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Movie", b =>
@@ -631,7 +745,11 @@ namespace MovieGalleryWebAPI.Data.Migrations
 
                     b.Navigation("Favorites");
 
+                    b.Navigation("MovieCountries");
+
                     b.Navigation("MovieDirectors");
+
+                    b.Navigation("MovieLanguages");
 
                     b.Navigation("MovieStarrings");
 
