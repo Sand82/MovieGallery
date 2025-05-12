@@ -19,6 +19,8 @@ const Details = () => {
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
   const [hovered, setHovered] = useState(false);
 
+  console.log(movie)
+
   useEffect(() => {
     detailsHandler(movieId, user.id);
   }, [movieId, user.id]);

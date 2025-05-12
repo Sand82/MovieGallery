@@ -18,6 +18,13 @@ export const convertHtmlToContentState = (html) => {
   );
 };
 
+export const convertToOptions = (rawOptions) => {
+  return rawOptions.map((item) => ({
+    value: item.id,
+    label: item.name,
+  }));
+};
+
 export const cropText = (text, symbolsCount = 200) => {
   text = convertToPlaneText(text);
 

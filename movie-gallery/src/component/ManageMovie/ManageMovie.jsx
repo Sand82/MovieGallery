@@ -6,12 +6,15 @@ import Error from "../UI/Error/Error.jsx";
 import TextEditor from "../UI/TextEditor/TextEditor.jsx";
 import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
+import MultiSelect from "../UI/MultiSelect/MultiSelect.jsx";
+import { convertToOptions } from "../../services/HelperService.js"
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
+import { useMultiSelect } from "../../hooks/useMultiSelect.js"
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
@@ -92,6 +95,13 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isReleaseFieldEmpty,
   } = useInput(isCreated ? "" : movie.release, (value) =>
     hasLength(value, GlobalConstant.releaseMinLength, GlobalConstant.releaseMaxLength)
+  );
+
+  const { 
+    selectedOptions: countriesOptions, 
+    error: countriesError, 
+    changeHandler:  contriesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.countries), 
+    "Please select at least one item."
   );
     
   const {
@@ -291,7 +301,18 @@ const ManageMovie = ({ isCreated }) => {
                         onChange={startingInputHandler}
                       />
                   </div>
-                </div>                
+                </div> 
+                <div className="row mb-4">
+                  <div className="col-12 col-md-6">
+                      <MultiSelect 
+                        label={"Countries"} 
+                        options="" 
+                        selectedOptions={countriesOptions} 
+                        error={countriesError}
+                        changeHandler={contriesChangeHandler}
+                      />
+                  </div>
+                </div>               
                 <div className="row mb-5">
                   <div className="col-12">
                     <TextEditor 

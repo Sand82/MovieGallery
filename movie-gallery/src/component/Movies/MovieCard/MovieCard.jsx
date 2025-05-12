@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { cropText } from "../../../services/HelperService.js";
-import styels from "./MovieCard.module.css"
 
 const MovieCard = ({ movie }) => {
 
