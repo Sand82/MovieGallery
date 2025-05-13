@@ -36,10 +36,10 @@
         public const int MinRatingValue = 1;
         public const int MaxRatingValue = 10;
 
-        public const int MaxStarringNameValue = 100;
-        public const int MaxDirectorNameValue = 100;
-        public const int MaxCompanyNameValue = 100;
-        public const int MaxCountryNameValue = 100;
-        public const int MaxLanguageValue = 100;
+        public const int MaxStarringNameLength = 100;
+        public const int MaxDirectorNameLength = 100;
+        public const int MaxCompanyNameLength = 100;
+        public const int MaxCountryNameLength = 100;
+        public const int MaxLanguageLength = 100;
     }
 }

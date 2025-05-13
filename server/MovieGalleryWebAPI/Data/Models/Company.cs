@@ -15,7 +15,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(MaxCompanyNameValue)]
+        [StringLength(MaxCompanyNameLength)]
         public string? Name { get; set; }
 
         public ICollection<Movie>? Movies { get; set; }

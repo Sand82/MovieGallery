@@ -15,7 +15,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public int Id{ get; set; }
 
         [Required]
-        [StringLength(MaxLanguageValue)]
+        [StringLength(MaxLanguageLength)]
         public string? Name { get; set; }
 
         public ICollection<MovieLanguage>? MovieLanguages { get; set; }

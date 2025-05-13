@@ -9,7 +9,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public int Id { get; set; }
 
         [Required]
-        [StringLength(MaxDirectorNameValue)]
+        [StringLength(MaxDirectorNameLength)]
         public string? Name { get; set; }
     }
 }

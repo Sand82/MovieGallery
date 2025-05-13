@@ -7,7 +7,7 @@ import TextEditor from "../UI/TextEditor/TextEditor.jsx";
 import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
 import MultiSelect from "../UI/MultiSelect/MultiSelect.jsx";
-import { convertToOptions } from "../../services/HelperService.js"
+import { convertToOptions, convertToEntity } from "../../services/HelperService.js"
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
@@ -168,9 +168,11 @@ const ManageMovie = ({ isCreated }) => {
       directors: isCreated
       ? directorValue.map(field => field.name)
       : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
-      countries: countriesOptions,
-      languages: languagesOptions,
-    };     
+      countries: convertToEntity(countriesOptions),
+      languages: convertToEntity(languagesOptions),
+    };   
+    
+    console.log(movieData);
 
     if (isCreated) {
       createHandler(movieData);

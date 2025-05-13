@@ -25,6 +25,13 @@ export const convertToOptions = (rawOptions) => {
   }));
 };
 
+export const convertToEntity = (rawOptions) => {
+  return rawOptions.map((item) => ({
+    id: item.value,
+    name: item.label,
+  }));
+};
+
 export const cropText = (text, symbolsCount = 200) => {
   text = convertToPlaneText(text);
 

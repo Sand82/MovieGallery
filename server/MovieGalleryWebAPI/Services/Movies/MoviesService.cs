@@ -5,13 +5,15 @@ using MovieGalleryWebAPI.Models.Movies;
 using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
-using AutoMapper;
 using MovieGalleryWebAPI.Service.Favorites;
 using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Models.Starring;
 using MovieGalleryWebAPI.Models.Directors;
 using MovieGalleryWebAPI.Models.Countries;
-using MovieGalleryWebAPI.Models.Languagies;
+using MovieGalleryWebAPI.Models.Languages;
+using MovieGalleryWebAPI.Services.MovieCompany;
+using MovieGalleryWebAPI.Services.MovieDirectors;
+using MovieGalleryWebAPI.Services.MoviesStarring;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -20,20 +22,25 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly MovieGalleryDbContext data;
         private readonly IFavoriteService favoriteService;   
         private readonly IRatingService ratingService;
-
-        private readonly IMapper mapper;
+        private readonly IMovieCompanyService movieCompanyService;
+        private readonly IMovieDirectorsService movieDirectorsService;
+        private readonly IMovieStarringService movieStarringService;      
 
         public MoviesService(
-            MovieGalleryDbContext data, 
-            IMapper mapper, 
-            IFavoriteService favoriteService, 
-            IRatingService ratingService)
+            MovieGalleryDbContext data,            
+            IFavoriteService favoriteService,
+            IRatingService ratingService,
+            IMovieCompanyService movieCompanyService,
+            IMovieDirectorsService movieDirectorsService,
+            IMovieStarringService movieStarringService)
         {
-            this.data = data;
-            this.mapper = mapper;
+            this.data = data;           
             this.favoriteService = favoriteService;
             this.ratingService = ratingService;
-        }        
+            this.movieCompanyService = movieCompanyService;
+            this.movieDirectorsService = movieDirectorsService;
+            this.movieStarringService = movieStarringService;
+        }
 
         public async Task<MovieGetModel> GetLastMovie()
         {
@@ -117,35 +124,42 @@ namespace MovieGalleryWebAPI.Service.Movies
                         Name = ms.Starring.Name!,
 
                     }).ToList(),
-                    Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId).Select(md => new MovieDirectorsModel
+
+                    Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId)
+                    .Select(md => new MovieDirectorsModel
                     {
                         Id = md.Director!.Id,
                         Name = md.Director!.Name!,
 
                     }).ToList(),
-                    Countries = m.MovieCountries!.Where(m => m.MovieId == movieId).Select(mc => new MovieCountriesModel
+
+                    Countries = m.MovieCountries!.Where(m => m.MovieId == movieId)
+                    .Select(mc => new MovieCountriesModel
                     {
                         Id = mc.Country!.Id,
                         Name = mc.Country!.Name!,
 
                     }).ToList(),
-                    Languages = m.MovieLanguages!.Where(m => m.MovieId == movieId).Select(ml => new MovieLanguagesModel 
+
+                    Languages = m.MovieLanguages!.Where(m => m.MovieId == movieId)
+                    .Select(ml => new MovieLanguagesModel 
                     { 
                         Id = ml.Language!.Id,
                         Name = ml.Language!.Name!,
 
                     }).ToList(),
+
                     Comments = m.Comments!.Where(c => c.IsDelete == false)
-                        .Select(c => new MovieCommentModel
-                        {
-                            Id = c.Id,
-                            Comment = c.Content,
-                            UserId = c.UserId,
-                            MovieId = movieId,
-                            Username = c.User!.UserName,
-                            CreationData = c.CreationData,                            
-                        })
-                        .ToList()                  
+                    .Select(c => new MovieCommentModel
+                    {
+                        Id = c.Id,
+                        Comment = c.Content,
+                        UserId = c.UserId,
+                        MovieId = movieId,
+                        Username = c.User!.UserName,
+                        CreationData = c.CreationData,                            
+                    })
+                    .ToList()                  
                 })
                 .FirstOrDefaultAsync();
 
@@ -176,6 +190,8 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie = AddStarring(movie, model);
             movie = AddDirector(movie, model);
 
+            await movieCompanyService.AddMovieCompany(model.Company!, movie);
+
             await this.data.Movies.AddAsync(movie);
             await this.data.SaveChangesAsync();
         }
@@ -203,73 +219,15 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
             movie.Release = model.Release;
-
-            await RemoveMappings(movie.Id);
-            await AddNewStarringMappings(model, movie);
-            await AddNewDirectorsMappings(model, movie);
+            
+            await movieStarringService.AddMappings(model, movie);
+            await movieDirectorsService.AddMappings(model, movie);
 
             await this.data.SaveChangesAsync();
 
             return isEdited;
         }
-
-        private async Task AddNewDirectorsMappings(MovieEditModel model, Movie movie)
-        {             
-            foreach (var director in model.Directors!)
-            {
-                Director? currentDirector;
-
-                if (director.Id == -1)
-                {
-                    currentDirector = new Director { Name = director.Name };
-                    this.data.Directors.Add(currentDirector);
-                }
-                else
-                {
-                    currentDirector = await this.data.Directors!.FirstOrDefaultAsync(d => d.Id == director.Id);
-
-                    if (currentDirector!.Name != director.Name)
-                    {
-                        currentDirector.Name = director.Name;
-                    }
-                }
-
-                movie.MovieDirectors!.Add(new MovieDirector
-                {
-                    Movie = movie,
-                    Director = currentDirector
-                });
-            }
-        }
-
-        private async Task AddNewStarringMappings(MovieEditModel model, Movie movie)
-        {
-            foreach (var starring in model.Starring!)
-            {
-                Starring? currentStarring;
-
-                if (starring.Id == -1)
-                {
-                    currentStarring = new Starring { Name = starring.Name };
-                    this.data.Starring.Add(currentStarring);
-                }
-                else
-                {
-                    currentStarring = await this.data.Starring.FirstOrDefaultAsync(s => s.Id == starring.Id);
-
-                    if (currentStarring!.Name != starring.Name)
-                    {
-                        currentStarring.Name = starring.Name;
-                    }
-                }
-
-                movie.MovieStarrings!.Add(new MovieStarring
-                {
-                    Movie = movie,
-                    Starring = currentStarring
-                });
-            }
-        }
+        
 
         public async Task<bool> RemoveMovie(int movieId)
         {
@@ -402,17 +360,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             }
 
             return entity;
-        }
-
-        //TODO Refactoring
-        private async Task RemoveMappings(int movieId)
-        {
-            var starringMappingsToRemove = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
-            var directorsMappingsToRemove = await data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
-
-            data.MovieStarrings.RemoveRange(starringMappingsToRemove); 
-            data.MovieDirectors.RemoveRange(directorsMappingsToRemove);
-        }
+        }        
 
         private IQueryable<Movie> GetQueryMovies()
         {

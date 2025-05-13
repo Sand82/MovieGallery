@@ -1,7 +1,7 @@
 ﻿using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Countries;
 using MovieGalleryWebAPI.Models.Directors;
-using MovieGalleryWebAPI.Models.Languagies;
+using MovieGalleryWebAPI.Models.Languages;
 using MovieGalleryWebAPI.Models.Starring;
 
 namespace MovieGalleryWebAPI.Models.Movies

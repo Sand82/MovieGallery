@@ -15,7 +15,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(MaxCountryNameValue)]
+        [StringLength(MaxCountryNameLength)]
         public string? Name { get; set; }
 
         public ICollection<MovieCountry>? MovieCountries { get; set; }

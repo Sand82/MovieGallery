@@ -5,15 +5,18 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
+using MovieGalleryWebAPI.Settings;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Movies;
 using MovieGalleryWebAPI.Service.Users;
-using MovieGalleryWebAPI.Settings;
 using MovieGalleryWebAPI.Service.Comments;
 using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Service.Favorites;
 using MovieGalleryWebAPI.Services.StaticData;
+using MovieGalleryWebAPI.Services.MovieCompany;
+using MovieGalleryWebAPI.Services.MovieDirectors;
+using MovieGalleryWebAPI.Services.MoviesStarring;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -70,6 +73,9 @@ builder.Services.AddTransient<ICommentService, CommentService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
 builder.Services.AddTransient<IFavoriteService, FavoriteController>();
 builder.Services.AddTransient<IStaticDataService, StaticDataService>();
+builder.Services.AddTransient<IMovieCompanyService, MovieCompanyService>();
+builder.Services.AddTransient<IMovieDirectorsService, MovieDirectorsService>();
+builder.Services.AddTransient<IMovieStarringService, MovieStarringService>();
 builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 
 builder.Services.AddCors(options =>

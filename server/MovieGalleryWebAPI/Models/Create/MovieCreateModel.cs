@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieGalleryWebAPI.Models.Countries;
+using MovieGalleryWebAPI.Models.Languages;
+using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
 
@@ -46,9 +48,15 @@ namespace MovieGalleryWebAPI.Models.Create
         public string? Release { get; set; }
 
         [Required]
-        public List<string>? Starring { get; set; } 
+        [StringLength(MaxCompanyNameLength)]
+        public string? Company { get; set; }
+        
+        public ICollection<string>? Starring { get; set; } 
+        
+        public ICollection<string>? Directors { get; set; }
 
-        [Required]
-        public List<string>? Director { get; set; }
+        public ICollection<MovieCountriesModel>? Countries {  get; set; }
+
+        public ICollection<MovieLanguagesModel>? Languages {  get; set; }        
     }
 }
