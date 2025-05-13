@@ -6,6 +6,9 @@ export const passwordLength = 5;
 export const titleMinLength = 2;
 export const titelMaxLength = 100;
 
+export const companyMinLength = 2;
+export const companyMaxLength = 100;
+
 export const categoryMinLength = 2;
 export const categoryMaxLength = 50;
 

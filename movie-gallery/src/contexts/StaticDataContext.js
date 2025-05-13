@@ -14,15 +14,12 @@ export const StaticDataProvider = ({ children }) => {
       try {
         const responce = await detailService.getStaticData();
         setStaticData(responce);
-        console.log(responce);
       } catch (error) {
         setServerErrors(error);
       }
     };
     getStaticData();
   }, []);
-
-  console.log(staticData);
 
   return (
     <StaticDataContext.Provider value={{ staticData, serverErrors }}>

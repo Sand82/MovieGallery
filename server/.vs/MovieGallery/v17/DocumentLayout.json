@@ -50,8 +50,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:23:36.707Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:23:36.707Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAAABoAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:16:03.907Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:16:03.907Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\StaticData\\GetStaticDataEntities.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:09:58.367Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:09:58.367Z"
             },
             {
               "$type": "Document",
@@ -89,8 +86,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\StaticData\\GetStaticDataModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:07:39.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:07:39.39Z"
             },
             {
               "$type": "Document",
@@ -102,8 +98,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\StaticData\\StaticDataService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:06:31.311Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:06:31.311Z"
             },
             {
               "$type": "Document",
@@ -115,8 +110,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\StaticData\\IStaticDataService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-13T07:06:12.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-13T07:06:12.731Z"
             },
             {
               "$type": "Document",

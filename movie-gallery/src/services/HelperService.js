@@ -39,6 +39,17 @@ export const cropText = (text, symbolsCount = 200) => {
   return cropedText.concat(text.charAt(index), "...");
 };
 
+export const multiSelectStyles = {
+  menu: (provided) => ({
+    ...provided,
+    zIndex: 2,
+  }),
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 2,
+  }),
+};
+
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");
   text = text.replace(/<\/?[^>]+(>|$)/g, "");

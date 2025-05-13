@@ -6,7 +6,7 @@ const ratingUrl = "https://localhost:7222/api/ratings";
 
 const favoriteUrl = "https://localhost:7222/api/favorites";
 
-const staticDataUrl = "https://localhost:7222/api/StaticData";
+const staticDataUrl = "https://localhost:7222/api/staticData";
 
 export const createComment = async (data, token) => {
   return request.post(baseUrl, data, token);

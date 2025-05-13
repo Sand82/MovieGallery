@@ -21,9 +21,7 @@ const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
   const { movie } = useContext(DetailContext);  
-  const { staticData } = useContext(StaticDataContext);
-
-  console.log(staticData)
+  const { staticData } = useContext(StaticDataContext);  
 
   const [starringValue, setStarringValue] = useState(isCreated && movie
     ? [] 
@@ -43,6 +41,16 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isTitleFieldEmpty,
   } = useInput(isCreated ? "" : movie.title, (value) =>
     hasLength(value, GlobalConstant.userNameMinLength, GlobalConstant.userNameMaxLength)
+  );
+
+  const {
+    value: companyValue,
+    changeHandler: companyChangeHandler,
+    hasError: companyHasError,
+    inputBlurHandler: companyInputBluerHandler,
+    isEmpty: isCompanyFieldEmpty,
+  } = useInput(isCreated ? "" : movie.company, (value) =>
+    hasLength(value, GlobalConstant.companyMinLength, GlobalConstant.companyMaxLength)
   );
 
   const {
@@ -103,14 +111,16 @@ const ManageMovie = ({ isCreated }) => {
 
   const { 
     selectedOptions: countriesOptions, 
-    error: countriesError, 
+    hasError: countriesHasError,
+    isTouched: countriesIsTouched,
     changeHandler:  contriesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.countries), 
     "Please select at least one country."
   );
 
   const { 
     selectedOptions: languagesOptions, 
-    error: languagesError, 
+    hasError: languagesHasError, 
+    isTouched : languagesIsTouched,
     changeHandler:  languagesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.languages), 
     "Please select at least one language."
   );
@@ -144,6 +154,7 @@ const ManageMovie = ({ isCreated }) => {
     const movieData = {
       id: movie.id,
       title: titleValue,
+      company: companyValue,
       category: categoryValue,
       year: yearValue,
       imageUrl: imageUrlValue,
@@ -156,8 +167,10 @@ const ManageMovie = ({ isCreated }) => {
       : starringValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),      
       directors: isCreated
       ? directorValue.map(field => field.name)
-      : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name }))
-    };    
+      : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
+      countries: countriesOptions,
+      languages: languagesOptions,
+    };     
 
     if (isCreated) {
       createHandler(movieData);
@@ -169,6 +182,8 @@ const ManageMovie = ({ isCreated }) => {
   const isValid =
     titleHasError ||
     isTitleFieldEmpty ||
+    companyHasError ||
+    isCompanyFieldEmpty ||
     categoryHasError ||
     isCategoryFieldEmpty ||
     yearHasError ||
@@ -183,6 +198,8 @@ const ManageMovie = ({ isCreated }) => {
     serverErrors || 
     releaseHasError ||
     isReleaseFieldEmpty ||
+    countriesHasError !== "" || !countriesIsTouched ||
+    languagesHasError !== "" || !languagesIsTouched ||
     starringValue.some(input => input.error) ||
     starringValue.some(input => !input.isFieldEdited) ||
     directorValue.some(input => input.error) ||
@@ -218,14 +235,14 @@ const ManageMovie = ({ isCreated }) => {
                   </div>
                   <div className="col-12 col-md-6">
                     <Input
-                      label="Category"
+                      label="Company"
                       type="text"
-                      name="category"
+                      name="company"
                       className="form-control"
-                      value={categoryValue}
-                      onChange={categoryChangeHandler}
-                      onBlur={categoryInputBluerHandler}
-                      error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
+                      value={companyValue}
+                      onChange={companyChangeHandler}
+                      onBlur={companyInputBluerHandler}
+                      error={companyHasError && `company should be between ${GlobalConstant.companyMinLength} and ${GlobalConstant.companyMaxLength} symbols.`}
                     />                
                   </div>                  
                 </div> 
@@ -314,24 +331,36 @@ const ManageMovie = ({ isCreated }) => {
                   </div>
                 </div> 
                 <div className="row mb-4">
-                  <div className="col-12 col-md-6">
+                  <div className="col-12 col-md-4">
                       <MultiSelect 
                         label={"Countries"} 
                         options={convertToOptions(staticData.countries)} 
                         selectedOptions={countriesOptions} 
-                        error={countriesError}
+                        error={countriesHasError}
                         changeHandler={contriesChangeHandler}
                       />
                   </div>
-                  <div className="col-12 col-md-6">
+                  <div className="col-12 col-md-4">
                       <MultiSelect 
                         label={"Languages"} 
                         options={convertToOptions(staticData.languages)} 
                         selectedOptions={languagesOptions} 
-                        error={languagesError}
+                        error={languagesHasError}
                         changeHandler={languagesChangeHandler}
                       />
                   </div>
+                  <div className="col-12 col-md-4">
+                    <Input
+                      label="Category"
+                      type="text"
+                      name="category"
+                      className="form-control"
+                      value={categoryValue}
+                      onChange={categoryChangeHandler}
+                      onBlur={categoryInputBluerHandler}
+                      error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
+                    />                
+                  </div>          
                 </div>               
                 <div className="row mb-5">
                   <div className="col-12">

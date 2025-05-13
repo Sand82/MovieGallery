@@ -5,9 +5,7 @@ import styels from "./DynamicInput.module.css"
 import Error from "../Error/Error.jsx"
 import { hasLength } from "../../../services/Validators.js"
 
-const DynamicInput = ({sectionName, inputData, onChange}) => {
-
-	console.log(inputData)
+const DynamicInput = ({sectionName, inputData, onChange}) => {	
 
 	const [inputFields, setInputFields] = useState(inputData 
 		? inputData.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id})) 
