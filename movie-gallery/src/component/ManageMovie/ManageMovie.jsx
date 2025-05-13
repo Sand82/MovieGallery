@@ -15,11 +15,15 @@ import { MovieContext } from "../../contexts/MovieContext.js";
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
 import { useMultiSelect } from "../../hooks/useMultiSelect.js"
+import { StaticDataContext } from "../../contexts/StaticDataContext.js";
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
-  const { movie } = useContext(DetailContext);    
+  const { movie } = useContext(DetailContext);  
+  const { staticData } = useContext(StaticDataContext);
+
+  console.log(staticData)
 
   const [starringValue, setStarringValue] = useState(isCreated && movie
     ? [] 
@@ -101,7 +105,14 @@ const ManageMovie = ({ isCreated }) => {
     selectedOptions: countriesOptions, 
     error: countriesError, 
     changeHandler:  contriesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.countries), 
-    "Please select at least one item."
+    "Please select at least one country."
+  );
+
+  const { 
+    selectedOptions: languagesOptions, 
+    error: languagesError, 
+    changeHandler:  languagesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.languages), 
+    "Please select at least one language."
   );
     
   const {
@@ -306,10 +317,19 @@ const ManageMovie = ({ isCreated }) => {
                   <div className="col-12 col-md-6">
                       <MultiSelect 
                         label={"Countries"} 
-                        options="" 
+                        options={convertToOptions(staticData.countries)} 
                         selectedOptions={countriesOptions} 
                         error={countriesError}
                         changeHandler={contriesChangeHandler}
+                      />
+                  </div>
+                  <div className="col-12 col-md-6">
+                      <MultiSelect 
+                        label={"Languages"} 
+                        options={convertToOptions(staticData.languages)} 
+                        selectedOptions={languagesOptions} 
+                        error={languagesError}
+                        changeHandler={languagesChangeHandler}
                       />
                   </div>
                 </div>               

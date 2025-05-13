@@ -13,6 +13,7 @@ using MovieGalleryWebAPI.Settings;
 using MovieGalleryWebAPI.Service.Comments;
 using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Service.Favorites;
+using MovieGalleryWebAPI.Services.StaticData;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -68,6 +69,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICommentService, CommentService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
 builder.Services.AddTransient<IFavoriteService, FavoriteController>();
+builder.Services.AddTransient<IStaticDataService, StaticDataService>();
 builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 
 builder.Services.AddCors(options =>

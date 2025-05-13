@@ -6,7 +6,9 @@ const ratingUrl = "https://localhost:7222/api/ratings";
 
 const favoriteUrl = "https://localhost:7222/api/favorites";
 
-export const createComment = async (data, token) => {  
+const staticDataUrl = "https://localhost:7222/api/StaticData";
+
+export const createComment = async (data, token) => {
   return request.post(baseUrl, data, token);
 };
 
@@ -38,4 +40,8 @@ export const getFavorite = async (data, token) => {
 export const getFavoriteMovies = async (userId) => {
   const encodedValue = encodeURIComponent(userId);
   return request.get(`${favoriteUrl}?userId=${encodedValue}`);
+};
+
+export const getStaticData = async () => {
+  return request.get(staticDataUrl);
 };
