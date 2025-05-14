@@ -11,6 +11,7 @@ namespace MovieGalleryWebAPI.Data.Models
             this.MovieStarrings = new List<MovieStarring>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [Required]

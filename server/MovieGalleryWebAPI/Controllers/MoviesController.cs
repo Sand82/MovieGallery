@@ -54,7 +54,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest("Authorization denied");
             }
 
-            var isExist = await moviesService.CheckForDuplicates(model.Title);
+            var isExist = await moviesService.CheckForDuplicates(model.Title!);
 
             if (isExist)
             {

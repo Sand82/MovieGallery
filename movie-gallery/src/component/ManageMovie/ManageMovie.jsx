@@ -170,9 +170,7 @@ const ManageMovie = ({ isCreated }) => {
       : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
-    };   
-    
-    console.log(movieData);
+    };    
 
     if (isCreated) {
       createHandler(movieData);
@@ -196,8 +194,7 @@ const ManageMovie = ({ isCreated }) => {
     isDurationFieldEmpty ||
     isTextEditorFieldEmpty ||
     embededVideoHasError ||
-    isEmbededVideoFieldEmpty ||
-    serverErrors || 
+    isEmbededVideoFieldEmpty ||     
     releaseHasError ||
     isReleaseFieldEmpty ||
     countriesHasError !== "" || !countriesIsTouched ||
@@ -205,9 +202,15 @@ const ManageMovie = ({ isCreated }) => {
     starringValue.some(input => input.error) ||
     starringValue.some(input => !input.isFieldEdited) ||
     directorValue.some(input => input.error) ||
-    directorValue.some(input => !input.isFieldEdited); 
+    directorValue.some(input => !input.isFieldEdited) ||
+    serverErrors ; 
 
   const movieActionType = isCreated ? "Create" : "Edit";
+
+  //TODO Server error functionality
+  // <div className="col-12">
+  //   <Error error={serverErrors} />
+  // </div>
 
   return (
     <div className={`container px-12 ${style["form-container"]}`}>
@@ -218,10 +221,7 @@ const ManageMovie = ({ isCreated }) => {
             <div className="mt-5 mb-5 section-head">
               <h2 className="section-title text-uppercase">{movieActionType} Movie</h2>
             </div>
-              <form onSubmit={manageMovieHandler}>
-                <div className="col-12">
-                  <Error error={serverErrors} />
-                </div>
+              <form onSubmit={manageMovieHandler}>                
                 <div className="row mb-4">                  
                   <div className="col-12 col-md-6">
                     <Input
@@ -334,22 +334,22 @@ const ManageMovie = ({ isCreated }) => {
                 </div> 
                 <div className="row mb-4">
                   <div className="col-12 col-md-4">
-                      <MultiSelect 
-                        label={"Countries"} 
-                        options={convertToOptions(staticData.countries)} 
-                        selectedOptions={countriesOptions} 
-                        error={countriesHasError}
-                        changeHandler={contriesChangeHandler}
-                      />
+                    <MultiSelect 
+                      label={"Countries"} 
+                      options={convertToOptions(staticData.countries)} 
+                      selectedOptions={countriesOptions} 
+                      error={countriesHasError}
+                      changeHandler={contriesChangeHandler}
+                    />
                   </div>
                   <div className="col-12 col-md-4">
-                      <MultiSelect 
-                        label={"Languages"} 
-                        options={convertToOptions(staticData.languages)} 
-                        selectedOptions={languagesOptions} 
-                        error={languagesHasError}
-                        changeHandler={languagesChangeHandler}
-                      />
+                    <MultiSelect 
+                      label={"Languages"} 
+                      options={convertToOptions(staticData.languages)} 
+                      selectedOptions={languagesOptions} 
+                      error={languagesHasError}
+                      changeHandler={languagesChangeHandler}
+                    />
                   </div>
                   <div className="col-12 col-md-4">
                     <Input

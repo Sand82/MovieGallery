@@ -5,6 +5,7 @@ namespace MovieGalleryWebAPI.Data.Models
 {
     public class Favorite
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]

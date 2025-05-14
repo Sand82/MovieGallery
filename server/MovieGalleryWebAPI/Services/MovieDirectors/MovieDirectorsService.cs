@@ -14,6 +14,29 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
             this.data = data;
         }
 
+        public async Task AddMovieDirectors(ICollection<string> directors, Movie movie)
+        {
+            var movieDirectors = new List<MovieDirector>();
+
+            foreach (var director in directors)
+            {
+                var currDirector = await data.Directors.FirstOrDefaultAsync(d => d.Name == director);
+
+                if (currDirector == null)
+                {
+                    currDirector = new Director { Name = director };
+
+                    await data.Directors.AddAsync(currDirector);                    
+                    await data.SaveChangesAsync();
+                }
+
+                movieDirectors.Add(new MovieDirector { Director = currDirector, Movie = movie });
+            }
+
+            await data.MovieDirectors.AddRangeAsync(movieDirectors);
+            await data.SaveChangesAsync();
+        }
+
         public async Task AddMappings(MovieEditModel model, Movie movie)
         {
             await RemoveMappings(movie.Id);
@@ -43,7 +66,9 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
                     Director = currentDirector
                 });
             }
-        }
+
+            await data.SaveChangesAsync();
+        }        
 
         public async Task RemoveMappings(int movieId)
         {

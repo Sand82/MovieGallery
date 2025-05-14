@@ -42,6 +42,10 @@ namespace MovieGalleryWebAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Movie>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<MovieStarring>()
                 .HasKey(ms => new { ms.MovieId, ms.StarringId });
 

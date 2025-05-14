@@ -7,6 +7,7 @@ namespace MovieGalleryWebAPI.Data.Models
 {
     public class Rating
     {
+        [Key]
         public int Id { get; set; }
 
         [Range(MinRatingValue, MaxRatingValue)]

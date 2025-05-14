@@ -24,6 +24,7 @@ namespace MovieGalleryWebAPI.Data.Models
             this.MovieLanguages = new HashSet<MovieLanguage>();
         }
 
+        [Key]
         public int Id { get; set; }
 
         [Required]

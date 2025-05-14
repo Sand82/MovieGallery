@@ -1,19 +1,21 @@
-﻿using MovieGalleryWebAPI.Data;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Movies;
-
-using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Models.Edit;
-using MovieGalleryWebAPI.Service.Favorites;
-using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Models.Starring;
 using MovieGalleryWebAPI.Models.Directors;
 using MovieGalleryWebAPI.Models.Countries;
 using MovieGalleryWebAPI.Models.Languages;
+using MovieGalleryWebAPI.Service.Favorites;
+using MovieGalleryWebAPI.Service.Ratings;
 using MovieGalleryWebAPI.Services.MovieCompany;
 using MovieGalleryWebAPI.Services.MovieDirectors;
 using MovieGalleryWebAPI.Services.MoviesStarring;
+using MovieGalleryWebAPI.Services.MovieCountries;
+using MovieGalleryWebAPI.Services.MovieLanguages;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -24,22 +26,28 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly IRatingService ratingService;
         private readonly IMovieCompanyService movieCompanyService;
         private readonly IMovieDirectorsService movieDirectorsService;
-        private readonly IMovieStarringService movieStarringService;      
+        private readonly IMovieStarringService movieStarringService;
+        private readonly IMovieCountriesService movieCountriesService;
+        private readonly IMovieLanguageService movieLanguageService;
 
         public MoviesService(
-            MovieGalleryDbContext data,            
+            MovieGalleryDbContext data,
             IFavoriteService favoriteService,
             IRatingService ratingService,
             IMovieCompanyService movieCompanyService,
             IMovieDirectorsService movieDirectorsService,
-            IMovieStarringService movieStarringService)
+            IMovieStarringService movieStarringService,
+            IMovieCountriesService movieCountriesService,
+            IMovieLanguageService movieLanguageService)
         {
-            this.data = data;           
+            this.data = data;
             this.favoriteService = favoriteService;
             this.ratingService = ratingService;
             this.movieCompanyService = movieCompanyService;
             this.movieDirectorsService = movieDirectorsService;
             this.movieStarringService = movieStarringService;
+            this.movieCountriesService = movieCountriesService;
+            this.movieLanguageService = movieLanguageService;
         }
 
         public async Task<MovieGetModel> GetLastMovie()
@@ -183,19 +191,22 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
-                Release = model.Release,
-                MovieStarrings = new List<MovieStarring>()
+                Release = model.Release
             };
 
-            movie = AddStarring(movie, model);
-            movie = AddDirector(movie, model);
-
-            await movieCompanyService.AddMovieCompany(model.Company!, movie);
+            var company = await movieCompanyService.AddMovieCompany(model.Company!);
+            movie.CompanyId = company.Id;
 
             await this.data.Movies.AddAsync(movie);
             await this.data.SaveChangesAsync();
+
+            await movieDirectorsService.AddMovieDirectors(model.Directors!, movie);
+            await movieStarringService.AddMovieStarring(model.Starring!, movie);
+            await movieCountriesService.AddMovieCountries(model.Countries!, movie);
+            await movieLanguageService.AddMovieLanguages(model.Languages!, movie);            
         }
-        
+
+
         public async Task<bool> EditMovie(MovieEditModel model)
         {
             var isEdited = true;
@@ -303,64 +314,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                .ToListAsync();
 
             return movies;
-        }
-
-        //TODO Refactoring
-        private Movie AddStarring(Movie movie, MovieCreateModel model)
-        {
-            return AddRelations<Movie, Starring, MovieStarring>(
-                movie,
-                model.Starring!,
-                name => this.data.Starring.FirstOrDefault(s => s.Name == name),
-                name =>
-                {
-                    var newStarring = new Starring { Name = name };
-                    this.data.Starring.Add(newStarring);
-                    return newStarring;
-                },
-                (m, s) => m.MovieStarrings!.Add(new MovieStarring { Movie = m, Starring = s })
-            );
-        }
-
-        //TODO Refactoring
-        private Movie AddDirector(Movie movie, MovieCreateModel model)
-        {
-            return AddRelations<Movie, Director, MovieDirector>(
-                movie,
-                model.Starring!,
-                name => this.data.Directors.FirstOrDefault(s => s.Name == name),
-                name =>
-                {
-                    var newDirector = new Director { Name = name };
-                    this.data.Directors.Add(newDirector);
-                    return newDirector;
-                },
-                (m, d) => m.MovieDirectors!.Add(new MovieDirector { Movie = m, Director = d })
-            );
-        }
-
-        //TODO Refactoring
-        private TEntity AddRelations<TEntity, TRelation, TJoin>(
-            TEntity entity,
-            IEnumerable<string> names,
-            Func<string, TRelation?> findExisting,
-            Func<string, TRelation> createNew,
-            Action<TEntity, TRelation> addJoin)
-        {
-            foreach (var name in names)
-            {
-                var related = findExisting(name);
-
-                if (related == null)
-                {
-                    related = createNew(name);
-                }
-
-                addJoin(entity, related);
-            }
-
-            return entity;
-        }        
+        }       
 
         private IQueryable<Movie> GetQueryMovies()
         {

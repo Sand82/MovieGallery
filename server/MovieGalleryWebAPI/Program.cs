@@ -17,6 +17,8 @@ using MovieGalleryWebAPI.Services.StaticData;
 using MovieGalleryWebAPI.Services.MovieCompany;
 using MovieGalleryWebAPI.Services.MovieDirectors;
 using MovieGalleryWebAPI.Services.MoviesStarring;
+using MovieGalleryWebAPI.Services.MovieCountries;
+using MovieGalleryWebAPI.Services.MovieLanguages;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -73,9 +75,11 @@ builder.Services.AddTransient<ICommentService, CommentService>();
 builder.Services.AddTransient<IRatingService, RatingService>();
 builder.Services.AddTransient<IFavoriteService, FavoriteController>();
 builder.Services.AddTransient<IStaticDataService, StaticDataService>();
-builder.Services.AddTransient<IMovieCompanyService, MovieCompanyService>();
+builder.Services.AddTransient<ICompanyService, CompanyService>();
 builder.Services.AddTransient<IMovieDirectorsService, MovieDirectorsService>();
 builder.Services.AddTransient<IMovieStarringService, MovieStarringService>();
+builder.Services.AddTransient<IMovieCountriesService, MovieCountriesService>();
+builder.Services.AddTransient<IMovieLanguageService, MovieLanguageService>();
 builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 
 builder.Services.AddCors(options =>

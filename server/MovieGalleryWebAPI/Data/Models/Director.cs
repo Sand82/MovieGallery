@@ -10,6 +10,8 @@ namespace MovieGalleryWebAPI.Data.Models
         {
             this.MovieDirectors = new List<MovieDirector>();
         }
+
+        [Key]
         public int Id { get; set; }
 
         [Required]
