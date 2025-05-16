@@ -32,6 +32,11 @@ namespace MovieGalleryWebAPI.Services.MovieLanguages
 
         public async Task EditMovieLanguages(ICollection<MovieLanguagesModel> languages, Movie movie)
         {
+            if (movie.MovieLanguages == null)
+            {
+                movie.MovieLanguages = new List<MovieLanguage>();
+            }
+
             await RemoveMappings(movie.Id);
 
             foreach (var language in languages)
@@ -40,8 +45,8 @@ namespace MovieGalleryWebAPI.Services.MovieLanguages
 
                 movie.MovieLanguages!.Add(new MovieLanguage
                 {
-                    Movie = movie,
-                    Language = currentLanguage
+                    MovieId = movie.Id,
+                    LanguageId = currentLanguage!.Id
                 });
             }
 

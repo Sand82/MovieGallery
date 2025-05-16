@@ -40,6 +40,11 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
 
         public async Task EditMovieStarring(MovieEditModel model, Movie movie)
         {
+            if (movie.MovieStarrings == null)
+            {
+                movie.MovieStarrings = new List<MovieStarring>();
+            }
+
             await RemoveMovieStarring(movie.Id);
 
             foreach (var starring in model.Starring!)
@@ -50,10 +55,14 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
                 {
                     currentStarring = new Starring { Name = starring.Name };
                     this.data.Starring.Add(currentStarring);
+                    await data.SaveChangesAsync();
                 }
                 else
                 {
                     currentStarring = await this.data.Starring.FirstOrDefaultAsync(s => s.Id == starring.Id);
+
+                    if (currentStarring == null)
+                        continue;
 
                     if (currentStarring!.Name != starring.Name)
                     {
@@ -63,8 +72,8 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
 
                 movie.MovieStarrings!.Add(new MovieStarring
                 {
-                    Movie = movie,
-                    Starring = currentStarring
+                    MovieId = movie.Id,
+                    StarringId = currentStarring.Id
                 });
             }
 

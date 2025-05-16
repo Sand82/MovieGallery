@@ -39,7 +39,12 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
         }
 
         public async Task EditMovieDirectors(MovieEditModel model, Movie movie)
-        {
+        {            
+            if (movie.MovieDirectors == null)
+            {
+                movie.MovieDirectors = new List<MovieDirector>();
+            }
+            
             await RemoveMovieDirectors(movie.Id);
 
             foreach (var director in model.Directors!)
@@ -50,26 +55,34 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
                 {
                     currentDirector = new Director { Name = director.Name };
                     this.data.Directors.Add(currentDirector);
+                    await data.SaveChangesAsync();
                 }
                 else
                 {
-                    currentDirector = await this.data.Directors!.FirstOrDefaultAsync(d => d.Id == director.Id);
+                    currentDirector = await this.data.Directors
+                        .FirstOrDefaultAsync(d => d.Id == director.Id);
 
-                    if (currentDirector!.Name != director.Name)
+                    if (currentDirector == null)
+                        continue;
+
+                    if (currentDirector.Name != director.Name)
                     {
                         currentDirector.Name = director.Name;
+                        this.data.Directors.Update(currentDirector);
                     }
                 }
 
-                movie.MovieDirectors!.Add(new MovieDirector
+                var movieDirector = new MovieDirector
                 {
-                    Movie = movie,
-                    Director = currentDirector
-                });
+                    MovieId = movie.Id,
+                    DirectorId = currentDirector.Id
+                };
+
+                this.data.MovieDirectors.Add(movieDirector);
             }
 
             await data.SaveChangesAsync();
-        }        
+        }
 
         public async Task RemoveMovieDirectors(int movieId)
         {

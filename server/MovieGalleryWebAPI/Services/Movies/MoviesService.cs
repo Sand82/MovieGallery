@@ -192,7 +192,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
                 Release = model.Release
-            };
+            };            
 
             var company = await companyService.AddMovieCompany(model.Company!);
             movie.CompanyId = company.Id;

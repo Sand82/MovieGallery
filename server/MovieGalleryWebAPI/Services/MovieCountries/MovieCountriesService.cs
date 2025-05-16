@@ -32,6 +32,11 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
 
         public async Task EditMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie)
         {
+            if (movie.MovieCountries == null)
+            {
+                movie.MovieCountries = new List<MovieCountry>();
+            }
+
             await RemoveMappings(movie.Id);
 
             foreach (var country in countries)
@@ -40,8 +45,8 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
 
                 movie.MovieCountries!.Add(new MovieCountry
                 {
-                    Movie = movie,
-                    Country = currentCountry
+                    MovieId = movie.Id,
+                    CountryId = currentCountry!.Id
                 });
             }
 
