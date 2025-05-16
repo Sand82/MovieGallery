@@ -1,15 +1,16 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using MovieGalleryWebAPI.Data;
-using MovieGalleryWebAPI.Models.Users;
-using MovieGalleryWebAPI.Settings;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using MovieGalleryWebAPI.Data;
+using MovieGalleryWebAPI.Models.Users;
+using MovieGalleryWebAPI.Settings;
 
 namespace MovieGalleryWebAPI.Service.Users
 {

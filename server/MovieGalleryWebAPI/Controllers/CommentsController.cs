@@ -1,11 +1,10 @@
-﻿using MovieGalleryWebAPI.Infrastructure;
-using MovieGalleryWebAPI.Models.Comments;
-using MovieGalleryWebAPI.Service.Comments;
-using MovieGalleryWebAPI.Service.Users;
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using MovieGalleryWebAPI.Infrastructure;
+using MovieGalleryWebAPI.Models.Comments;
+using MovieGalleryWebAPI.Service.Comments;
 
 namespace MovieGalleryWebAPI.Controllers
 {

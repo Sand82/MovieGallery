@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MovieGalleryWebAPI.Models.Countries;
+using MovieGalleryWebAPI.Models.Languages;
+using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
 
@@ -47,8 +49,16 @@ namespace MovieGalleryWebAPI.Models.Edit
         [StringLength(MaxMovieReleaseLength)]
         public string? Release { get; set; }
 
+        [Required]
+        [StringLength(MaxCompanyNameLength)]
+        public string? Company { get; set; }
+
         public List<StarringEditModel>? Starring { get; set; } 
 
-        public List<DirectorsEditModel>? Directors { get; set; } 
+        public List<DirectorsEditModel>? Directors { get; set; }
+
+        public ICollection<MovieCountriesModel>? Countries { get; set; }
+
+        public ICollection<MovieLanguagesModel>? Languages { get; set; }
     }
 }

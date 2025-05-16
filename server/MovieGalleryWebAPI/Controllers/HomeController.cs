@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieGalleryWebAPI.Models;
 using System.Diagnostics;
+
+using MovieGalleryWebAPI.Models;
 
 namespace MovieGalleryWebAPI.Controllers
 {

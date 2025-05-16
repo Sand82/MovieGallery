@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Favorites;

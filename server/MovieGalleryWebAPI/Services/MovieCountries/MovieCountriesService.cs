@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Countries;
@@ -7,11 +8,11 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
 {
     public class MovieCountriesService : IMovieCountriesService
     {
-        private readonly MovieGalleryDbContext data;
+        private readonly MovieGalleryDbContext data;        
 
         public MovieCountriesService(MovieGalleryDbContext data)
         {
-            this.data = data;
+            this.data = data;            
         }
 
         public async Task AddMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie)
@@ -29,9 +30,29 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
             await data.SaveChangesAsync();
         }
 
-        public Task RemoveMappings(int movieId)
+        public async Task EditMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie)
         {
-            throw new NotImplementedException();
+            await RemoveMappings(movie.Id);
+
+            foreach (var country in countries)
+            {
+                var currentCountry = await this.data.Countries!.FirstOrDefaultAsync(d => d.Id == country.Id);
+
+                movie.MovieCountries!.Add(new MovieCountry
+                {
+                    Movie = movie,
+                    Country = currentCountry
+                });
+            }
+
+            await data.SaveChangesAsync();
         }
+
+        public async Task RemoveMappings(int movieId)
+        {
+            var mappings = await data.MovieCountries.Where(mc => mc.MovieId == movieId).ToListAsync();
+
+            data.MovieCountries.RemoveRange(mappings);
+        }        
     }
 }

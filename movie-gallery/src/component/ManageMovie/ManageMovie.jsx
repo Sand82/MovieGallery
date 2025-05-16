@@ -141,11 +141,11 @@ const ManageMovie = ({ isCreated }) => {
   ); 
 
   const startingInputHandler = (newValues) => {
-    setStarringValue(newValues);    
+    setStarringValue(newValues);
   }
 
   const directorInputHandler = (newValues) => {
-    setDirectorValue(newValues);    
+    setDirectorValue(newValues);
   }
 
   const manageMovieHandler = (e) => {
@@ -170,7 +170,9 @@ const ManageMovie = ({ isCreated }) => {
       : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
-    };    
+    };
+    
+    console.log(movieData)
 
     if (isCreated) {
       createHandler(movieData);
@@ -288,7 +290,7 @@ const ManageMovie = ({ isCreated }) => {
                     />
                   </div>                  
                 </div>
-                <div className="row mb-5">                  
+                <div className="row mb-4">                  
                   <div className="col-12 col-md-6">
                     <Input
                       label="Release Information"
@@ -315,24 +317,6 @@ const ManageMovie = ({ isCreated }) => {
                   </div>
                 </div> 
                 <div className="row mb-5">
-                  <div className="col-12">
-                      <DynamicInput 
-                        sectionName={"Director Section"} 
-                        inputData={isCreated ? undefined : movie.directors} 
-                        onChange={directorInputHandler}
-                      />
-                  </div>
-                </div>
-                <div className="row mb-4">
-                  <div className="col-12">
-                      <DynamicInput 
-                        sectionName={"Starring Section"} 
-                        inputData={isCreated ? undefined : movie.starring} 
-                        onChange={startingInputHandler}
-                      />
-                  </div>
-                </div> 
-                <div className="row mb-4">
                   <div className="col-12 col-md-4">
                     <MultiSelect 
                       label={"Countries"} 
@@ -363,7 +347,25 @@ const ManageMovie = ({ isCreated }) => {
                       error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
                     />                
                   </div>          
-                </div>               
+                </div>     
+                <div className="row mb-5">
+                  <div className="col-12">
+                      <DynamicInput 
+                        sectionName={"Director Section"} 
+                        inputData={isCreated ? undefined : movie.directors} 
+                        onChange={directorInputHandler}
+                      />
+                  </div>
+                </div>
+                <div className="row mb-4">
+                  <div className="col-12">
+                      <DynamicInput 
+                        sectionName={"Starring Section"} 
+                        inputData={isCreated ? undefined : movie.starring} 
+                        onChange={startingInputHandler}
+                      />
+                  </div>
+                </div>                           
                 <div className="row mb-5">
                   <div className="col-12">
                     <TextEditor 

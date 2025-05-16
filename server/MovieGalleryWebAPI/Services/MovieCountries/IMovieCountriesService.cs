@@ -7,6 +7,8 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
     {
         public Task AddMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie);
 
+        public Task EditMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie);
+
         public Task RemoveMappings(int movieId);
     }
 }

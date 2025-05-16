@@ -6,7 +6,7 @@ import { multiSelectStyles } from "../../../services/HelperService.js"
 const MultiSelect = ({ label, options, selectedOptions, error, changeHandler }) => {
 
   return (
-    <div className="container mt-4">
+    < >
       <h5>{label}</h5>
       <Select
         isMulti
@@ -17,7 +17,7 @@ const MultiSelect = ({ label, options, selectedOptions, error, changeHandler }) 
         styles={multiSelectStyles}             
       />
       {error && <Error error={error} />}
-    </div>
+    </>
   );
 };
 

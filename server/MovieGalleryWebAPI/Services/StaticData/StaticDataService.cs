@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Models.StaticData;
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Edit;
@@ -12,11 +13,34 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
         public MovieStarringService(MovieGalleryDbContext data)
         {
             this.data = data;
+        }        
+
+        public async Task AddMovieStarring(ICollection<string> starringCollection, Movie movie)
+        {
+            var movieStarring = new List<MovieStarring>();
+
+            foreach (var starring in starringCollection)
+            {
+                var currStarring = await data.Starring.FirstOrDefaultAsync(s => s.Name == starring);
+
+                if (currStarring == null) 
+                {
+                    currStarring = new Starring { Name = starring };
+
+                    await data.Starring.AddAsync(currStarring);
+                    await data.SaveChangesAsync();
+                }
+
+                movieStarring.Add( new MovieStarring { Starring = currStarring, Movie = movie });
+            }
+
+            await data.MovieStarrings.AddRangeAsync(movieStarring);
+            await data.SaveChangesAsync();
         }
 
-        public async Task AddMappings(MovieEditModel model, Movie movie)
+        public async Task EditMovieStarring(MovieEditModel model, Movie movie)
         {
-            await RemoveMappings(movie.Id);
+            await RemoveMovieStarring(movie.Id);
 
             foreach (var starring in model.Starring!)
             {
@@ -47,30 +71,7 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
             await data.SaveChangesAsync();
         }
 
-        public async Task AddMovieStarring(ICollection<string> starringCollection, Movie movie)
-        {
-            var movieStarring = new List<MovieStarring>();
-
-            foreach (var starring in starringCollection)
-            {
-                var currStarring = await data.Starring.FirstOrDefaultAsync(s => s.Name == starring);
-
-                if (currStarring == null) 
-                {
-                    currStarring = new Starring { Name = starring };
-
-                    await data.Starring.AddAsync(currStarring);
-                    await data.SaveChangesAsync();
-                }
-
-                movieStarring.Add( new MovieStarring { Starring = currStarring, Movie = movie });
-            }
-
-            await data.MovieStarrings.AddRangeAsync(movieStarring);
-            await data.SaveChangesAsync();
-        }
-
-        public async Task RemoveMappings(int movieId)
+        public async Task RemoveMovieStarring(int movieId)
         {
             var mappings = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
             data.MovieStarrings.RemoveRange(mappings);

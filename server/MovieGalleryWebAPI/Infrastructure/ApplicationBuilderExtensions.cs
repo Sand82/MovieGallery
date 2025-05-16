@@ -1,25 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using static MovieGalleryWebAPI.GlobalConstans;
-
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Seed;
-using AutoMapper;
-using System.Text;
-using Microsoft.Extensions.Hosting;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Numerics;
-using Microsoft.AspNetCore.Routing;
-using System.Drawing.Printing;
-using System.IO.Pipelines;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections.Generic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
+using static MovieGalleryWebAPI.GlobalConstans;
 
 namespace MovieGalleryWebAPI.Infrastructure
 {

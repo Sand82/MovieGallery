@@ -7,8 +7,8 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
     {
         public Task AddMovieStarring(ICollection<string> starring, Movie movie);
 
-        public Task AddMappings(MovieEditModel model, Movie movie);
+        public Task EditMovieStarring(MovieEditModel model, Movie movie);
 
-        public Task RemoveMappings(int movieId);
+        public Task RemoveMovieStarring(int movieId);
     }
 }

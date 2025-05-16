@@ -24,7 +24,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly MovieGalleryDbContext data;
         private readonly IFavoriteService favoriteService;   
         private readonly IRatingService ratingService;
-        private readonly IMovieCompanyService movieCompanyService;
+        private readonly ICompanyService companyService;
         private readonly IMovieDirectorsService movieDirectorsService;
         private readonly IMovieStarringService movieStarringService;
         private readonly IMovieCountriesService movieCountriesService;
@@ -34,7 +34,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             MovieGalleryDbContext data,
             IFavoriteService favoriteService,
             IRatingService ratingService,
-            IMovieCompanyService movieCompanyService,
+            ICompanyService companyService,
             IMovieDirectorsService movieDirectorsService,
             IMovieStarringService movieStarringService,
             IMovieCountriesService movieCountriesService,
@@ -43,7 +43,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.data = data;
             this.favoriteService = favoriteService;
             this.ratingService = ratingService;
-            this.movieCompanyService = movieCompanyService;
+            this.companyService = companyService;
             this.movieDirectorsService = movieDirectorsService;
             this.movieStarringService = movieStarringService;
             this.movieCountriesService = movieCountriesService;
@@ -99,8 +99,8 @@ namespace MovieGalleryWebAPI.Service.Movies
             moviesData.LatestMovies = latestMovies;
 
             return moviesData;
-        }        
-
+        }
+       
         public async Task<MovieDataModel> GetOneMovie(int movieId , string userId)
         {
             var movie = await this.data.Movies
@@ -128,7 +128,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Company = m.Company!.Name,
                     Starring = m.MovieStarrings!.Where(m => m.MovieId == movieId).Select(ms => new MovieStarringModel
                     {
-                        Id = ms.Starring.Id,
+                        Id = ms.Starring!.Id,
                         Name = ms.Starring.Name!,
 
                     }).ToList(),
@@ -194,7 +194,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Release = model.Release
             };
 
-            var company = await movieCompanyService.AddMovieCompany(model.Company!);
+            var company = await companyService.AddMovieCompany(model.Company!);
             movie.CompanyId = company.Id;
 
             await this.data.Movies.AddAsync(movie);
@@ -231,8 +231,12 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.EmbededVideo = model.EmbededVideo;
             movie.Release = model.Release;
             
-            await movieStarringService.AddMappings(model, movie);
-            await movieDirectorsService.AddMappings(model, movie);
+            await movieStarringService.EditMovieStarring(model, movie);
+            await movieDirectorsService.EditMovieDirectors(model, movie);
+
+            await companyService.EditMovieCompany(model.Company!, movie);
+            await movieCountriesService.EditMovieCountries(model.Countries!, movie);
+            await movieLanguageService.EditMovieLanguages(model.Languages!, movie);
 
             await this.data.SaveChangesAsync();
 

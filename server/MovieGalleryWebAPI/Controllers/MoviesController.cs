@@ -1,13 +1,13 @@
-﻿using MovieGalleryWebAPI.Models.Movies;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+using MovieGalleryWebAPI.Models.Movies;
 using MovieGalleryWebAPI.Service.Movies;
 using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Users;
-
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MovieGalleryWebAPI.Controllers
 {

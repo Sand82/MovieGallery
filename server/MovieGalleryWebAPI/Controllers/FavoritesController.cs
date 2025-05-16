@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using MovieGalleryWebAPI.Models.Favorites;
 using MovieGalleryWebAPI.Service.Favorites;
+
 using static MovieGalleryWebAPI.Infrastructure.ClaimsPrincipalExtensions;
 
 namespace MovieGalleryWebAPI.Controllers

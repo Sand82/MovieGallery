@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Edit;
@@ -37,9 +38,9 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
             await data.SaveChangesAsync();
         }
 
-        public async Task AddMappings(MovieEditModel model, Movie movie)
+        public async Task EditMovieDirectors(MovieEditModel model, Movie movie)
         {
-            await RemoveMappings(movie.Id);
+            await RemoveMovieDirectors(movie.Id);
 
             foreach (var director in model.Directors!)
             {
@@ -70,7 +71,7 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
             await data.SaveChangesAsync();
         }        
 
-        public async Task RemoveMappings(int movieId)
+        public async Task RemoveMovieDirectors(int movieId)
         {
             var mappings = await data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
 

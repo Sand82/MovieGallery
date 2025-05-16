@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using MovieGalleryWebAPI.Models.Users;
+﻿using MovieGalleryWebAPI.Models.Users;
 
 namespace MovieGalleryWebAPI.Service.Users
 {
