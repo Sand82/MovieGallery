@@ -42,7 +42,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
                     Description = m.Description,
                     Title = m.Title,
                     ImageUrl = m.ImageUrl,
-                    Category = m.Category,
+                    //Category = m.Category,
                     Duration = m.Duration,
                     Year = m.Year
                 })

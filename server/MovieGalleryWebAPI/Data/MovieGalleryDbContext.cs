@@ -30,13 +30,17 @@ namespace MovieGalleryWebAPI.Data
 
         public DbSet<Language> Languages { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         public DbSet<MovieStarring> MovieStarrings { get; set; }
 
         public DbSet<MovieDirector> MovieDirectors { get; set; }
 
         public DbSet<MovieCountry> MovieCountries { get; set; }
 
-        public DbSet<MovieLanguage> MovieLanguages { get; set; }
+        public DbSet<MovieLanguage> MovieLanguages { get; set; }        
+
+        public DbSet<MovieCategory> MovieCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,6 +101,19 @@ namespace MovieGalleryWebAPI.Data
                 .HasOne(ml => ml.Language)
                 .WithMany(l => l.MovieLanguages)
                 .HasForeignKey(ml => ml.LanguageId);
+
+            modelBuilder.Entity<MovieCategory>()
+               .HasKey(mc => new { mc.MovieId, mc.CategoryId });
+
+            modelBuilder.Entity<MovieCategory>()
+                .HasOne(mc => mc.Movie)
+                .WithMany(m => m.MovieCategories)
+                .HasForeignKey(mc => mc.MovieId);
+
+            modelBuilder.Entity<MovieCategory>()
+                .HasOne(mc => mc.Category)
+                .WithMany(c => c.MovieCategories)
+                .HasForeignKey(mc => mc.CategoryId);
 
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Company)

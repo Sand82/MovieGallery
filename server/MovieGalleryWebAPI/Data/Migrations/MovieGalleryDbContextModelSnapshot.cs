@@ -224,6 +224,24 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
@@ -366,11 +384,6 @@ namespace MovieGalleryWebAPI.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
@@ -417,6 +430,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCategory", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("MovieCategories");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCountry", b =>
@@ -624,6 +652,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCategory", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Category", "Category")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieCategories")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Movie");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieCountry", b =>
                 {
                     b.HasOne("MovieGalleryWebAPI.Data.Models.Country", "Country")
@@ -719,6 +766,11 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Category", b =>
+                {
+                    b.Navigation("MovieCategories");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Company", b =>
                 {
                     b.Navigation("Movies");
@@ -744,6 +796,8 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("MovieCategories");
 
                     b.Navigation("MovieCountries");
 

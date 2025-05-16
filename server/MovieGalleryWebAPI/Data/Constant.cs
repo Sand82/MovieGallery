@@ -40,6 +40,6 @@
         public const int MaxDirectorNameLength = 100;
         public const int MaxCompanyNameLength = 100;
         public const int MaxCountryNameLength = 100;
-        public const int MaxLanguageLength = 100;
+        public const int MaxLanguageLength = 100;        
     }
 }

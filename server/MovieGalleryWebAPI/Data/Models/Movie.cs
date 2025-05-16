@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Execution;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
@@ -22,6 +23,8 @@ namespace MovieGalleryWebAPI.Data.Models
             this.MovieCountries = new HashSet<MovieCountry>();
 
             this.MovieLanguages = new HashSet<MovieLanguage>();
+
+            this.MovieCategories = new HashSet<MovieCategory>();
         }
 
         [Key]
@@ -41,11 +44,7 @@ namespace MovieGalleryWebAPI.Data.Models
 
         [Required]
         [StringLength(MovieYearLength)]
-        public string? Year { get; set; }
-
-        [Required]
-        [StringLength(MaxMovieCategoryLength)]
-        public string? Category { get; set; }
+        public string? Year { get; set; }        
 
         [Required]
         [StringLength(MaxMovieDuration)]
@@ -78,5 +77,7 @@ namespace MovieGalleryWebAPI.Data.Models
         public ICollection<MovieCountry>? MovieCountries { get; set; }
 
         public ICollection<MovieLanguage>? MovieLanguages { get; set; }
+
+        public ICollection<MovieCategory> MovieCategories { get; set; }
     }
 }

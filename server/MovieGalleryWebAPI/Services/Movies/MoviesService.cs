@@ -61,7 +61,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Title= m.Title,
                     Description= m.Description,
                     Year= m.Year,
-                    Category= m.Category,
+                    //Category= m.Category,
                     ImageUrl= m.ImageUrl,
                     AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
@@ -119,7 +119,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Title = m.Title,
                     Description = m.Description,
                     ImageUrl = m.ImageUrl,
-                    Category = m.Category,
+                    //Category = m.Category,
                     Year = m.Year,
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
@@ -187,7 +187,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Title = model.Title,
                 Description = model.Description,
                 ImageUrl = model.ImageUrl,
-                Category = model.Category,
+                //Category = model.Category,
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
@@ -225,7 +225,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Title = model.Title;
             movie.Description = model.Description;
             movie.ImageUrl = model.ImageUrl;
-            movie.Category = model.Category;
+            //movie.Category = model.Category;
             movie.Year = model.Year;
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
@@ -307,7 +307,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                    Title = m.Title,
                    Description = m.Description,
                    ImageUrl = m.ImageUrl,
-                   Category = m.Category,
+                   Category = string.Join(", ", m.MovieCategories.Where(mc => mc.MovieId == m.Id).Select(mc => mc.Category!.Name).ToList()),
                    Year = m.Year,
                    Duration = m.Duration,
                    EmbededVideo = m.EmbededVideo,
