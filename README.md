@@ -20,7 +20,8 @@
 ![swagger](https://github.com/user-attachments/assets/367bf0dd-c67d-427a-afee-c8a2fb2a8140)
 <h3>Database diagram</h3>
 
-![db-diagram](https://github.com/user-attachments/assets/dabf42be-4f71-4f28-998e-7dc11c9b6e3d)
+![database-diagram](https://github.com/user-attachments/assets/00490c1a-802b-4590-ab2c-0309a8cb6707)
+
 
 <h2>Client-side</h2>
 <p> MovieGallery is written on React JS for my project defence. It is application for movies, basic version on IMDb (Internet Movie Database), User part and Admin part. Like User you can create your unique account, manage favorite list of movies, rate movies, post comments in comment section. In Contact us page Users can send messages to application owner. From Administration part you can manage the application. All movie CRUD operation are available.</p>
