@@ -33,6 +33,8 @@ const ManageMovie = ({ isCreated }) => {
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );
 
+  console.log(staticData);
+
   const {
     value: titleValue,
     changeHandler: titleChangeHandler,
@@ -51,17 +53,7 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isCompanyFieldEmpty,
   } = useInput(isCreated ? "" : movie.company, (value) =>
     hasLength(value, GlobalConstant.companyMinLength, GlobalConstant.companyMaxLength)
-  );
-
-  const {
-    value: categoryValue,
-    changeHandler: categoryChangeHandler,
-    hasError: categoryHasError,
-    inputBlurHandler: categoryInputBluerHandler,
-    isEmpty: isCategoryFieldEmpty,
-  } = useInput(isCreated ? "" : movie.category, (value) =>
-    hasLength(value, GlobalConstant.categoryMinLength, GlobalConstant.categoryMaxLength)
-  );
+  );  
 
   const {
     value: yearValue,
@@ -124,6 +116,14 @@ const ManageMovie = ({ isCreated }) => {
     changeHandler:  languagesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.languages), 
     "Please select at least one language."
   );
+
+  const { 
+    selectedOptions: categoriesOptions, 
+    hasError: categoriesHasError, 
+    isTouched : categoriesIsTouched,
+    changeHandler:  categoriesChangeHandler} = useMultiSelect(isCreated ? [] : convertToOptions(movie.categories), 
+    "Please select at least one category."
+  );
     
   const {
     editorState: textEditorState,
@@ -154,8 +154,7 @@ const ManageMovie = ({ isCreated }) => {
     const movieData = {
       id: movie.id,
       title: titleValue,
-      company: companyValue,
-      category: categoryValue,
+      company: companyValue,      
       year: yearValue,
       imageUrl: imageUrlValue,
       duration: durationValue,
@@ -170,6 +169,7 @@ const ManageMovie = ({ isCreated }) => {
       : directorValue.map((field) => ({id: field.id ? field.id : -1, name: field.name })),
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
+      categories: convertToEntity(categoriesOptions),
     };
 
     if (isCreated) {
@@ -183,9 +183,7 @@ const ManageMovie = ({ isCreated }) => {
     titleHasError ||
     isTitleFieldEmpty ||
     companyHasError ||
-    isCompanyFieldEmpty ||
-    categoryHasError ||
-    isCategoryFieldEmpty ||
+    isCompanyFieldEmpty ||    
     yearHasError ||
     isYearFieldEmpty ||
     imageUrlHasError ||
@@ -199,6 +197,7 @@ const ManageMovie = ({ isCreated }) => {
     isReleaseFieldEmpty ||
     countriesHasError !== "" || !countriesIsTouched ||
     languagesHasError !== "" || !languagesIsTouched ||
+    categoriesHasError !== "" || !categoriesIsTouched ||
     starringValue.some(input => input.error) ||
     starringValue.some(input => !input.isFieldEdited) ||
     directorValue.some(input => input.error) ||
@@ -334,16 +333,13 @@ const ManageMovie = ({ isCreated }) => {
                     />
                   </div>
                   <div className="col-12 col-md-4">
-                    <Input
-                      label="Category"
-                      type="text"
-                      name="category"
-                      className="form-control"
-                      value={categoryValue}
-                      onChange={categoryChangeHandler}
-                      onBlur={categoryInputBluerHandler}
-                      error={categoryHasError && `Category should be between ${GlobalConstant.categoryMinLength} and ${GlobalConstant.categoryMaxLength} symbols.`}
-                    />                
+                    <MultiSelect 
+                      label={"Category"} 
+                      options={convertToOptions(staticData.categories)} 
+                      selectedOptions={categoriesOptions} 
+                      error={categoriesHasError}
+                      changeHandler={categoriesChangeHandler}
+                    />
                   </div>          
                 </div>     
                 <div className="row mb-5">
@@ -377,8 +373,7 @@ const ManageMovie = ({ isCreated }) => {
                       error={textEditorHasError && `Description should be between ${GlobalConstant.descriptionMinLength} and ${GlobalConstant.descriptionMaxLength} symbols.`}
                     />                       
                   </div>
-                </div>
-                
+                </div>                
                 <button type="submit" className={`btn btn-block col-4 offset-md-4 mb-4 ${style["create-button"]}`} disabled={isValid}>
                   {movieActionType}
                 </button>
