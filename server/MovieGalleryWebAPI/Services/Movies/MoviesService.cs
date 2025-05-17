@@ -16,6 +16,7 @@ using MovieGalleryWebAPI.Services.MovieDirectors;
 using MovieGalleryWebAPI.Services.MoviesStarring;
 using MovieGalleryWebAPI.Services.MovieCountries;
 using MovieGalleryWebAPI.Services.MovieLanguages;
+using MovieGalleryWebAPI.Models.Category;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -111,15 +112,15 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.MovieStarrings)
                 .Include(m => m.MovieDirectors)
                 .Include(m => m.MovieCountries)
-                .Include(m => m.MovieLanguages)                
+                .Include(m => m.MovieLanguages) 
+                .Include(m => m.MovieCategories)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
                     Id = m.Id,
                     Title = m.Title,
                     Description = m.Description,
-                    ImageUrl = m.ImageUrl,
-                    //Category = m.Category,
+                    ImageUrl = m.ImageUrl,                    
                     Year = m.Year,
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
@@ -132,6 +133,11 @@ namespace MovieGalleryWebAPI.Service.Movies
                         Name = ms.Starring.Name!,
 
                     }).ToList(),
+
+                    Categories = m.MovieCategories
+                       .Where(mc => mc.MovieId == m.Id)
+                       .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name })
+                       .ToList(),
 
                     Directors = m.MovieDirectors!.Where(m => m.MovieId == movieId)
                     .Select(md => new MovieDirectorsModel
@@ -306,8 +312,11 @@ namespace MovieGalleryWebAPI.Service.Movies
                    Id = m.Id,
                    Title = m.Title,
                    Description = m.Description,
-                   ImageUrl = m.ImageUrl,
-                   Category = string.Join(", ", m.MovieCategories.Where(mc => mc.MovieId == m.Id).Select(mc => mc.Category!.Name).ToList()),
+                   ImageUrl = m.ImageUrl,                   
+                   Categories = m.MovieCategories
+                       .Where(mc => mc.MovieId == m.Id)
+                       .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name})
+                       .ToList(),
                    Year = m.Year,
                    Duration = m.Duration,
                    EmbededVideo = m.EmbededVideo,

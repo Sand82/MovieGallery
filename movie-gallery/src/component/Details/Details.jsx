@@ -11,15 +11,14 @@ import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx"
 import Error from "../UI/Error/Error.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
+import { arrayToString } from "../../services/HelperService.js"
 
 const Details = () => {
   const { movieId } = useParams();
 
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);
-
-  console.log(movie)
+  const [hovered, setHovered] = useState(false);  
 
   useEffect(() => {
     detailsHandler(movieId, user.id);
@@ -92,7 +91,7 @@ const Details = () => {
                   </div>
                   <div className="entity-content">
                     <h2 className="entity-title">{movie.title}</h2>
-                    <div className="entity-category">{movie.category}</div>
+                    <div className="entity-category">{arrayToString(movie.categories)}</div>
                     <div className="entity-info">
                       <div className="info-lines">
                         <div className="info info-short">

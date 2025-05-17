@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+
 import styles from "./NewMovieBlog.module.css";
 import { cropText } from "../../../services/HelperService.js";
+import { arrayToString } from "../../../services/HelperService.js";
 
 const NewMovieBlog = ({ movie }) => {
 
@@ -21,7 +23,7 @@ const NewMovieBlog = ({ movie }) => {
         </h4>
         <div className="entity-category">         
           <Link className="content-link" to={`/movies/details/${movie.id}`}>
-            {movie.category}
+            {arrayToString(movie.categories)}
           </Link>
         </div>
         <p className="text-short entity-text">{cropText(movie.description)}</p>

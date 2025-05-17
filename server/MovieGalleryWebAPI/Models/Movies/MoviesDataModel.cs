@@ -1,4 +1,6 @@
-﻿namespace MovieGalleryWebAPI.Models.Movies
+﻿using MovieGalleryWebAPI.Models.Category;
+
+namespace MovieGalleryWebAPI.Models.Movies
 {
     public class MoviesDataModel
     {
@@ -13,7 +15,9 @@
 
         public string? Year { get; set; }
 
-        public string? Category { get; set; }
+        //public string? Category { get; set; }
+
+        public ICollection<MovieCategoryModel>? Categories { get; set; }
 
         public string? Duration { get; set; }
 

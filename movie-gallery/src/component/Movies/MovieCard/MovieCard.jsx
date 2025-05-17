@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { cropText } from "../../../services/HelperService.js";
+import { arrayToString } from "../../../services/HelperService.js";
 
 const MovieCard = ({ movie }) => {
 
@@ -48,7 +49,7 @@ const MovieCard = ({ movie }) => {
             className="content-link"
             to={`/movies/details/${movie.id}`}            
           >
-            {movie.category}
+            {arrayToString(movie.categories)}
           </Link>
         </div>
         <div className="entity-info">

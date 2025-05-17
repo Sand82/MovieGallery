@@ -57,6 +57,10 @@ export const multiSelectStyles = {
   }),
 };
 
+export const arrayToString = (arr) => {
+  return arr.map((obj) => obj.name).join(", ");
+};
+
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");
   text = text.replace(/<\/?[^>]+(>|$)/g, "");

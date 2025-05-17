@@ -2,8 +2,10 @@ import {Link} from "react-router-dom"
 
 import style from "./FavoriteMovie.module.css"
 import { cropText } from "../../../services/HelperService.js"
+import { arrayToString } from "../../../services/HelperService.js";
 
 const FavoriteMovie = ({movie}) => {
+  
   return (
     <div className="col-md-6">
       <article className="article-tape-entity">
@@ -38,7 +40,7 @@ const FavoriteMovie = ({movie}) => {
           </h4>
           <div className="entity-category">
             <Link className="content-link" to={`/movies/details/${movie.id}`}>
-            {movie.category}
+            {arrayToString(movie.categories)}
             </Link>
             
           </div>

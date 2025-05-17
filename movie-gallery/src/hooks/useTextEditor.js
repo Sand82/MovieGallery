@@ -57,7 +57,6 @@ export const useTextEditor = (value, validationFn) => {
     e.preventDefault();
 
     const url = prompt("Enter the URL:");
-    console.log(url);
 
     if (url) {
       const selection = editorState.getSelection();

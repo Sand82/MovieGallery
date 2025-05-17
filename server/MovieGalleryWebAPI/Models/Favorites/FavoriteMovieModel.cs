@@ -1,4 +1,6 @@
-﻿namespace MovieGalleryWebAPI.Models.Favorites
+﻿using MovieGalleryWebAPI.Models.Category;
+
+namespace MovieGalleryWebAPI.Models.Favorites
 {
     public class FavoriteMovieModel
     {
@@ -10,10 +12,10 @@
 
         public string? ImageUrl { get; set; }
 
-        public string? Year { get; set; }
+        public string? Year { get; set; }        
 
-        public string? Category { get; set; }
+        public string? Duration { get; set; }
 
-        public string? Duration { get; set; }        
+        public ICollection<MovieCategoryModel>? Categories { get; set; }
     }
 }

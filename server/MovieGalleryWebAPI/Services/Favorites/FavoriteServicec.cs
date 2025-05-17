@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
+using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Models.Favorites;
 
 namespace MovieGalleryWebAPI.Service.Favorites
@@ -35,14 +36,18 @@ namespace MovieGalleryWebAPI.Service.Favorites
         {
             var movies = await this.data.Movies
                 .Include(m => m.Favorites)
-                .Where(m => m.Favorites.Any(f => f.IsFavorite == true && userId == f.UserId))
+                .Include(m => m.MovieCategories)
+                .Where(m => m.Favorites!.Any(f => f.IsFavorite == true && userId == f.UserId))
                 .Select(m => new FavoriteMovieModel
                 {
                     Id = m.Id,
                     Description = m.Description,
                     Title = m.Title,
                     ImageUrl = m.ImageUrl,
-                    //Category = m.Category,
+                    Categories = m.MovieCategories
+                        .Where(mc => mc.MovieId == m.Id)
+                        .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name })
+                        .ToList(),
                     Duration = m.Duration,
                     Year = m.Year
                 })
@@ -53,7 +58,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
 
         public async Task<bool> SetFavorite(FavoriteDataModel model)
         {
-            Favorite? favorite = await FindFavorite(model.UserId, model.MovieId);                
+            Favorite? favorite = await FindFavorite(model.UserId!, model.MovieId);                
 
             if (favorite == null)
             {
@@ -82,7 +87,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
                 .Where(f => f.MovieId == movieId && f.UserId == userId)
                 .FirstOrDefaultAsync();
 
-            return favorite;
+            return favorite!;
         }
     }
 }

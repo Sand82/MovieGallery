@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
 import styles from "./TopRatedCard.module.css";
+import { arrayToString } from "../../../services/HelperService.js"
 
-const TopRatedCard = ({ movie }) => { 
+const TopRatedCard = ({ movie }) => {   
 
   return (
     <div
@@ -54,7 +55,7 @@ const TopRatedCard = ({ movie }) => {
               href="movies-blocks.html"
               tabIndex={-1}
             >
-              {movie.category}
+              {arrayToString(movie.categories)}
             </div>
           </div>
           <div className="entity-info">

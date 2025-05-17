@@ -171,8 +171,6 @@ const ManageMovie = ({ isCreated }) => {
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
     };
-    
-    console.log(movieData)
 
     if (isCreated) {
       createHandler(movieData);
