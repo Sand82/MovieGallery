@@ -28,7 +28,7 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
             return company;
         }
 
-        public async Task EditMovieCompany(string companyName, Movie movie)
+        public async Task<Company> EditMovieCompany(string companyName, Movie movie)
         {
             var company = await data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
 
@@ -41,8 +41,7 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
                 await RemoveMovieCompany(company, movie);
             }
 
-            company.Movies!.Add(movie);
-            await data.SaveChangesAsync();
+            return company;
         }
 
         public async Task RemoveMovieCompany(Company company, Movie movie)

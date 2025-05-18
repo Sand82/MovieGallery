@@ -62,8 +62,7 @@ namespace MovieGalleryWebAPI.Controllers
             }            
 
             await moviesService.CreateMovie(model);
-
-            //TODO maybe this is not needed method
+            
             var movie = await moviesService.GetLastMovie();
 
             return Ok(movie);

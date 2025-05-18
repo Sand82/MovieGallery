@@ -1,6 +1,8 @@
-﻿using MovieGalleryWebAPI.Models.Countries;
+﻿using System.ComponentModel.DataAnnotations;
+
+using MovieGalleryWebAPI.Models.Category;
+using MovieGalleryWebAPI.Models.Countries;
 using MovieGalleryWebAPI.Models.Languages;
-using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
 
@@ -24,12 +26,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         [Required]
         [StringLength(MaxMovieImageUrlLength, MinimumLength = MinMovieImageUrlLength,
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        public string? ImageUrl { get; set; }
-
-        [Required]
-        [StringLength(MaxMovieCategoryLength, MinimumLength = MinMovieCategoryLength,
-            ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        public string? Category { get; set; }
+        public string? ImageUrl { get; set; }        
 
         [Required]
         [StringLength(MovieYearLength,
@@ -56,6 +53,8 @@ namespace MovieGalleryWebAPI.Models.Edit
         public List<StarringEditModel>? Starring { get; set; } 
 
         public List<DirectorsEditModel>? Directors { get; set; }
+
+        public ICollection<MovieCategoryModel>? Categories { get; set; }
 
         public ICollection<MovieCountriesModel>? Countries { get; set; }
 

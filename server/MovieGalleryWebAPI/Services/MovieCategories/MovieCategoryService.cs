@@ -31,14 +31,34 @@ namespace MovieGalleryWebAPI.Services.MovieCategories
             await data.SaveChangesAsync();
         }
 
-        public Task EditMovieCategories(ICollection<MovieCategoryModel> categories, Movie movie)
+        public async Task EditMovieCategories(ICollection<MovieCategoryModel> categories, Movie movie)
         {
-            throw new NotImplementedException();
+            if (movie.MovieCategories == null)
+            {
+                movie.MovieCategories = new List<MovieCategory>();
+            }
+
+            await RemoveMappings(movie.Id);
+
+            foreach (var category in categories)
+            {
+                var currentCategory = await this.data.Countries!.FirstOrDefaultAsync(d => d.Id == category.Id);
+
+                movie.MovieCategories!.Add(new MovieCategory
+                {
+                    MovieId = movie.Id,
+                    CategoryId = currentCategory!.Id
+                });
+            }
+
+            await data.SaveChangesAsync();
         }
 
-        public Task RemoveMappings(int movieId)
+        public async Task RemoveMappings(int movieId)
         {
-            throw new NotImplementedException();
+            var mappings = await data.MovieCategories.Where(mc => mc.MovieId == movieId).ToListAsync();
+
+            data.MovieCategories.RemoveRange(mappings);
         }
     }
 }
