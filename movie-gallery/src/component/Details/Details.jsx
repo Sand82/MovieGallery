@@ -18,11 +18,13 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);  
+  const [hovered, setHovered] = useState(false);
+
+  console.log(movie);
 
   useEffect(() => {
     detailsHandler(movieId, user.id);
-  }, [movieId, user.id]);
+  }, [movieId, user.id, detailsHandler]);  
 
   const hartClickHandler = (hart) => {
 
@@ -91,7 +93,7 @@ const Details = () => {
                   </div>
                   <div className="entity-content">
                     <h2 className="entity-title">{movie.title}</h2>
-                    <div className="entity-category">{arrayToString(movie.categories)}</div>
+                    <div className="entity-category">{movie.categories && arrayToString(movie.categories)}</div>
                     <div className="entity-info">
                       <div className="info-lines">
                         <div className="info info-short">

@@ -32,9 +32,7 @@ const ManageMovie = ({ isCreated }) => {
     ? [] 
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );
-
-  console.log(staticData);
-
+  
   const {
     value: titleValue,
     changeHandler: titleChangeHandler,
@@ -170,7 +168,7 @@ const ManageMovie = ({ isCreated }) => {
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
       categories: convertToEntity(categoriesOptions),
-    };
+    };    
 
     if (isCreated) {
       createHandler(movieData);

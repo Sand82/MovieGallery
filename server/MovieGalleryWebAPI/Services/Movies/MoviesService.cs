@@ -17,6 +17,8 @@ using MovieGalleryWebAPI.Services.MoviesStarring;
 using MovieGalleryWebAPI.Services.MovieCountries;
 using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Models.Category;
+using MovieGalleryWebAPI.Services.MovieCategories;
+using Microsoft.VisualBasic;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -30,6 +32,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly IMovieStarringService movieStarringService;
         private readonly IMovieCountriesService movieCountriesService;
         private readonly IMovieLanguageService movieLanguageService;
+        private readonly IMovieCategoryService movieCategoryService;
 
         public MoviesService(
             MovieGalleryDbContext data,
@@ -39,7 +42,9 @@ namespace MovieGalleryWebAPI.Service.Movies
             IMovieDirectorsService movieDirectorsService,
             IMovieStarringService movieStarringService,
             IMovieCountriesService movieCountriesService,
-            IMovieLanguageService movieLanguageService)
+            IMovieLanguageService movieLanguageService,
+            IMovieCategoryService movieCategoryService
+            )
         {
             this.data = data;
             this.favoriteService = favoriteService;
@@ -49,11 +54,13 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.movieStarringService = movieStarringService;
             this.movieCountriesService = movieCountriesService;
             this.movieLanguageService = movieLanguageService;
+            this.movieCategoryService = movieCategoryService;
         }
 
         public async Task<MovieGetModel> GetLastMovie()
         {
             var movie = await this.data.Movies
+                .Include(m => m.MovieCountries)
                 .OrderByDescending(m => m.Id)
                 .Where(m => m.IsDelete == false)
                 .Select(m => new MovieGetModel
@@ -61,12 +68,15 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Id = m.Id,
                     Title= m.Title,
                     Description= m.Description,
-                    Year= m.Year,
-                    //Category= m.Category,
+                    Year= m.Year,                    
                     ImageUrl= m.ImageUrl,
                     AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
+                    Categories = m.MovieCategories
+                        .Where(mc => m.Id == mc.MovieId)
+                        .Select(c => new MovieCategoryModel { Id = c.Category!.Id, Name = c.Category.Name })
+                        .ToList()
                 })
                 .FirstOrDefaultAsync();
 
@@ -192,8 +202,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             {
                 Title = model.Title,
                 Description = model.Description,
-                ImageUrl = model.ImageUrl,
-                //Category = model.Category,
+                ImageUrl = model.ImageUrl,                
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
@@ -206,6 +215,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             await this.data.Movies.AddAsync(movie);
             await this.data.SaveChangesAsync();
 
+            await movieCategoryService.AddMovieCategories(model.Categories!, movie);
             await movieDirectorsService.AddMovieDirectors(model.Directors!, movie);
             await movieStarringService.AddMovieStarring(model.Starring!, movie);
             await movieCountriesService.AddMovieCountries(model.Countries!, movie);

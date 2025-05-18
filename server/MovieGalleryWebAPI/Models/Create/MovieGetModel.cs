@@ -1,4 +1,6 @@
-﻿namespace MovieGalleryWebAPI.Models.Create
+﻿using MovieGalleryWebAPI.Models.Category;
+
+namespace MovieGalleryWebAPI.Models.Create
 {
     public class MovieGetModel
     {
@@ -10,14 +12,14 @@
 
         public string? ImageUrl { get; set; }
 
-        public string? Year { get; set; }
-
-        public string? Category { get; set; }
+        public string? Year { get; set; }        
 
         public string? Duration { get; set; }
 
         public string? AverageRating { get; set; }
 
         public string? EmbededVideo { get; set; }
+
+        public ICollection<MovieCategoryModel>? Categories {  get; set; }
     }
 }
