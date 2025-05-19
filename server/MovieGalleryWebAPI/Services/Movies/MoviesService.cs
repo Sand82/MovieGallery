@@ -256,7 +256,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             await movieCountriesService.EditMovieCountries(model.Countries!, movie);
             await movieLanguageService.EditMovieLanguages(model.Languages!, movie);            
             
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
 
             return isEdited;
         }        

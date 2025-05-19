@@ -1,6 +1,6 @@
-﻿using Microsoft.Build.Execution;
-using System.Collections;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+
+using MovieGalleryWebAPI.Services;
 
 using static MovieGalleryWebAPI.Data.Constant;
 
@@ -25,6 +25,8 @@ namespace MovieGalleryWebAPI.Data.Models
             this.MovieLanguages = new HashSet<MovieLanguage>();
 
             this.MovieCategories = new HashSet<MovieCategory>();
+
+            this.MovieTags = new HashSet<MovieTag>();
         }
 
         [Key]
@@ -69,6 +71,8 @@ namespace MovieGalleryWebAPI.Data.Models
         public ICollection<Rating>? Ratings { get; set; }
 
         public ICollection<Favorite>? Favorites { get; set; }
+
+        public ICollection<MovieTag>? MovieTags { get; set; }
 
         public ICollection<MovieStarring>? MovieStarrings { get; set; }
 

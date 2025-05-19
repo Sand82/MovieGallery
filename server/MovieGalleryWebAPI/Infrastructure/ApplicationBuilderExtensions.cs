@@ -35,6 +35,8 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             SeedCategories(data);
 
+            SeedTags(data);
+
             SeedMovies(data);
 
             return app;
@@ -625,7 +627,125 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             data.Categories.AddRange(categories);
             data.SaveChanges();
-        }  
+        }
+
+        private static void SeedTags(MovieGalleryDbContext data)
+        {
+            if (data.Tags.Any())
+            {
+                return;
+            }
+
+            var tags = new List<Tag>();
+
+            //seed tags
+
+            //Obi-Wan Kenobi
+            tags.Add(new Tag { Name = "star" });
+            tags.Add(new Tag { Name = "jedi" });
+            tags.Add(new Tag { Name = "mini serials" });
+            tags.Add(new Tag { Name = "dark power" });
+
+            //Thor: Love and Thunder
+            tags.Add(new Tag { Name = "superhero" });
+            tags.Add(new Tag { Name = "warrior" });
+            tags.Add(new Tag { Name = "love" });
+            tags.Add(new Tag { Name = "fantasy" });
+            tags.Add(new Tag { Name = "comics" });
+
+            //The Lord of the Rings: The Fellowship of the Ring
+            tags.Add(new Tag { Name = "wizard" });
+            tags.Add(new Tag { Name = "hobbit" });
+            tags.Add(new Tag { Name = "elf" });
+            tags.Add(new Tag { Name = "dwarf" });
+            tags.Add(new Tag { Name = "fellowship" });
+
+            //The Lord of the Rings: The Two Towers
+            tags.Add(new Tag { Name = "fight" });
+            tags.Add(new Tag { Name = "middle earth" });
+            tags.Add(new Tag { Name = "good" });
+            tags.Add(new Tag { Name = "evil" });
+
+            //The Lord of the Rings: The Return of the King
+            tags.Add(new Tag { Name = "king" });
+            tags.Add(new Tag { Name = "ring" });
+            tags.Add(new Tag { Name = "diversion" });
+
+            //Heat
+            tags.Add(new Tag { Name = "band" });
+            tags.Add(new Tag { Name = "police" });
+            tags.Add(new Tag { Name = "robbery" });
+
+            //Top Gun: Maverick
+            tags.Add(new Tag { Name = "fly" });
+            tags.Add(new Tag { Name = "plane" });
+            tags.Add(new Tag { Name = "top speed" });
+
+            //The Godfather Part II
+            tags.Add(new Tag { Name = "mafia" });
+            tags.Add(new Tag { Name = "family" });
+            tags.Add(new Tag { Name = "head" });
+            tags.Add(new Tag { Name = "murderers" });
+
+            //The Godfather
+            tags.Add(new Tag { Name = "boos" });
+            tags.Add(new Tag { Name = "mafia" });
+            tags.Add(new Tag { Name = "blood" });
+
+            //The Fast and the Furious
+            tags.Add(new Tag { Name = "speed" });
+            tags.Add(new Tag { Name = "cars" });
+            tags.Add(new Tag { Name = "girls" });
+            tags.Add(new Tag { Name = "family" });
+
+
+            //F9: The Fast Saga
+            tags.Add(new Tag { Name = "enemy" });
+            tags.Add(new Tag { Name = "compete" });
+            tags.Add(new Tag { Name = "rase" });
+            tags.Add(new Tag { Name = "cars" });
+
+            //Die hard
+            tags.Add(new Tag { Name = "hero" });
+            tags.Add(new Tag { Name = "police" });
+            tags.Add(new Tag { Name = "terrorists" });
+
+            //Die hard 2
+            tags.Add(new Tag { Name = "plane" });
+            tags.Add(new Tag { Name = "terrorists" });
+            tags.Add(new Tag { Name = "hero" });
+
+            //Die Hard with a Vengeance
+            tags.Add(new Tag { Name = "vengeance" });
+            tags.Add(new Tag { Name = "bombs" });
+            tags.Add(new Tag { Name = "hero" });
+
+
+            //Live Free or Die Hard
+            tags.Add(new Tag { Name = "hero" });
+            tags.Add(new Tag { Name = "hackers" });
+            tags.Add(new Tag { Name = "technologies" });
+
+            //Beautiful mind
+            tags.Add(new Tag { Name = "sharp mind" });
+            tags.Add(new Tag { Name = "family" });
+            tags.Add(new Tag { Name = "math" });
+
+            //Cinderella Man
+            tags.Add(new Tag { Name = "sport" });
+            tags.Add(new Tag { Name = "box" });
+            tags.Add(new Tag { Name = "family" });
+
+            //The Shawshank Redemption
+            tags.Add(new Tag { Name = "prison" });
+            tags.Add(new Tag { Name = "unfair" });
+            tags.Add(new Tag { Name = "friendship" }); 
+
+            tags.Distinct().ToList();
+
+            data.Tags.AddRange(tags);
+            data.SaveChanges();
+        }
 
         private static void SeedMovies(MovieGalleryDbContext data)
         {

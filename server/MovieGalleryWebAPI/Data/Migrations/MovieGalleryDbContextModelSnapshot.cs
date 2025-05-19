@@ -552,6 +552,39 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("Starring");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Services.MovieTag", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("MovieTags");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -766,6 +799,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Services.MovieTag", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieTags")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Tag", "Tag")
+                        .WithMany("MovieTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Category", b =>
                 {
                     b.Navigation("MovieCategories");
@@ -807,12 +859,19 @@ namespace MovieGalleryWebAPI.Data.Migrations
 
                     b.Navigation("MovieStarrings");
 
+                    b.Navigation("MovieTags");
+
                     b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Starring", b =>
                 {
                     b.Navigation("MovieStarrings");
+                });
+
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Tag", b =>
+                {
+                    b.Navigation("MovieTags");
                 });
 #pragma warning restore 612, 618
         }

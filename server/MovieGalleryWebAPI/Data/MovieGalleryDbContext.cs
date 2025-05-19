@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 using MovieGalleryWebAPI.Data.Models;
+using MovieGalleryWebAPI.Services;
 
 namespace MovieGalleryWebAPI.Data
 {
@@ -31,6 +32,8 @@ namespace MovieGalleryWebAPI.Data
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
         public DbSet<MovieStarring> MovieStarrings { get; set; }
 
         public DbSet<MovieDirector> MovieDirectors { get; set; }
@@ -40,6 +43,8 @@ namespace MovieGalleryWebAPI.Data
         public DbSet<MovieLanguage> MovieLanguages { get; set; }        
 
         public DbSet<MovieCategory> MovieCategories { get; set; }
+
+        public DbSet<MovieTag> MovieTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -113,6 +118,19 @@ namespace MovieGalleryWebAPI.Data
                 .HasOne(mc => mc.Category)
                 .WithMany(c => c.MovieCategories)
                 .HasForeignKey(mc => mc.CategoryId);
+
+            modelBuilder.Entity<MovieTag>()
+               .HasKey(mt => new { mt.MovieId, mt.TagId });
+
+            modelBuilder.Entity<MovieTag>()
+                .HasOne(mt => mt.Movie)
+                .WithMany(m => m.MovieTags)
+                .HasForeignKey(mt => mt.MovieId);
+
+            modelBuilder.Entity<MovieTag>()
+                .HasOne(mt => mt.Tag)
+                .WithMany(t => t.MovieTags)
+                .HasForeignKey(mt => mt.TagId);
 
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Company)

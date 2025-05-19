@@ -55,7 +55,7 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
                 {
                     currentStarring = new Starring { Name = starring.Name };
                     this.data.Starring.Add(currentStarring);
-                    await data.SaveChangesAsync();
+                    await this.data.SaveChangesAsync();
                 }
                 else
                 {
@@ -77,13 +77,13 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
                 });
             }
 
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
         }
 
         public async Task RemoveMovieStarring(int movieId)
         {
-            var mappings = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
-            data.MovieStarrings.RemoveRange(mappings);            
+            var mappings = await this.data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
+            this.data.MovieStarrings.RemoveRange(mappings);            
         }
     }
 }

@@ -21,13 +21,13 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
 
             foreach (var country in countries)
             {
-                var currCountry = await data.Countries.FirstOrDefaultAsync(c => c.Id == country.Id);
+                var currCountry = await this.data.Countries.FirstOrDefaultAsync(c => c.Id == country.Id);
 
                 movieCountries.Add( new MovieCountry { Country = currCountry, Movie = movie } );
             }
 
-            await data.MovieCountries.AddRangeAsync(movieCountries);
-            await data.SaveChangesAsync();
+            await this.data.MovieCountries.AddRangeAsync(movieCountries);
+            await this.data.SaveChangesAsync();
         }
 
         public async Task EditMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie)
@@ -50,14 +50,14 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
                 });
             }
 
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
         }
 
         public async Task RemoveMappings(int movieId)
         {
-            var mappings = await data.MovieCountries.Where(mc => mc.MovieId == movieId).ToListAsync();
+            var mappings = await this.data.MovieCountries.Where(mc => mc.MovieId == movieId).ToListAsync();
 
-            data.MovieCountries.RemoveRange(mappings);            
+            this.data.MovieCountries.RemoveRange(mappings);            
         }        
     }
 }

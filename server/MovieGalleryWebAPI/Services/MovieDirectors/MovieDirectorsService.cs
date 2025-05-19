@@ -21,21 +21,21 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
 
             foreach (var director in directors)
             {
-                var currDirector = await data.Directors.FirstOrDefaultAsync(d => d.Name == director);
+                var currDirector = await this.data.Directors.FirstOrDefaultAsync(d => d.Name == director);
 
                 if (currDirector == null)
                 {
                     currDirector = new Director { Name = director };
 
-                    await data.Directors.AddAsync(currDirector);                    
-                    await data.SaveChangesAsync();
+                    await this.data.Directors.AddAsync(currDirector);                    
+                    await this.data.SaveChangesAsync();
                 }
 
                 movieDirectors.Add(new MovieDirector { Director = currDirector, Movie = movie });
             }
 
-            await data.MovieDirectors.AddRangeAsync(movieDirectors);
-            await data.SaveChangesAsync();
+            await this.data.MovieDirectors.AddRangeAsync(movieDirectors);
+            await this.data.SaveChangesAsync();
         }
 
         public async Task EditMovieDirectors(MovieEditModel model, Movie movie)
@@ -55,7 +55,7 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
                 {
                     currentDirector = new Director { Name = director.Name };
                     this.data.Directors.Add(currentDirector);
-                    await data.SaveChangesAsync();
+                    await this.data.SaveChangesAsync();
                 }
                 else
                 {
@@ -79,14 +79,14 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
                 });                
             }
 
-            await data.SaveChangesAsync();
+            await this.data.SaveChangesAsync();
         }
 
         public async Task RemoveMovieDirectors(int movieId)
         {
-            var mappings = await data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
+            var mappings = await this.data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
 
-            data.MovieDirectors.RemoveRange(mappings);            
+            this.data.MovieDirectors.RemoveRange(mappings);            
         }
     }
 }

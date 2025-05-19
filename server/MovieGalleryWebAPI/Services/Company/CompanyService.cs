@@ -18,7 +18,7 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
 
         public async Task<Company> AddMovieCompany(string companyName)
         {
-            var company = await data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
+            var company = await this.data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
 
             if (company == null)
             {
@@ -30,7 +30,7 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
 
         public async Task<Company> EditMovieCompany(string companyName, Movie movie)
         {
-            var company = await data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
+            var company = await this.data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
 
             if (company == null)
             {
@@ -45,8 +45,8 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
         private async Task<Company> CreateCompany(string companyName) 
         {
             var company = new Company { Name = companyName };
-            await data.Companies.AddAsync(company);
-            await data.SaveChangesAsync();
+            await this.data.Companies.AddAsync(company);
+            await this.data.SaveChangesAsync();
 
             return company;
         }
