@@ -22,7 +22,7 @@ const Details = () => {
 
   useEffect(() => {
     detailsHandler(movieId, user.id);
-  }, [movieId, user.id, detailsHandler]);  
+  }, [movieId, user.id]);  
 
   const hartClickHandler = (hart) => {
 

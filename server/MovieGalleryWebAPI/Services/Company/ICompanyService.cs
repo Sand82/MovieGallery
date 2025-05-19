@@ -7,7 +7,5 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
         public Task<Company> AddMovieCompany(string companyName);
 
         public Task<Company> EditMovieCompany(string companyName, Movie movie);
-
-        public Task RemoveMovieCompany(Company company, Movie movie);
     }
 }

@@ -72,13 +72,11 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
                     }
                 }
 
-                var movieDirector = new MovieDirector
+                movie.MovieDirectors.Add( new MovieDirector
                 {
                     MovieId = movie.Id,
                     DirectorId = currentDirector.Id
-                };
-
-                this.data.MovieDirectors.Add(movieDirector);
+                });                
             }
 
             await data.SaveChangesAsync();
@@ -88,7 +86,7 @@ namespace MovieGalleryWebAPI.Services.MovieDirectors
         {
             var mappings = await data.MovieDirectors.Where(m => m.MovieId == movieId).ToListAsync();
 
-            data.MovieDirectors.RemoveRange(mappings);
+            data.MovieDirectors.RemoveRange(mappings);            
         }
     }
 }

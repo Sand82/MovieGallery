@@ -9,8 +9,7 @@ namespace MovieGalleryWebAPI.Data
     {
         public MovieGalleryDbContext(DbContextOptions<MovieGalleryDbContext> options)
             : base(options)
-        {
-        }
+        {}
 
         public DbSet<Movie> Movies { get; set; }
 
@@ -118,8 +117,7 @@ namespace MovieGalleryWebAPI.Data
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Company)
                 .WithMany(c => c.Movies)
-                .HasForeignKey(m => m.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(m => m.CompanyId);              
         }
     }
 }

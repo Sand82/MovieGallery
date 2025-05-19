@@ -18,7 +18,6 @@ using MovieGalleryWebAPI.Services.MovieCountries;
 using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Services.MovieCategories;
-using Microsoft.VisualBasic;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -222,13 +221,12 @@ namespace MovieGalleryWebAPI.Service.Movies
             await movieLanguageService.AddMovieLanguages(model.Languages!, movie);            
         }
 
-
         public async Task<bool> EditMovie(MovieEditModel model)
         {
             var isEdited = true;
 
             var movie = await this.data
-                .Movies
+                .Movies                
                 .Where(m => m.Id == model.Id)                
                 .FirstOrDefaultAsync();
 
@@ -245,22 +243,23 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
             movie.Release = model.Release;
+            movie.IsDelete = false;            
 
             var company = await companyService.EditMovieCompany(model.Company!, movie);
-            movie.CompanyId = company.Id;            
+            movie.CompanyId = company.Id;
+            movie.Company = company;
 
             await movieStarringService.EditMovieStarring(model, movie);
             await movieDirectorsService.EditMovieDirectors(model, movie);
 
             await movieCategoryService.EditMovieCategories(model.Categories!, movie);            
             await movieCountriesService.EditMovieCountries(model.Countries!, movie);
-            await movieLanguageService.EditMovieLanguages(model.Languages!, movie);
-
-            await this.data.SaveChangesAsync();
+            await movieLanguageService.EditMovieLanguages(model.Languages!, movie);            
+            
+            await data.SaveChangesAsync();
 
             return isEdited;
-        }
-        
+        }        
 
         public async Task<bool> RemoveMovie(int movieId)
         {

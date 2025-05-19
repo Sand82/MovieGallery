@@ -83,7 +83,7 @@ namespace MovieGalleryWebAPI.Services.MoviesStarring
         public async Task RemoveMovieStarring(int movieId)
         {
             var mappings = await data.MovieStarrings.Where(m => m.MovieId == movieId).ToListAsync();
-            data.MovieStarrings.RemoveRange(mappings);
+            data.MovieStarrings.RemoveRange(mappings);            
         }
     }
 }

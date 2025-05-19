@@ -12,7 +12,7 @@ using MovieGalleryWebAPI.Data;
 namespace MovieGalleryWebAPI.Data.Migrations
 {
     [DbContext(typeof(MovieGalleryDbContext))]
-    [Migration("20250516203807_InitialMigration")]
+    [Migration("20250519071539_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

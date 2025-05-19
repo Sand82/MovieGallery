@@ -36,19 +36,11 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
             {
                 company = await CreateCompany(companyName);
             }
-            else
-            {
-                await RemoveMovieCompany(company, movie);
-            }
+            
+            company.Movies = new HashSet<Movie>();            
 
             return company;
-        }
-
-        public async Task RemoveMovieCompany(Company company, Movie movie)
-        {
-            company.Movies!.Remove(movie);
-            await data.SaveChangesAsync();
-        }
+        }        
 
         private async Task<Company> CreateCompany(string companyName) 
         {

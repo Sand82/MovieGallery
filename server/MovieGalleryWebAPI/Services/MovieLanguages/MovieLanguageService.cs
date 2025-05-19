@@ -57,7 +57,7 @@ namespace MovieGalleryWebAPI.Services.MovieLanguages
         {
             var mappings = await data.MovieLanguages.Where(ml => ml.MovieId == movieId).ToListAsync();
 
-            data.MovieLanguages.RemoveRange(mappings);
+            data.MovieLanguages.RemoveRange(mappings);            
         }
     }
 }
