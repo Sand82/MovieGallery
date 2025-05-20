@@ -27,5 +27,7 @@
         public string? CountryString { get; set; }
 
         public  string? LanguageString { get; set; }
+
+        public string? TagString { get; set; }
     }
 }

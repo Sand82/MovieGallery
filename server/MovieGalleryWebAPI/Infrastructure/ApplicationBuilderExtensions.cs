@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Seed;
+using MovieGalleryWebAPI.Services;
 using static MovieGalleryWebAPI.GlobalConstans;
 
 namespace MovieGalleryWebAPI.Infrastructure
@@ -638,108 +639,71 @@ namespace MovieGalleryWebAPI.Infrastructure
 
             var tags = new List<Tag>();
 
-            //seed tags
-
-            //Obi-Wan Kenobi
+            //seed tags            
             tags.Add(new Tag { Name = "star" });
             tags.Add(new Tag { Name = "jedi" });
             tags.Add(new Tag { Name = "mini serials" });
-            tags.Add(new Tag { Name = "dark power" });
-
-            //Thor: Love and Thunder
+            tags.Add(new Tag { Name = "dark power" });            
             tags.Add(new Tag { Name = "superhero" });
             tags.Add(new Tag { Name = "warrior" });
             tags.Add(new Tag { Name = "love" });
             tags.Add(new Tag { Name = "fantasy" });
-            tags.Add(new Tag { Name = "comics" });
-
-            //The Lord of the Rings: The Fellowship of the Ring
+            tags.Add(new Tag { Name = "comics" });            
             tags.Add(new Tag { Name = "wizard" });
             tags.Add(new Tag { Name = "hobbit" });
             tags.Add(new Tag { Name = "elf" });
             tags.Add(new Tag { Name = "dwarf" });
-            tags.Add(new Tag { Name = "fellowship" });
-
-            //The Lord of the Rings: The Two Towers
+            tags.Add(new Tag { Name = "fellowship" });            
             tags.Add(new Tag { Name = "fight" });
             tags.Add(new Tag { Name = "middle earth" });
             tags.Add(new Tag { Name = "good" });
-            tags.Add(new Tag { Name = "evil" });
-
-            //The Lord of the Rings: The Return of the King
+            tags.Add(new Tag { Name = "evil" });           
             tags.Add(new Tag { Name = "king" });
             tags.Add(new Tag { Name = "ring" });
-            tags.Add(new Tag { Name = "diversion" });
-
-            //Heat
+            tags.Add(new Tag { Name = "diversion" });            
             tags.Add(new Tag { Name = "band" });
             tags.Add(new Tag { Name = "police" });
-            tags.Add(new Tag { Name = "robbery" });
-
-            //Top Gun: Maverick
+            tags.Add(new Tag { Name = "robbery" });            
             tags.Add(new Tag { Name = "fly" });
             tags.Add(new Tag { Name = "plane" });
-            tags.Add(new Tag { Name = "top speed" });
-
-            //The Godfather Part II
+            tags.Add(new Tag { Name = "top speed" });            
             tags.Add(new Tag { Name = "mafia" });
             tags.Add(new Tag { Name = "family" });
             tags.Add(new Tag { Name = "head" });
-            tags.Add(new Tag { Name = "murderers" });
-
-            //The Godfather
-            tags.Add(new Tag { Name = "boos" });
+            tags.Add(new Tag { Name = "murderers" });            
+            tags.Add(new Tag { Name = "boss" });
             tags.Add(new Tag { Name = "mafia" });
             tags.Add(new Tag { Name = "blood" });
-
-            //The Fast and the Furious
             tags.Add(new Tag { Name = "speed" });
             tags.Add(new Tag { Name = "cars" });
             tags.Add(new Tag { Name = "girls" });
             tags.Add(new Tag { Name = "family" });
-
-
-            //F9: The Fast Saga
             tags.Add(new Tag { Name = "enemy" });
             tags.Add(new Tag { Name = "compete" });
-            tags.Add(new Tag { Name = "rase" });
-            tags.Add(new Tag { Name = "cars" });
-
-            //Die hard
+            tags.Add(new Tag { Name = "race" });
+            tags.Add(new Tag { Name = "cars" });            
             tags.Add(new Tag { Name = "hero" });
             tags.Add(new Tag { Name = "police" });
             tags.Add(new Tag { Name = "terrorists" });
-
-            //Die hard 2
             tags.Add(new Tag { Name = "plane" });
             tags.Add(new Tag { Name = "terrorists" });
             tags.Add(new Tag { Name = "hero" });
-
-            //Die Hard with a Vengeance
             tags.Add(new Tag { Name = "vengeance" });
             tags.Add(new Tag { Name = "bombs" });
             tags.Add(new Tag { Name = "hero" });
-
-
-            //Live Free or Die Hard
             tags.Add(new Tag { Name = "hero" });
             tags.Add(new Tag { Name = "hackers" });
-            tags.Add(new Tag { Name = "technologies" });
-
-            //Beautiful mind
+            tags.Add(new Tag { Name = "technologies" });            
             tags.Add(new Tag { Name = "sharp mind" });
             tags.Add(new Tag { Name = "family" });
-            tags.Add(new Tag { Name = "math" });
-
-            //Cinderella Man
+            tags.Add(new Tag { Name = "math" });           
             tags.Add(new Tag { Name = "sport" });
             tags.Add(new Tag { Name = "box" });
-            tags.Add(new Tag { Name = "family" });
-
-            //The Shawshank Redemption
+            tags.Add(new Tag { Name = "girl" });
+            tags.Add(new Tag { Name = "family" });           
             tags.Add(new Tag { Name = "prison" });
             tags.Add(new Tag { Name = "unfair" });
-            tags.Add(new Tag { Name = "friendship" }); 
+            tags.Add(new Tag { Name = "friendship" });           
 
             tags.Distinct().ToList();
 
@@ -771,6 +735,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Lucasfilm",
                 CountryString = "United States",
                 LanguageString = "English",
+                TagString = "star,jedi,mini serials,dark power",
             });
 
 
@@ -789,6 +754,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Marvel Studios",
                 CountryString = "Australia,United States",
                 LanguageString = "English",
+                TagString = "superhero,warrior,love,fantasy,comics",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -806,6 +772,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "New Line Cinema",
                 CountryString = "New Zealand,United States,United Kingdom",
                 LanguageString = "English,Sindarin",
+                TagString = "wizard,hobbit,elf,dwarf,fellowship",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -823,6 +790,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "New Line Cinema",
                 CountryString = "New Zealand,United States",
                 LanguageString = "English,Sindarin,Old English",
+                TagString = "fight,middle earth,good,evil",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -840,6 +808,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "New Line Cinema",
                 CountryString = "New Zealand,United States",
                 LanguageString = "English,Quenya,Old English,Sindarin",
+                TagString = "king,ring,diversion",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -857,6 +826,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Warner Bros",
                 CountryString = "United States",
                 LanguageString = "English,Spanish",
+                TagString = "band,police,robbery",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -874,6 +844,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Paramount Pictures",
                 CountryString = "United States",
                 LanguageString = "English",
+                TagString = "fly,plane,top speed",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -891,6 +862,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Paramount Pictures",
                 CountryString = "United States",
                 LanguageString = "English,Italian,Spanish,Latin,Sicilian",
+                TagString = "mafia,family,head,murderers",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -908,6 +880,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Paramount Pictures",
                 CountryString = "United States",
                 LanguageString = "English,Italian,Latin",
+                TagString = "boss,mafia,blood",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -925,6 +898,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Universal Pictures",
                 CountryString = "United States,Germany",
                 LanguageString = "English,Spanish",
+                TagString = "speed,cars,girls,family",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -942,6 +916,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "One Race Films",
                 CountryString = "United States,Thailand,Canada,Japan",
                 LanguageString = "English,Japanese,Spanish",
+                TagString = "enemy,compete,race,cars",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -959,6 +934,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Twentieth Century Fox",
                 CountryString = "United States",
                 LanguageString = "English,German,Italian,Japanese",
+                TagString = "hero,police,terrorists",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -976,6 +952,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Twentieth Century Fox",
                 CountryString = "United States",
                 LanguageString = "English,Spanish",
+                TagString = "plane,terrorists,hero",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -993,6 +970,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Cinergi Pictures Entertainment",
                 CountryString = "United States",
                 LanguageString = "English,German,Romanian",
+                TagString = "vengeance,bombs,hero",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -1010,6 +988,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Twentieth Century Fox",
                 CountryString = "United States,United Kingdom",
                 LanguageString = "English,Italian,French",
+                TagString = "hero,hackers,technologies",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -1027,6 +1006,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Universal Pictures",
                 CountryString = "United States",
                 LanguageString = "English",
+                TagString = "sharp mind,family,math",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -1044,6 +1024,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Universal Pictures",
                 CountryString = "United States",
                 LanguageString = "English",
+                TagString = "sport,box,family",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -1061,6 +1042,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Castle Rock Entertainment",
                 CountryString = "United States",
                 LanguageString = "English",
+                TagString = "prison,unfair,friendship",
             });
 
             moviesInfo.Add(new SeedMovies
@@ -1078,6 +1060,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                 Company = "Warner Bros",
                 CountryString = "United States",
                 LanguageString = "English,Irish,Gaelic,German",
+                TagString = "sport,box,girl",
             });
 
             var movies = GenerateMovies(moviesInfo, data);
@@ -1101,7 +1084,7 @@ namespace MovieGalleryWebAPI.Infrastructure
                     Duration = movieInfo.Duration,
                     EmbededVideo = movieInfo.EmbededVideo,
                     Release = movieInfo.ReleaseInfo,
-                    Company = data.Companies.FirstOrDefault(x => x.Name == movieInfo.Company),
+                    Company = data.Companies.FirstOrDefault(x => x.Name == movieInfo.Company),                    
             };                
 
                 var movieStarring = movieInfo.StartingString!.Split(",").ToList();
@@ -1131,13 +1114,27 @@ namespace MovieGalleryWebAPI.Infrastructure
                     currentMovie.MovieLanguages!.Add(new MovieLanguage { Language = currentLanguage!, Movie = currentMovie });
                 }
 
-                var movieCategory = movieInfo.CategoryString!.Split(',').ToList();
+                var movieCategory = movieInfo.CategoryString!.Split(",").ToList();
 
                 foreach (var categoryName in movieCategory)
                 {
                     var currentCategory = data.Categories.FirstOrDefault(x => x.Name == categoryName);
 
                     currentMovie.MovieCategories!.Add(new MovieCategory { Category = currentCategory!, Movie = currentMovie });
+                }
+
+                var movieTag = movieInfo.TagString!.Split(",").ToList();
+
+                foreach (var tagName in movieTag)
+                {
+                    var currentTag = data.Tags.FirstOrDefault(x => x.Name == tagName);
+
+                    if (currentTag == null)
+                    {
+                        continue;
+                    }
+
+                    currentMovie.MovieTags!.Add(new MovieTag { Tag = currentTag!, Movie = currentMovie });
                 }
 
                 var currentDirector = data.Directors.FirstOrDefault(x => x.Name == movieInfo.DirectorsString);
