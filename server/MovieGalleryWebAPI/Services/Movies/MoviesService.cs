@@ -18,6 +18,7 @@ using MovieGalleryWebAPI.Services.MovieCountries;
 using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Services.MovieCategories;
+using MovieGalleryWebAPI.Models.Tags;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -123,6 +124,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                 .Include(m => m.MovieCountries)
                 .Include(m => m.MovieLanguages) 
                 .Include(m => m.MovieCategories)
+                .Include(m => m.MovieTags)
                 .Where(m => m.Id == movieId && m.IsDelete == false)
                 .Select(m => new MovieDataModel
                 {
@@ -169,6 +171,14 @@ namespace MovieGalleryWebAPI.Service.Movies
                     { 
                         Id = ml.Language!.Id,
                         Name = ml.Language!.Name!,
+
+                    }).ToList(),
+
+                    Tags = m.MovieTags!.Where(m => m.MovieId == movieId)
+                    .Select(ml => new MovieTagsModel
+                    {
+                        Id = ml.Tag!.Id,
+                        Name = ml.Tag!.Name!,
 
                     }).ToList(),
 

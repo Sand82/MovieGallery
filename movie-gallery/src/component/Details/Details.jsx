@@ -18,7 +18,7 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);  
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     detailsHandler(movieId, user.id);
@@ -160,7 +160,7 @@ const Details = () => {
                 </div>
               </div>
 
-              <Description description={movie.description} />
+              <Description description={movie.description} tags={movie.tags}/>
 
               <div className="section-line">
                 <div className="section-head">

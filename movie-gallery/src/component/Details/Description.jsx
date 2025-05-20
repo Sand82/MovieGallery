@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Description = ({description}) => {
+import { arrayToString } from "../../services/HelperService.js"
+
+const Description = ({description, tags}) => {
+
+  console.log(tags)
 	
 return (
   <div className="section-line">
@@ -34,18 +38,8 @@ return (
         </div>
         <div className="col-auto">
           <div className="entity-links">
-            <div className="entity-list-title">Tags:</div>
-            <Link className="content-link" to="#">
-            family
-            </Link>
-            ,&nbsp;
-            <Link className="content-link" to="#">
-            gaming
-            </Link>
-            ,&nbsp;
-            <Link className="content-link" to="#">
-            historical
-            </Link>
+            <div className="entity-list-title">Tags:</div>            
+            {tags && arrayToString(tags)}            
           </div>
         </div>
       </div>

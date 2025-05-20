@@ -4,6 +4,7 @@ using MovieGalleryWebAPI.Models.Countries;
 using MovieGalleryWebAPI.Models.Directors;
 using MovieGalleryWebAPI.Models.Languages;
 using MovieGalleryWebAPI.Models.Starring;
+using MovieGalleryWebAPI.Models.Tags;
 
 namespace MovieGalleryWebAPI.Models.Movies
 {
@@ -17,9 +18,7 @@ namespace MovieGalleryWebAPI.Models.Movies
                 
         public string? ImageUrl { get; set; }
 
-        public string? Year { get; set; }
-
-        //public string? Category { get; set; }
+        public string? Year { get; set; }       
 
         public string? Duration { get; set; }
 
@@ -46,5 +45,7 @@ namespace MovieGalleryWebAPI.Models.Movies
         public ICollection<MovieLanguagesModel>? Languages { get; set; }
 
         public ICollection<MovieCategoryModel>? Categories { get; set; }
+
+        public ICollection<MovieTagsModel>? Tags { get; set; }
     }
 }
