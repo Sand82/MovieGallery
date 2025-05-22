@@ -17,7 +17,7 @@
 </ul>
 <h3>Endpoints diagram</h3>
 
-![swagger](https://github.com/user-attachments/assets/367bf0dd-c67d-427a-afee-c8a2fb2a8140)
+![Endpoints](https://github.com/user-attachments/assets/ec0279f9-e722-4d72-86cb-be29cbd765f5)
 
 <h3>Database diagram</h3>
 
