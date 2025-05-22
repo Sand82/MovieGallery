@@ -51,6 +51,7 @@ const Tags = () => {
 			Create Tag
 		</button>			
 		</div>
+		
 		<div className="col-6 mt-3">
 			{tagList.map((t) => (
 				<Tag key={t} value={t} />
