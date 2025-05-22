@@ -5,14 +5,13 @@
 <h3>Build in</h3>
 <ul>
   <li>ASP.NET Core 6.0</li>
+  <li>Web Api</li>
   <li>Entity Framework (EF) Core 6.0</li>
   <li>Microsoft SQL Server</li> 
   <li>Dependency Injection</li>
   <li>Json Web Token Authorization</li>
-  <li>Server Side Data Validation</li> 
-  <li>Web Api</li>
-  <li>Automapper</li>
-  <li>Server site sorting searching and pagination</li>   
+  <li>Server Side Data Validation</li>
+  <li>Server site sorting, searching and pagination</li>   
   <li>Swagger</li>
 </ul>
 <h3>Endpoints diagram</h3>
