@@ -29,6 +29,7 @@
 <h3>Build in</h3>
 <ul>
   <li>React</li>
+  <li>Bootstrap 5</li>
   <li>Functional Components</li>
   <li>Hooks: Reducer, State, Effect, Params, Context, Callback, Custom and more</li>
   <li>Provider Pattern</li>
@@ -42,6 +43,7 @@
   <li>Reusable components</li>
   <li>Embeded videos</li>
   <li>CSS modules</li>
+  <li>Responsive design</li>
   <li>Integrate Google Maps</li>
   <li>Integrate Gmail owner</li>
   <li>Integrate Rich text editor</li>
