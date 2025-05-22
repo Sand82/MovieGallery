@@ -7,6 +7,7 @@ import TextEditor from "../UI/TextEditor/TextEditor.jsx";
 import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
 import MultiSelect from "../UI/MultiSelect/MultiSelect.jsx";
+import Tags from "../UI/Tags/Tags.jsx"
 import { convertToOptions, convertToEntity } from "../../services/HelperService.js"
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
@@ -220,7 +221,8 @@ const ManageMovie = ({ isCreated }) => {
             <div className="mt-5 mb-5 section-head">
               <h2 className="section-title text-uppercase">{movieActionType} Movie</h2>
             </div>
-              <form onSubmit={manageMovieHandler}>                
+              <form onSubmit={manageMovieHandler}> 
+                                          
                 <div className="row mb-4">                  
                   <div className="col-12 col-md-6">
                     <Input
@@ -246,7 +248,7 @@ const ManageMovie = ({ isCreated }) => {
                       error={companyHasError && `company should be between ${GlobalConstant.companyMinLength} and ${GlobalConstant.companyMaxLength} symbols.`}
                     />                
                   </div>                  
-                </div> 
+                </div>                
                 <div className="row mb-4">
                   <div className="col-12 col-md-4">
                     <Input
@@ -359,7 +361,13 @@ const ManageMovie = ({ isCreated }) => {
                         onChange={startingInputHandler}
                       />
                   </div>
-                </div>                           
+                </div>
+                 <div className="row mb-4">                  
+                  <div className="col-12">
+                    <Tags />
+                  </div>                  
+                </div>   
+                                          
                 <div className="row mb-5">
                   <div className="col-12">
                     <TextEditor 

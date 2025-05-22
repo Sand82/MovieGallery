@@ -2,8 +2,8 @@
   position: relative;
   height: 45vh;
   overflow: hidden;
-  min-height: 13rem;
   box-shadow: 0 1.2rem 3.2rem rgba(20, 20, 20, 0.4);
+  max-height: 24rem;
 }
 
 .backgroundImage {

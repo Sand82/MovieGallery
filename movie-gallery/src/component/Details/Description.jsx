@@ -39,7 +39,7 @@ return (
         <div className="col-auto">
           <div className="entity-links">
             <div className="entity-list-title">Tags:</div>            
-            {tags && arrayToString(tags)}            
+            {tags && tags.length > 0 ? arrayToString(tags) : "No createed tags for that movie."}            
           </div>
         </div>
       </div>
