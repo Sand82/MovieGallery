@@ -17,11 +17,11 @@
 </ul>
 <h3>Endpoints diagram</h3>
 
-![swagger](https://github.com/user-attachments/assets/367bf0dd-c67d-427a-afee-c8a2fb2a8140)
+![Endpoints](https://github.com/user-attachments/assets/ec0279f9-e722-4d72-86cb-be29cbd765f5)
+
 <h3>Database diagram</h3>
 
-![database-diagram](https://github.com/user-attachments/assets/00490c1a-802b-4590-ab2c-0309a8cb6707)
-
+![DB-diagram](https://github.com/user-attachments/assets/54e344e9-dd63-497c-9a47-919e78fac926)
 
 <h2>Client-side</h2>
 <p> MovieGallery is written on React JS for my project defence. It is application for movies, basic version on IMDb (Internet Movie Database), User part and Admin part. Like User you can create your unique account, manage favorite list of movies, rate movies, post comments in comment section. In Contact us page Users can send messages to application owner. From Administration part you can manage the application. All movie CRUD operation are available.</p>
@@ -29,6 +29,7 @@
 <h3>Build in</h3>
 <ul>
   <li>React</li>
+  <li>Bootstrap 5</li>
   <li>Functional Components</li>
   <li>Hooks: Reducer, State, Effect, Params, Context, Callback, Custom and more</li>
   <li>Provider Pattern</li>
@@ -42,6 +43,7 @@
   <li>Reusable components</li>
   <li>Embeded videos</li>
   <li>CSS modules</li>
+  <li>Responsive design</li>
   <li>Integrate Google Maps</li>
   <li>Integrate Gmail owner</li>
   <li>Integrate Rich text editor</li>
@@ -51,53 +53,55 @@
 <h3>Screen shots of some views</h3>
 
 View from Home page upper part.
-![Home_part_1](https://github.com/user-attachments/assets/e075164d-81a6-4950-a280-569665975d6c)
+![Home-upper-part](https://github.com/user-attachments/assets/eed16fd1-4a3d-4ab7-8409-ef3fe771910c)
 
 View from Home page middle part.
-![Home_part_2](https://github.com/user-attachments/assets/14268cc5-1b3b-4b76-a52d-c2b2feb675a3)
+![Home-middle-part](https://github.com/user-attachments/assets/62227a66-1e9a-4e6e-ba04-c639d5cc2105)
 
 View from Home page down part.
-![Home_part_3](https://github.com/user-attachments/assets/33cdf55c-e6bc-4038-8903-b8b81ae46899)
+![Home-down-part](https://github.com/user-attachments/assets/e4f9e942-6355-4c1e-93c7-c2264b146161)
 
 View from Movies upper part.
-![Movies_part_1](https://github.com/user-attachments/assets/bc9d90dd-8a27-4a36-96c3-183dd2d4d46b)
+![Movie-upper-part](https://github.com/user-attachments/assets/12627c38-db88-446b-a3eb-c73125d8b12e)
 
 View from Movies down part.
-![Movies_part_2](https://github.com/user-attachments/assets/f68b823b-231d-47f1-9a8c-16edee6f6ae1)
+![Movie-down-part](https://github.com/user-attachments/assets/5654a900-919f-4ded-8fc5-7aba2e923afe)
 
 View from movie Details page upper part admin account.
-![Details_admin](https://github.com/user-attachments/assets/9e9762a9-ff25-49a7-8cea-455346a29d5c)
+![Details-admin-upper-part](https://github.com/user-attachments/assets/af489123-4bbd-48dc-b797-7ffa3b47f2cc)
 
 View from movie Details page upper part user account.
-![Details_user_part_1](https://github.com/user-attachments/assets/53fd3f86-53d4-4f2a-a591-21b27acd967c)
+![Datails-user-part](https://github.com/user-attachments/assets/a9bcae13-1bd4-4f41-97e1-b883b131f2e3)
 
 View from movie Details page down part.
-![Details_user_part_2](https://github.com/user-attachments/assets/f4fe1b71-66ff-4337-9de2-224e8e6f26dc)
+![Details-down-part](https://github.com/user-attachments/assets/7df3c703-e23b-43d4-bbe7-a5babecaf62e)
 
 View from Favorite page upper part.
-![Favorite_part_1](https://github.com/user-attachments/assets/4171e584-6f40-4f84-bc93-facecf361458)
+![Favorite-upper-part](https://github.com/user-attachments/assets/9681fc60-e8e5-4d6d-9a74-978a6a5dbcf2)
 
 View from Favorite page down part.
-![Favorite_part_2](https://github.com/user-attachments/assets/5387d471-0c3a-4365-8138-b0e60ee7a8d3)
+![Favorite-down-part](https://github.com/user-attachments/assets/99620e81-8fcc-4f97-af6f-1e6889fad6d0)
 
 View from Contact As page upper part.
-![ContactAs_part_1](https://github.com/user-attachments/assets/933c26f2-2685-4a45-995e-b99c6fb8f5bb)
+![Contact-upper-part](https://github.com/user-attachments/assets/fdc88767-86e1-40fd-8769-43f1276beb19)
 
 View from Contact As page down part.
-![ContactAs_part_2](https://github.com/user-attachments/assets/9924c542-4b72-4ae4-9922-d162160a0bd3)
+![Contact-down-part](https://github.com/user-attachments/assets/57690519-b1b6-40a3-a49d-39bcec5c6ad5)
 
 View from Video page
-![video-page](https://github.com/user-attachments/assets/27f6556a-9999-4524-acc1-b1b411120f75)
+![Movie-page](https://github.com/user-attachments/assets/93c8e928-4179-4384-b220-16ad77147417)
 
 View from some Forms.
-![Login](https://github.com/user-attachments/assets/2c813ecf-e59f-4f85-ae90-c31f70b2fef8)
+![login-form](https://github.com/user-attachments/assets/902a5ff3-ea84-4cb1-bdcd-b3e020c92276)
 
-![register](https://github.com/user-attachments/assets/402620fe-8845-454b-b6f9-efcb54b59a4e)s
+![Register-form](https://github.com/user-attachments/assets/e8513e61-67c8-4c68-81a5-a16e4be53b68)
 
-![Create_movie_form](https://github.com/user-attachments/assets/3b4d9580-9e34-4caa-9552-b973eaab01aa)
+![Creat-upper-part](https://github.com/user-attachments/assets/a34260f6-1f9c-4cad-a48e-909b0efe67c5)
 
-![Edit_movie_form](https://github.com/user-attachments/assets/166cc09e-9ab3-4028-be95-a15821f15b0e)
+![Create-down-part](https://github.com/user-attachments/assets/7a5de220-661f-4253-ab3e-f16ac02b438e)
 
+![Edit-upper-part](https://github.com/user-attachments/assets/be907f49-225b-472b-b604-623275775896)
 
+![Edit-down-part](https://github.com/user-attachments/assets/7ec5d087-2045-4415-b386-5ad6bf8fb2d1)
 
 
