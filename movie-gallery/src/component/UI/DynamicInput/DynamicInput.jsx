@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import * as GlobalConstants from "../../../constants/GlobalConstants.js"
-import styels from "./DynamicInput.module.css"
+import styles from "./DynamicInput.module.css"
 import Error from "../Error/Error.jsx"
 import { hasLength } from "../../../services/Validators.js"
 
@@ -49,8 +49,8 @@ const DynamicInput = ({sectionName, inputData, onChange}) => {
 	}
 
   return(
-		<div className={styels["dynamic-container"]}>
-			<h2 className={`container ${styels["dynamic-title"]}`}>{sectionName}</h2>
+		<div className={styles["dynamic-container"]}>
+			<h2 className={`container ${styles["dynamic-title"]}`}>{sectionName}</h2>
     	<div className="row">
 			
 			{inputFields.map((input, index) => {

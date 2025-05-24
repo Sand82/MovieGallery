@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import Tag from "./Tag.jsx"
+import Tag from "./Tag/Tag.jsx"
 import Error from "../Error/Error.jsx";
+import styles from "./Tags.module.css"
 
 const Tags = () => {
 	const [tagList, setTagList] = useState([]);
@@ -33,32 +34,40 @@ const Tags = () => {
 		}
 	};
 
-	return (
-		
-	<div className="row">		
-		<div className="col-6">
-			<label className="form-label" htmlFor="tag">Tag</label>
-			<input
-				className="form-control"
-				type="text"
-				name="tag"
-				value={tag}
-				onChange={changeTagHandler}
-				onBlur={errorHandler}
-			/>
-			{error && <Error error="Tag should be a unique value." />}
-			<button className="btn btn-secondary mt-2" disabled={error} onClick={createTagHandler}>
-			Create Tag
-		</button>			
-		</div>
-		
-		<div className="col-6 mt-3">
-			{tagList.map((t) => (
-				<Tag key={t} value={t} />
-			))}
-		</div>
-	</div>	
-	
+	const tagRemoveHandler = (value) => {
+		setTagList(state => state.filter(t => t !== value))
+	}
+
+	return (	
+	<div className={`container ${styles["tags-container"]}`}>
+		<h2 className={styles["tags-title"]}>Tags section</h2>
+		<div className="row">
+			<div className="col-4">
+				<label className="form-label" htmlFor="tag">Tag</label>
+				<input
+					className="form-control"
+					type="text"
+					name="tag"
+					value={tag}
+					onChange={changeTagHandler}
+					onBlur={errorHandler}
+				/>
+				<div>
+					{error && <Error error="Tag should be a unique value." />}
+				</div>
+
+				<button className="btn btn-secondary mt-4" disabled={error} onClick={createTagHandler}>
+				Create Tag
+			</button>			
+			</div>
+
+			<div className="col-8 mt-4">
+				{tagList.map((t) => (
+					<Tag key={t} value={t} tagRemoveHandler={tagRemoveHandler} />
+				))}
+			</div>
+		</div>	
+	</div>
 	);
 };
 
