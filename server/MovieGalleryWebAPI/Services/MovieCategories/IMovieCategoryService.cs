@@ -1,6 +1,5 @@
 ﻿using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Category;
-using MovieGalleryWebAPI.Models.Countries;
 
 namespace MovieGalleryWebAPI.Services.MovieCategories
 {

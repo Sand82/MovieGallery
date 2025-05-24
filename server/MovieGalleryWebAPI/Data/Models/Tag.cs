@@ -1,5 +1,4 @@
-﻿using MovieGalleryWebAPI.Services;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 using static MovieGalleryWebAPI.Data.Constant;
 

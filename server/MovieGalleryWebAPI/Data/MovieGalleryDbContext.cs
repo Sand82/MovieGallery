@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 
 using MovieGalleryWebAPI.Data.Models;
-using MovieGalleryWebAPI.Services;
 
 namespace MovieGalleryWebAPI.Data
 {

@@ -4,21 +4,22 @@ import Tag from "./Tag/Tag.jsx"
 import Error from "../Error/Error.jsx";
 import styles from "./Tags.module.css"
 
-const Tags = () => {
+const Tags = ({tagHandler}) => {
 	const [tagList, setTagList] = useState([]);
 	const [tag, setTag] = useState("");
-	const [error, setError] = useState(false);
+	const [error, setError] = useState(false);	
 
 	const createTagHandler = (e) => {
 		e.preventDefault();		
 
 		if (tag && !tagList.includes(tag)) {
 			setTagList([...tagList, tag]);
-			setTag("");
+			setTag("");			
 			setError(false);
+			tagHandler([...tagList, tag]);			
 		} else {
 			setError(true);
-		}
+		}		
 	};
 
 	const changeTagHandler = (e) => {
@@ -40,7 +41,7 @@ const Tags = () => {
 
 	return (	
 	<div className={`container ${styles["tags-container"]}`}>
-		<h2 className={styles["tags-title"]}>Tags section</h2>
+		<h2 className={styles["tags-title"]}>Tag section</h2>
 		<div className="row">
 			<div className="col-4">
 				<label className="form-label" htmlFor="tag">Tag</label>

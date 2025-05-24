@@ -1,6 +1,4 @@
-﻿using MovieGalleryWebAPI.Data.Models;
-
-namespace MovieGalleryWebAPI.Services
+﻿namespace MovieGalleryWebAPI.Data.Models
 {
     public class MovieTag
     {

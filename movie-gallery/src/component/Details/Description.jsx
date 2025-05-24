@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 
 import { arrayToString } from "../../services/HelperService.js"
 
-const Description = ({description, tags}) => {
-
-  console.log(tags)
+const Description = ({description, tags}) => { 
 	
 return (
   <div className="section-line">

@@ -59,7 +59,9 @@ namespace MovieGalleryWebAPI.Controllers
             if (isExist)
             {
                 return BadRequest("Movie already exist.");
-            }            
+            }
+
+            ;
 
             await moviesService.CreateMovie(model);
             

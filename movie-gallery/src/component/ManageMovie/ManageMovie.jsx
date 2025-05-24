@@ -34,6 +34,8 @@ const ManageMovie = ({ isCreated }) => {
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );
   
+  const [tags, setTags] = useState([]);
+  
   const {
     value: titleValue,
     changeHandler: titleChangeHandler,
@@ -147,6 +149,10 @@ const ManageMovie = ({ isCreated }) => {
     setDirectorValue(newValues);
   }
 
+  const tagHandler = (value) => {    
+    setTags(value);
+  } 
+
   const manageMovieHandler = (e) => {
     e.preventDefault();
     
@@ -169,9 +175,8 @@ const ManageMovie = ({ isCreated }) => {
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
       categories: convertToEntity(categoriesOptions),
+      tags: tags,
     };
-    
-    console.log(movieData)
 
     if (isCreated) {
       createHandler(movieData);
@@ -362,12 +367,11 @@ const ManageMovie = ({ isCreated }) => {
                       />
                   </div>
                 </div>
-                 <div className="row mb-4">                  
+                <div className="row mb-4">                  
                   <div className="col-12">
-                    <Tags />
+                    <Tags tagHandler={tagHandler}/>
                   </div>                  
-                </div>   
-                                          
+                </div>                                          
                 <div className="row mb-5">
                   <div className="col-12">
                     <TextEditor 

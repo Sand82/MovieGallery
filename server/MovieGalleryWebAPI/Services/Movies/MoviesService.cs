@@ -19,6 +19,7 @@ using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Services.MovieCategories;
 using MovieGalleryWebAPI.Models.Tags;
+using MovieGalleryWebAPI.Services.MovieTags;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -33,6 +34,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly IMovieCountriesService movieCountriesService;
         private readonly IMovieLanguageService movieLanguageService;
         private readonly IMovieCategoryService movieCategoryService;
+        private readonly IMovieTagService movieTagService;      
 
         public MoviesService(
             MovieGalleryDbContext data,
@@ -43,7 +45,8 @@ namespace MovieGalleryWebAPI.Service.Movies
             IMovieStarringService movieStarringService,
             IMovieCountriesService movieCountriesService,
             IMovieLanguageService movieLanguageService,
-            IMovieCategoryService movieCategoryService
+            IMovieCategoryService movieCategoryService,
+            IMovieTagService movieTagService
             )
         {
             this.data = data;
@@ -55,6 +58,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.movieCountriesService = movieCountriesService;
             this.movieLanguageService = movieLanguageService;
             this.movieCategoryService = movieCategoryService;
+            this.movieTagService = movieTagService;
         }
 
         public async Task<MovieGetModel> GetLastMovie()
@@ -228,7 +232,12 @@ namespace MovieGalleryWebAPI.Service.Movies
             await movieDirectorsService.AddMovieDirectors(model.Directors!, movie);
             await movieStarringService.AddMovieStarring(model.Starring!, movie);
             await movieCountriesService.AddMovieCountries(model.Countries!, movie);
-            await movieLanguageService.AddMovieLanguages(model.Languages!, movie);            
+            await movieLanguageService.AddMovieLanguages(model.Languages!, movie);
+
+            if (model.Tags?.Count > 0)
+            {
+                await movieTagService.AddMovieTags(model.Tags!, movie);
+            }
         }
 
         public async Task<bool> EditMovie(MovieEditModel model)

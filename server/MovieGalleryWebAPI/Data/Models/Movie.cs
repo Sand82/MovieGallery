@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using MovieGalleryWebAPI.Services;
-
 using static MovieGalleryWebAPI.Data.Constant;
 
 namespace MovieGalleryWebAPI.Data.Models
-{    
+{
     public class Movie
     {
         public Movie()
