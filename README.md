@@ -1,5 +1,5 @@
-<h1>MovieGallery</h1>
-<div>Project application for the React JS June 2022 course SoftUni university.</div>
+<h1>🎬 MovieGallery</h1>
+<div>MovieGallery is a full-stack web application developed with React JS on the frontend and ASP.NET Core on the backend, providing a responsive user interface and robust server-side functionality, inspired by the core features of IMDb (Internet Movie Database).</div>
 <h2>Server-side</h2>
 <p>ASP.NET Core Web API with Entity Framework Core, both on version 6.0, MSSQL Ralation Database code first approach.</p>
 <h3>Build in</h3>
@@ -23,7 +23,26 @@
 ![DB-diagram](https://github.com/user-attachments/assets/54e344e9-dd63-497c-9a47-919e78fac926)
 
 <h2>Client-side</h2>
-<p> MovieGallery is written on React JS for my project defence. It is application for movies, basic version on IMDb (Internet Movie Database), User part and Admin part. Like User you can create your unique account, manage favorite list of movies, rate movies, post comments in comment section. In Contact us page Users can send messages to application owner. From Administration part you can manage the application. All movie CRUD operation are available.</p>
+
+<p>Client-side part includes both <strong>User</strong> and <strong>Admin</strong> roles, each with distinct functionality and interface.</p>
+
+<h2>👤 User Features:</h2>
+<ul>
+  <li><strong>User Authentication:</strong> Create and manage personal accounts.</li>
+  <li><strong>Favorites Management:</strong> Add or remove movies from a personalized favorites list.</li>
+  <li><strong>Movie Ratings:</strong> Rate movies based on personal preferences.</li>
+  <li><strong>Comment System:</strong> Post and view comments for each movie.</li>
+  <li><strong>Contact Page:</strong> Send messages or inquiries directly to the application owner via the "Contact Us" form.</li>
+</ul>
+
+<h2>🛠️ Admin Features:</h2>
+<ul>
+  <li><strong>Movie Management:</strong> Full <abbr title="Create, Read, Update, Delete">CRUD</abbr> operations for managing movie entries.</li>
+  <li><strong>Content Moderation:</strong> Oversee user-generated content such as comments and ratings (if implemented).</li>
+</ul>
+
+<p>This project demonstrates the use of modern web development practices including component-based architecture, state management, and form handling in React. It serves as a solid foundation for a scalable movie-related platform.</p>
+
 
 <h3>Build in</h3>
 <ul>
