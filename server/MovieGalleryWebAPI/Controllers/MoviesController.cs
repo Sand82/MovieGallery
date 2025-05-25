@@ -59,9 +59,7 @@ namespace MovieGalleryWebAPI.Controllers
             if (isExist)
             {
                 return BadRequest("Movie already exist.");
-            }
-
-            ;
+            }            
 
             await moviesService.CreateMovie(model);
             
@@ -81,8 +79,8 @@ namespace MovieGalleryWebAPI.Controllers
             if (!isAdmin)
             {
                 return BadRequest("Authorization denied.");
-            }
-
+            }            
+            
             var movie = await moviesService.EditMovie(model);
 
             return Ok(movie);

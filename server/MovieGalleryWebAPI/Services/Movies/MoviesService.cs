@@ -268,13 +268,16 @@ namespace MovieGalleryWebAPI.Service.Movies
             movie.CompanyId = company.Id;
             movie.Company = company;
 
+            await this.data.SaveChangesAsync();
+
+            await movieTagService.EditMovieTags(model.Tags!, movie);
             await movieStarringService.EditMovieStarring(model, movie);
-            await movieDirectorsService.EditMovieDirectors(model, movie);
+            await movieDirectorsService.EditMovieDirectors(model, movie);            
 
             await movieCategoryService.EditMovieCategories(model.Categories!, movie);            
             await movieCountriesService.EditMovieCountries(model.Countries!, movie);
-            await movieLanguageService.EditMovieLanguages(model.Languages!, movie);            
-            
+            await movieLanguageService.EditMovieLanguages(model.Languages!, movie);
+
             await this.data.SaveChangesAsync();
 
             return isEdited;

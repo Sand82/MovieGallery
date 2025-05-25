@@ -61,6 +61,10 @@ export const arrayToString = (arr) => {
   return arr.map((obj) => obj.name).join(", ");
 };
 
+export const objectArrayToStringArray = (arr) => {
+  return arr.map(item => item.name);
+}
+
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");
   text = text.replace(/<\/?[^>]+(>|$)/g, "");

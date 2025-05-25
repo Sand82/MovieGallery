@@ -59,5 +59,7 @@ namespace MovieGalleryWebAPI.Models.Edit
         public ICollection<MovieCountriesModel>? Countries { get; set; }
 
         public ICollection<MovieLanguagesModel>? Languages { get; set; }
+
+        public ICollection<string>? Tags { get; set; }
     }
 }

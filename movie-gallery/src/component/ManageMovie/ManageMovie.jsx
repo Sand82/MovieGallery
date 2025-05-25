@@ -8,7 +8,7 @@ import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
 import MultiSelect from "../UI/MultiSelect/MultiSelect.jsx";
 import Tags from "../UI/Tags/Tags.jsx"
-import { convertToOptions, convertToEntity } from "../../services/HelperService.js"
+import { convertToOptions, convertToEntity, objectArrayToStringArray } from "../../services/HelperService.js"
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
@@ -32,7 +32,7 @@ const ManageMovie = ({ isCreated }) => {
   const [directorValue, setDirectorValue] = useState(isCreated && movie
     ? [] 
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
-  );
+  );  
   
   const [tags, setTags] = useState([]);
   
@@ -369,7 +369,7 @@ const ManageMovie = ({ isCreated }) => {
                 </div>
                 <div className="row mb-4">                  
                   <div className="col-12">
-                    <Tags tagHandler={tagHandler}/>
+                    <Tags tagHandler={tagHandler} defaultValue={objectArrayToStringArray(movie.tags)} />
                   </div>                  
                 </div>                                          
                 <div className="row mb-5">

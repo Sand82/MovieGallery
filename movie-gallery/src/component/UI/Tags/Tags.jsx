@@ -4,8 +4,9 @@ import Tag from "./Tag/Tag.jsx"
 import Error from "../Error/Error.jsx";
 import styles from "./Tags.module.css"
 
-const Tags = ({tagHandler}) => {
-	const [tagList, setTagList] = useState([]);
+const Tags = ({tagHandler, defaultValue}) => {
+	
+	const [tagList, setTagList] = useState(defaultValue);
 	const [tag, setTag] = useState("");
 	const [error, setError] = useState(false);	
 
@@ -37,6 +38,7 @@ const Tags = ({tagHandler}) => {
 
 	const tagRemoveHandler = (value) => {
 		setTagList(state => state.filter(t => t !== value))
+		tagHandler(tagList.filter(t => t !== value));
 	}
 
 	return (	

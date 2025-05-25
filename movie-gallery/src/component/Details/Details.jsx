@@ -18,7 +18,7 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);   
 
   useEffect(() => {
     detailsHandler(movieId, user.id);
