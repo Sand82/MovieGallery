@@ -266,9 +266,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             var company = await companyService.EditMovieCompany(model.Company!, movie);
             movie.CompanyId = company.Id;
-            movie.Company = company;
-
-            await this.data.SaveChangesAsync();
+            movie.Company = company;            
 
             await movieTagService.EditMovieTags(model.Tags!, movie);
             await movieStarringService.EditMovieStarring(model, movie);
