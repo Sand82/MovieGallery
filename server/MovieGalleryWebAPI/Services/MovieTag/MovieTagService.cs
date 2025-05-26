@@ -43,7 +43,9 @@ namespace MovieGalleryWebAPI.Services.MovieTags
                 movie.MovieTags = new List<MovieTag>();
             }
             
-            await RemoveMovieTags(movie.Id);
+            await RemoveMovieTags(movie.Id);            
+
+            var movieExists = await this.data.Movies.AnyAsync(m => m.Id == movie.Id);
 
             var currentMovieTags = new List<MovieTag>();
 
@@ -60,8 +62,8 @@ namespace MovieGalleryWebAPI.Services.MovieTags
 
                 currentMovieTags.Add(new MovieTag
                 {
-                    Movie = movie,
-                    TagId = currentTag.Id
+                    MovieId = movie.Id,
+                    Tag = currentTag
                 });
             }
 
@@ -72,9 +74,7 @@ namespace MovieGalleryWebAPI.Services.MovieTags
         public async Task RemoveMovieTags(int movieId)
         {
             var mappings = await this.data.MovieTags.Where(m => m.MovieId == movieId).ToListAsync();
-            this.data.MovieTags.RemoveRange(mappings);
-
-            await this.data.SaveChangesAsync();                                                                                                                  
+            this.data.MovieTags.RemoveRange(mappings);                                                                                                                             
         }
     }
 }

@@ -8,6 +8,6 @@ namespace MovieGalleryWebAPI.Services.MovieTags
 
         public Task EditMovieTags(ICollection<string> tags, Movie movie);
 
-        public Task RemoveMovieTags(int movieId);
+        //public Task RemoveMovieTags(int movieId);
     }
 }

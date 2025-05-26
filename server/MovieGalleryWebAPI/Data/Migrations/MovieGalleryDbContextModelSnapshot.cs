@@ -507,6 +507,21 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.ToTable("MovieStarrings");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieTag", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovieId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("MovieTags");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Rating", b =>
                 {
                     b.Property<int>("Id")
@@ -568,21 +583,6 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("MovieGalleryWebAPI.Services.MovieTag", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MovieId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("MovieTags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -780,6 +780,25 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Starring");
                 });
 
+            modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.MovieTag", b =>
+                {
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
+                        .WithMany("MovieTags")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieGalleryWebAPI.Data.Models.Tag", "Tag")
+                        .WithMany("MovieTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Rating", b =>
                 {
                     b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
@@ -797,25 +816,6 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MovieGalleryWebAPI.Services.MovieTag", b =>
-                {
-                    b.HasOne("MovieGalleryWebAPI.Data.Models.Movie", "Movie")
-                        .WithMany("MovieTags")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieGalleryWebAPI.Data.Models.Tag", "Tag")
-                        .WithMany("MovieTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("MovieGalleryWebAPI.Data.Models.Category", b =>

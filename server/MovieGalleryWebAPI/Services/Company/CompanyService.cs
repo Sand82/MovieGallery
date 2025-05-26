@@ -30,14 +30,19 @@ namespace MovieGalleryWebAPI.Services.MovieCompany
 
         public async Task<Company> EditMovieCompany(string companyName, Movie movie)
         {
-            var company = await this.data.Companies.FirstOrDefaultAsync(c => c.Name == companyName);
+            var company = await this.data.Companies
+                .Include(c => c.Movies)
+        .       FirstOrDefaultAsync(c => c.Name == companyName);
 
             if (company == null)
             {
                 company = await CreateCompany(companyName);
             }
-            
-            company.Movies = new HashSet<Movie>();            
+
+            if (!company!.Movies!.Contains(movie))
+            {
+                company.Movies.Add(movie);
+            }
 
             return company;
         }        

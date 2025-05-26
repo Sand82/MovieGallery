@@ -8,6 +8,7 @@ import DynamicInput from "../UI/DynamicInput/DynamicInput.jsx";
 import style from "./ManageMove.module.css";
 import MultiSelect from "../UI/MultiSelect/MultiSelect.jsx";
 import Tags from "../UI/Tags/Tags.jsx"
+import FildInput from "../UI/FileInput/FileInput.jsx"
 import { convertToOptions, convertToEntity, objectArrayToStringArray } from "../../services/HelperService.js"
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
@@ -34,7 +35,7 @@ const ManageMovie = ({ isCreated }) => {
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );  
   
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);  
   
   const {
     value: titleValue,
@@ -267,20 +268,18 @@ const ManageMovie = ({ isCreated }) => {
                       error={yearHasError && `Year should be exact ${GlobalConstant.yearLength} symbols.`}
                     />
                   </div>
-
                   <div className="col-12 col-md-4">
                     <Input
-                      label="Image Link"
+                      label="You Tude Embeded Video Code"
                       type="text"
-                      name="imageUrl"
+                      name="embededVideo"
                       className="form-control"
-                      value={imageUrlValue}
-                      onChange={imageUrlChangeHandler}
-                      onBlur={imageUrlInputBluerHandler}
-                      error={imageUrlHasError && `Image link should be a valid URL.`}
+                      value={embededVideoValue}
+                      onChange={embededVideoChangeHandler}
+                      onBlur={embededVideoInputBluerHandler}
+                      error={embededVideoHasError && `Embeded video code should be exact ${GlobalConstant.embededVideoLength} symbols.`}
                     />
                   </div>
-
                   <div className="col-12 col-md-4">
                     <Input
                       label="Duration"
@@ -306,19 +305,20 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={releaseInputBluerHandler}
                       error={releaseHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
                     />
-                  </div>                  
-                  <div className="col-12 col-md-6">
-                    <Input
-                      label="You Tude Embeded Video Code"
-                      type="text"
-                      name="embededVideo"
-                      className="form-control"
-                      value={embededVideoValue}
-                      onChange={embededVideoChangeHandler}
-                      onBlur={embededVideoInputBluerHandler}
-                      error={embededVideoHasError && `Embeded video code should be exact ${GlobalConstant.embededVideoLength} symbols.`}
-                    />
                   </div>
+                  {/* <div className="col-12 col-md-6">
+                    <Input
+                      label="Image Link"
+                      type="text"
+                      name="imageUrl"
+                      className="form-control"
+                      value={imageUrlValue}
+                      onChange={imageUrlChangeHandler}
+                      onBlur={imageUrlInputBluerHandler}
+                      error={imageUrlHasError && `Image link should be a valid URL.`}
+                    />
+                  </div>                   */}
+                  <FildInput />
                 </div> 
                 <div className="row mb-5">
                   <div className="col-12 col-md-4">
@@ -358,7 +358,7 @@ const ManageMovie = ({ isCreated }) => {
                       />
                   </div>
                 </div>
-                <div className="row mb-4">
+                <div className="row mb-5">
                   <div className="col-12">
                       <DynamicInput 
                         sectionName={"Starring Section"} 
@@ -367,9 +367,9 @@ const ManageMovie = ({ isCreated }) => {
                       />
                   </div>
                 </div>
-                <div className="row mb-4">                  
+                <div className="row mb-5">                  
                   <div className="col-12">
-                    <Tags tagHandler={tagHandler} defaultValue={objectArrayToStringArray(movie.tags)} />
+                    <Tags tagHandler={tagHandler} defaultValue={movie.tags ? objectArrayToStringArray(movie.tags) : []} />
                   </div>                  
                 </div>                                          
                 <div className="row mb-5">
