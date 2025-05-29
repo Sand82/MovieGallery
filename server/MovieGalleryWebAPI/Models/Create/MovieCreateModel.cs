@@ -21,11 +21,12 @@ namespace MovieGalleryWebAPI.Models.Create
             ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
         public string? Description { get; set; }
 
-        [Required]
-        [StringLength(MaxMovieImageUrlLength, MinimumLength = MinMovieImageUrlLength,
-            ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
-        public string? ImageUrl { get; set; }        
-
+        //[Required]
+        //[StringLength(MaxMovieImageUrlLength, MinimumLength = MinMovieImageUrlLength,
+        //    ErrorMessage = "The field {0} is not valid! Must be between of {2} and {1} symbols.")]
+        //public string? ImageUrl { get; set; }
+        //
+       
         [Required]
         [StringLength(MovieYearLength,
             ErrorMessage = "The field {0} is not valid! Must be exact {1} symbols.")]
@@ -48,16 +49,16 @@ namespace MovieGalleryWebAPI.Models.Create
         [StringLength(MaxCompanyNameLength)]
         public string? Company { get; set; }
         
-        public ICollection<string>? Starring { get; set; } 
+        public ICollection<string>? Starring { get; set; } = new List<string>();
         
-        public ICollection<string>? Directors { get; set; }
+        public ICollection<string>? Directors { get; set; } = new List<string>();
 
-        public ICollection<string>? Tags { get; set; }
+        public ICollection<string>? Tags { get; set; } = new List<string>();
 
-        public ICollection<MovieCountriesModel>? Countries {  get; set; }
+        public ICollection<MovieCountriesModel>? Countries {  get; set; } = new List<MovieCountriesModel>();
 
-        public ICollection<MovieLanguagesModel>? Languages {  get; set; }   
-        
-        public ICollection<MovieCategoryModel>? Categories { get; set; }        
+        public ICollection<MovieLanguagesModel>? Languages {  get; set; } = new List<MovieLanguagesModel>();
+
+        public ICollection<MovieCategoryModel>? Categories { get; set; } = new List<MovieCategoryModel>();
     }
 }

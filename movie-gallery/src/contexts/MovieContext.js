@@ -53,10 +53,10 @@ export const MovieProvider = ({ children }) => {
     getAllMovies();
   }, [filters, serverErrorsHandler]);
 
-  const createHandler = async (movieData) => {
+  const createHandler = async (movieData, file) => {
     setServerErrors(null);
     try {
-      await movieService.create(movieData, user.accessToken);
+      await movieService.create(movieData, user.accessToken, file);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);

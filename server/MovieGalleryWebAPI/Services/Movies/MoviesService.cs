@@ -215,7 +215,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             {
                 Title = model.Title,
                 Description = model.Description,
-                ImageUrl = model.ImageUrl,                
+                //ImageUrl = model.ImageUrl,                
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,

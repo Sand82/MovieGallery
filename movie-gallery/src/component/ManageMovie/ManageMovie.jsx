@@ -35,7 +35,9 @@ const ManageMovie = ({ isCreated }) => {
     : movie.directors.map(x => ({name: x.name, error: false, isFieldEdited: true, id: x.id}))
   );  
   
-  const [tags, setTags] = useState([]);  
+  const [tags, setTags] = useState([]);
+
+  const [fileInfo, setFileInfo] = useState({file: null, error: ""});
   
   const {
     value: titleValue,
@@ -65,13 +67,13 @@ const ManageMovie = ({ isCreated }) => {
     isEmpty: isYearFieldEmpty,
   } = useInput(isCreated ? "" : movie.year, (value) => isEqualToExactLenght(value, GlobalConstant.yearLength));
 
-  const {
-    value: imageUrlValue,
-    changeHandler: imageUrlChangeHandler,
-    hasError: imageUrlHasError,
-    inputBlurHandler: imageUrlInputBluerHandler,
-    isEmpty: isImageUrlFieldEmpty,
-  } = useInput(isCreated ? "" : movie.imageUrl, (value) => isValidUrl(value));
+  // const {
+  //   value: imageUrlValue,
+  //   changeHandler: imageUrlChangeHandler,
+  //   hasError: imageUrlHasError,
+  //   inputBlurHandler: imageUrlInputBluerHandler,
+  //   isEmpty: isImageUrlFieldEmpty,
+  // } = useInput(isCreated ? "" : movie.imageUrl, (value) => isValidUrl(value));
 
   const {
     value: durationValue,
@@ -152,7 +154,11 @@ const ManageMovie = ({ isCreated }) => {
 
   const tagHandler = (value) => {    
     setTags(value);
-  } 
+  }
+
+  const fileInfoHandler = (fileInfo) => {
+    setFileInfo((state) => ({file: fileInfo.file, error: fileInfo.error}));
+  }
 
   const manageMovieHandler = (e) => {
     e.preventDefault();
@@ -162,7 +168,7 @@ const ManageMovie = ({ isCreated }) => {
       title: titleValue,
       company: companyValue,      
       year: yearValue,
-      imageUrl: imageUrlValue,
+      //imageUrl: imageUrlValue,
       duration: durationValue,
       description: textEditorInput,
       embededVideo: embededVideoValue,
@@ -176,11 +182,11 @@ const ManageMovie = ({ isCreated }) => {
       countries: convertToEntity(countriesOptions),
       languages: convertToEntity(languagesOptions),
       categories: convertToEntity(categoriesOptions),
-      tags: tags,
-    };
+      tags: tags,      
+    };     
 
     if (isCreated) {
-      createHandler(movieData);
+      createHandler(movieData, fileInfo.file);
     } else {
       editHandler(movieData);
     }
@@ -193,8 +199,8 @@ const ManageMovie = ({ isCreated }) => {
     isCompanyFieldEmpty ||    
     yearHasError ||
     isYearFieldEmpty ||
-    imageUrlHasError ||
-    isImageUrlFieldEmpty ||
+    // imageUrlHasError ||
+    // isImageUrlFieldEmpty ||
     durationHasError ||
     isDurationFieldEmpty ||
     isTextEditorFieldEmpty ||
@@ -209,6 +215,7 @@ const ManageMovie = ({ isCreated }) => {
     starringValue.some(input => !input.isFieldEdited) ||
     directorValue.some(input => input.error) ||
     directorValue.some(input => !input.isFieldEdited) ||
+    fileInfo.error !== "" ||
     serverErrors ; 
 
   const movieActionType = isCreated ? "Create" : "Edit";
@@ -318,7 +325,7 @@ const ManageMovie = ({ isCreated }) => {
                       error={imageUrlHasError && `Image link should be a valid URL.`}
                     />
                   </div>                   */}
-                  <FildInput />
+                  <FildInput fileHandler={fileInfoHandler}/>
                 </div> 
                 <div className="row mb-5">
                   <div className="col-12 col-md-4">

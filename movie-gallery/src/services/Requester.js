@@ -1,26 +1,32 @@
-export const request = async (method, url, data, token) => {
+export const request = async (
+  method,
+  url,
+  data,
+  token,
+  useFormData = false
+) => {
   try {
-    let buildRequest;
     let headers = {};
 
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    if (method === "GET") {
-      buildRequest = fetch(url);
-    } else {
-      buildRequest = fetch(url, {
-        method,
-        headers: {
-          ...headers,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-    }
-    const response = await buildRequest;
+    let options = {
+      method,
+      headers,
+    };
 
+    if (method !== "GET") {
+      if (useFormData) {
+        options.body = data;
+      } else {
+        headers["Content-Type"] = "application/json";
+        options.body = JSON.stringify(data);
+      }
+    }
+
+    const response = await fetch(url, options);
     const result = await response.json();
 
     if (!response.ok) {

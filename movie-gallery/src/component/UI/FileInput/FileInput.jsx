@@ -4,30 +4,25 @@ import styles from "./FileInput.module.css";
 import Error from "../Error/Error.jsx";
 import { fileImageValidator } from "../../../services/Validators.js"
 
-const FileInput = () => {
-  const [file, setFile] = useState(null);
-  const [error, setError] = useState("");
+const FileInput = ({fileHandler}) => {
+  const [fileInfo, setFileInfo] = useState({file: null, error: ""});  
 
   const fileChangeHandler = (event) => {
     const selectedFile = event.target.files[0];
 
     if (!selectedFile) {
-      setFile(null);
-      setError("");
+      setFileInfo((state) => ({file: null, error: ""}));      
       return;
     }
     
     if (!fileImageValidator(selectedFile.type)) {
-      setFile(null);
-      setError("Invalid file type. Only png, jpeg, or gif allowed.");
+      
+      setFileInfo((state) => ({file: null, error: "Invalid file type. Only png, jpeg, or gif allowed."}));
       return;
-    }    
-
-    setFile(selectedFile);
-    setError("");
-  };
-
-	console.log(file)
+    }
+      setFileInfo((state) => ({file: selectedFile, error: ""}));
+      fileHandler({file: selectedFile, error: ""})
+  };	
 
   return (
     <div className="mb-3 col-6">
@@ -39,8 +34,8 @@ const FileInput = () => {
         onChange={fileChangeHandler}
       />
 
-      {error && (
-        <Error error={error} />
+      {fileInfo.error && (
+        <Error error={fileInfo.error} />
       )}      
     </div>
   );

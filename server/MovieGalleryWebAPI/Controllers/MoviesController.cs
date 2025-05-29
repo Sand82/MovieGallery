@@ -8,6 +8,8 @@ using MovieGalleryWebAPI.Models.Edit;
 using MovieGalleryWebAPI.Models.Create;
 using MovieGalleryWebAPI.Infrastructure;
 using MovieGalleryWebAPI.Service.Users;
+using System.Text.Json;
+using MovieGalleryWebAPI.Models.FormModel;
 
 namespace MovieGalleryWebAPI.Controllers
 {
@@ -39,11 +41,11 @@ namespace MovieGalleryWebAPI.Controllers
            
             return movie;
         }
-        
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        public async Task<IActionResult> Post(MovieCreateModel model)
+        [Consumes("multipart/form-data")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]        
+        public async Task<IActionResult> Post([FromForm]MovieCreateFormModel formModel)
         {
             var userId = User.GetId();
 
@@ -54,14 +56,24 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest("Authorization denied");
             }
 
-            var isExist = await moviesService.CheckForDuplicates(model.Title!);
+            if (formModel.File == null || formModel.File.Length == 0)
+            {
+                return BadRequest("File is required");
+            }                
+            
+            var model = JsonSerializer.Deserialize<MovieCreateModel>(formModel!.Data!, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            var isExist = await moviesService.CheckForDuplicates(model?.Title!);
 
             if (isExist)
             {
                 return BadRequest("Movie already exist.");
-            }            
+            } 
 
-            await moviesService.CreateMovie(model);
+            await moviesService.CreateMovie(model!);
             
             var movie = await moviesService.GetLastMovie();
 
