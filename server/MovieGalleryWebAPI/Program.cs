@@ -21,6 +21,7 @@ using MovieGalleryWebAPI.Services.MovieCountries;
 using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Services.MovieCategories;
 using MovieGalleryWebAPI.Services.MovieTags;
+using MovieGalleryWebAPI.Services.Image;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -84,6 +85,7 @@ builder.Services.AddTransient<IMovieCountriesService, MovieCountriesService>();
 builder.Services.AddTransient<IMovieLanguageService, MovieLanguageService>();
 builder.Services.AddTransient<IMovieCategoryService, MovieCategoryService>();
 builder.Services.AddTransient<IMovieTagService, MovieTagService>();
+builder.Services.AddTransient<IManageImage, ManageImage>();
 builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 
 builder.Services.AddCors(options =>

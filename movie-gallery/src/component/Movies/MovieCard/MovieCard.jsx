@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 
 import { cropText } from "../../../services/HelperService.js";
 import { arrayToString } from "../../../services/HelperService.js";
+import { adjustMovieImageURL } from "../../../services/HelperService.js"
 
 const MovieCard = ({ movie }) => {
+
+  console.log(movie.mainImage)
 
   return (    
     <article className="movie-line-entity p-3">
@@ -14,7 +17,7 @@ const MovieCard = ({ movie }) => {
           >
             <img
               className="embed-responsive-item movie-img"
-              src={movie.imageUrl}
+              src={adjustMovieImageURL("The Lord of the Rings The Fellowship of the Ring-1000x1600.jpg")}
               alt=""
             ></img>
           </Link>

@@ -73,7 +73,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest("Movie already exist.");
             } 
 
-            await moviesService.CreateMovie(model!);
+            await moviesService.CreateMovie(model!, formModel.File);
             
             var movie = await moviesService.GetLastMovie();
 

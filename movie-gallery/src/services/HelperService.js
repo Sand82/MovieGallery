@@ -65,6 +65,10 @@ export const objectArrayToStringArray = (arr) => {
   return arr.map(item => item.name);
 }
 
+export const adjustMovieImageURL = (imageName) => {
+  return `https://localhost:7222/images/${imageName}`
+}
+
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");
   text = text.replace(/<\/?[^>]+(>|$)/g, "");

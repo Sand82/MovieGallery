@@ -34,9 +34,17 @@ namespace MovieGalleryWebAPI.Data.Models
         [StringLength(MaxMovieTitleLength)]
         public string? Title { get; set; }
 
-        [Required]
+        
         [StringLength(MaxMovieImageUrlLength)]
         public string? ImageUrl { get; set; }
+
+        
+        [StringLength(MaxMovieImageUrlLength)]
+        public string? BackgroundImage { get; set; }
+
+        
+        [StringLength(MaxMovieImageUrlLength)]
+        public string? MainImage { get; set; }
 
         [Required]
         [StringLength(MaxMovieDescriptionLength)]

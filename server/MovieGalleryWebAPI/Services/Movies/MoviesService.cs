@@ -20,6 +20,7 @@ using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Services.MovieCategories;
 using MovieGalleryWebAPI.Models.Tags;
 using MovieGalleryWebAPI.Services.MovieTags;
+using MovieGalleryWebAPI.Services.Image;
 
 namespace MovieGalleryWebAPI.Service.Movies
 {
@@ -34,7 +35,8 @@ namespace MovieGalleryWebAPI.Service.Movies
         private readonly IMovieCountriesService movieCountriesService;
         private readonly IMovieLanguageService movieLanguageService;
         private readonly IMovieCategoryService movieCategoryService;
-        private readonly IMovieTagService movieTagService;      
+        private readonly IMovieTagService movieTagService;
+        private readonly IManageImage manageImage;
 
         public MoviesService(
             MovieGalleryDbContext data,
@@ -47,7 +49,8 @@ namespace MovieGalleryWebAPI.Service.Movies
             IMovieLanguageService movieLanguageService,
             IMovieCategoryService movieCategoryService,
             IMovieTagService movieTagService
-            )
+,
+            IManageImage manageImage)
         {
             this.data = data;
             this.favoriteService = favoriteService;
@@ -59,6 +62,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.movieLanguageService = movieLanguageService;
             this.movieCategoryService = movieCategoryService;
             this.movieTagService = movieTagService;
+            this.manageImage = manageImage;
         }
 
         public async Task<MovieGetModel> GetLastMovie()
@@ -209,8 +213,12 @@ namespace MovieGalleryWebAPI.Service.Movies
             return movie;
         }
 
-        public async Task CreateMovie(MovieCreateModel model)
+        public async Task CreateMovie(MovieCreateModel model, IFormFile file)
         {
+            var backgroundImage = await manageImage.ImageManager(file, 1200, 600);
+
+            var mainImage = await manageImage.ImageManager(file, 1000, 1600);
+
             var movie = new Movie
             {
                 Title = model.Title,
@@ -219,8 +227,10 @@ namespace MovieGalleryWebAPI.Service.Movies
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
-                Release = model.Release
-            };            
+                Release = model.Release,
+                BackgroundImage = backgroundImage,
+                MainImage = mainImage
+            };
 
             var company = await companyService.AddMovieCompany(model.Company!);
             movie.CompanyId = company.Id;
@@ -343,7 +353,9 @@ namespace MovieGalleryWebAPI.Service.Movies
                    Id = m.Id,
                    Title = m.Title,
                    Description = m.Description,
-                   ImageUrl = m.ImageUrl,                   
+                   ImageUrl = m.ImageUrl,   
+                   BackgroundImage = m.BackgroundImage,
+                   MainImage = m.MainImage,
                    Categories = m.MovieCategories
                        .Where(mc => mc.MovieId == m.Id)
                        .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name})

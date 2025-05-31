@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 
 import style from "./FavoriteMovie.module.css"
 import { cropText } from "../../../services/HelperService.js"
-import { arrayToString } from "../../../services/HelperService.js";
+import { arrayToString, adjustMovieImageURL } from "../../../services/HelperService.js";
 
 const FavoriteMovie = ({movie}) => {
   
@@ -15,7 +15,7 @@ const FavoriteMovie = ({movie}) => {
           data-role="hover-wrap"
         >
           <div className={style.imageContainer}>
-            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={movie.imageUrl} alt="" />
+            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={adjustMovieImageURL('The Lord of the Rings The Fellowship of the Ring-1000x1600.jpg')} alt="" />
           </div>
           <span className="entity-date">
             <span className="tape-block tape-horizontal tape-single bg-theme text-white">

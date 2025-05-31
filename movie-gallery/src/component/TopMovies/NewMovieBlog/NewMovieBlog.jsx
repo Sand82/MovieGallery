@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 
 import styles from "./NewMovieBlog.module.css";
 import { cropText } from "../../../services/HelperService.js";
-import { arrayToString } from "../../../services/HelperService.js";
+import { arrayToString, adjustMovieImageURL } from "../../../services/HelperService.js";
 
 const NewMovieBlog = ({ movie }) => {
+
+ let currentBackgroundImage = (adjustMovieImageURL('Test-1200x600.jpg'));
 
   return (
     <div className="col-6 ">
@@ -13,7 +15,7 @@ const NewMovieBlog = ({ movie }) => {
     >
       <div
         className={styles.backgroundImage}
-        style={{ backgroundImage: `url(${movie.imageUrl})` }}
+        style={{ backgroundImage: `url(${currentBackgroundImage})` }}
       />      
       <div className={`d-flex p-3 flex-column justify-content-around ${styles["movie-content"]}`}>
         <h4 className="entity-title">

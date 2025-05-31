@@ -1,4 +1,5 @@
 ﻿using MovieGalleryWebAPI.Models.Category;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieGalleryWebAPI.Models.Movies
 {
@@ -15,7 +16,9 @@ namespace MovieGalleryWebAPI.Models.Movies
 
         public string? Year { get; set; }
 
-        //public string? Category { get; set; }
+        public string? BackgroundImage { get; set; }
+        
+        public string? MainImage { get; set; }
 
         public ICollection<MovieCategoryModel>? Categories { get; set; }
 

@@ -12,7 +12,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public Task<bool> RemoveMovie(int movieId);
 
-        public Task CreateMovie(MovieCreateModel model);
+        public Task CreateMovie(MovieCreateModel model, IFormFile file);
 
         public Task<MovieGetModel> GetLastMovie();
 
