@@ -1,4 +1,5 @@
 ﻿using MovieGalleryWebAPI.Models.Category;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieGalleryWebAPI.Models.Favorites
 {
@@ -9,8 +10,8 @@ namespace MovieGalleryWebAPI.Models.Favorites
         public string? Title { get; set; }
 
         public string? Description { get; set; }
-
-        public string? ImageUrl { get; set; }
+        
+        public string? MainImage { get; set; }
 
         public string? Year { get; set; }        
 

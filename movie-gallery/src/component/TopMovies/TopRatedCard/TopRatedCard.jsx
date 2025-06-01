@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 
 import styles from "./TopRatedCard.module.css";
 import { arrayToString } from "../../../services/HelperService.js"
+import { adjustMovieImageURL } from "../../../services/HelperService.js"
 
-const TopRatedCard = ({ movie }) => {   
+const TopRatedCard = ({ movie }) => { 
 
   return (
     <div
@@ -15,7 +16,7 @@ const TopRatedCard = ({ movie }) => {
       
       <article className="poster-entity" data-role="hover-wrap">
         <div className="embed-responsive embed-responsive-poster">
-          <img className="embed-responsive-item" src={movie.imageUrl} alt="" />
+          <img className="embed-responsive-item" src={adjustMovieImageURL(movie.mainImage)} alt="" />
         </div>        
         <div
           className="d-background bg-theme-lighted collapse delay-4s"

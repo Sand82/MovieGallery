@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-import * as helperService from "../../services/HelperService.js";
 import Search from "../Search/Search.jsx";
 import Select from "../UI/Select/Select.jsx"
 import MovieCard from "./MovieCard/MovieCard.jsx";
@@ -8,6 +7,7 @@ import Pagination from "../UI/Pagination/Pagination.jsx";
 import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
 import { MovieContext } from "../../contexts/MovieContext.js";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
+import { formatData } from "../../services/HelperService.js";
 
 const Movies = () => {
   const { movies, moviesCount } = useContext(MovieContext);   
@@ -30,7 +30,7 @@ const Movies = () => {
         <Search />
         <div className="section-head">
           <h2 className="section-title text-uppercase">Colection</h2>
-          <p className="section-text">{helperService.formatData(date)}</p>
+          <p className="section-text">{formatData(date)}</p>
         </div>
 
         {movies.map((x) => (

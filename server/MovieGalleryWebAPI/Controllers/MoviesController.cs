@@ -75,7 +75,7 @@ namespace MovieGalleryWebAPI.Controllers
 
             await moviesService.CreateMovie(model!, formModel.File);
             
-            var movie = await moviesService.GetLastMovie();
+            var movie = await moviesService.GetLastCreatedMovie();
 
             return Ok(movie);
         }

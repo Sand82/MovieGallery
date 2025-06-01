@@ -252,7 +252,8 @@ namespace MovieGalleryWebAPI.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    BackgroundImage = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    MainImage = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
                     Year = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Duration = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false),

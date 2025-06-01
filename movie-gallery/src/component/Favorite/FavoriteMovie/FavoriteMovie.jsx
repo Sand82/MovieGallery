@@ -15,7 +15,7 @@ const FavoriteMovie = ({movie}) => {
           data-role="hover-wrap"
         >
           <div className={style.imageContainer}>
-            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={adjustMovieImageURL('The Lord of the Rings The Fellowship of the Ring-1000x1600.jpg')} alt="" />
+            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={adjustMovieImageURL(movie.mainImage)} alt="" />
           </div>
           <span className="entity-date">
             <span className="tape-block tape-horizontal tape-single bg-theme text-white">

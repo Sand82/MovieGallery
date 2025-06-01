@@ -65,7 +65,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             this.manageImage = manageImage;
         }
 
-        public async Task<MovieGetModel> GetLastMovie()
+        public async Task<MovieGetModel> GetLastCreatedMovie()
         {
             var movie = await this.data.Movies
                 .Include(m => m.MovieCountries)
@@ -77,7 +77,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Title= m.Title,
                     Description= m.Description,
                     Year= m.Year,                    
-                    ImageUrl= m.ImageUrl,
+                    BackgroundImage = m.BackgroundImage,
                     AverageRating = m.Ratings!.Average(m => m.Value).ToString("F1"),
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
@@ -139,7 +139,7 @@ namespace MovieGalleryWebAPI.Service.Movies
                     Id = m.Id,
                     Title = m.Title,
                     Description = m.Description,
-                    ImageUrl = m.ImageUrl,                    
+                    MainImage= m.MainImage,                 
                     Year = m.Year,
                     Duration = m.Duration,
                     EmbededVideo = m.EmbededVideo,
@@ -215,15 +215,14 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public async Task CreateMovie(MovieCreateModel model, IFormFile file)
         {
-            var backgroundImage = await manageImage.ImageManager(file, 1200, 600);
+            var backgroundImage = await manageImage.ImageManager(file, 1800, 600);
 
             var mainImage = await manageImage.ImageManager(file, 1000, 1600);
 
             var movie = new Movie
             {
                 Title = model.Title,
-                Description = model.Description,
-                //ImageUrl = model.ImageUrl,                
+                Description = model.Description,                               
                 Year = model.Year,
                 Duration = model.Duration,
                 EmbededVideo = model.EmbededVideo,
@@ -267,7 +266,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             movie.Title = model.Title;
             movie.Description = model.Description;
-            movie.ImageUrl = model.ImageUrl;           
+            //movie.ImageUrl = model.ImageUrl;           
             movie.Year = model.Year;
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;
@@ -352,10 +351,9 @@ namespace MovieGalleryWebAPI.Service.Movies
                {
                    Id = m.Id,
                    Title = m.Title,
-                   Description = m.Description,
-                   ImageUrl = m.ImageUrl,   
-                   BackgroundImage = m.BackgroundImage,
+                   Description = m.Description,                   
                    MainImage = m.MainImage,
+                   BackgroundImage = m.BackgroundImage,
                    Categories = m.MovieCategories
                        .Where(mc => mc.MovieId == m.Id)
                        .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name})

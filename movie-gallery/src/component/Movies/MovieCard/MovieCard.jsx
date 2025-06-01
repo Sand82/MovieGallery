@@ -6,8 +6,6 @@ import { adjustMovieImageURL } from "../../../services/HelperService.js"
 
 const MovieCard = ({ movie }) => {
 
-  console.log(movie.mainImage)
-
   return (    
     <article className="movie-line-entity p-3">
       <div className="entity-poster" data-role="hover-wrap">
@@ -17,7 +15,7 @@ const MovieCard = ({ movie }) => {
           >
             <img
               className="embed-responsive-item movie-img"
-              src={adjustMovieImageURL("The Lord of the Rings The Fellowship of the Ring-1000x1600.jpg")}
+              src={adjustMovieImageURL(movie.mainImage)}
               alt=""
             ></img>
           </Link>

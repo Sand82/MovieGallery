@@ -4,9 +4,9 @@ import styles from "./NewMovieBlog.module.css";
 import { cropText } from "../../../services/HelperService.js";
 import { arrayToString, adjustMovieImageURL } from "../../../services/HelperService.js";
 
-const NewMovieBlog = ({ movie }) => {
+const NewMovieBlog = ({ movie }) => {  
 
- let currentBackgroundImage = (adjustMovieImageURL('Test-1200x600.jpg'));
+ let currentBackgroundImage = (adjustMovieImageURL(movie.backgroundImage));
 
   return (
     <div className="col-6 ">

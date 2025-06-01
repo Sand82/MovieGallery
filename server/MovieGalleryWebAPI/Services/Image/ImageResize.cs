@@ -56,12 +56,14 @@ public class ManageImage : IManageImage
 
     private string CreateImageName(string imageName) 
     {
+        var imageArr = imageName.Split(".").ToArray();
+
         if (string.IsNullOrWhiteSpace(imageName))
         {
             return string.Empty;
         }            
         
-        var sanitized = Regex.Replace(imageName, @"[^a-zA-Z0-9]+", "-");
+        var sanitized = Regex.Replace(imageArr[0], @"[^a-zA-Z0-9]+", "-");
        
         sanitized = sanitized.Trim('-');
 

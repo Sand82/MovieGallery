@@ -5,6 +5,7 @@ using MovieGalleryWebAPI.Models.Directors;
 using MovieGalleryWebAPI.Models.Languages;
 using MovieGalleryWebAPI.Models.Starring;
 using MovieGalleryWebAPI.Models.Tags;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieGalleryWebAPI.Models.Movies
 {
@@ -15,8 +16,8 @@ namespace MovieGalleryWebAPI.Models.Movies
         public string? Title { get; set; }
                 
         public string? Description { get; set; }
-                
-        public string? ImageUrl { get; set; }
+        
+        public string? MainImage { get; set; }
 
         public string? Year { get; set; }       
 

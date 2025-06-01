@@ -12,6 +12,7 @@ import Error from "../UI/Error/Error.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { arrayToString } from "../../services/HelperService.js"
+import { adjustMovieImageURL } from '../../services/HelperService.js'
 
 const Details = () => {
   const { movieId } = useParams();
@@ -68,7 +69,7 @@ const Details = () => {
                     <div className="embed-responsive embed-responsive-poster">
                       <img
                         className="embed-responsive-item"
-                        src={movie.imageUrl}
+                        src={adjustMovieImageURL(movie.mainImage)}
                         alt=""
                       />
                     </div>

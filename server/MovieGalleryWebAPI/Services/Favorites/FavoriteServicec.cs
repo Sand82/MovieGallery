@@ -43,7 +43,7 @@ namespace MovieGalleryWebAPI.Service.Favorites
                     Id = m.Id,
                     Description = m.Description,
                     Title = m.Title,
-                    ImageUrl = m.ImageUrl,
+                    MainImage = m.MainImage,
                     Categories = m.MovieCategories
                         .Where(mc => mc.MovieId == m.Id)
                         .Select(mc => new MovieCategoryModel { Id = mc.Category!.Id, Name = mc.Category.Name })

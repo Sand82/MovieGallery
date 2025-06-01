@@ -12,8 +12,8 @@ using MovieGalleryWebAPI.Data;
 namespace MovieGalleryWebAPI.Data.Migrations
 {
     [DbContext(typeof(MovieGalleryDbContext))]
-    [Migration("20250531195617_ImageResizing")]
-    partial class ImageResizing
+    [Migration("20250601184554_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -407,10 +407,6 @@ namespace MovieGalleryWebAPI.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");

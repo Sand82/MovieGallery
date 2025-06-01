@@ -14,7 +14,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public Task CreateMovie(MovieCreateModel model, IFormFile file);
 
-        public Task<MovieGetModel> GetLastMovie();
+        public Task<MovieGetModel> GetLastCreatedMovie();
 
         public Task<bool> EditMovie(MovieEditModel model);
 
