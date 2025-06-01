@@ -11,7 +11,8 @@
   <li>Dependency Injection</li>
   <li>Json Web Token Authorization</li>
   <li>Server Side Data Validation</li>
-  <li>Server site sorting, searching and pagination</li>   
+  <li>Server site sorting, searching and pagination</li>
+  <li>Image resizing via ImageSharp</li>
   <li>Swagger</li>
 </ul>
 <h3>Endpoints diagram</h3>
