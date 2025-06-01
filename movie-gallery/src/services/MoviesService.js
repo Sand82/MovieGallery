@@ -17,7 +17,6 @@ export const getOne = (movieId, userId, token) => {
 
 export const create = async (dataInfo, token, file) => {
   let data = createFormData(dataInfo, file);
-  console.log(data);
   return request.post(baseUrl, data, token, true);
 };
 
