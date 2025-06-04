@@ -38,7 +38,7 @@ public class ManageImage : IManageImage
 
         using var outputStream = new MemoryStream();
         await image.SaveAsJpegAsync(outputStream);
-        return outputStream.ToArray();
+        return outputStream.ToArray();        
     }
 
     private async Task<string> SaveToServer(byte[] fileBytes, string fileName)

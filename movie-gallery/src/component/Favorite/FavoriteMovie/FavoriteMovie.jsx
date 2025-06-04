@@ -5,6 +5,9 @@ import { cropText } from "../../../services/HelperService.js"
 import { arrayToString, adjustMovieImageURL } from "../../../services/HelperService.js";
 
 const FavoriteMovie = ({movie}) => {
+
+  let image = 
+  adjustMovieImageURL(movie.mainImage);  
   
   return (
     <div className="col-md-6">
@@ -15,7 +18,7 @@ const FavoriteMovie = ({movie}) => {
           data-role="hover-wrap"
         >
           <div className={style.imageContainer}>
-            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={adjustMovieImageURL(movie.mainImage)} alt="" />
+            <img className={`embed-responsive-item movie-img ${style.favoriteImage}`} src={image} alt="" />
           </div>
           <span className="entity-date">
             <span className="tape-block tape-horizontal tape-single bg-theme text-white">
