@@ -217,9 +217,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         {
             var backgroundImage = await manageImage.ImageManager(file, 1800, 600);            
 
-            var mainImage = await manageImage.ImageManager(file, 1000, 1600);
-
-            ;
+            var mainImage = await manageImage.ImageManager(file, 1000, 1600);            
 
             var movie = new Movie
             {

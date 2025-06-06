@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom"
 
 import style from "./FavoriteMovie.module.css"
+import ScrollToTop from "../../UI/ScrollToTop/ScrollToTop.jsx"
 import { cropText } from "../../../services/HelperService.js"
 import { arrayToString, adjustMovieImageURL } from "../../../services/HelperService.js";
 
@@ -10,6 +11,7 @@ const FavoriteMovie = ({movie}) => {
   adjustMovieImageURL(movie.mainImage);  
   
   return (
+    <>     
     <div className="col-md-6">
       <article className="article-tape-entity">
         <Link
@@ -58,6 +60,8 @@ const FavoriteMovie = ({movie}) => {
         </div>
       </article>
     </div>
+     <ScrollToTop route="/favorite"/>  
+    </>
   );
 };
 

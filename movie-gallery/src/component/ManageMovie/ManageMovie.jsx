@@ -66,15 +66,7 @@ const ManageMovie = ({ isCreated }) => {
     inputBlurHandler: yearInputBluerHandler,
     isEmpty: isYearFieldEmpty,
   } = useInput(isCreated ? "" : movie.year, (value) => isEqualToExactLenght(value, GlobalConstant.yearLength));
-
-  // const {
-  //   value: imageUrlValue,
-  //   changeHandler: imageUrlChangeHandler,
-  //   hasError: imageUrlHasError,
-  //   inputBlurHandler: imageUrlInputBluerHandler,
-  //   isEmpty: isImageUrlFieldEmpty,
-  // } = useInput(isCreated ? "" : movie.imageUrl, (value) => isValidUrl(value));
-
+  
   const {
     value: durationValue,
     changeHandler: durationChangeHandler,
@@ -167,8 +159,7 @@ const ManageMovie = ({ isCreated }) => {
       id: movie.id,
       title: titleValue,
       company: companyValue,      
-      year: yearValue,
-      //imageUrl: imageUrlValue,
+      year: yearValue,      
       duration: durationValue,
       description: textEditorInput,
       embededVideo: embededVideoValue,
@@ -198,9 +189,7 @@ const ManageMovie = ({ isCreated }) => {
     companyHasError ||
     isCompanyFieldEmpty ||    
     yearHasError ||
-    isYearFieldEmpty ||
-    // imageUrlHasError ||
-    // isImageUrlFieldEmpty ||
+    isYearFieldEmpty ||   
     durationHasError ||
     isDurationFieldEmpty ||
     isTextEditorFieldEmpty ||
@@ -234,8 +223,7 @@ const ManageMovie = ({ isCreated }) => {
             <div className="mt-5 mb-5 section-head">
               <h2 className="section-title text-uppercase">{movieActionType} Movie</h2>
             </div>
-              <form onSubmit={manageMovieHandler}> 
-                                          
+              <form onSubmit={manageMovieHandler}>                                          
                 <div className="row mb-4">                  
                   <div className="col-12 col-md-6">
                     <Input
@@ -312,20 +300,8 @@ const ManageMovie = ({ isCreated }) => {
                       onBlur={releaseInputBluerHandler}
                       error={releaseHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
                     />
-                  </div>
-                  {/* <div className="col-12 col-md-6">
-                    <Input
-                      label="Image Link"
-                      type="text"
-                      name="imageUrl"
-                      className="form-control"
-                      value={imageUrlValue}
-                      onChange={imageUrlChangeHandler}
-                      onBlur={imageUrlInputBluerHandler}
-                      error={imageUrlHasError && `Image link should be a valid URL.`}
-                    />
-                  </div>                   */}
-                  <FildInput fileHandler={fileInfoHandler}/>
+                  </div>                  
+                  <FildInput fileHandler={fileInfoHandler} fileName={isCreated? null : movie.mainImage} accessToken={user.AccessToken}/>
                 </div> 
                 <div className="row mb-5">
                   <div className="col-12 col-md-4">
@@ -376,7 +352,7 @@ const ManageMovie = ({ isCreated }) => {
                 </div>
                 <div className="row mb-5">                  
                   <div className="col-12">
-                    <Tags tagHandler={tagHandler} defaultValue={movie.tags ? objectArrayToStringArray(movie.tags) : []} />
+                    <Tags tagHandler={tagHandler} defaultValue={isCreated ? [] : objectArrayToStringArray(movie.tags)} />
                   </div>                  
                 </div>                                          
                 <div className="row mb-5">

@@ -1,9 +1,10 @@
-export const request = async (
+const request = async (
   method,
   url,
   data,
   token,
-  useFormData = false
+  useFormData = false,
+  isBinary = false
 ) => {
   try {
     let headers = {};
@@ -27,15 +28,13 @@ export const request = async (
     }
 
     const response = await fetch(url, options);
-    const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(
-        result.message || `HTTP error! Status: ${response.status}`
-      );
+      let errorText = await response.text();
+      throw new Error(`HTTP ${response.status}: ${errorText}`);
     }
 
-    return result;
+    return isBinary ? await response.blob() : await response.json();
   } catch (error) {
     console.error("API Request Error:", error.message);
     throw error;

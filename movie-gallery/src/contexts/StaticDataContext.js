@@ -6,7 +6,7 @@ export const StaticDataContext = createContext();
 
 export const StaticDataProvider = ({ children }) => {
   const [staticData, setStaticData] = useState({});
-  const [serverErrors, setServerErrors] = useState(null);
+  const [serverErrors, setServerErrors] = useState(null);  
 
   useEffect(() => {
     const getStaticData = async () => {

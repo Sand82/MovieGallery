@@ -9,7 +9,7 @@ const NewMovieBlog = ({ movie }) => {
  let currentBackgroundImage = (adjustMovieImageURL(movie.backgroundImage));
 
   return (
-    <div className="col-6 ">
+    <div className="col-6">
     <article
       className={`contaner-image ${styles.backgroundWrapper}`}     
     >

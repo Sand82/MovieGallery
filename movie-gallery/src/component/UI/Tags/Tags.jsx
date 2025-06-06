@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Tag from "./Tag/Tag.jsx"
 import Error from "../Error/Error.jsx";
@@ -8,7 +8,11 @@ const Tags = ({tagHandler, defaultValue}) => {
 	
 	const [tagList, setTagList] = useState(defaultValue);
 	const [tag, setTag] = useState("");
-	const [error, setError] = useState(false);	
+	const [error, setError] = useState(false);
+
+	useEffect(() => {
+    	setTagList(defaultValue);
+  	}, [defaultValue]);
 
 	const createTagHandler = (e) => {
 		e.preventDefault();		
@@ -46,7 +50,7 @@ const Tags = ({tagHandler, defaultValue}) => {
 		<h2 className={styles["tags-title"]}>Tag section</h2>
 		<div className="row">
 			<div className="col-4">
-				<label className="form-label" htmlFor="tag">Tag</label>
+				<label className="form-label" htmlFor="tag">Add Tag</label>
 				<input
 					className="form-control"
 					type="text"

@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\MovieGallery\\server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\image\\manageimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\image\\manageimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\image\\imageresize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\image\\imageresize.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\controllers\\filescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\controllers\\filescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,43 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ApplicationBuilderExtensions.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ViewState": "AQIAACIEAAAAAAAAAAAAACsEAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T12:56:04.166Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ImageResize.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Image\\ImageResize.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Image\\ImageResize.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Image\\ImageResize.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Image\\ImageResize.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAAAmAAAA",
+              "Title": "FilesController.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\FilesController.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\FilesController.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\FilesController.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\FilesController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAYwBMAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T12:38:09.976Z"
+              "WhenOpened": "2025-06-05T06:08:32.351Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MoviesService.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ViewState": "AQIAANQAAAAAAAAAAAAlwN0AAAAMAAAA",
+              "Title": "ManageImage.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Image\\ManageImage.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Image\\ManageImage.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Image\\ManageImage.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Image\\ManageImage.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAMwBgAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T18:38:41.509Z",
+              "WhenOpened": "2025-06-03T12:38:09.976Z",
               "EditorCaption": ""
             }
           ]
