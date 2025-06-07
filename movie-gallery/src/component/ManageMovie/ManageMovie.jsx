@@ -23,7 +23,9 @@ const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
   const { movie } = useContext(DetailContext);  
-  const { staticData } = useContext(StaticDataContext);  
+  const { staticData } = useContext(StaticDataContext);
+
+  console.log(movie);
 
   const [starringValue, setStarringValue] = useState(isCreated && movie
     ? [] 
@@ -179,7 +181,7 @@ const ManageMovie = ({ isCreated }) => {
     if (isCreated) {
       createHandler(movieData, fileInfo.file);
     } else {
-      editHandler(movieData);
+      editHandler(movieData, fileInfo.file);
     }
   };  
 
@@ -301,7 +303,7 @@ const ManageMovie = ({ isCreated }) => {
                       error={releaseHasError && `Title should be between ${GlobalConstant.titleMinLength} and ${GlobalConstant.titelMaxLength} symbols.`}
                     />
                   </div>                  
-                  <FildInput fileHandler={fileInfoHandler} fileName={isCreated? null : movie.mainImage} accessToken={user.AccessToken}/>
+                  <FildInput fileHandler={fileInfoHandler} fileName={isCreated ? null : movie.mainImage} accessToken={user.AccessToken}/>
                 </div> 
                 <div className="row mb-5">
                   <div className="col-12 col-md-4">

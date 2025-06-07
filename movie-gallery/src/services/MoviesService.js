@@ -20,8 +20,9 @@ export const create = async (dataInfo, token, file) => {
   return request.post(baseUrl, data, token, true);
 };
 
-export const edit = async (data, token) => {
-  return request.put(`${baseUrl}/${data.id}`, data, token);
+export const edit = async (dataInfo, token, file) => {
+  let data = createFormData(dataInfo, file);
+  return request.put(`${baseUrl}/${dataInfo.id}`, data, token);
 };
 
 export const remove = async (movieId, token) => {

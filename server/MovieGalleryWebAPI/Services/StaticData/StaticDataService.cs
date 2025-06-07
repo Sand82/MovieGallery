@@ -21,6 +21,7 @@ namespace MovieGalleryWebAPI.Services.StaticData
             model.Countries = await GetCountries();
             model.Languages = await GetLanguages();
             model.Categories = await GetCategories();
+            model.FileNames = await GetFileNames();
 
             return model;
         }
@@ -38,6 +39,13 @@ namespace MovieGalleryWebAPI.Services.StaticData
         private async Task<List<GetStaticDataModel>> GetCategories() 
         { 
             return await this.data.Categories.Select(c => new GetStaticDataModel { Id = c.Id, Name = c.Name, }).ToListAsync();
+        }
+
+        private async Task<List<string>> GetFileNames()
+        {
+            var data = await this.data.Movies.Select(m => m.MainImage).ToListAsync();
+
+            return data!;
         }
     }
 }

@@ -69,6 +69,18 @@ export const adjustMovieImageURL = (imageName) => {
   return `https://localhost:7222/images/${imageName}`
 }
 
+export const formatFileName = (filename, size = "1000x1600") => {
+  const lastDotIndex = filename.lastIndexOf(".");
+  if (lastDotIndex === -1) {
+    return null;
+  } 
+
+  const namePart = filename.slice(0, lastDotIndex).replace(/\s+/g, "-");
+  const extension = filename.slice(lastDotIndex);
+
+  return `${namePart}-${size}${extension}`; 
+}
+
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");
   text = text.replace(/<\/?[^>]+(>|$)/g, "");

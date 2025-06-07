@@ -8,5 +8,7 @@
         public ICollection<GetStaticDataModel>? Languages { get; set; }
 
         public ICollection<GetStaticDataModel>? Categories { get; set; }
+
+        public ICollection<string>? FileNames { get; set; }
     }
 }

@@ -45,7 +45,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost]
         [Consumes("multipart/form-data")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]        
-        public async Task<IActionResult> Post([FromForm]MovieCreateFormModel formModel)
+        public async Task<IActionResult> Post([FromForm] ManageMovieFormModel formModel)
         {
             var userId = User.GetId();
 
@@ -80,9 +80,10 @@ namespace MovieGalleryWebAPI.Controllers
             return Ok(movie);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(MovieEditModel model)
+        [Consumes("multipart/form-data")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]        
+        public async Task<IActionResult> Edit(ManageMovieFormModel formModel)
         {
             var userId = User.GetId();
 
@@ -91,9 +92,19 @@ namespace MovieGalleryWebAPI.Controllers
             if (!isAdmin)
             {
                 return BadRequest("Authorization denied.");
-            }            
-            
-            var movie = await moviesService.EditMovie(model);
+            }
+
+            if (formModel.File == null || formModel.File.Length == 0)
+            {
+                return BadRequest("File is required");
+            }
+
+            var model = JsonSerializer.Deserialize<MovieEditModel>(formModel!.Data!, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            var movie = await moviesService.EditMovie(model!);
 
             return Ok(movie);
         }

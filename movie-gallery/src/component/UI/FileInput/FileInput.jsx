@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
+import * as fileService from "../../../services/FilesService.js"
 import styles from "./FileInput.module.css";
 import Error from "../Error/Error.jsx";
 import { fileImageValidator } from "../../../services/Validators.js"
-import * as fileService from "../../../services/FilesService.js"
+import { StaticDataContext } from "../../../contexts/StaticDataContext.js";
+import { formatFileName } from "../../../services/HelperService.js"
 
 const FileInput = ({fileHandler, fileName, accessToken}) => {
-  const [file, setFile] = useState({file: null, error: ""});    
+  const [file, setFile] = useState({file: null, error: ""});
+  
+  const { staticData } = useContext(StaticDataContext);
 
   useEffect(() => {
     if (!fileName) {
@@ -26,15 +30,23 @@ const FileInput = ({fileHandler, fileName, accessToken}) => {
     if (!selectedFile) {
       setFile((state) => ({file: null, error: ""}));      
       return;
-    }
+    }    
     
-    if (!fileImageValidator(selectedFile.type)) {
-      
+    if (!fileImageValidator(selectedFile.type)) {      
       setFile((state) => ({file: null, error: "Invalid file type. Only png, jpeg, or gif allowed."}));
       return;
     }
-      setFile((state) => ({file: selectedFile, error: ""}));
-      fileHandler({file: selectedFile, error: ""})
+
+    let fileName = formatFileName(event.target.files[0].name);  
+
+    if (staticData.fileNames.includes(fileName)) {
+      console.log("Error not allowed repat file name");
+      setFile((state) => ({file: null, error: "Each image must have a unique name. Select a different file or rename the current one."}));
+      return;
+    }    
+
+    setFile((state) => ({file: selectedFile, error: ""}));
+    fileHandler({file: selectedFile, error: ""})
   };	
 
   return (
@@ -45,8 +57,8 @@ const FileInput = ({fileHandler, fileName, accessToken}) => {
       <input
         type="file"
         id="formFileSm"
-        onChange={fileChangeHandler}
-        className={`form-control ${styles["file-hidden"]}`}        
+        className={`form-control ${styles["file-hidden"]}`} 
+        onChange={fileChangeHandler}               
       />
 
       <input
@@ -58,7 +70,7 @@ const FileInput = ({fileHandler, fileName, accessToken}) => {
 
       <button
         type="button"
-        className="btn btn-outline-secondary btn-sm"
+        className="btn btn-secondary btn-sm"
         onClick={() => document.getElementById("formFileSm").click()}
       >
         Choose file

@@ -38,9 +38,9 @@ public class ManageImage : IManageImage
        
         var fileName = $"{originalName}-{width}x{height}.jpg";
 
-        var path = await SaveToServer(imageBytes, fileName);
+        await SaveToServer(imageBytes, fileName);
 
-        return path;
+        return fileName;
     }
 
     private string GetContentType(string path)
@@ -67,7 +67,7 @@ public class ManageImage : IManageImage
         return outputStream.ToArray();        
     }
 
-    private async Task<string> SaveToServer(byte[] fileBytes, string fileName)
+    private async Task SaveToServer(byte[] fileBytes, string fileName)
     {
         var subfolder = "images";
         var folderPath = Path.Combine(env.WebRootPath, subfolder);
@@ -75,9 +75,7 @@ public class ManageImage : IManageImage
 
         var filePath = Path.Combine(folderPath, fileName);
 
-        await File.WriteAllBytesAsync(filePath, fileBytes);
-
-        return $"/{fileName}";
+        await File.WriteAllBytesAsync(filePath, fileBytes);      
     }   
 
     private string CreateImageName(string imageName) 

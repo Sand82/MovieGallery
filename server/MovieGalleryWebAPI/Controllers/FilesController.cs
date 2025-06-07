@@ -14,6 +14,7 @@ namespace MovieGalleryWebAPI.Controllers
             this.manageImage = manageImage;
         }
 
+
         [HttpGet("{fileName}")]
         public IActionResult GetImage(string fileName)
         {

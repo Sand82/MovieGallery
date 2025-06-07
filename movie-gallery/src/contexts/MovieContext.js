@@ -63,10 +63,10 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
-  const editHandler = async (movieData) => {
+  const editHandler = async (movieData, file) => {
     setServerErrors(null);
     try {
-      await movieService.edit(movieData, user.accessToken);
+      await movieService.edit(movieData, user.accessToken, file);
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
