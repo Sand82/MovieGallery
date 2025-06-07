@@ -16,7 +16,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public Task<MovieGetModel> GetLastCreatedMovie();
 
-        public Task<bool> EditMovie(MovieEditModel model);
+        public Task<bool> EditMovie(MovieEditModel model, IFormFile file);
 
         public Task<bool> CheckForDuplicates(string title);
     }

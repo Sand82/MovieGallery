@@ -83,7 +83,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPut("{id}")]
         [Consumes("multipart/form-data")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]        
-        public async Task<IActionResult> Edit(ManageMovieFormModel formModel)
+        public async Task<IActionResult> Edit([FromForm]ManageMovieFormModel formModel)
         {
             var userId = User.GetId();
 
@@ -104,7 +104,7 @@ namespace MovieGalleryWebAPI.Controllers
                 PropertyNameCaseInsensitive = true
             });
 
-            var movie = await moviesService.EditMovie(model!);
+            var movie = await moviesService.EditMovie(model!, formModel.File);
 
             return Ok(movie);
         }

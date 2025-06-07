@@ -249,7 +249,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             }
         }
 
-        public async Task<bool> EditMovie(MovieEditModel model)
+        public async Task<bool> EditMovie(MovieEditModel model, IFormFile file)
         {
             var isEdited = true;
 
@@ -264,9 +264,27 @@ namespace MovieGalleryWebAPI.Service.Movies
                 return isEdited;
             }
 
+            //TODO isMainImageDelete or isBackgroundImageDelete throw some error
+
+            var mainImage = movie.MainImage;
+
+            var backgroundImage = movie.BackgroundImage;            
+
+            if (!movie.MainImage!.Equals(file.FileName))
+            {
+                var isMainImageDelete = manageImage.DeleteFile(movie.MainImage!);
+
+                var isBackgroundImageDelete = manageImage.DeleteFile(movie.BackgroundImage!);
+
+                backgroundImage = await manageImage.ImageManager(file, 1800, 600);
+
+                mainImage = await manageImage.ImageManager(file, 1000, 1600);
+            }
+
             movie.Title = model.Title;
             movie.Description = model.Description;
-            //movie.ImageUrl = model.ImageUrl;           
+            movie.MainImage = mainImage;
+            movie.BackgroundImage = backgroundImage;           
             movie.Year = model.Year;
             movie.Duration = model.Duration;
             movie.EmbededVideo = model.EmbededVideo;

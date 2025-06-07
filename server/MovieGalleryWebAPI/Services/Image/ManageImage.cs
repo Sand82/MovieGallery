@@ -43,6 +43,46 @@ public class ManageImage : IManageImage
         return fileName;
     }
 
+    public bool DeleteFile(string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+        {
+            return false;
+        }
+
+        var filePath = PeakFile(fileName);
+       
+        if (filePath == null)
+        {
+            return false;
+        }           
+
+        try
+        {
+            File.Delete(filePath);
+            return true;
+        }
+        catch
+        {            
+            return false;
+        }
+    }
+
+    private string? PeakFile(string fileName)
+    {
+        fileName = Path.GetFileName(fileName);
+
+        var folderPath = Path.Combine(env.WebRootPath, "images");
+        var filePath = Path.Combine(folderPath, fileName);
+
+        if (!File.Exists(filePath))
+        {
+            return null;
+        }
+
+        return filePath;
+    }
+
     private string GetContentType(string path)
     {
         var ext = Path.GetExtension(path).ToLowerInvariant();
