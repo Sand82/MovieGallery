@@ -58,7 +58,7 @@ function App() {
                       path="/create"
                       element={
                         <RouteGuard>
-                          <ManageMovie isCreated={true} />
+                          <ManageMovie isCreated={true} key="create" />
                         </RouteGuard>
                       }
                     />
@@ -104,7 +104,7 @@ function App() {
                       path="/movies/details/:movieId/edit"
                       element={
                         <RouteGuard>
-                          <ManageMovie />
+                          <ManageMovie isCreated={false} key="edit" />
                         </RouteGuard>
                       }
                     />

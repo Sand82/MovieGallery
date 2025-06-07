@@ -23,9 +23,7 @@ const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
   const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
   const { movie } = useContext(DetailContext);  
-  const { staticData } = useContext(StaticDataContext);
-
-  console.log(movie);
+  const { staticData } = useContext(StaticDataContext); 
 
   const [starringValue, setStarringValue] = useState(isCreated && movie
     ? [] 

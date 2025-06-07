@@ -12,10 +12,12 @@ const Tags = ({tagHandler, defaultValue}) => {
 
 	useEffect(() => {
     	setTagList(defaultValue);
-  	}, [defaultValue]);
+  	}, []);
 
 	const createTagHandler = (e) => {
-		e.preventDefault();		
+		e.preventDefault();	
+		
+		console.log(tag)
 
 		if (tag && !tagList.includes(tag)) {
 			setTagList([...tagList, tag]);
@@ -39,6 +41,8 @@ const Tags = ({tagHandler, defaultValue}) => {
 			setError(false);
 		}
 	};
+
+	console.log(tagList)
 
 	const tagRemoveHandler = (value) => {
 		setTagList(state => state.filter(t => t !== value))
