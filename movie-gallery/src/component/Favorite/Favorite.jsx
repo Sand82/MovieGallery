@@ -5,21 +5,13 @@ import Spinner from "../UI/Spinner/Spiner.jsx";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { MovieContext } from "../../contexts/MovieContext.js";
+import { useAsyncEffect } from "../../hooks/useAsyncEffect.js"
 
 const Favorite = () => {
   const {user} =  useContext(AuthContext);
-  const { favMovies, favoritesHandler } = useContext(MovieContext);
-  const [loading, setLoading] = useState(true);
+  const { favMovies, favoritesHandler } = useContext(MovieContext); 
 
-  useEffect(()=>{
-    
-    const fetchFavorites = async () => {
-      setLoading(true);      
-      await favoritesHandler(user.id);
-      setLoading(false);
-    };
-    fetchFavorites();
-  },[user.id]) 
+  const loading = useAsyncEffect(() => favoritesHandler(user.id), [user.id]);  
 
   if (loading || !favMovies || Object.keys(favMovies).length === 0) {
     return <Spinner />;

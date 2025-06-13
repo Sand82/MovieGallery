@@ -14,6 +14,7 @@ import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { arrayToString } from "../../services/HelperService.js"
 import { adjustMovieImageURL } from '../../services/HelperService.js'
+import { useAsyncEffect } from "../../hooks/useAsyncEffect.js"
 
 const Details = () => {
   const { movieId } = useParams();
@@ -21,21 +22,7 @@ const Details = () => {
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
   const [hovered, setHovered] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-   const fetchDetails = async () => {
-      setLoading(true);      
-      await detailsHandler(movieId, user.id);
-      setLoading(false);
-    };
-
-    fetchDetails();
-  }, [movieId, user.id]);
-
-  if (loading || !movie || Object.keys(movie).length === 0) {
-    return <Spinner />;
-  }
+  const loading = useAsyncEffect(() => detailsHandler(movieId, user.id), [movieId, user.id]);
 
   const hartClickHandler = (hart) => {
 
@@ -65,6 +52,10 @@ const Details = () => {
   let countries = movie.countries && movie.countries.map(c => c.name).join(', ');
 
   let languages = movie.languages && movie.languages.map(l => l.name).join(', ');
+
+  if (loading || !movie || Object.keys(movie).length === 0) {
+    return <Spinner />;
+  }
 
   return (
     <>

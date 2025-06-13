@@ -8,23 +8,14 @@ import Spinner from "../UI/Spinner/Spiner.jsx";
 import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
+import { useAsyncEffect } from "../../hooks/useAsyncEffect.js";
 
 const NewMovies = () => {
 
   const { movies, latestMovies } = useContext(MovieContext);
-  const { topRatedMovieHandler } = useContext(FilterCotntext);
-  const [loading, setLoading] = useState(true);
+  const { topRatedMovieHandler } = useContext(FilterCotntext); 
 
-  useEffect(() => {    
-
-    const fetchTopRatedMovie = async () => {
-      setLoading(true);      
-      await  topRatedMovieHandler();
-      setLoading(false);
-    };
-
-    fetchTopRatedMovie();
-  }, []);
+  const loading = useAsyncEffect(() => topRatedMovieHandler(), []);  
 
   if (loading || !movies || Object.keys(movies).length === 0) {
     return <Spinner />;
