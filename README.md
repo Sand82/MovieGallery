@@ -72,34 +72,34 @@
 <h3>Screen shots of some views</h3>
 
 View from Home page upper part.
-![Home-upper-part](https://github.com/user-attachments/assets/eed16fd1-4a3d-4ab7-8409-ef3fe771910c)
+![Home_upper_part](https://github.com/user-attachments/assets/eacfc797-9ad7-4744-8501-f3c1b3031ef2)
 
 View from Home page middle part.
-![Home-middle-part](https://github.com/user-attachments/assets/62227a66-1e9a-4e6e-ba04-c639d5cc2105)
+![Home_middle_part](https://github.com/user-attachments/assets/62982219-725d-4722-9903-b3e80791b991)
 
 View from Home page down part.
-![Home-down-part](https://github.com/user-attachments/assets/e4f9e942-6355-4c1e-93c7-c2264b146161)
+![Home_down_part](https://github.com/user-attachments/assets/818496f8-23bc-412d-a2bf-b4ac6dff524d)
 
 View from Movies upper part.
-![Movie-upper-part](https://github.com/user-attachments/assets/12627c38-db88-446b-a3eb-c73125d8b12e)
+![Movies_upper_part](https://github.com/user-attachments/assets/ae58ad0d-121b-4e4f-b426-039ad7d55d89)
 
 View from Movies down part.
-![Movie-down-part](https://github.com/user-attachments/assets/5654a900-919f-4ded-8fc5-7aba2e923afe)
+![Movies_down_part](https://github.com/user-attachments/assets/35240b22-9c5b-405c-9301-20cb89d3c351)
 
 View from movie Details page upper part admin account.
-![Details-admin-upper-part](https://github.com/user-attachments/assets/af489123-4bbd-48dc-b797-7ffa3b47f2cc)
+![Details_admin_upper_part](https://github.com/user-attachments/assets/eec71557-24c4-46a4-9ddb-e57c8c2e6b7e)
 
 View from movie Details page upper part user account.
-![Datails-user-part](https://github.com/user-attachments/assets/a9bcae13-1bd4-4f41-97e1-b883b131f2e3)
+![Details_user_upper_part](https://github.com/user-attachments/assets/49ead9f3-145a-492a-9d01-4843fc354585)
 
 View from movie Details page down part.
-![Details-down-part](https://github.com/user-attachments/assets/7df3c703-e23b-43d4-bbe7-a5babecaf62e)
+![Details_down_part](https://github.com/user-attachments/assets/9d97064a-9e07-4470-97ce-dc1c7362b06d)
 
 View from Favorite page upper part.
-![Favorite-upper-part](https://github.com/user-attachments/assets/9681fc60-e8e5-4d6d-9a74-978a6a5dbcf2)
+![Favorite_upper_part](https://github.com/user-attachments/assets/98021cd2-d40f-4a67-8b11-942884683620)
 
 View from Favorite page down part.
-![Favorite-down-part](https://github.com/user-attachments/assets/99620e81-8fcc-4f97-af6f-1e6889fad6d0)
+![Favorite_down_part](https://github.com/user-attachments/assets/fb5011d9-61ab-4e66-9bb5-5bc1f6c5a854)
 
 View from Contact As page upper part.
 ![Contact-upper-part](https://github.com/user-attachments/assets/fdc88767-86e1-40fd-8769-43f1276beb19)
@@ -115,12 +115,12 @@ View from some Forms.
 
 ![Register-form](https://github.com/user-attachments/assets/e8513e61-67c8-4c68-81a5-a16e4be53b68)
 
-![Creat-upper-part](https://github.com/user-attachments/assets/a34260f6-1f9c-4cad-a48e-909b0efe67c5)
+![Create_movie_upper_part](https://github.com/user-attachments/assets/18b80bb4-acca-41c9-88c0-3a2462147f11)
 
-![Create-down-part](https://github.com/user-attachments/assets/7a5de220-661f-4253-ab3e-f16ac02b438e)
+![Create_movie_down_part](https://github.com/user-attachments/assets/e9195be5-f563-4557-808b-2be208fbf7cb)
 
-![Edit-upper-part](https://github.com/user-attachments/assets/be907f49-225b-472b-b604-623275775896)
+![Edit_movie_upper_part](https://github.com/user-attachments/assets/2972b26a-08db-46a1-bf8b-de7f625ea095)
 
-![Edit-down-part](https://github.com/user-attachments/assets/7ec5d087-2045-4415-b386-5ad6bf8fb2d1)
+![Edit_movie_middle_part](https://github.com/user-attachments/assets/1e26455f-d8f6-4d58-8f58-1c53b4812b07)
 
-
+![Edit_movie_down_part](https://github.com/user-attachments/assets/277edc34-20cc-41ce-b7bf-ddbbd1f96eb2)
