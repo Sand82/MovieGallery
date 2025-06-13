@@ -61,9 +61,9 @@
   <li>Services and Helpers</li>
   <li>Reusable components</li>
   <li>Embeded videos</li>
-  <li>CSS modules</li>
-  <li>Responsive design</li>
+  <li>CSS Modules</li>
   <li>CSS Animations</li>
+  <li>Responsive design</li>  
   <li>loading Spinner functionality</li>
   <li>Integrate Google Maps</li>
   <li>Integrate Gmail owner</li>
