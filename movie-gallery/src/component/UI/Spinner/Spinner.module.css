@@ -1,0 +1,32 @@
+/* src/component/UI/Spinner/Spinner.module.css */
+.spinnerContainer {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  border: 8px solid #e0e0e0;
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.text {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 500;
+  font-family: "Segoe UI", sans-serif;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -6,7 +6,7 @@ import { arrayToString, adjustMovieImageURL } from "../../../services/HelperServ
 
 const NewMovieBlog = ({ movie }) => {  
 
- let currentBackgroundImage = (adjustMovieImageURL(movie.backgroundImage));
+ let currentBackgroundImage = (adjustMovieImageURL(movie.backgroundImage)); 
 
   return (
     <div className="col-6">

@@ -9,6 +9,7 @@ import Comment from "../Comments/Comment/Comment.jsx";
 import CreateComment from "../Comments/CommentCreate/CreateComment.jsx";
 import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx"
 import Error from "../UI/Error/Error.jsx";
+import Spinner from "../UI/Spinner/Spiner.jsx";
 import { AuthContext } from "../../contexts/AuthContext.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { arrayToString } from "../../services/HelperService.js"
@@ -19,11 +20,22 @@ const Details = () => {
 
   const { user } = useContext(AuthContext);
   const { movie, detailsHandler, favoriteMovieHandler, serverErrors } = useContext(DetailContext);  
-  const [hovered, setHovered] = useState(false);   
+  const [hovered, setHovered] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    detailsHandler(movieId, user.id);
-  }, [movieId, user.id]);  
+   const fetchDetails = async () => {
+      setLoading(true);      
+      await detailsHandler(movieId, user.id);
+      setLoading(false);
+    };
+
+    fetchDetails();
+  }, [movieId, user.id]);
+
+  if (loading || !movie || Object.keys(movie).length === 0) {
+    return <Spinner />;
+  }
 
   const hartClickHandler = (hart) => {
 
