@@ -1,12 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./component/Header/Header.jsx";
-import { AuthProvider } from "./contexts/AuthContext.js";
-import { MovieProvider } from "./contexts/MovieContext.js";
-import { DetailProvider } from "./contexts/DetailContext.js";
-import { FilterProvider } from "./contexts/FiltersContext.js";
-import { StaticDataProvider } from "./contexts/StaticDataContext.js";
-
 import NewMovies from "./component/TopMovies/NewMovies.jsx";
 import Movies from "./component/Movies/Movies.jsx";
 import ContactUs from "./component/ContactUs/ContactUs.jsx";
@@ -24,6 +18,12 @@ import UnderConstruction from "./component/ErrorsPage/UnderConstruction.jsx";
 import Video from "./component/UI/Video/Video.jsx";
 import AutoScroll from "./component/AutoScroll/AutoScroll.jsx";
 import PageTransitionWrapper from "./component/UI/PageTransitionWrapper/PageTransitionWrapper.jsx";
+
+import { AuthProvider } from "./contexts/AuthContext.js";
+import { MovieProvider } from "./contexts/MovieContext.js";
+import { DetailProvider } from "./contexts/DetailContext.js";
+import { FilterProvider } from "./contexts/FiltersContext.js";
+import { StaticDataProvider } from "./contexts/StaticDataContext.js";
 
 function App() {
   return (
