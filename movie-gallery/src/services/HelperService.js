@@ -1,3 +1,6 @@
+import CustomNextArrow from "../component/UI/Arrows/CustomNextArrow.jsx";
+import CustomPrevArrow from "../component/UI/Arrows/CustomPrevArrow.jsx";
+
 import { convertFromHTML, ContentState } from "draft-js";
 
 export const formatData = (currentDate) => {
@@ -62,24 +65,55 @@ export const arrayToString = (arr) => {
 };
 
 export const objectArrayToStringArray = (arr) => {
-  return arr.map(item => item.name);
-}
+  return arr.map((item) => item.name);
+};
 
 export const adjustMovieImageURL = (imageName) => {
-  return `https://localhost:7222/images/${imageName}`
-}
+  return `https://localhost:7222/images/${imageName}`;
+};
 
 export const formatFileName = (filename, size = "1000x1600") => {
   const lastDotIndex = filename.lastIndexOf(".");
   if (lastDotIndex === -1) {
     return null;
-  } 
+  }
 
   const namePart = filename.slice(0, lastDotIndex).replace(/\s+/g, "-");
   const extension = filename.slice(lastDotIndex);
 
-  return `${namePart}-${size}${extension}`; 
-}
+  return `${namePart}-${size}${extension}`;
+};
+
+export const sliderSettings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  arrows: true,
+  nextArrow: <CustomNextArrow />,
+  prevArrow: <CustomPrevArrow />,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+      },
+    },
+  ],
+};
 
 const convertToPlaneText = (text) => {
   text = text.replace(/<h[1-6][^>]*>.*?<\/h[1-6]>/gi, "");

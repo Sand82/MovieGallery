@@ -1,59 +1,45 @@
 import { useContext } from "react";
-import { MovieContext } from "../../contexts/MovieContext.js";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";
 import NewMovieBlog from "./NewMovieBlog/NewMovieBlog.jsx";
 import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
 import Spinner from "../UI/Spinner/Spiner.jsx";
-import * as style from "../TopMovies/NewMovies.Module.css";
 import { Link } from "react-router-dom";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
 import { useAsyncEffect } from "../../hooks/useAsyncEffect.js";
+import { MovieContext } from "../../contexts/MovieContext.js";
+import { sliderSettings } from "../../services/HelperService.js"
 
 const NewMovies = () => {
-
   const { movies, latestMovies } = useContext(MovieContext);
-  const { topRatedMovieHandler } = useContext(FilterCotntext); 
+  const { topRatedMovieHandler } = useContext(FilterCotntext);
 
-  const loading = useAsyncEffect(() => topRatedMovieHandler(), []);  
+  const loading = useAsyncEffect(() => topRatedMovieHandler(), []);
 
   if (loading || !movies || Object.keys(movies).length === 0) {
     return <Spinner />;
   }
- 
+
   return (
     <>
-      <section style={style} className="section-text-white position-relative">
-        <div
-          className="d-background"
-          data-image-src=""
-          data-parallax="scroll"
-        />
+      <section className="section-text-white position-relative">
+        <div className="d-background" data-parallax="scroll" />
         <div className="d-background bg-theme-blacked" />
         <div className="mt-auto container position-relative">
           <div className="top-block-head text-uppercase">
             <h2 className="display-4">
-              Top
-              <span className="text-theme"> Rated</span>
+              Top <span className="text-theme">Rated</span>
             </h2>
           </div>
           <div className="top-block-footer">
-            <div
-              className="slick-spaced slick-carousel"
-              data-slick-view="navigation responsive-4"
-            >
-            <div>             
-              </div>
-              <div className="slick-slides slick-initialized slick-slider">
-                <div className="slick-list draggable">                
-                  <div className="slick-track">
-                    {movies.slice(0, 4).map((x) => (
-                      <TopRatedCard key={x.id} movie={x} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Slider {...sliderSettings}>
+              {movies.slice(0, 5).map((x) => (
+                <TopRatedCard key={x.id} movie={x} />
+              ))}
+            </Slider>
           </div>
         </div>
       </section>
@@ -75,8 +61,9 @@ const NewMovies = () => {
           </div>
         </div>
       </section>
-      <ScrollToTop route={`/`}/>
-    </>    
+
+      <ScrollToTop route={`/`} />
+    </>
   );
 };
 
