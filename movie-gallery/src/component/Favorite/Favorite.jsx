@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 import FavoriteMovie from "./FavoriteMovie/FavoriteMovie.jsx";
 import Spinner from "../UI/Spinner/Spiner.jsx";

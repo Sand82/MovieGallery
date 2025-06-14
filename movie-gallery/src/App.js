@@ -23,6 +23,7 @@ import Favorite from "./component/Favorite/Favorite.jsx";
 import UnderConstruction from "./component/ErrorsPage/UnderConstruction.jsx";
 import Video from "./component/UI/Video/Video.jsx";
 import AutoScroll from "./component/AutoScroll/AutoScroll.jsx";
+import PageTransitionWrapper from "./component/UI/PageTransitionWrapper/PageTransitionWrapper.jsx";
 
 function App() {
   return (
@@ -35,14 +36,37 @@ function App() {
                 <AutoScroll>
                   <Header />
                   <Routes>
-                    <Route path="/" element={<NewMovies />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route
+                      path="/"
+                      element={
+                        <PageTransitionWrapper>
+                          <NewMovies />
+                        </PageTransitionWrapper>
+                      }
+                    />
+                    <Route
+                      path="/login"
+                      element={
+                        <PageTransitionWrapper>
+                          <Login />
+                        </PageTransitionWrapper>
+                      }
+                    />
+                    <Route
+                      path="/register"
+                      element={
+                        <PageTransitionWrapper>
+                          <Register />
+                        </PageTransitionWrapper>
+                      }
+                    />
                     <Route
                       path="/logout"
                       element={
                         <RouteGuard>
-                          <Logout />
+                          <PageTransitionWrapper>
+                            <Logout />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -50,7 +74,9 @@ function App() {
                       path="/movies"
                       element={
                         <RouteGuard>
-                          <Movies />
+                          <PageTransitionWrapper>
+                            <Movies />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -58,7 +84,9 @@ function App() {
                       path="/create"
                       element={
                         <RouteGuard>
-                          <ManageMovie isCreated={true} key="create" />
+                          <PageTransitionWrapper>
+                            <ManageMovie isCreated={true} key="create" />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -66,7 +94,9 @@ function App() {
                       path="/favorite"
                       element={
                         <RouteGuard>
-                          <Favorite />
+                          <PageTransitionWrapper>
+                            <Favorite />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -74,21 +104,43 @@ function App() {
                       path="/contactus"
                       element={
                         <RouteGuard>
-                          <ContactUs />
+                          <PageTransitionWrapper>
+                            <ContactUs />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
-                    <Route path="/notfound" element={<NotFound />} />
-                    <Route path="/badrequest" element={<BadRequest />} />
+                    <Route
+                      path="/notfound"
+                      element={
+                        <PageTransitionWrapper>
+                          <NotFound />
+                        </PageTransitionWrapper>
+                      }
+                    />
+                    <Route
+                      path="/badrequest"
+                      element={
+                        <PageTransitionWrapper>
+                          <BadRequest />
+                        </PageTransitionWrapper>
+                      }
+                    />
                     <Route
                       path="/underconstruction"
-                      element={<UnderConstruction />}
+                      element={
+                        <PageTransitionWrapper>
+                          <UnderConstruction />
+                        </PageTransitionWrapper>
+                      }
                     />
                     <Route
                       path="/movies/details/:movieId"
                       element={
                         <RouteGuard>
-                          <Details />
+                          <PageTransitionWrapper>
+                            <Details />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -96,7 +148,9 @@ function App() {
                       path="/details/video/:movieId"
                       element={
                         <RouteGuard>
-                          <Video />
+                          <PageTransitionWrapper>
+                            <Video />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
@@ -104,11 +158,20 @@ function App() {
                       path="/movies/details/:movieId/edit"
                       element={
                         <RouteGuard>
-                          <ManageMovie isCreated={false} key="edit" />
+                          <PageTransitionWrapper>
+                            <ManageMovie isCreated={false} key="edit" />
+                          </PageTransitionWrapper>
                         </RouteGuard>
                       }
                     />
-                    <Route path="*" element={<NotFound />} />
+                    <Route
+                      path="*"
+                      element={
+                        <PageTransitionWrapper>
+                          <NotFound />
+                        </PageTransitionWrapper>
+                      }
+                    />
                   </Routes>
                   <Footer />
                 </AutoScroll>

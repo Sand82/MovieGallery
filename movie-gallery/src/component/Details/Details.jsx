@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 
 import styles from "./Details.module.css";
 import DeleteModal from "./DeleteModal/DeleteModal.jsx";

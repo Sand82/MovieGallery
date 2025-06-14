@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { MovieContext } from "../../contexts/MovieContext.js";
 
 import TopRatedCard from "./TopRatedCard/TopRatedCard.jsx";

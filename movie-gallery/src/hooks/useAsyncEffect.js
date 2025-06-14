@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useAsyncEffect = (asyncFn, deps = []) => {
+export const useAsyncEffect = (asyncFunction, deps = []) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -9,7 +9,7 @@ export const useAsyncEffect = (asyncFn, deps = []) => {
     const run = async () => {
       setLoading(true);
 
-      await asyncFn();
+      await asyncFunction();
       if (active) setLoading(false);
     };
 
