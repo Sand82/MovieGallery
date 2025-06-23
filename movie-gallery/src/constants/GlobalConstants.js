@@ -32,3 +32,5 @@ export const releaseMaxLength = 200;
 export const yearLength = 4;
 
 export const badRequestStatusCode = "400";
+
+export const successMessage = "Successfully added";

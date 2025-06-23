@@ -4,12 +4,13 @@ import { useContext, useState} from "react";
 import * as helperService from "../../../services/HelperService.js";
 import * as GlobalConstant from "../../../constants/GlobalConstants.js";
 import Input from "../../UI/Input/Input.jsx";
-import Error from "../../UI/Error/Error.jsx"
+import ServerError from "../../UI/ServerError/ServerError.jsx"
 import styles from './Comment.module.css';
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import { DetailContext } from "../../../contexts/DetailContext.js";
 import { hasLength } from "../../../services/Validators.js";
 import { useInput } from "../../../hooks/useInput.js";
+import { successMessage } from "../../../constants/GlobalConstants.js"
 
 const Comment = ({ comment }) => {
   const {
@@ -62,12 +63,12 @@ const Comment = ({ comment }) => {
   }
 
   return (
-    <div className="comment-entity" >      
+    <div className="comment-entity" >
+      {/* <div>
+        <ServerError message={serverErrors ? serverErrors : successMessage + " comment."}/>
+      </div>  */}
       <div className="entity-inner">
-        <form className="entity-content">
-          <div>
-            <Error error={serverErrors}/>
-          </div> 
+        <form className="entity-content">          
           <h4 className="entity-title">{comment.username}</h4>
           <p className="entity-subtext">{helperService.formatData(comment.creationData)}</p>
           {isEditing ? (                       
