@@ -10,7 +10,6 @@ import { AuthContext } from "../../../contexts/AuthContext.js";
 import { DetailContext } from "../../../contexts/DetailContext.js";
 import { hasLength } from "../../../services/Validators.js";
 import { useInput } from "../../../hooks/useInput.js";
-import { successMessage } from "../../../constants/GlobalConstants.js"
 
 const Comment = ({ comment }) => {
   const {
@@ -64,9 +63,9 @@ const Comment = ({ comment }) => {
 
   return (
     <div className="comment-entity" >
-      {/* <div>
-        <ServerError message={serverErrors ? serverErrors : successMessage + " comment."}/>
-      </div>  */}
+      <div>
+        { serverErrors ?? <ServerError /> }
+      </div> 
       <div className="entity-inner">
         <form className="entity-content">          
           <h4 className="entity-title">{comment.username}</h4>

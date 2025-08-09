@@ -33,4 +33,4 @@ export const yearLength = 4;
 
 export const badRequestStatusCode = "400";
 
-export const successMessage = "Successfully added";
+export const errorMessage = "Something happened, try again later.";

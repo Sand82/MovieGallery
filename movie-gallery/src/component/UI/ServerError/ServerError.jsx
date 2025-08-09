@@ -1,18 +1,19 @@
 import styles from "./ServerError.module.css";
 
-const ServerError = ({ message}) => {
+const ServerError = () => {
 
   let serverErrorClass = "alert alert-success";
 
-  if (message) {
+  if (isSuccess) {
     serverErrorClass = "alert alert-danger";
   }
 
   return (
     <div className={`container ${styles["server-error"]}`}>            
-      <div className={serverErrorClass} role="alert">
-        {message}
-      </div>      
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     </div>
   )
 }
