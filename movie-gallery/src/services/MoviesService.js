@@ -5,7 +5,6 @@ import { createFormData } from "../services/DataTransformer.js";
 const baseUrl = "https://localhost:7222/api/movies";
 
 export const getAll = (filters) => {
-  console.log(filters.tag);
   return request.get(
     `${baseUrl}?search=${filters.search}&select=${filters.select}&sort=${filters.sort}&category=${filters.category}&tag=${filters.tag}&itemsPerPage=${filters.itemsPerPage}&currentPage=${filters.currentPage}`
   );

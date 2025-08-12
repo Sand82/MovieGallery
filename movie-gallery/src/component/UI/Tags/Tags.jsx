@@ -40,9 +40,7 @@ const Tags = ({tagHandler, defaultValue}) => {
 		} else {
 			setError(false);
 		}
-	};
-
-	console.log(tagList)
+	};	
 
 	const tagRemoveHandler = (value) => {
 		setTagList(state => state.filter(t => t !== value))

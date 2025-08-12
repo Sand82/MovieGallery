@@ -100,18 +100,22 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             var latestMovies = await GetLatestMovies(moviesQuery);
 
+            if (!string.IsNullOrWhiteSpace(model.Tag))
+            {
+                moviesQuery = moviesQuery.Where(m => m.MovieTags!.Any(mt => mt.TagId == int.Parse(model.Tag)));
+            }
+
             if (!string.IsNullOrWhiteSpace(model.Category))
             {
-
-                moviesQuery = moviesQuery.Where(m => m.MovieCategories.Any(mc => mc.CategoryId == int.Parse(model.Category)));
-                moviesData.Count = moviesQuery.ToList().Count();
+                moviesQuery = moviesQuery.Where(m => m.MovieCategories.Any(mc => mc.CategoryId == int.Parse(model.Category)));                
             }
 
             if (!string.IsNullOrWhiteSpace(model.Search))
             {
-                moviesQuery = moviesQuery.Where(m => m.Title!.Contains(model.Search));
-                moviesData.Count = moviesQuery.ToList().Count();
+                moviesQuery = moviesQuery.Where(m => m.Title!.Contains(model.Search));                
             }
+
+            moviesData.Count = moviesQuery.ToList().Count();
 
             moviesQuery = SelectQueryMoviesBy(model.Select!, model.Sort!, moviesQuery);
 

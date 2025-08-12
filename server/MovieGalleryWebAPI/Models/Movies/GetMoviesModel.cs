@@ -10,6 +10,8 @@
 
         public string? Category { get; set; }
 
+        public string? Tag { get; set; }
+
         public int ItemsPerPage { get; set; }
 
         public int CurrentPage { get; set; }

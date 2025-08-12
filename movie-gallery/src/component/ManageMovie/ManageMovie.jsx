@@ -174,7 +174,7 @@ const ManageMovie = ({ isCreated }) => {
       languages: convertToEntity(languagesOptions),
       categories: convertToEntity(categoriesOptions),
       tags: tags,      
-    };     
+    };    
 
     if (isCreated) {
       createHandler(movieData, fileInfo.file);
@@ -207,7 +207,7 @@ const ManageMovie = ({ isCreated }) => {
     fileInfo.error !== "" ||
     serverErrors ; 
 
-  const movieActionType = isCreated ? "Create" : "Edit";
+  const movieActionType = isCreated ? "Create" : "Edit";  
 
   //TODO Server error functionality
   // <div className="col-12">
