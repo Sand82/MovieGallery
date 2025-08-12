@@ -9,6 +9,7 @@ import {
   SELECT_CHANGE,
   SORT_CHANGE,
   TAG_CHANGE,
+  RESET_CHANGE,
   CATEGORY_CHANGE,
   ITEM_PER_PAGE_CHANGE,
   CURRENT_PAGE_CHANGE,
@@ -80,7 +81,7 @@ export const filterReducer = (state, action) => {
     case CURRENT_PAGE_CHANGE:
       return { ...state, currentPage: action.payload };
 
-    case TOP_RATED_CHANGE:
+    case TOP_RATED_CHANGE, RESET_CHANGE:
       return {
         search: action.payload.search,
         select: action.payload.select,

@@ -7,11 +7,11 @@ import { StaticDataContext } from "../../contexts/StaticDataContext.js";
 const Search = () => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("All");
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState("");
   const [sort, setSort] = useState(true);
   const { staticData } = useContext(StaticDataContext);
   
-  const { searchHandler, selectHandler, sortHandler, categoryHandler } = useContext(FilterCotntext)
+  const { searchHandler, selectHandler, sortHandler, categoryHandler, tagHandler, resetHandler } = useContext(FilterCotntext)
   
   const searchChangeHandler = (e) => {
     e.preventDefault();
@@ -19,7 +19,19 @@ const Search = () => {
     searchHandler(search);
     selectHandler(select);
     categoryHandler(category);
-    sortHandler(sortString);    
+    sortHandler(sortString);
+  };
+
+  const clearSearchHandler = (e) => {
+    e.preventDefault(); 
+    
+    setSearch("");    
+    setSelect("All");    
+    setCategory("");    
+    setSort(true);
+    tagHandler("");
+    
+    resetHandler();
   };
 
   const searchChnageHandler = (e) => {
@@ -45,7 +57,7 @@ const Search = () => {
   return (
     <div className="section-pannel">
       <div className="grid row">
-        <div className="col-md-10">
+        <div className="col-md-11">
           <form onSubmit={searchChangeHandler}>
             <div className="row form-grid">
               <div className="col-sm-12 col-lg-4">
@@ -113,10 +125,21 @@ const Search = () => {
             </div>
           </form>
         </div>
-        <div className="col-md-2 my-md-auto d-flex">
-          <span className="info-title d-md-none mr-3">Select view:</span>
+        <div className="col-md-1 my-md-auto d-flex">
+          <span className="info-title d-md-none ">Select view:</span>
           <ul className="ml-md-auto h5 list-inline">
             <li className="list-inline-item">
+              {/* <button className="btn btn-secondary mr-4" onClick={clearSearchHandler}>Clear</button> */}
+              
+              <Link
+                className="content-link transparent-link mr-1"
+                to="#"
+                onClick={clearSearchHandler}
+              >
+                <i class="fa-solid fa-eraser"></i>
+              </Link>
+            </li>
+            <li className="list-inline-item">              
               <Link
                 className="content-link transparent-link"
                 to="#"

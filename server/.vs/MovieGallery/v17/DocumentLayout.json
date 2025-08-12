@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ViewState": "AQIAAPsAAAAAAAAAAAAuwAgBAAAMAAAA",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAnwF8AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-07T15:38:45.841Z",
               "IsPinned": true,
@@ -46,7 +46,7 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFcAAAAMAAAA",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAAAFcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-12T12:32:41.028Z",
               "EditorCaption": ""
@@ -61,8 +61,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Models\\Movies\\GetMoviesModel.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-12T08:53:33.988Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-12T08:53:33.988Z"
             }
           ]
         }
