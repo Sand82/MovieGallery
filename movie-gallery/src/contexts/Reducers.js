@@ -8,6 +8,7 @@ import {
   SEARCH_CHANGE,
   SELECT_CHANGE,
   SORT_CHANGE,
+  TAG_CHANGE,
   CATEGORY_CHANGE,
   ITEM_PER_PAGE_CHANGE,
   CURRENT_PAGE_CHANGE,
@@ -70,6 +71,9 @@ export const filterReducer = (state, action) => {
     case CATEGORY_CHANGE:
       return { ...state, category: action.payload };
 
+    case TAG_CHANGE:
+      return { ...state, tag: action.payload };
+
     case ITEM_PER_PAGE_CHANGE:
       return { ...state, itemsPerPage: action.payload };
 
@@ -82,6 +86,7 @@ export const filterReducer = (state, action) => {
         select: action.payload.select,
         sort: action.payload.sort,
         category: action.payload.category,
+        tag: action.payload.tag,
         itemsPerPage: action.payload.itemsPerPage,
         currentPage: action.payload.currentPage,
       };

@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { arrayToString } from "../../services/HelperService.js"
+import ViewTag from "./ViewTag/ViewTag.jsx"
+import { Fragment } from "react";
 
-const Description = ({description, tags}) => { 
+const Description = ({description, tags}) => {  
 	
 return (
   <div className="section-line">
@@ -37,7 +38,14 @@ return (
         <div className="col-auto">
           <div className="entity-links">
             <div className="entity-list-title">Tags:</div>            
-            {tags && tags.length > 0 ? arrayToString(tags) : "No createed tags for that movie."}            
+            {tags && tags.length > 0 ?  
+              tags.map((t, i) => 
+                  <Fragment key={t.id}>
+                    < ViewTag tag={t}/>
+                    {tags.length - 1 > i ? ", " : ""}
+                  </Fragment>
+                )   
+              : "No createed tags for that movie."}
           </div>
         </div>
       </div>

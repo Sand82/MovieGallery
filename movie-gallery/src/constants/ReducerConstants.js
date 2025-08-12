@@ -20,6 +20,8 @@ export const SORT_CHANGE = "SORT_CHANGE";
 
 export const CATEGORY_CHANGE = "CATEGORY_CHANGE";
 
+export const TAG_CHANGE = "TAG_CHANGE";
+
 export const ITEM_PER_PAGE_CHANGE = "ITEM_PER_PAGE_CHANGE";
 
 export const CURRENT_PAGE_CHANGE = "CURRENT_PAGE_CHANGE";

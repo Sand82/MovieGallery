@@ -92,7 +92,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         }
 
         public async Task<MoviesData> GetMovies(GetMoviesModel model)
-        {
+        {            
             var moviesQuery = GetQueryMovies();
 
             var moviesData = new MoviesData();
@@ -100,10 +100,17 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             var latestMovies = await GetLatestMovies(moviesQuery);
 
+            if (!string.IsNullOrWhiteSpace(model.Category))
+            {
+
+                moviesQuery = moviesQuery.Where(m => m.MovieCategories.Any(mc => mc.CategoryId == int.Parse(model.Category)));
+                moviesData.Count = moviesQuery.ToList().Count();
+            }
+
             if (!string.IsNullOrWhiteSpace(model.Search))
             {
                 moviesQuery = moviesQuery.Where(m => m.Title!.Contains(model.Search));
-                moviesData.Count = moviesQuery.Where(m => m.Title!.Contains(model.Search)).Count();
+                moviesData.Count = moviesQuery.ToList().Count();
             }
 
             moviesQuery = SelectQueryMoviesBy(model.Select!, model.Sort!, moviesQuery);
@@ -115,7 +122,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             var movies = await MaterializeMoviesQuery(moviesQuery);
 
             moviesData.Movies = movies;
-            moviesData.LatestMovies = latestMovies;
+            moviesData.LatestMovies = latestMovies;            
 
             return moviesData;
         }
@@ -392,6 +399,7 @@ namespace MovieGalleryWebAPI.Service.Movies
         {
             return this.data.Movies
                 .Include(m => m.Ratings)
+                .Include(m => m.MovieCategories)
                 .Where(m => !m.IsDelete)
                 .AsQueryable();
         }       

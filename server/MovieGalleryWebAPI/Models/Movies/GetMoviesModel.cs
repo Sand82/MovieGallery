@@ -8,6 +8,8 @@
 
         public string? Sort { get; set; }
 
+        public string? Category { get; set; }
+
         public int ItemsPerPage { get; set; }
 
         public int CurrentPage { get; set; }
