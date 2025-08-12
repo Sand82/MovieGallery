@@ -4,6 +4,7 @@ import {
   SEARCH_CHANGE,
   SELECT_CHANGE,
   SORT_CHANGE,
+  CATEGORY_CHANGE,
   ITEM_PER_PAGE_CHANGE,
   CURRENT_PAGE_CHANGE,
   TOP_RATED_CHANGE,
@@ -18,6 +19,7 @@ export const FilterProvider = ({ children }) => {
     search: "",
     select: "All",
     sort: "desc",
+    category: "",
     itemsPerPage: 5,
     currentPage: 1,
   });
@@ -44,6 +46,13 @@ export const FilterProvider = ({ children }) => {
     });
   };
 
+  const categoryHandler = (category) => {
+    dispatch({
+      type: CATEGORY_CHANGE,
+      payload: category,
+    });
+  };
+
   const itemsPerPageHandler = (itemsPerPage) => {
     dispatch({
       type: ITEM_PER_PAGE_CHANGE,
@@ -66,6 +75,7 @@ export const FilterProvider = ({ children }) => {
         search: "",
         select: SELECT_RATING,
         sort: "desc",
+        category: "",
         itemsPerPage: 5,
         currentPage: 1,
       },
@@ -79,6 +89,7 @@ export const FilterProvider = ({ children }) => {
         searchHandler,
         selectHandler,
         sortHandler,
+        categoryHandler,
         itemsPerPageHandler,
         currentPageHandler,
         topRatedMovieHandler,

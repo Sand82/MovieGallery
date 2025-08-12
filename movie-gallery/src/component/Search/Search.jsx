@@ -2,24 +2,32 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
+import { StaticDataContext } from "../../contexts/StaticDataContext.js";
 
 const Search = () => {
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("All");
+  const [category, setCategory] = useState(0);
   const [sort, setSort] = useState(true);
+  const { staticData } = useContext(StaticDataContext);
   
-  const { searchHandler, selectHandler, sortHandler } = useContext(FilterCotntext)
+  const { searchHandler, selectHandler, sortHandler, categoryHandler } = useContext(FilterCotntext)
   
   const searchChangeHandler = (e) => {
     e.preventDefault();
     let sortString = sort ? "desc": "asc";
     searchHandler(search);
     selectHandler(select);
-    sortHandler(sortString);
+    categoryHandler(category);
+    sortHandler(sortString);    
   };
 
   const searchChnageHandler = (e) => {
     setSearch(e.target.value);    
+  };
+
+  const categoryChangeHandler = (e) => {
+    setCategory(e.target.value);    
   };
 
   const selectChangeHandler = (e) => {
@@ -40,7 +48,7 @@ const Search = () => {
         <div className="col-md-10">
           <form onSubmit={searchChangeHandler}>
             <div className="row form-grid">
-              <div className="col-sm-7 col-lg-5">
+              <div className="col-sm-12 col-lg-4">
                 <div
                   className="input-view-flat date input-group"
                   data-toggle="datetimepicker"
@@ -66,7 +74,7 @@ const Search = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-7 col-lg-5 d-flex">
+              <div className="col-sm-12 col-lg-4 d-flex">
                 <div className="input-view-flat input-group">
                   <select
                     className="form-control"
@@ -91,6 +99,15 @@ const Search = () => {
                       }
                     </Link>                   
                   </div>
+                </div>
+              </div>
+              <div className="col-sm-12 col-lg-4">
+                <div className="input-view-flat input-group">
+                  <select className="form-control" name="genre" value={category} onChange={categoryChangeHandler}>
+                     <option value=""></option>
+                    {staticData.categories.map(x => <option key={x.id} value={x.id}>{x.name}</option>)
+                    }                  
+                  </select>
                 </div>
               </div>              
             </div>

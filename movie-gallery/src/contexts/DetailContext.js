@@ -20,12 +20,12 @@ export const DetailContext = createContext();
 export const DetailProvider = ({ children }) => {
   const [movie, dispatch] = useReducer(detailReducer, []);
   const [serverErrors, setServerErrors] = useState(null);
-  const { user } = useContext(AuthContext);  
+  const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const detailsHandler = async (movieId, userId) => {
-    setServerErrors(null);   
+    setServerErrors(null);
     try {
       const responce = await movieService.getOne(
         movieId,
@@ -72,7 +72,7 @@ export const DetailProvider = ({ children }) => {
   };
 
   const daleteCommentHandler = async (commentId) => {
-    setServerErrors(null);    
+    setServerErrors(null);
     try {
       await detailsService.removeComment(commentId, user.accessToken);
       dispatch({
@@ -81,11 +81,11 @@ export const DetailProvider = ({ children }) => {
       });
     } catch (error) {
       serverErrorsHandler(error);
-    }   
+    }
   };
 
   const favoriteMovieHandler = async (data) => {
-    setServerErrors(null);    
+    setServerErrors(null);
     try {
       await detailsService.addFavorite(data, user.accessToken);
       dispatch({
@@ -98,16 +98,16 @@ export const DetailProvider = ({ children }) => {
   };
 
   const movieRatingHandler = async (data) => {
-    setServerErrors(null);    
+    setServerErrors(null);
     try {
-      let responce = await detailsService.addRating(data, user.accessToken);     
+      let responce = await detailsService.addRating(data, user.accessToken);
       dispatch({
         type: SET_PERSONAL_RATING,
         payload: responce,
       });
     } catch (error) {
       serverErrorsHandler(error);
-    }    
+    }
   };
 
   const serverErrorsHandler = (error) => {
