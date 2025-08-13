@@ -34,6 +34,14 @@ namespace MovieGalleryWebAPI.Controllers
             return movies;
         }
 
+        [HttpGet("lates")]
+        public async Task<IEnumerable<MoviesDataModel>> GetLates()
+        {
+            var movies = await moviesService.GetLatesMovies();
+
+            return movies;
+        }
+
         [HttpGet("{id}")]
         public async Task<MovieDataModel> Get(int id, [FromQuery] string userId)
         {

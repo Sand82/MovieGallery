@@ -39,13 +39,26 @@ export const MovieProvider = ({ children }) => {
   );
 
   useEffect(() => {
+    const getLates = async () => {
+      setServerErrors(null);
+      try {
+        const responce = await movieService.getLates();
+        setLatestMovies(responce);
+      } catch (error) {
+        serverErrorsHandler(error);
+      }
+    };
+    getLates();
+  }, []);
+
+  useEffect(() => {
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
         const responce = await movieService.getAll(filters);
         setMovies(responce.movies);
         setMoviesCount(responce.count);
-        setLatestMovies(responce.latestMovies);
+        //setLatestMovies(responce.latestMovies);
       } catch (error) {
         serverErrorsHandler(error);
       }

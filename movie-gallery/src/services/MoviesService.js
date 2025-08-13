@@ -15,6 +15,10 @@ export const getOne = (movieId, userId, token) => {
   return request.get(`${baseUrl}/${movieId}?userId=${userId}`, data, token);
 };
 
+export const getLates = () => {  
+  return request.get(`${baseUrl}/lates`);
+};
+
 export const create = async (dataInfo, token, file) => {
   let data = createFormData(dataInfo, file);
   return request.post(baseUrl, data, token, true);
