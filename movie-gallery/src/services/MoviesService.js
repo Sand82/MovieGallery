@@ -4,19 +4,23 @@ import { createFormData } from "../services/DataTransformer.js";
 
 const baseUrl = "https://localhost:7222/api/movies";
 
-export const getAll = (filters) => {
+export const getAll = (filters) => {  
   return request.get(
     `${baseUrl}?search=${filters.search}&select=${filters.select}&sort=${filters.sort}&category=${filters.category}&tag=${filters.tag}&itemsPerPage=${filters.itemsPerPage}&currentPage=${filters.currentPage}`
   );
 };
 
-export const getOne = (movieId, userId, token) => {
+export const getOne = (movieId, userId, token) => { 
   let data = {};
   return request.get(`${baseUrl}/${movieId}?userId=${userId}`, data, token);
 };
 
-export const getLates = () => {  
+export const getLates = () => {
   return request.get(`${baseUrl}/lates`);
+};
+
+export const getTopRated = () => {
+  return request.get(`${baseUrl}/top-rated`);
 };
 
 export const create = async (dataInfo, token, file) => {

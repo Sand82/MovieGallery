@@ -13,7 +13,7 @@ import { convertToOptions, convertToEntity, objectArrayToStringArray } from "../
 import { useInput } from "../../hooks/useInput.js";
 import { DetailContext } from "../../contexts/DetailContext.js";
 import { AuthContext } from "../../contexts/AuthContext.js";
-import { MovieContext } from "../../contexts/MovieContext.js";
+import { MoviesContext } from "../../contexts/MoviesContext.js";
 import { hasLength, isEqualToExactLenght, isValidUrl, hasLengthNumberValue } from "../../services/Validators.js";
 import { useTextEditor } from "../../hooks/useTextEditor.js";
 import { useMultiSelect } from "../../hooks/useMultiSelect.js"
@@ -21,7 +21,7 @@ import { StaticDataContext } from "../../contexts/StaticDataContext.js";
 
 const ManageMovie = ({ isCreated }) => {
   const { user } = useContext(AuthContext);
-  const { createHandler, editHandler, serverErrors } = useContext(MovieContext);
+  const { createHandler, editHandler, serverErrors } = useContext(MoviesContext);
   const { movie } = useContext(DetailContext);  
   const { staticData } = useContext(StaticDataContext); 
 

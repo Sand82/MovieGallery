@@ -139,6 +139,14 @@ namespace MovieGalleryWebAPI.Service.Movies
             return latestMovies;
         }
 
+        public async Task<IEnumerable<MoviesDataModel>> GetTopRatedMovies()
+        {
+            var moviesQuery = GetQueryMovies();
+            var topRatedMovies = await GetTopRatedMovies(moviesQuery);
+
+            return topRatedMovies;
+        }
+
         public async Task<MovieDataModel> GetOneMovie(int movieId , string userId)
         {
             var movie = await this.data.Movies
@@ -351,6 +359,15 @@ namespace MovieGalleryWebAPI.Service.Movies
         private async Task<List<MoviesDataModel>> GetLatestMovies(IQueryable<Movie> moviesQuery)
         {
             moviesQuery = moviesQuery.OrderByDescending(m => m.Year).AsQueryable().Take(4);
+
+            var movies = await MaterializeMoviesQuery(moviesQuery);
+
+            return movies;
+        }
+
+        private async Task<List<MoviesDataModel>> GetTopRatedMovies(IQueryable<Movie> moviesQuery)
+        {
+            moviesQuery = moviesQuery.OrderByDescending(m => m.Ratings!.Any() ? m.Ratings!.Average(r => r.Value) : 0).AsQueryable().Take(5);
 
             var movies = await MaterializeMoviesQuery(moviesQuery);
 

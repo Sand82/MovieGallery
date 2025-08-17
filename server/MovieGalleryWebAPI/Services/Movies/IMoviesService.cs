@@ -10,6 +10,8 @@ namespace MovieGalleryWebAPI.Service.Movies
 
         public Task<IEnumerable<MoviesDataModel>> GetLatesMovies();
 
+        public Task<IEnumerable<MoviesDataModel>> GetTopRatedMovies();
+
         public Task<MovieDataModel> GetOneMovie(int movieId, string userId);        
 
         public Task<bool> RemoveMovie(int movieId);

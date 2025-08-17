@@ -10,16 +10,16 @@ import Spinner from "../UI/Spinner/Spiner.jsx";
 import { Link } from "react-router-dom";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
 import { useAsyncEffect } from "../../hooks/useAsyncEffect.js";
-import { MovieContext } from "../../contexts/MovieContext.js";
+import { TypesMoviesContext } from "../../contexts/TypesMoviesContext.js";
 import { sliderSettings } from "../../services/HelperService.js"
 
-const NewMovies = () => {
-  const { movies, latestMovies } = useContext(MovieContext);
-  const { topRatedMovieHandler } = useContext(FilterCotntext);
+const NewMovies = () => {  
+  const { latestMovies, topRatedMovies } = useContext(TypesMoviesContext);
+  const { topRatedMovieHandler } = useContext(FilterCotntext);  
 
   const loading = useAsyncEffect(() => topRatedMovieHandler(), []);
 
-  if (loading || !movies || Object.keys(movies).length === 0) {
+  if (loading || !topRatedMovies || Object.keys(topRatedMovies).length === 0) {
     return <Spinner />;
   }
 
@@ -36,7 +36,7 @@ const NewMovies = () => {
           </div>
           <div className="top-block-footer">
             <Slider {...sliderSettings}>
-              {movies.slice(0, 5).map((x) => (
+              {topRatedMovies.map((x) => (
                 <TopRatedCard key={x.id} movie={x} />
               ))}
             </Slider>

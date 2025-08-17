@@ -20,19 +20,21 @@ import AutoScroll from "./component/AutoScroll/AutoScroll.jsx";
 import PageTransitionWrapper from "./component/UI/PageTransitionWrapper/PageTransitionWrapper.jsx";
 
 import { AuthProvider } from "./contexts/AuthContext.js";
-import { MovieProvider } from "./contexts/MovieContext.js";
+import { MoviesProvider } from "./contexts/MoviesContext.js";
 import { DetailProvider } from "./contexts/DetailContext.js";
 import { FilterProvider } from "./contexts/FiltersContext.js";
 import { StaticDataProvider } from "./contexts/StaticDataContext.js";
+import { TypesMoviesProvider } from "./contexts/TypesMoviesContext.js"
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
         <FilterProvider>
-          <MovieProvider>
+          <MoviesProvider>
+            <TypesMoviesProvider>
             <DetailProvider>
-              <StaticDataProvider>
+              <StaticDataProvider>                
                 <AutoScroll>
                   <Header />
                   <Routes>
@@ -174,10 +176,11 @@ function App() {
                     />
                   </Routes>
                   <Footer />
-                </AutoScroll>
+                </AutoScroll>                
               </StaticDataProvider>
             </DetailProvider>
-          </MovieProvider>
+            </TypesMoviesProvider>
+          </MoviesProvider>
         </FilterProvider>
       </AuthProvider>
     </div>

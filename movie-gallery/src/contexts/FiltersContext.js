@@ -27,7 +27,7 @@ export const FilterProvider = ({ children }) => {
     currentPage: 1,
   });
 
-  const searchHandler = (search) => {
+  const searchHandler = (search) => {    
     dispatch({
       type: SEARCH_CHANGE,
       payload: search,
@@ -35,28 +35,28 @@ export const FilterProvider = ({ children }) => {
     currentPageHandler(1);
   };
 
-  const selectHandler = (select) => {
+  const selectHandler = (select) => {    
     dispatch({
       type: SELECT_CHANGE,
       payload: select,
     });
   };
 
-  const sortHandler = (sort) => {
+  const sortHandler = (sort) => {    
     dispatch({
       type: SORT_CHANGE,
       payload: sort,
     });
   };
 
-  const categoryHandler = (category) => {
+  const categoryHandler = (category) => {    
     dispatch({
       type: CATEGORY_CHANGE,
       payload: category,
     });
   };
 
-  const tagHandler = (tag) => {
+  const tagHandler = (tag) => {    
     dispatch({
       type: TAG_CHANGE,
       payload: tag,
@@ -64,7 +64,7 @@ export const FilterProvider = ({ children }) => {
     currentPageHandler(1);
   };
 
-  const itemsPerPageHandler = (itemsPerPage) => {
+  const itemsPerPageHandler = (itemsPerPage) => {   
     dispatch({
       type: ITEM_PER_PAGE_CHANGE,
       payload: itemsPerPage,
@@ -72,14 +72,14 @@ export const FilterProvider = ({ children }) => {
     currentPageHandler(1);
   };
 
-  const currentPageHandler = (currentPage) => {
+  const currentPageHandler = (currentPage) => {    
     dispatch({
       type: CURRENT_PAGE_CHANGE,
       payload: currentPage,
     });
   };
 
-  const resetHandler = () => {
+  const resetHandler = () => {    
     dispatch({
       type: RESET_CHANGE,
       payload: {
@@ -93,7 +93,7 @@ export const FilterProvider = ({ children }) => {
     });
   };
 
-  const topRatedMovieHandler = () => {
+  const topRatedMovieHandler = () => {    
     dispatch({
       type: TOP_RATED_CHANGE,
       payload: {

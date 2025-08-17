@@ -1,11 +1,11 @@
 import { useContext } from "react";
 
-import { MovieContext } from "../../../contexts/MovieContext.js";
+import { MoviesContext } from "../../../contexts/MoviesContext.js";
 import { AuthContext } from "../../../contexts/AuthContext.js";
 import styels from "./DeleteModal.module.css"
 
 const DeleteModal = ({ movieId }) => {
-  const { deleteHandler } = useContext(MovieContext);
+  const { deleteHandler } = useContext(MoviesContext);
   const { user } = useContext(AuthContext);
 
   const deleteMovie = () => {

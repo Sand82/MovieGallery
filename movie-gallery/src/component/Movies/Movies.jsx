@@ -5,12 +5,12 @@ import Select from "../UI/Select/Select.jsx"
 import MovieCard from "./MovieCard/MovieCard.jsx";
 import Pagination from "../UI/Pagination/Pagination.jsx";
 import ScrollToTop from "../UI/ScrollToTop/ScrollToTop.jsx";
-import { MovieContext } from "../../contexts/MovieContext.js";
+import { MoviesContext } from "../../contexts/MoviesContext.js";
 import { FilterCotntext } from "../../contexts/FiltersContext.js";
 import { formatData } from "../../services/HelperService.js";
 
 const Movies = () => {
-  const { movies, moviesCount } = useContext(MovieContext);   
+  const { movies, moviesCount } = useContext(MoviesContext);   
   const { itemsPerPageHandler,  currentPageHandler, filters} = useContext(FilterCotntext)
 
   const itemsPerPageChnageHandler = (itemsPerPage) => { 

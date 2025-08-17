@@ -15,10 +15,8 @@ const Tags = ({tagHandler, defaultValue}) => {
   	}, []);
 
 	const createTagHandler = (e) => {
-		e.preventDefault();	
+		e.preventDefault();			
 		
-		console.log(tag)
-
 		if (tag && !tagList.includes(tag)) {
 			setTagList([...tagList, tag]);
 			setTag("");			

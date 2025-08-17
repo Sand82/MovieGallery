@@ -136,7 +136,7 @@ const Search = () => {
                 to="#"
                 onClick={clearSearchHandler}
               >
-                <i class="fa-solid fa-eraser"></i>
+                <i className="fa-solid fa-eraser"></i>
               </Link>
             </li>
             <li className="list-inline-item">              

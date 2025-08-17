@@ -3,13 +3,13 @@ import { useParams, useSearchParams, Link  } from "react-router-dom";
 
 import styels from "./Video.module.css"
 import { DetailContext } from "../../../contexts/DetailContext.js";
-import { MovieContext } from "../../../contexts/MovieContext.js";
+import { MoviesContext } from "../../../contexts/MoviesContext.js";
 
 const Video = () => {
 
   const { movieId } = useParams();
   const { movie } = useContext(DetailContext);
-  const { movies } = useContext(MovieContext)
+  const { movies } = useContext(MoviesContext)
   const [searchParams] = useSearchParams();
   const queryParam = searchParams.get('details');	  
   let movieInfo = movie;

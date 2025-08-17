@@ -34,6 +34,14 @@ namespace MovieGalleryWebAPI.Controllers
             return movies;
         }
 
+        [HttpGet("top-rated")]
+        public async Task<IEnumerable<MoviesDataModel>> GetTopRated()
+        {
+            var movies = await moviesService.GetTopRatedMovies();
+
+            return movies;
+        }
+
         [HttpGet("lates")]
         public async Task<IEnumerable<MoviesDataModel>> GetLates()
         {

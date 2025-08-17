@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
 import * as movieService from "../services/MoviesService.js";
-import * as commentService from "../services/DetailsService.js";
 import {
   createContext,
   useEffect,
@@ -13,13 +12,11 @@ import { AuthContext } from "./AuthContext.js";
 import { badRequestStatusCode } from "../constants/GlobalConstants.js";
 import { FilterCotntext } from "./FiltersContext.js";
 
-export const MovieContext = createContext();
+export const MoviesContext = createContext();
 
-export const MovieProvider = ({ children }) => {
+export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
-  const [favMovies, setFavMovies] = useState([]);
   const [moviesCount, setMoviesCount] = useState(0);
-  const [latestMovies, setLatestMovies] = useState([]);
 
   const [serverErrors, setServerErrors] = useState(null);
   const { filters } = useContext(FilterCotntext);
@@ -38,33 +35,19 @@ export const MovieProvider = ({ children }) => {
     [navigate]
   );
 
-  useEffect(() => {
-    const getLates = async () => {
-      setServerErrors(null);
-      try {
-        const responce = await movieService.getLates();
-        setLatestMovies(responce);
-      } catch (error) {
-        serverErrorsHandler(error);
-      }
-    };
-    getLates();
-  }, []);
-
-  useEffect(() => {
+  useEffect(() => {    
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
         const responce = await movieService.getAll(filters);
         setMovies(responce.movies);
         setMoviesCount(responce.count);
-        //setLatestMovies(responce.latestMovies);
       } catch (error) {
         serverErrorsHandler(error);
       }
     };
     getAllMovies();
-  }, [filters, serverErrorsHandler]);
+  }, [filters]);
 
   const createHandler = async (movieData, file) => {
     setServerErrors(null);
@@ -96,31 +79,18 @@ export const MovieProvider = ({ children }) => {
     }
   };
 
-  const favoritesHandler = async (userId) => {
-    setServerErrors(null);
-    try {
-      let responce = await commentService.getFavoriteMovies(userId);
-      setFavMovies(responce);
-    } catch (error) {
-      serverErrorsHandler(error);
-    }
-  };
-
   return (
-    <MovieContext.Provider
+    <MoviesContext.Provider
       value={{
         movies,
-        favMovies,
-        latestMovies,
         createHandler,
         editHandler,
         deleteHandler,
-        favoritesHandler,
         moviesCount,
         serverErrors,
       }}
     >
       {children}
-    </MovieContext.Provider>
+    </MoviesContext.Provider>
   );
 };
