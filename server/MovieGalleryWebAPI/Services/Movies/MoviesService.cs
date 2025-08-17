@@ -96,9 +96,7 @@ namespace MovieGalleryWebAPI.Service.Movies
             var moviesQuery = GetQueryMovies();
 
             var moviesData = new MoviesData();
-            moviesData.Count = this.data.Movies.Where(m => m.IsDelete == false).Count();
-
-            //var latestMovies = await GetLatestMovies(moviesQuery);
+            moviesData.Count = this.data.Movies.Where(m => m.IsDelete == false).Count();            
 
             if (!string.IsNullOrWhiteSpace(model.Tag))
             {
@@ -125,8 +123,7 @@ namespace MovieGalleryWebAPI.Service.Movies
 
             var movies = await MaterializeMoviesQuery(moviesQuery);
 
-            moviesData.Movies = movies;
-            //moviesData.LatestMovies = latestMovies;            
+            moviesData.Movies = movies;                    
 
             return moviesData;
         }
