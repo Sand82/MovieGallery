@@ -21,11 +21,11 @@ namespace MovieGalleryWebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<FavoriteMovieModel>> Get(string userId)
+        public async Task<IActionResult> Get(string userId)
         {
            var movies = await favoriteService.GetFavoriteMovies(userId);
 
-            return movies;
+            return Ok(movies);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

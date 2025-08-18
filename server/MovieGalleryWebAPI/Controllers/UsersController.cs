@@ -20,12 +20,12 @@ namespace MovieGalleryWebAPI.Controllers
         public async Task<IActionResult> Register(RegisterInputModel model)
         {
 
-            if (model.Password.CompareTo(model.RepeatPassword) != 0)
+            if (model?.Password?.CompareTo(model.RepeatPassword) != 0)
             {
                 ModelState.AddModelError("RepeatPassword", "Password and confirm password should be the same.");
             }
 
-            var checkedUser = await userService.FindUserByEmail(model.Email);
+            var checkedUser = await userService.FindUserByEmail(model?.Email!);
 
             if (checkedUser != null)
             {
@@ -37,7 +37,7 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var isRegister = await userService.CreateUser(model);
+            var isRegister = await userService.CreateUser(model!);
 
             return Ok(isRegister);
         }
@@ -45,7 +45,7 @@ namespace MovieGalleryWebAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserApiModel>> Login(LoginInputModel model)
         {
-            var user = await userService.FindUser(model.Username, model.Password);
+            var user = await userService.FindUser(model.Username!, model.Password!);
 
             if (user == null)
             {
@@ -56,15 +56,15 @@ namespace MovieGalleryWebAPI.Controllers
                 return BadRequest(errorMode);
             }            
 
-            var token = await userService.CreateToken(model.Username, model.Password);
+            var token = await userService.CreateToken(model.Username!, model.Password!);
 
-            var isAdmin = await userService.CheckIsAdmin(user.Id);
+            var isAdmin = await userService.CheckIsAdmin(user.Id!);
 
             user.AccessToken = token;
 
             user.IsAdmin = isAdmin;
 
-            return user;
+            return Ok(user);
         }        
     }
 }

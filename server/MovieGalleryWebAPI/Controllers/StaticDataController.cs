@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MovieGalleryWebAPI.Models.StaticData;
 using MovieGalleryWebAPI.Services.StaticData;
 
 namespace MovieGalleryWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StaticDataController
+    public class StaticDataController : ControllerBase
     {
         private readonly IStaticDataService staticDataService;
 
@@ -16,11 +15,11 @@ namespace MovieGalleryWebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<GetStaticDataEntities> Get()
+        public async Task<IActionResult> Get()
         {
             var model = await staticDataService.GetStaticData();
 
-            return model;
+            return Ok(model);
         }
     }
 }

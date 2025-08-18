@@ -27,35 +27,35 @@ namespace MovieGalleryWebAPI.Controllers
         }
         
         [HttpGet]
-        public async Task<MoviesData> Get([FromQuery]GetMoviesModel model)
+        public async Task<IActionResult> Get([FromQuery]GetMoviesModel model)
         {
             var movies = await moviesService.GetMovies(model);
 
-            return movies;
+            return Ok(movies);
         }
 
         [HttpGet("top-rated")]
-        public async Task<IEnumerable<MoviesDataModel>> GetTopRated()
+        public async Task<IActionResult> GetTopRated()
         {
             var movies = await moviesService.GetTopRatedMovies();
 
-            return movies;
+            return Ok(movies);
         }
 
         [HttpGet("lates")]
-        public async Task<IEnumerable<MoviesDataModel>> GetLates()
+        public async Task<IActionResult> GetLates()
         {
             var movies = await moviesService.GetLatesMovies();
 
-            return movies;
+            return Ok(movies);
         }
 
         [HttpGet("{id}")]
-        public async Task<MovieDataModel> Get(int id, [FromQuery] string userId)
+        public async Task<IActionResult> Get(int id, [FromQuery] string userId)
         {
             var movie = await moviesService.GetOneMovie(id, userId);
            
-            return movie;
+            return Ok(movie);
         }
 
         [HttpPost]

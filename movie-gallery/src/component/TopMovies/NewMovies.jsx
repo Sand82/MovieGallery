@@ -12,19 +12,23 @@ import { FilterCotntext } from "../../contexts/FiltersContext.js";
 import { useAsyncEffect } from "../../hooks/useAsyncEffect.js";
 import { TypesMoviesContext } from "../../contexts/TypesMoviesContext.js";
 import { sliderSettings } from "../../services/HelperService.js"
+import ServerError from "../UI/ServerError/ServerError.jsx";
 
 const NewMovies = () => {  
-  const { latestMovies, topRatedMovies } = useContext(TypesMoviesContext);
+  const { latestMovies, topRatedMovies, serverErrors } = useContext(TypesMoviesContext);
   const { topRatedMovieHandler } = useContext(FilterCotntext);  
 
   const loading = useAsyncEffect(() => topRatedMovieHandler(), []);
 
   if (loading || !topRatedMovies || Object.keys(topRatedMovies).length === 0) {
     return <Spinner />;
-  }
+  }  
 
   return (
     <>
+    {
+      serverErrors && < ServerError/>
+    }
       <section className="section-text-white position-relative">
         <div className="d-background" data-parallax="scroll" />
         <div className="d-background bg-theme-blacked" />
