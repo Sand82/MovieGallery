@@ -28,7 +28,7 @@ export const detailReducer = (state, action) => {
       return {
         ...state,
         comments: state.comments.map((comment) =>
-          comment.id == action.payload.id ? action.payload : comment
+          comment.id == action.payload.id ? action.payload : comment,
         ),
       };
 
@@ -36,7 +36,7 @@ export const detailReducer = (state, action) => {
       return {
         ...state,
         comments: state.comments.filter(
-          (comment) => comment.id != action.payload
+          (comment) => comment.id != action.payload,
         ),
       };
 
@@ -81,7 +81,8 @@ export const filterReducer = (state, action) => {
     case CURRENT_PAGE_CHANGE:
       return { ...state, currentPage: action.payload };
 
-    case TOP_RATED_CHANGE, RESET_CHANGE:
+    case TOP_RATED_CHANGE:
+    case RESET_CHANGE:
       return {
         search: action.payload.search,
         select: action.payload.select,

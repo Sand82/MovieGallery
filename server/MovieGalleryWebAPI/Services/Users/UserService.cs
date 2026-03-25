@@ -35,7 +35,7 @@ namespace MovieGalleryWebAPI.Service.Users
 
         public async Task<bool> CreateUser(RegisterInputModel model)
         {
-            var currPassword = passwordHasher.HashPassword(null ,model.Password);
+            var currPassword = passwordHasher.HashPassword(null! ,model.Password);
             var user = new IdentityUser
             {
                 UserName = model.UserName,
@@ -57,14 +57,14 @@ namespace MovieGalleryWebAPI.Service.Users
 
             if (user == null)
             {
-                return null;
+                return null!;
             }            
            
-            var result = passwordHasher.VerifyHashedPassword(null, user.PasswordHash, password);
+            var result = passwordHasher.VerifyHashedPassword(null!, user.PasswordHash, password);
 
             if (result != PasswordVerificationResult.Success)
             {
-                return null;             
+                return null!;             
             }
             
             return new UserApiModel
@@ -81,7 +81,7 @@ namespace MovieGalleryWebAPI.Service.Users
                 .ProjectTo<UserApiModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
 
-            return user;
+            return user!;
         }
 
         public async Task<string> CreateToken (string username, string password)
@@ -90,7 +90,7 @@ namespace MovieGalleryWebAPI.Service.Users
 
             if (user == null)
             {
-                return null;
+                return null!;
             }
 
             var token = TokenGenerator(user);
@@ -101,7 +101,7 @@ namespace MovieGalleryWebAPI.Service.Users
         private string TokenGenerator(IdentityUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(this.jwtSettings.Value.Secret);
+            var key = Encoding.ASCII.GetBytes(this.jwtSettings.Value.Secret!);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -132,7 +132,7 @@ namespace MovieGalleryWebAPI.Service.Users
             var user = await data.Users
                 .Where(u => u.UserName == username)
                 .FirstOrDefaultAsync();
-            return user;
+            return user!;
         }
     }
 }

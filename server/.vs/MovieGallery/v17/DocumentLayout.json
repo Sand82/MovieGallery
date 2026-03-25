@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\MovieGallery\\server\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\users\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,24 +26,40 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Users\\UserService.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Users\\UserService.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Users\\UserService.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Users\\UserService.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAmwHAAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T20:20:01.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UsersController.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\UsersController.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\UsersController.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAAAEIAAAAbAAAA",
+              "ViewState": "AQIAACkAAAAAAAAAAAAuwEIAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T20:17:32.302Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T20:17:32.302Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "MoviesController.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
@@ -47,12 +67,11 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\MoviesController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAuwBkAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T20:13:22.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T20:13:22.304Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "StaticDataController.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Controllers\\StaticDataController.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Controllers\\StaticDataController.cs",
@@ -60,8 +79,7 @@
               "RelativeToolTip": "MovieGalleryWebAPI\\Controllers\\StaticDataController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T20:10:28.583Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-18T20:10:28.583Z"
             }
           ]
         }

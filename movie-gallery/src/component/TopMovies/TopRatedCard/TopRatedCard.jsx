@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 
 import styles from "./TopRatedCard.module.css";
 import { arrayToString } from "../../../services/HelperService.js"
 import { adjustMovieImageURL } from "../../../services/HelperService.js"
+import { AuthContext } from "../../../contexts/AuthContext.js";
+import { DetailContext } from "../../../contexts/DetailContext.js";
 
 const TopRatedCard = ({ movie }) => { 
-
+  
   return (
     <div
       className={`slick-slide slick-cloned ${styles["card-container"]}`}
@@ -29,7 +32,7 @@ const TopRatedCard = ({ movie }) => {
             data-show-class="fadeIn show"
             
           >
-              <Link
+              <Link                
                 className="action-icon-theme action-icon-bordered rounded-circle"
                 to={`/details/video/${movie.id}`}
                 data-magnific-popup="iframe"

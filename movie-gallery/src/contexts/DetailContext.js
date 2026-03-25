@@ -25,13 +25,14 @@ export const DetailProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const detailsHandler = async (movieId, userId) => {
+    
     setServerErrors(null);
     try {
       const responce = await movieService.getOne(
         movieId,
         userId,
-        user.AccessToken
-      );
+        user.AccessToken,
+      );      
       dispatch({
         type: ADD_MOVIE,
         payload: responce,
@@ -46,7 +47,7 @@ export const DetailProvider = ({ children }) => {
     try {
       const responce = await detailsService.createComment(
         data,
-        user.accessToken
+        user.accessToken,
       );
       dispatch({
         type: CREATE_COMMENT,

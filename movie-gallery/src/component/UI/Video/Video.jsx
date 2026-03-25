@@ -12,6 +12,7 @@ const Video = () => {
   const { movies } = useContext(MoviesContext)
   const [searchParams] = useSearchParams();
   const queryParam = searchParams.get('details');	  
+  
   let movieInfo = movie;
   let linkTo = `/movies/details/${movieId}`;
 	
