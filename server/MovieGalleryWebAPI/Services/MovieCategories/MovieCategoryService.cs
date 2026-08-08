@@ -18,16 +18,29 @@ namespace MovieGalleryWebAPI.Services.MovieCategories
 
         public async Task AddMovieCategories(ICollection<MovieCategoryModel> categories, Movie movie)
         {
-            var movieCategories = new List<MovieCategory>();
-
             foreach (var category in categories)
             {
-                var currCategory = await this.data.Categories.FirstOrDefaultAsync(c => c.Id == category.Id);
+                var existingCategory = await this.data.Categories
+                    .FirstOrDefaultAsync(c => c.Name == category.Name);
 
-                movieCategories.Add(new MovieCategory { Category = currCategory, Movie = movie });
+                if (existingCategory == null)
+                {
+                    existingCategory = new Category
+                    {
+                        Name = category.Name
+                    };
+
+                    await this.data.Categories.AddAsync(existingCategory);                    
+                    await this.data.SaveChangesAsync();
+                }
+
+                movie.MovieCategories.Add(new MovieCategory
+                {
+                    Movie = movie,                    
+                    Category = existingCategory,                    
+                });
             }
 
-            await this.data.MovieCategories.AddRangeAsync(movieCategories);
             await this.data.SaveChangesAsync();
         }
 
@@ -59,6 +72,6 @@ namespace MovieGalleryWebAPI.Services.MovieCategories
             var mappings = await this.data.MovieCategories.Where(mc => mc.MovieId == movieId).ToListAsync();
 
             this.data.MovieCategories.RemoveRange(mappings);            
-        }
+        }        
     }
 }

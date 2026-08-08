@@ -16,17 +16,22 @@ namespace MovieGalleryWebAPI.Services.MovieLanguages
         }
 
         public async Task AddMovieLanguages(ICollection<MovieLanguagesModel> languages, Movie movie)
-        {
-            var movieLanguages = new List<MovieLanguage>();
-
+        {   
             foreach (var language in languages)
             {
-                var currLanguage = await this.data.Languages.FirstOrDefaultAsync(l => l.Id == language.Id);
+                var currLanguage = await this.data.Languages!.FirstOrDefaultAsync(d => d.Name == language.Name);
 
-                movieLanguages.Add(new MovieLanguage { Language = currLanguage, Movie = movie });
+                if (currLanguage == null)
+                {
+                    currLanguage = new Language { Name = language.Name };
+
+                    await this.data.Languages.AddAsync(currLanguage);
+                    await this.data.SaveChangesAsync();
+                }               
+
+                movie.MovieLanguages!.Add(new MovieLanguage { Language = currLanguage, Movie = movie });
             }
-
-            await this.data.AddRangeAsync(movieLanguages);
+            
             await this.data.SaveChangesAsync();
         }
 
@@ -58,6 +63,6 @@ namespace MovieGalleryWebAPI.Services.MovieLanguages
             var mappings = await this.data.MovieLanguages.Where(ml => ml.MovieId == movieId).ToListAsync();
 
             this.data.MovieLanguages.RemoveRange(mappings);            
-        }
+        }        
     }
 }

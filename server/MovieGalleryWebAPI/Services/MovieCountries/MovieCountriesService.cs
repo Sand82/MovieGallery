@@ -3,6 +3,7 @@
 using MovieGalleryWebAPI.Data;
 using MovieGalleryWebAPI.Data.Models;
 using MovieGalleryWebAPI.Models.Countries;
+using System.Diagnostics.Metrics;
 
 namespace MovieGalleryWebAPI.Services.MovieCountries
 {
@@ -16,17 +17,22 @@ namespace MovieGalleryWebAPI.Services.MovieCountries
         }
 
         public async Task AddMovieCountries(ICollection<MovieCountriesModel> countries, Movie movie)
-        {           
-            var movieCountries = new List<MovieCountry>();
-
+        {   
             foreach (var country in countries)
             {
-                var currCountry = await this.data.Countries.FirstOrDefaultAsync(c => c.Id == country.Id);
+                var currCountry = await this.data.Countries.FirstOrDefaultAsync(c => c.Name == country.Name);
 
-                movieCountries.Add( new MovieCountry { Country = currCountry, Movie = movie } );
+                if (currCountry == null)
+                {
+                    currCountry = new Country { Name = country.Name };
+
+                    await this.data.Countries.AddAsync(currCountry);
+                    await this.data.SaveChangesAsync();
+                }                
+
+                movie.MovieCountries!.Add( new MovieCountry { Country = currCountry, Movie = movie } );
             }
-
-            await this.data.MovieCountries.AddRangeAsync(movieCountries);
+            
             await this.data.SaveChangesAsync();
         }
 

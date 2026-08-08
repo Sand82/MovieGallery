@@ -22,6 +22,7 @@ using MovieGalleryWebAPI.Services.MovieLanguages;
 using MovieGalleryWebAPI.Services.MovieCategories;
 using MovieGalleryWebAPI.Services.MovieTags;
 using MovieGalleryWebAPI.Services.Image;
+using MovieGalleryWebAPI.Services.MovieImport;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -71,20 +72,21 @@ builder.
     .AddEntityFrameworkStores<MovieGalleryDbContext>();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<IMoviesService, MoviesService>();
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<ICommentService, CommentService>();
-builder.Services.AddTransient<IRatingService, RatingService>();
-builder.Services.AddTransient<IFavoriteService, FavoriteController>();
-builder.Services.AddTransient<IStaticDataService, StaticDataService>();
-builder.Services.AddTransient<ICompanyService, CompanyService>();
-builder.Services.AddTransient<IMovieDirectorsService, MovieDirectorsService>();
-builder.Services.AddTransient<IMovieStarringService, MovieStarringService>();
-builder.Services.AddTransient<IMovieCountriesService, MovieCountriesService>();
-builder.Services.AddTransient<IMovieLanguageService, MovieLanguageService>();
-builder.Services.AddTransient<IMovieCategoryService, MovieCategoryService>();
-builder.Services.AddTransient<IMovieTagService, MovieTagService>();
-builder.Services.AddTransient<IManageImage, ManageImage>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
+builder.Services.AddScoped<IFavoriteService, FavoriteController>();
+builder.Services.AddScoped<IStaticDataService, StaticDataService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+builder.Services.AddScoped<IMovieDirectorsService, MovieDirectorsService>();
+builder.Services.AddScoped<IMovieStarringService, MovieStarringService>();
+builder.Services.AddScoped<IMovieCountriesService, MovieCountriesService>();
+builder.Services.AddScoped<IMovieLanguageService, MovieLanguageService>();
+builder.Services.AddScoped<IMovieCategoryService, MovieCategoryService>();
+builder.Services.AddScoped<IMovieTagService, MovieTagService>();
+builder.Services.AddScoped<IManageImage, ManageImage>();
+builder.Services.AddScoped<IMovieImportService, MovieImportService>();
 builder.Services.AddScoped<IPasswordHasher<string>, PasswordHasher<string>>();
 
 builder.Services.AddCors(options =>
