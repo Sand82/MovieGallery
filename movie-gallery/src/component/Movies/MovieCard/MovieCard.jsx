@@ -5,7 +5,7 @@ import { arrayToString } from "../../../services/HelperService.js";
 import { adjustMovieImageURL } from "../../../services/HelperService.js"
 
 const MovieCard = ({ movie }) => {
-
+  
   return (    
     <article className="movie-line-entity p-3">
       <div className="entity-poster" data-role="hover-wrap">

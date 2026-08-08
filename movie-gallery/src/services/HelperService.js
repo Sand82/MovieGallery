@@ -2,6 +2,7 @@ import CustomNextArrow from "../component/UI/Arrows/CustomNextArrow.jsx";
 import CustomPrevArrow from "../component/UI/Arrows/CustomPrevArrow.jsx";
 
 import { convertFromHTML, ContentState } from "draft-js";
+import { pictureUrlScrapedMoives } from "../constants/GlobalConstants.js";
 
 export const formatData = (currentDate) => {
   const dataChange = new Date(currentDate).toLocaleDateString("en-us", {
@@ -17,7 +18,7 @@ export const convertHtmlToContentState = (html) => {
   const blocksFromHTML = convertFromHTML(html);
   return ContentState.createFromBlockArray(
     blocksFromHTML.contentBlocks,
-    blocksFromHTML.entityMap
+    blocksFromHTML.entityMap,
   );
 };
 
@@ -69,6 +70,10 @@ export const objectArrayToStringArray = (arr) => {
 };
 
 export const adjustMovieImageURL = (imageName) => {
+  if (imageName?.includes(pictureUrlScrapedMoives)) {
+    return imageName;
+  }
+
   return `https://localhost:7222/images/${imageName}`;
 };
 

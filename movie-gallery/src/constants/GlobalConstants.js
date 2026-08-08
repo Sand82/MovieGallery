@@ -34,3 +34,6 @@ export const yearLength = 4;
 export const badRequestStatusCode = "400";
 
 export const errorMessage = "Something happened, try again later.";
+
+export const pictureUrlScrapedMoives =
+  "https://media.themoviedb.org/t/p/original";

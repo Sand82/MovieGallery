@@ -16,7 +16,7 @@ import ServerError from "../UI/ServerError/ServerError.jsx";
 
 const NewMovies = () => {  
   const { latestMovies, topRatedMovies, serverErrors } = useContext(TypesMoviesContext);
-  const { topRatedMovieHandler } = useContext(FilterCotntext);  
+  const { topRatedMovieHandler } = useContext(FilterCotntext);    
 
   const loading = useAsyncEffect(() => topRatedMovieHandler(), []);
 
