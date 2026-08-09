@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-using static MovieGalleryWebAPI.Data.Constant;
+using static MovieGalleryWebAPI.Data.Constants;
 
 namespace MovieGalleryWebAPI.Models.Users
 {

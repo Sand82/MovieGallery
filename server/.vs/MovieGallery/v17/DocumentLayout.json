@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\MovieGallery\\server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\infrastructure\\applicationbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\services\\movies\\moviesservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\data\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|solutionrelative:moviegallerywebapi\\data\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C604A19D-F7E7-45C1-8AFC-82C41CE899FC}|MovieGalleryWebAPI\\MovieGalleryWebAPI.csproj|c:\\moviegallery\\server\\moviegallerywebapi\\services\\movieimport\\movieimportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\MovieImport\\MovieImportService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\MovieImport\\MovieImportService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\MovieImport\\MovieImportService.cs",
-              "ViewState": "AQIAAJYAAAAAAAAAAAAAAFYAAAA4AAAA",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAuwFYAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-07T21:40:22.433Z",
               "IsPinned": true,
@@ -44,26 +44,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApplicationBuilderExtensions.cs",
-              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "RelativeToolTip": "MovieGalleryWebAPI\\Infrastructure\\ApplicationBuilderExtensions.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAAAEUAAABAAAAA",
+              "DocumentIndex": 1,
+              "Title": "Constants.cs",
+              "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Data\\Constants.cs",
+              "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Data\\Constants.cs",
+              "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Data\\Constants.cs",
+              "RelativeToolTip": "MovieGalleryWebAPI\\Data\\Constants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-08T22:05:13.977Z",
+              "WhenOpened": "2026-08-09T06:33:44.424Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MoviesService.cs",
               "DocumentMoniker": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeDocumentMoniker": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "ToolTip": "C:\\MovieGallery\\server\\MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
               "RelativeToolTip": "MovieGalleryWebAPI\\Services\\Movies\\MoviesService.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAuwE8AAAA3AAAA",
+              "ViewState": "AQIAANsAAAAAAAAAAAAiwOcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-08-08T21:37:12.043Z",
               "EditorCaption": ""

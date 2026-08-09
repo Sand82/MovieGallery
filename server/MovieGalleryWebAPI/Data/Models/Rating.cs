@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-using static MovieGalleryWebAPI.Data.Constant;
+using static MovieGalleryWebAPI.Data.Constants;
 
 namespace MovieGalleryWebAPI.Data.Models
 {

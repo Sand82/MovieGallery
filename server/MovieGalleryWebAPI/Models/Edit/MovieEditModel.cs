@@ -4,7 +4,7 @@ using MovieGalleryWebAPI.Models.Category;
 using MovieGalleryWebAPI.Models.Countries;
 using MovieGalleryWebAPI.Models.Languages;
 
-using static MovieGalleryWebAPI.Data.Constant;
+using static MovieGalleryWebAPI.Data.Constants;
 
 namespace MovieGalleryWebAPI.Models.Edit
 {  

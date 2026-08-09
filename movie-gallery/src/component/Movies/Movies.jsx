@@ -26,7 +26,7 @@ const Movies = () => {
   return (
     <>
     <section className="section-long">
-      <div className="container">
+      <div className="container" style={{ paddingBottom: "6rem" }}>
         <Search />
         <div className="section-head">
           <h2 className="section-title text-uppercase">Colection</h2>

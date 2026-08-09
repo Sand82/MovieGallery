@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /movie-gallery/yarn.lock
+/server/.vs/MovieGallery/FileContentIndex/*.vsidx
