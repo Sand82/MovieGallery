@@ -33,7 +33,7 @@ const Details = () => {
     };
 
     favoriteMovieHandler(data);
-  };
+  };  
 
   let animationClass = "d-over bg-black-40 collapse animated slow";
 
@@ -169,10 +169,7 @@ const Details = () => {
               <div className="section-line">
                 <div className="section-head">
                   <h2 className="section-title text-uppercase">Comments</h2>
-                </div>
-                <div>
-                  <Error error={serverErrors}/>
-                </div>
+                </div>               
                 {movie.comments
                   ? movie.comments.map((x) => (
                       <Comment

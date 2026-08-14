@@ -25,14 +25,13 @@ export const DetailProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const detailsHandler = async (movieId, userId) => {
-    
     setServerErrors(null);
     try {
       const responce = await movieService.getOne(
         movieId,
         userId,
         user.AccessToken,
-      );      
+      );
       dispatch({
         type: ADD_MOVIE,
         payload: responce,
@@ -72,7 +71,7 @@ export const DetailProvider = ({ children }) => {
     }
   };
 
-  const daleteCommentHandler = async (commentId) => {
+  const deleteCommentHandler = async (commentId) => {
     setServerErrors(null);
     try {
       await detailsService.removeComment(commentId, user.accessToken);
@@ -125,7 +124,7 @@ export const DetailProvider = ({ children }) => {
         movie,
         createCommentHandler,
         editCommentHandler,
-        daleteCommentHandler,
+        deleteCommentHandler,
         detailsHandler,
         favoriteMovieHandler,
         movieRatingHandler,

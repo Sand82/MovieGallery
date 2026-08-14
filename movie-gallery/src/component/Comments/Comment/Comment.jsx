@@ -22,7 +22,7 @@ const Comment = ({ comment }) => {
   );  
 
   const { user } = useContext(AuthContext);
-  const { editCommentHandler, daleteCommentHandler, serverErrors } = useContext(DetailContext);
+  const { editCommentHandler, deleteCommentHandler, serverErrors } = useContext(DetailContext);
   const [isEditing, setIsEditing] = useState(false); 
 
   const handleClick = () => {
@@ -42,7 +42,7 @@ const Comment = ({ comment }) => {
   };
 
   const deleteHandler = () => {
-    daleteCommentHandler(comment.id);
+    deleteCommentHandler(comment.id);
   };
 
   const editComment = () => {

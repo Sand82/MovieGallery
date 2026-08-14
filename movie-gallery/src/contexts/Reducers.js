@@ -61,16 +61,16 @@ export const detailReducer = (state, action) => {
 export const filterReducer = (state, action) => {
   switch (action.type) {
     case SEARCH_CHANGE:
-      return { ...state, search: action.payload };
+      return { ...state, tag: "", search: action.payload };
 
     case SELECT_CHANGE:
-      return { ...state, select: action.payload };
+      return { ...state, tag: "", select: action.payload };
 
     case SORT_CHANGE:
-      return { ...state, sort: action.payload };
+      return { ...state, tag: "", sort: action.payload };
 
     case CATEGORY_CHANGE:
-      return { ...state, category: action.payload };
+      return { ...state, tag: "", category: action.payload };
 
     case TAG_CHANGE:
       return { ...state, tag: action.payload };

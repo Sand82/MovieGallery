@@ -19,7 +19,7 @@ export const MoviesProvider = ({ children }) => {
   const [moviesCount, setMoviesCount] = useState(0);
 
   const [serverErrors, setServerErrors] = useState(null);
-  const { filters } = useContext(FilterCotntext);
+  const { filters, resetHandler } = useContext(FilterCotntext);
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -32,10 +32,10 @@ export const MoviesProvider = ({ children }) => {
         setServerErrors(error.message);
       }
     },
-    [navigate]
+    [navigate],
   );
 
-  useEffect(() => {    
+  useEffect(() => {
     const getAllMovies = async () => {
       setServerErrors(null);
       try {
@@ -76,6 +76,8 @@ export const MoviesProvider = ({ children }) => {
       navigate("/movies");
     } catch (error) {
       serverErrorsHandler(error);
+    } finally {
+      resetHandler();
     }
   };
 
