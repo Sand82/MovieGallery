@@ -128,7 +128,7 @@ const Search = () => {
         <div className="col-md-1 my-md-auto d-flex">
           <span className="info-title d-md-none ">Select view:</span>
           <ul className="ml-md-auto h5 list-inline">
-            <li className="list-inline-item">
+            <li className="list-inline-item pl-2 p-md-0">
               {/* <button className="btn btn-secondary mr-4" onClick={clearSearchHandler}>Clear</button> */}
               
               <Link
@@ -139,7 +139,7 @@ const Search = () => {
                 <i className="fa-solid fa-eraser"></i>
               </Link>
             </li>
-            <li className="list-inline-item">              
+            <li className="list-inline-item pl-2 p-md-0">              
               <Link
                 className="content-link transparent-link"
                 to="#"

@@ -1703,6 +1703,7 @@ textarea.form-control {
     overflow-y: auto;
     width: 100%;
     display: none;
+    background: transparent;
   }
   .header-horizontal .navbar-extra {
     padding-top: 1rem;
@@ -1732,15 +1733,47 @@ textarea.form-control {
     color: #ff8a00;
   }
   .header-horizontal.active {
-    position: fixed;
-    left: 0;
-    top: 0;
+    position: relative;
+    left: auto;
+    top: auto;
+    background: #f1e7e4;
   }
   .header-horizontal.active .navbar {
-    height: 100vh;
+    height: auto;
+    min-height: 4.5rem;
+    display: flex;
+    flex-wrap: wrap;
   }
   .header-horizontal.active .navbar-collapse {
     display: block;
+    width: 100%;
+    max-height: none;
+    overflow-y: visible;
+    background: #f1e7e4;
+    padding: 0.75rem 0 1rem;
+    border-top: 2px solid #e8ddd8;
+    margin-top: 0.5rem;
+  }
+  .header-horizontal.active .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .header-horizontal.active .navbar-nav > li {
+    padding: 0.35rem 0;
+    margin: 0;
+  }
+  .header-horizontal.active .nav-item {
+    margin: 0;
+  }
+  .header-horizontal.active .nav-link {
+    display: block;
+    padding: 0.2rem 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
   }
 }
 @media (min-width: 768px) {
@@ -1841,8 +1874,12 @@ textarea.form-control {
   .header-horizontal .nav-link.active {
     color: #666;
     background-color: #fff;
-    -webkit-box-shadow: 0 0.5rem 0 #fff, 0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0.5rem 0 #fff, 0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow:
+      0 0.5rem 0 #fff,
+      0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
+    box-shadow:
+      0 0.5rem 0 #fff,
+      0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
   }
   .header-horizontal .nav-link.active:hover {
     color: #ff8a00;

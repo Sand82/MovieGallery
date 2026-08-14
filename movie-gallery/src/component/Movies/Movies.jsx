@@ -36,22 +36,23 @@ const Movies = () => {
         {movies.map((x) => (
           <MovieCard key={x.id} movie={x} />
         ))}
-        {moviesCount > 0 ? (     
+        {moviesCount > 0 ? (
           <div className="mt-5 d-flex justify-content-between align-items-center">
-            <div>      
-               <Pagination
+            <div>
+              <Pagination
                 totalItems={moviesCount}
                 itemsPerPage={filters.itemsPerPage}
                 currentPage={filters.currentPage}
                 currentPageHandler={currentPageChangeHandler}
               />
-            </div>          
-            <div>         
-               <Select itemsPerPageHandler={itemsPerPageChnageHandler}/>
             </div>
-          </div>) :(
-        <div className="h2 text-center text-uppercase">No movies found!</div>
-        )}      
+            <div>
+              <Select itemsPerPageHandler={itemsPerPageChnageHandler} />
+            </div>
+          </div>
+        ) : (
+          <div className="h2 text-center text-uppercase">No movies found!</div>
+        )}
       </div>
     </section>
     <ScrollToTop route="/movies"/>  
