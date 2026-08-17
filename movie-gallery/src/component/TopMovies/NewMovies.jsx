@@ -38,7 +38,7 @@ const NewMovies = () => {
               Top <span className="text-theme">Rated</span>
             </h2>
           </div>
-          <div className="top-block-footer">
+          <div className="slider-container">
             <Slider {...sliderSettings}>
               {topRatedMovies.map((x) => (
                 <TopRatedCard key={x.id} movie={x} />
